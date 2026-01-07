@@ -230,8 +230,8 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
                 borderRight: '2px solid #fff',
               }}
             >
-              {/* Centered logo */}
-              <div className="absolute inset-0 flex items-center justify-center">
+              {/* Centered logo and welcome text */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center px-8">
                 <img 
                   src={logoImage}
                   alt="Thành Lambeets"
@@ -239,6 +239,20 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
                   style={{ imageRendering: 'pixelated' }}
                   draggable={false}
                 />
+                <div 
+                  className="mt-6 text-center max-w-md"
+                  style={{ 
+                    fontFamily: 'var(--font-pixel)', 
+                    color: '#333',
+                    fontSize: '11px',
+                    lineHeight: '1.6',
+                  }}
+                >
+                  <p className="mb-3" style={{ fontSize: '14px', fontWeight: 'bold' }}>Welcome.</p>
+                  <p>
+                    This is a place for ideas, tools, and quiet exploration. I'm Gerrit, and I like building things with ideas, pixels, and curiosity where art, technology, and thoughtful experimentation come together. Scroll gently.
+                  </p>
+                </div>
               </div>
             </div>
 
