@@ -21,6 +21,7 @@ export function MediaPlayer() {
   const [currentTrack, setCurrentTrack] = useState(0);
   const [progress, setProgress] = useState(0);
   const [volume, setVolume] = useState(75);
+  const [showPlaylist, setShowPlaylist] = useState(false);
   const [playlist] = useState<Track[]>(mockPlaylist);
   const audioRef = useRef<HTMLAudioElement>(null);
   const progressInterval = useRef<NodeJS.Timeout | null>(null);
@@ -71,7 +72,7 @@ export function MediaPlayer() {
           }}
         >
           <div
-            className="flex items-center gap-1 px-1 py-0.5"
+            className="flex items-center gap-1 px-2 py-0.5"
             style={{
               background: 'linear-gradient(90deg, #000080, #1084d0)',
             }}
@@ -99,7 +100,6 @@ export function MediaPlayer() {
       initial={{ opacity: 0, x: 50 }}
       animate={{ opacity: 1, x: 0 }}
       className="fixed top-4 right-4 z-40"
-      style={{ width: '280px' }}
     >
       <div
         className="flex flex-col"
@@ -137,13 +137,14 @@ export function MediaPlayer() {
           <div className="flex items-center gap-1">
             <button
               onClick={() => setIsMinimized(true)}
-              className="w-4 h-4 flex items-center justify-center text-[10px] text-black"
+              className="w-4 h-4 flex items-center justify-center text-[10px]"
               style={{
                 backgroundColor: '#C0C0C0',
                 borderTop: '1px solid #fff',
                 borderLeft: '1px solid #fff',
                 borderBottom: '1px solid #808080',
                 borderRight: '1px solid #808080',
+                color: '#000',
               }}
               data-testid="button-media-player-minimize"
             >
@@ -151,13 +152,14 @@ export function MediaPlayer() {
             </button>
             <button
               onClick={() => setIsMinimized(true)}
-              className="w-4 h-4 flex items-center justify-center text-[10px] text-black"
+              className="w-4 h-4 flex items-center justify-center text-[10px]"
               style={{
                 backgroundColor: '#C0C0C0',
                 borderTop: '1px solid #fff',
                 borderLeft: '1px solid #fff',
                 borderBottom: '1px solid #808080',
                 borderRight: '1px solid #808080',
+                color: '#000',
               }}
               data-testid="button-media-player-close"
             >
@@ -166,213 +168,210 @@ export function MediaPlayer() {
           </div>
         </div>
 
-        {/* Display Panel */}
-        <div
-          className="mx-1 mt-1 p-2"
-          style={{
-            backgroundColor: '#fff',
-            borderTop: '2px solid #808080',
-            borderLeft: '2px solid #808080',
-            borderBottom: '2px solid #fff',
-            borderRight: '2px solid #fff',
-          }}
-        >
-          {/* Track Info */}
-          <div className="flex justify-between items-start mb-2">
-            <div>
-              <div
-                className="text-[10px] text-[#000080] tracking-wider font-bold"
-                style={{ fontFamily: 'var(--font-pixel)' }}
-              >
-                {playlist[currentTrack]?.title || "NO TRACK"}
-              </div>
-              <div
-                className="text-[8px]"
-                style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
-              >
-                {playlist[currentTrack]?.artist || ""}
-              </div>
-            </div>
-            <div
-              className="text-[10px] text-[#000080] font-bold"
-              style={{ fontFamily: 'var(--font-pixel)' }}
-            >
-              {isPlaying ? "PLAYING" : "STOPPED"}
-            </div>
-          </div>
-
-          {/* Visualizer bars */}
-          <div className="flex items-end gap-[2px] h-6 mb-2">
-            {Array.from({ length: 20 }).map((_, i) => {
-              const height = isPlaying 
-                ? Math.random() * 100 
-                : 10;
-              return (
-                <div
-                  key={i}
-                  className="w-[10px] transition-all duration-75"
-                  style={{
-                    height: `${height}%`,
-                    backgroundColor: height > 70 ? '#1084d0' : '#000080',
-                  }}
-                />
-              );
-            })}
-          </div>
-
-          {/* Progress Bar */}
+        {/* Main Content - Horizontal Layout */}
+        <div className="flex items-stretch gap-1 p-1">
+          {/* Left: Track Info & Visualizer */}
           <div
-            className="h-2 relative"
-            style={{
-              backgroundColor: '#C0C0C0',
-              borderTop: '1px solid #808080',
-              borderLeft: '1px solid #808080',
-              borderBottom: '1px solid #fff',
-              borderRight: '1px solid #fff',
-            }}
-          >
-            <div
-              className="h-full bg-[#000080]"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-
-          {/* Time Display */}
-          <div className="flex justify-between mt-1">
-            <span
-              className="text-[8px]"
-              style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
-            >
-              00:{String(Math.floor(progress * 0.6)).padStart(2, '0')}
-            </span>
-            <span
-              className="text-[8px]"
-              style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
-            >
-              01:00
-            </span>
-          </div>
-        </div>
-
-        {/* Controls */}
-        <div className="flex items-center justify-center gap-1 p-2">
-          {[
-            { icon: '|◄', action: prevTrack, testId: 'button-prev-track' },
-            { icon: isPlaying ? '||' : '►', action: togglePlay, testId: 'button-play-pause' },
-            { icon: '■', action: stopTrack, testId: 'button-stop' },
-            { icon: '►|', action: nextTrack, testId: 'button-next-track' },
-          ].map((btn, i) => (
-            <button
-              key={i}
-              onClick={btn.action}
-              className="w-8 h-6 flex items-center justify-center text-[10px] text-black"
-              style={{
-                backgroundColor: '#C0C0C0',
-                borderTop: '2px solid #fff',
-                borderLeft: '2px solid #fff',
-                borderBottom: '2px solid #808080',
-                borderRight: '2px solid #808080',
-                fontFamily: 'var(--font-pixel)',
-              }}
-              data-testid={btn.testId}
-            >
-              {btn.icon}
-            </button>
-          ))}
-        </div>
-
-        {/* Volume Slider */}
-        <div className="flex items-center gap-2 px-2 pb-1">
-          <span
-            className="text-[8px]"
-            style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
-          >
-            VOL
-          </span>
-          <div
-            className="flex-1 h-3 relative cursor-pointer"
+            className="flex flex-col p-1"
             style={{
               backgroundColor: '#fff',
               borderTop: '2px solid #808080',
               borderLeft: '2px solid #808080',
               borderBottom: '2px solid #fff',
               borderRight: '2px solid #fff',
-            }}
-            onClick={(e) => {
-              const rect = e.currentTarget.getBoundingClientRect();
-              const x = e.clientX - rect.left;
-              setVolume(Math.round((x / rect.width) * 100));
+              minWidth: '140px',
             }}
           >
+            {/* Track Info */}
+            <div className="flex justify-between items-center mb-1">
+              <div>
+                <div
+                  className="text-[9px] text-[#000080] font-bold"
+                  style={{ fontFamily: 'var(--font-pixel)' }}
+                >
+                  {playlist[currentTrack]?.title || "NO TRACK"}
+                </div>
+                <div
+                  className="text-[7px]"
+                  style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
+                >
+                  {playlist[currentTrack]?.artist || ""}
+                </div>
+              </div>
+              <div
+                className="text-[8px] text-[#000080] font-bold"
+                style={{ fontFamily: 'var(--font-pixel)' }}
+              >
+                {isPlaying ? "▶" : "■"}
+              </div>
+            </div>
+
+            {/* Mini Visualizer */}
+            <div className="flex items-end gap-[1px] h-4 mb-1">
+              {Array.from({ length: 12 }).map((_, i) => {
+                const height = isPlaying ? Math.random() * 100 : 10;
+                return (
+                  <div
+                    key={i}
+                    className="w-[8px] transition-all duration-75"
+                    style={{
+                      height: `${height}%`,
+                      backgroundColor: height > 70 ? '#1084d0' : '#000080',
+                    }}
+                  />
+                );
+              })}
+            </div>
+
+            {/* Progress Bar */}
             <div
-              className="h-full bg-[#000080]"
-              style={{ width: `${volume}%` }}
-            />
-            <div
-              className="absolute top-0 h-full w-2"
+              className="h-1.5 relative"
               style={{
-                left: `calc(${volume}% - 4px)`,
+                backgroundColor: '#C0C0C0',
+                borderTop: '1px solid #808080',
+                borderLeft: '1px solid #808080',
+                borderBottom: '1px solid #fff',
+                borderRight: '1px solid #fff',
+              }}
+            >
+              <div
+                className="h-full bg-[#000080]"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+
+            {/* Time */}
+            <div className="flex justify-between mt-0.5">
+              <span
+                className="text-[7px]"
+                style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
+              >
+                {String(Math.floor(progress * 0.6 / 60)).padStart(2, '0')}:{String(Math.floor(progress * 0.6) % 60).padStart(2, '0')}
+              </span>
+              <span
+                className="text-[7px]"
+                style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
+              >
+                01:00
+              </span>
+            </div>
+          </div>
+
+          {/* Right: Controls & Volume */}
+          <div className="flex flex-col justify-between">
+            {/* Controls */}
+            <div className="flex items-center gap-0.5">
+              {[
+                { icon: '|◄', action: prevTrack, testId: 'button-prev-track' },
+                { icon: isPlaying ? '||' : '►', action: togglePlay, testId: 'button-play-pause' },
+                { icon: '■', action: stopTrack, testId: 'button-stop' },
+                { icon: '►|', action: nextTrack, testId: 'button-next-track' },
+              ].map((btn, i) => (
+                <button
+                  key={i}
+                  onClick={btn.action}
+                  className="w-6 h-5 flex items-center justify-center text-[9px]"
+                  style={{
+                    backgroundColor: '#C0C0C0',
+                    borderTop: '2px solid #fff',
+                    borderLeft: '2px solid #fff',
+                    borderBottom: '2px solid #808080',
+                    borderRight: '2px solid #808080',
+                    fontFamily: 'var(--font-pixel)',
+                    color: '#000',
+                  }}
+                  data-testid={btn.testId}
+                >
+                  {btn.icon}
+                </button>
+              ))}
+            </div>
+
+            {/* Volume */}
+            <div className="flex items-center gap-1 mt-1">
+              <span
+                className="text-[7px]"
+                style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
+              >
+                VOL
+              </span>
+              <div
+                className="w-16 h-2 relative cursor-pointer"
+                style={{
+                  backgroundColor: '#fff',
+                  borderTop: '1px solid #808080',
+                  borderLeft: '1px solid #808080',
+                  borderBottom: '1px solid #fff',
+                  borderRight: '1px solid #fff',
+                }}
+                onClick={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  setVolume(Math.round((x / rect.width) * 100));
+                }}
+              >
+                <div
+                  className="h-full bg-[#000080]"
+                  style={{ width: `${volume}%` }}
+                />
+              </div>
+            </div>
+
+            {/* Playlist Toggle */}
+            <button
+              onClick={() => setShowPlaylist(!showPlaylist)}
+              className="text-[7px] px-1 py-0.5 mt-1"
+              style={{
                 backgroundColor: '#C0C0C0',
                 borderTop: '1px solid #fff',
                 borderLeft: '1px solid #fff',
                 borderBottom: '1px solid #808080',
                 borderRight: '1px solid #808080',
+                fontFamily: 'var(--font-pixel)',
+                color: '#000',
               }}
-            />
+              data-testid="button-toggle-playlist"
+            >
+              {showPlaylist ? '▲ HIDE' : '▼ PLAYLIST'}
+            </button>
           </div>
-          <span
-            className="text-[8px] w-6 text-right"
-            style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
-          >
-            {volume}%
-          </span>
         </div>
 
-        {/* Playlist */}
-        <div
-          className="mx-1 mb-1"
-          style={{
-            backgroundColor: '#fff',
-            borderTop: '2px solid #808080',
-            borderLeft: '2px solid #808080',
-            borderBottom: '2px solid #fff',
-            borderRight: '2px solid #fff',
-            maxHeight: '80px',
-            overflowY: 'auto',
-          }}
-        >
+        {/* Playlist (collapsible) */}
+        {showPlaylist && (
           <div
-            className="text-[8px] px-1 py-0.5 border-b border-gray-300"
-            style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
+            className="mx-1 mb-1"
+            style={{
+              backgroundColor: '#fff',
+              borderTop: '2px solid #808080',
+              borderLeft: '2px solid #808080',
+              borderBottom: '2px solid #fff',
+              borderRight: '2px solid #fff',
+              maxHeight: '60px',
+              overflowY: 'auto',
+            }}
           >
-            PLAYLIST [{playlist.length} TRACKS]
+            {playlist.map((track, index) => (
+              <div
+                key={track.id}
+                onClick={() => setCurrentTrack(index)}
+                className="flex items-center gap-1 px-1 py-0.5 cursor-pointer"
+                style={{
+                  backgroundColor: currentTrack === index ? '#000080' : 'transparent',
+                  color: currentTrack === index ? '#fff' : '#000',
+                }}
+                data-testid={`playlist-item-${track.id}`}
+              >
+                <span
+                  className="text-[7px]"
+                  style={{ fontFamily: 'var(--font-pixel)', color: 'inherit' }}
+                >
+                  {String(index + 1).padStart(2, '0')}. {track.artist} - {track.title}
+                </span>
+              </div>
+            ))}
           </div>
-          {playlist.map((track, index) => (
-            <div
-              key={track.id}
-              onClick={() => setCurrentTrack(index)}
-              className="flex items-center gap-1 px-1 py-0.5 cursor-pointer"
-              style={{
-                backgroundColor: currentTrack === index ? '#000080' : 'transparent',
-                color: currentTrack === index ? '#fff' : '#000',
-              }}
-              data-testid={`playlist-item-${track.id}`}
-            >
-              <span
-                className="text-[8px]"
-                style={{ fontFamily: 'var(--font-pixel)', color: 'inherit' }}
-              >
-                {String(index + 1).padStart(2, '0')}.
-              </span>
-              <span
-                className="text-[8px]"
-                style={{ fontFamily: 'var(--font-pixel)', color: 'inherit' }}
-              >
-                {track.artist} - {track.title}
-              </span>
-            </div>
-          ))}
-        </div>
+        )}
 
         {/* Status Bar */}
         <div
@@ -383,10 +382,10 @@ export function MediaPlayer() {
           }}
         >
           <span
-            className="text-[8px]"
+            className="text-[7px]"
             style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
           >
-            READY - {playlist.length} files in playlist
+            {playlist.length} tracks | {volume}%
           </span>
         </div>
       </div>
