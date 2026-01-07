@@ -11,18 +11,18 @@ In all his work, Gerrit wants to create chances for people to pause, reflect, an
 export function AboutMeContent() {
   return (
     <div
-      className="h-full p-4 overflow-y-auto"
+      className="h-full p-3 overflow-y-auto"
       style={{
         backgroundColor: "#fff",
       }}
     >
       {/* Title */}
       <h1
-        className="text-3xl font-bold mb-4 pb-2"
+        className="text-xl font-bold mb-2 pb-1"
         style={{
           fontFamily: "var(--font-pixel)",
           color: "#000",
-          borderBottom: "2px solid #000",
+          borderBottom: "1px solid #000",
         }}
       >
         About Me
@@ -30,14 +30,14 @@ export function AboutMeContent() {
 
       {/* Text Content */}
       <div
-        className="text-sm leading-relaxed"
+        className="text-[9px] leading-tight"
         style={{
           fontFamily: "var(--font-pixel)",
           color: "#000",
         }}
       >
         {aboutMeText.split("\n\n").map((paragraph, index) => (
-          <p key={index} className="mb-4">
+          <p key={index} className="mb-2">
             {paragraph}
           </p>
         ))}

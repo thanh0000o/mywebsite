@@ -37,9 +37,9 @@ export default function Home() {
       id: `window-${windowIdCounter++}`,
       type,
       title,
-      position: { x: 150 + offset, y: 80 + offset },
-      width: "500px",
-      height: "450px",
+      position: { x: 150 + offset, y: 50 + offset },
+      width: "520px",
+      height: "480px",
       zIndex: topZIndex + 1,
     };
     setTopZIndex(topZIndex + 1);
