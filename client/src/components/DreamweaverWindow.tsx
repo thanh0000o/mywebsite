@@ -33,14 +33,23 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
           }}
         >
           <div className="flex items-center gap-2">
-            <div className="w-4 h-4 flex items-center justify-center">
-              <span className="text-xs">📄</span>
+            <div 
+              className="w-4 h-4 flex items-center justify-center"
+              style={{
+                backgroundColor: '#C0C0C0',
+                borderTop: '1px solid #fff',
+                borderLeft: '1px solid #fff',
+                borderBottom: '1px solid #808080',
+                borderRight: '1px solid #808080',
+              }}
+            >
+              <span className="text-[8px] text-black">W</span>
             </div>
             <span 
               className="text-sm font-bold"
               style={{ fontFamily: 'var(--font-pixel)', textShadow: '1px 1px 0 #000' }}
             >
-              Untitled-1 - portfolio_gerritthànhlambeets
+              Untitled-1 - gerrit thành lambeets
             </span>
           </div>
           <div className="flex gap-0.5">
@@ -116,22 +125,22 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
           <div 
             className="flex flex-col gap-1 p-1"
             style={{
-              width: '50px',
+              width: '30px',
               backgroundColor: '#C0C0C0',
               borderRight: '1px solid #808080',
             }}
           >
-            {/* Sidebar Tool Icons */}
-            {['▼', '📄', '⊞', '⊟', '📋', '🔵', '🔗', '⚡', '✧'].map((icon, i) => (
+            {/* Sidebar Tool Icons - using simple symbols instead of emojis */}
+            {['▼', '□', '⊞', '⊟', '▤', '●', '⟁', '⚡', '✦'].map((icon, i) => (
               <div
                 key={i}
-                className="w-7 h-7 flex items-center justify-center text-xs cursor-pointer"
+                className="w-5 h-5 flex items-center justify-center text-[8px] cursor-pointer text-black"
                 style={{
                   backgroundColor: '#C0C0C0',
-                  borderTop: '2px solid #fff',
-                  borderLeft: '2px solid #fff',
-                  borderBottom: '2px solid #808080',
-                  borderRight: '2px solid #808080',
+                  borderTop: '1px solid #fff',
+                  borderLeft: '1px solid #fff',
+                  borderBottom: '1px solid #808080',
+                  borderRight: '1px solid #808080',
                 }}
               >
                 {icon}
@@ -143,13 +152,24 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
           <div className="flex-1 flex flex-col">
             {/* Top Toolbar */}
             <div 
-              className="flex items-center justify-end px-2 gap-2"
+              className="flex items-center justify-between px-2 gap-2"
               style={{
-                height: '60px',
+                height: '40px',
                 backgroundColor: '#C0C0C0',
                 borderBottom: '1px solid #808080',
               }}
             >
+              {/* Left blue square */}
+              <div 
+                className="w-6 h-6"
+                style={{
+                  backgroundColor: '#000080',
+                  borderTop: '1px solid #fff',
+                  borderLeft: '1px solid #fff',
+                  borderBottom: '1px solid #808080',
+                  borderRight: '1px solid #808080',
+                }}
+              />
               {/* Toolbar Tabs */}
               <div className="flex items-center gap-1">
                 {['SITE', 'LIBRARY', 'STYLES', 'BEHAVIOR', 'TIMELINE', 'HTML'].map((tab) => (
@@ -173,7 +193,7 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
 
             {/* Center Canvas */}
             <div 
-              className="flex-1 m-1"
+              className="flex-1 m-1 flex flex-col items-center justify-center relative"
               style={{
                 backgroundColor: '#fff',
                 borderTop: '2px solid #808080',
@@ -182,14 +202,76 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
                 borderRight: '2px solid #fff',
               }}
             >
-              {/* Canvas content - empty workspace */}
+              {/* Canvas Content - Thành Lambeets design */}
+              <div className="relative w-48 h-32 flex flex-col items-center justify-center">
+                {/* Diagonal line */}
+                <div 
+                  className="absolute w-32 h-0.5 bg-black"
+                  style={{
+                    transform: 'rotate(-25deg)',
+                    top: '30%',
+                    left: '10%',
+                  }}
+                />
+                {/* Lambeets text */}
+                <p 
+                  className="text-lg italic text-blue-800 absolute"
+                  style={{ 
+                    fontFamily: 'var(--font-pixel)',
+                    top: '15%',
+                    right: '5%',
+                  }}
+                >
+                  Lambeets
+                </p>
+                {/* Thành text */}
+                <p 
+                  className="text-lg italic text-blue-800 absolute"
+                  style={{ 
+                    fontFamily: 'var(--font-pixel)',
+                    top: '45%',
+                    left: '15%',
+                    borderBottom: '2px solid black',
+                    paddingBottom: '2px',
+                  }}
+                >
+                  Thành
+                </p>
+              </div>
+              
+              {/* Scroll Here text */}
+              <p 
+                className="text-xs text-black mt-4"
+                style={{ fontFamily: 'var(--font-pixel)' }}
+              >
+                [SCROLL HERE]
+              </p>
+
+              {/* Footer copyright inside canvas */}
+              <div 
+                className="absolute bottom-2 left-0 right-0 flex justify-center"
+              >
+                <p 
+                  className="text-[10px] text-black px-2 py-1"
+                  style={{ 
+                    fontFamily: 'var(--font-pixel)',
+                    backgroundColor: '#C0C0C0',
+                    borderTop: '1px solid #fff',
+                    borderLeft: '1px solid #fff',
+                    borderBottom: '1px solid #808080',
+                    borderRight: '1px solid #808080',
+                  }}
+                >
+                  © 2000-2026 | designed on a 2560 x 1440 screen & to last
+                </p>
+              </div>
             </div>
 
             {/* Bottom Toolbar */}
             <div 
               className="flex items-center px-2 gap-2"
               style={{
-                height: '60px',
+                height: '50px',
                 backgroundColor: '#C0C0C0',
                 borderTop: '1px solid #808080',
               }}
@@ -198,7 +280,7 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
               <div className="flex items-center gap-1">
                 <span className="text-[10px] text-black" style={{ fontFamily: 'var(--font-pixel)' }}>Format</span>
                 <select 
-                  className="text-[10px] px-1"
+                  className="text-[10px] px-1 text-black"
                   style={{
                     backgroundColor: '#fff',
                     border: '1px solid #808080',
@@ -211,7 +293,7 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
 
               {/* Font dropdown */}
               <select 
-                className="text-[10px] px-1"
+                className="text-[10px] px-1 text-black"
                 style={{
                   backgroundColor: '#fff',
                   border: '1px solid #808080',
@@ -223,7 +305,7 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
 
               {/* Size dropdown */}
               <select 
-                className="text-[10px] px-1"
+                className="text-[10px] px-1 text-black"
                 style={{
                   backgroundColor: '#fff',
                   border: '1px solid #808080',
@@ -238,7 +320,7 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
                 {['B', 'I', '≡', '≡', '≡'].map((btn, i) => (
                   <button
                     key={i}
-                    className="w-5 h-5 flex items-center justify-center text-[10px] font-bold"
+                    className="w-5 h-5 flex items-center justify-center text-[10px] font-bold text-black"
                     style={{
                       backgroundColor: '#C0C0C0',
                       borderTop: '2px solid #fff',
