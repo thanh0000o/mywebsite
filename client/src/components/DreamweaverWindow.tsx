@@ -105,7 +105,7 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
               className="cursor-pointer text-black"
               style={{ fontSize: '12px' }}
             >
-              <span className="underline">{item[0]}</span>{item.slice(1)}
+              <span style={{ textDecoration: 'underline', textDecorationThickness: '2px', textUnderlineOffset: '2px' }}>{item[0]}</span>{item.slice(1)}
             </span>
           ))}
         </div>
