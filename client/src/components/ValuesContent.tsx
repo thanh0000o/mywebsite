@@ -28,6 +28,8 @@ export function ValuesContent() {
           opacity: 0.6,
         }}
       />
+      {/* Moving scanlines overlay */}
+      <div className="window-scanlines" aria-hidden="true" />
       
       {/* Content area */}
       <div className="p-3 relative z-10 h-full">

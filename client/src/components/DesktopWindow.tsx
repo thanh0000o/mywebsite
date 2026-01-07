@@ -99,6 +99,8 @@ export function DesktopWindow({
             zIndex: 0,
           }}
         />
+        {/* Moving scanlines overlay */}
+        <div className="window-scanlines" aria-hidden="true" />
         {/* Title Bar - Draggable */}
         <div
           className="flex items-center justify-between px-1 py-0.5 cursor-move select-none relative z-10"

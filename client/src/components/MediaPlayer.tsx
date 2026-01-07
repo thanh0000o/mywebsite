@@ -123,6 +123,8 @@ export function MediaPlayer() {
             zIndex: 0,
           }}
         />
+        {/* Moving scanlines overlay */}
+        <div className="window-scanlines" aria-hidden="true" />
         {/* Title Bar */}
         <div
           className="flex items-center justify-between px-1 py-0.5 relative z-10"

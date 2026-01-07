@@ -131,6 +131,8 @@ function ArtViewer({ art, onClose }: { art: Artwork; onClose: () => void }) {
             zIndex: 0,
           }}
         />
+        {/* Moving scanlines overlay */}
+        <div className="window-scanlines" aria-hidden="true" />
         {/* Title Bar */}
         <div 
           className="flex items-center justify-between px-1 py-0.5 relative z-10"
@@ -376,6 +378,8 @@ export function ArtContent() {
             zIndex: 0,
           }}
         />
+        {/* Moving scanlines overlay */}
+        <div className="window-scanlines" aria-hidden="true" />
         <div 
           className="w-full h-full overflow-auto p-2 relative z-10"
           style={{

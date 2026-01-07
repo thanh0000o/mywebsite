@@ -91,6 +91,31 @@
   animation: scroll 10s linear infinite;
 }
 
+/* Window scanlines overlay - for individual windows */
+.window-scanlines {
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0),
+    rgba(255,255,255,0) 50%,
+    rgba(0,0,0,0.15) 50%,
+    rgba(0,0,0,0.15)
+  );
+  background-size: 100% 3px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 20;
+  animation: window-scroll 8s linear infinite;
+}
+
+@keyframes window-scroll {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 200px; }
+}
+
 .crt-flicker {
   position: fixed;
   top: 0;
