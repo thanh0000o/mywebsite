@@ -3,11 +3,70 @@ import { AnimatePresence, motion } from "framer-motion";
 import { CrtOverlay } from "@/components/CrtOverlay";
 import { DesktopIcon } from "@/components/DesktopIcon";
 import { DreamweaverWindow } from "@/components/DreamweaverWindow";
+import { DesktopWindow } from "@/components/DesktopWindow";
+import { AboutMeContent } from "@/components/AboutMeContent";
 import { MediaPlayer } from "@/components/MediaPlayer";
 import logoImage from "@assets/image_1767797842217.png";
 
+interface WindowState {
+  id: string;
+  type: string;
+  title: string;
+  position: { x: number; y: number };
+  width: string;
+  height: string;
+  zIndex: number;
+}
+
+let windowIdCounter = 0;
+
 export default function Home() {
   const [showDreamweaver, setShowDreamweaver] = useState(false);
+  const [windows, setWindows] = useState<WindowState[]>([]);
+  const [topZIndex, setTopZIndex] = useState(100);
+
+  const openWindow = (type: string, title: string) => {
+    const existingWindow = windows.find((w) => w.type === type);
+    if (existingWindow) {
+      focusWindow(existingWindow.id);
+      return;
+    }
+
+    const offset = windows.length * 30;
+    const newWindow: WindowState = {
+      id: `window-${windowIdCounter++}`,
+      type,
+      title,
+      position: { x: 150 + offset, y: 80 + offset },
+      width: "500px",
+      height: "450px",
+      zIndex: topZIndex + 1,
+    };
+    setTopZIndex(topZIndex + 1);
+    setWindows([...windows, newWindow]);
+  };
+
+  const closeWindow = (id: string) => {
+    setWindows(windows.filter((w) => w.id !== id));
+  };
+
+  const focusWindow = (id: string) => {
+    setWindows(
+      windows.map((w) =>
+        w.id === id ? { ...w, zIndex: topZIndex + 1 } : w
+      )
+    );
+    setTopZIndex(topZIndex + 1);
+  };
+
+  const renderWindowContent = (type: string) => {
+    switch (type) {
+      case "aboutme":
+        return <AboutMeContent />;
+      default:
+        return <div className="p-4">Content coming soon...</div>;
+    }
+  };
 
   return (
     <div className="relative w-full h-screen overflow-hidden bg-black">
@@ -61,8 +120,36 @@ export default function Home() {
       */}
       <AnimatePresence>
         {showDreamweaver && (
-          <DreamweaverWindow onClose={() => setShowDreamweaver(false)} />
+          <DreamweaverWindow 
+            onClose={() => setShowDreamweaver(false)} 
+            onOpenWindow={openWindow}
+          />
         )}
+      </AnimatePresence>
+
+      {/* 
+        =====================================================
+        DESKTOP WINDOWS
+        =====================================================
+        Draggable windows for different content
+        =====================================================
+      */}
+      <AnimatePresence>
+        {windows.map((window) => (
+          <DesktopWindow
+            key={window.id}
+            id={window.id}
+            title={window.title}
+            initialPosition={window.position}
+            width={window.width}
+            height={window.height}
+            zIndex={window.zIndex}
+            onFocus={() => focusWindow(window.id)}
+            onClose={() => closeWindow(window.id)}
+          >
+            {renderWindowContent(window.type)}
+          </DesktopWindow>
+        ))}
       </AnimatePresence>
 
       {/* Footer Text */}
