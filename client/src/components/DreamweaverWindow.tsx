@@ -170,7 +170,7 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
                 }}
               />
               <div className="flex items-center gap-1">
-                {['SITE', 'LIBRARY', 'STYLES', 'BEHAVIOR', 'TIMELINE', 'HTML'].map((tab) => (
+                {['ART', 'ABOUT ME', 'EDUCATION', 'LANGUAGES', 'EXPERIENCE', 'SOFTWARE', 'SOFTSKILLS', 'VALUES'].map((tab) => (
                   <div
                     key={tab}
                     className="px-2 py-1 text-[10px] cursor-pointer text-black font-bold"
