@@ -1,40 +1,48 @@
+import { Landmark, Users, Palette, UtensilsCrossed, Heart, TreePine } from "lucide-react";
+
 export function ExperienceContent() {
   const experiences = [
     {
-      role: "Student Intern",
-      description: "banking operations & certification support",
-      company: "Argenta Tervuren",
-      period: "2018",
+      icon: Landmark,
+      role: "Intern",
+      company: "Argenta",
+      period: "'18",
+      color: "#4a90d9",
     },
     {
+      icon: Users,
       role: "Leader",
-      description: "youth coordination & project organization",
-      company: "Scouts en Gidsen Vlaanderen",
-      period: "2019–2022",
+      company: "Scouts",
+      period: "'19-22",
+      color: "#2d8f2d",
     },
     {
-      role: "Digital artist",
-      description: "cover art & creative visuals",
+      icon: Palette,
+      role: "Artist",
       company: "Freelance",
-      period: "2021+",
+      period: "'21+",
+      color: "#9b59b6",
     },
     {
-      role: "Student job",
-      description: "kitchen helper, food preparation & workflow support",
-      company: "Bouf's restaurant",
-      period: "2022–2025",
+      icon: UtensilsCrossed,
+      role: "Kitchen",
+      company: "Bouf's",
+      period: "'22-25",
+      color: "#e67e22",
     },
     {
-      role: "Student Intern",
-      description: "youth coaching support & visual communication",
+      icon: Heart,
+      role: "Intern",
       company: "Make It Work",
-      period: "2023",
+      period: "'23",
+      color: "#e74c3c",
     },
     {
-      role: "Student Intern",
-      description: "marketing, research & client presentations",
+      icon: TreePine,
+      role: "Intern",
       company: "OneBonsai",
-      period: "2024",
+      period: "'24",
+      color: "#27ae60",
     },
   ];
 
@@ -58,10 +66,10 @@ export function ExperienceContent() {
       {/* Moving scanlines overlay */}
       <div className="window-scanlines" aria-hidden="true" />
       
-      {/* Content area */}
-      <div className="p-3 overflow-y-auto relative z-10 h-full">
+      {/* Content area - grid layout, no scroll */}
+      <div className="p-2 relative z-10 h-full flex flex-col">
         <div
-          className="h-full p-4 overflow-y-auto"
+          className="flex-1 p-2"
           style={{
             backgroundColor: "#d4d4d4",
             borderTop: "2px solid #808080",
@@ -70,32 +78,54 @@ export function ExperienceContent() {
             borderRight: "2px solid #fff",
           }}
         >
-          <div
-            className="text-[9px] leading-relaxed"
-            style={{
-              fontFamily: "var(--font-pixel)",
-              color: "#000",
-            }}
-          >
-            {experiences.map((exp, index) => (
-              <div 
-                key={index} 
-                className="mb-3 pb-2" 
-                style={{ 
-                  borderBottom: index < experiences.length - 1 ? "1px dotted #999" : "none" 
-                }}
-              >
-                <div className="flex items-start gap-1">
-                  <span style={{ color: "#000080" }}>[*]</span>
-                  <span className="font-bold">{exp.role}</span>
-                  <span style={{ color: "#666" }}>| {exp.period}</span>
+          <div className="grid grid-cols-3 gap-1 h-full">
+            {experiences.map((exp, index) => {
+              const IconComponent = exp.icon;
+              return (
+                <div 
+                  key={index} 
+                  className="flex flex-col items-center justify-center p-1 text-center"
+                  style={{
+                    backgroundColor: "#c0c0c0",
+                    borderTop: "1px solid #fff",
+                    borderLeft: "1px solid #fff",
+                    borderBottom: "1px solid #808080",
+                    borderRight: "1px solid #808080",
+                  }}
+                >
+                  <div 
+                    className="w-6 h-6 flex items-center justify-center mb-1"
+                    style={{
+                      backgroundColor: exp.color,
+                      borderTop: "1px solid #fff",
+                      borderLeft: "1px solid #fff",
+                      borderBottom: "1px solid #808080",
+                      borderRight: "1px solid #808080",
+                    }}
+                  >
+                    <IconComponent className="w-4 h-4 text-white" />
+                  </div>
+                  <span 
+                    className="text-[8px] font-bold"
+                    style={{ fontFamily: "var(--font-pixel)", color: "#000" }}
+                  >
+                    {exp.role}
+                  </span>
+                  <span 
+                    className="text-[7px]"
+                    style={{ fontFamily: "var(--font-pixel)", color: "#000080" }}
+                  >
+                    {exp.company}
+                  </span>
+                  <span 
+                    className="text-[6px]"
+                    style={{ fontFamily: "var(--font-pixel)", color: "#666" }}
+                  >
+                    {exp.period}
+                  </span>
                 </div>
-                <div className="ml-4" style={{ color: "#333" }}>{exp.description}</div>
-                <div className="ml-4">
-                  <span style={{ color: "#000080" }}>{exp.company}</span>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
