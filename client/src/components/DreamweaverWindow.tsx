@@ -204,11 +204,11 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
               }}
             >
               {/* Logo Image */}
-              <div className="flex-1 flex items-center justify-center py-4">
+              <div className="pt-8">
                 <img 
                   src={logoImage}
                   alt="Thành Lambeets"
-                  className="max-w-[70%] max-h-full object-contain"
+                  className="w-48 h-auto object-contain"
                   style={{ imageRendering: 'pixelated' }}
                   draggable={false}
                 />
@@ -216,11 +216,14 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
               
               {/* Scroll Here text */}
               <p 
-                className="text-sm text-black py-4 font-bold"
+                className="text-sm text-black mt-4 font-bold"
                 style={{ fontFamily: 'var(--font-pixel)' }}
               >
                 [SCROLL HERE]
               </p>
+              
+              {/* Spacer */}
+              <div className="flex-1" />
             </div>
 
             {/* Bottom Toolbar */}
