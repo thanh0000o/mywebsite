@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { CrtOverlay } from "@/components/CrtOverlay";
 import { DesktopIcon } from "@/components/DesktopIcon";
 import { DreamweaverWindow } from "@/components/DreamweaverWindow";
+import { MediaPlayer } from "@/components/MediaPlayer";
 import logoImage from "@assets/image_1767797842217.png";
 
 export default function Home() {
@@ -75,6 +76,9 @@ export default function Home() {
           © 2000-2026 | designed on a 2560 x 1440 screen & to last
         </p>
       </div>
+
+      {/* Media Player - Top Right */}
+      <MediaPlayer />
 
       {/* CRT / SCANLINE OVERLAY */}
       <CrtOverlay />
