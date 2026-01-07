@@ -206,7 +206,7 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
                 <img 
                   src={logoImage}
                   alt="Thành Lambeets"
-                  className="w-48 h-auto object-contain"
+                  className="w-72 h-auto object-contain"
                   style={{ imageRendering: 'pixelated' }}
                   draggable={false}
                 />
