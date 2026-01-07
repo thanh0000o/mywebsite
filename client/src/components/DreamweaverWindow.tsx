@@ -202,43 +202,6 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
                 borderRight: '2px solid #fff',
               }}
             >
-              {/* Canvas Content - Thành Lambeets design */}
-              <div className="relative w-48 h-32 flex flex-col items-center justify-center">
-                {/* Diagonal line */}
-                <div 
-                  className="absolute w-32 h-0.5 bg-black"
-                  style={{
-                    transform: 'rotate(-25deg)',
-                    top: '30%',
-                    left: '10%',
-                  }}
-                />
-                {/* Lambeets text */}
-                <p 
-                  className="text-lg italic text-blue-800 absolute"
-                  style={{ 
-                    fontFamily: 'var(--font-pixel)',
-                    top: '15%',
-                    right: '5%',
-                  }}
-                >
-                  Lambeets
-                </p>
-                {/* Thành text */}
-                <p 
-                  className="text-lg italic text-blue-800 absolute"
-                  style={{ 
-                    fontFamily: 'var(--font-pixel)',
-                    top: '45%',
-                    left: '15%',
-                    borderBottom: '2px solid black',
-                    paddingBottom: '2px',
-                  }}
-                >
-                  Thành
-                </p>
-              </div>
-              
               {/* Scroll Here text */}
               <p 
                 className="text-xs text-black mt-4"
