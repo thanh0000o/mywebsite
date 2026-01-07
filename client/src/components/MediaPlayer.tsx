@@ -22,12 +22,14 @@ export function MediaPlayer() {
   const [isMinimized, setIsMinimized] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTrack, setCurrentTrack] = useState(0);
+  const [isInitialized, setIsInitialized] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [volume, setVolume] = useState(75);
   const [showPlaylist, setShowPlaylist] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const isPlayingRef = useRef(false);
 
   useEffect(() => {
     if (audioRef.current) {
@@ -36,23 +38,42 @@ export function MediaPlayer() {
   }, [volume]);
 
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.src = playlist[currentTrack].src;
-      if (isPlaying) {
-        audioRef.current.play();
-      }
+    if (audioRef.current && !isInitialized) {
+      audioRef.current.src = playlist[0].src;
+      audioRef.current.volume = volume / 100;
+      setIsInitialized(true);
+      audioRef.current.play().then(() => {
+        setIsPlaying(true);
+        isPlayingRef.current = true;
+      }).catch(() => {
+        setIsPlaying(false);
+        isPlayingRef.current = false;
+      });
     }
-  }, [currentTrack]);
+  }, []);
 
   useEffect(() => {
-    if (audioRef.current) {
+    if (audioRef.current && isInitialized) {
+      audioRef.current.src = playlist[currentTrack].src;
+      if (isPlayingRef.current) {
+        audioRef.current.play().catch(() => {});
+      }
+    }
+  }, [currentTrack, isInitialized]);
+
+  useEffect(() => {
+    if (audioRef.current && isInitialized) {
+      isPlayingRef.current = isPlaying;
       if (isPlaying) {
-        audioRef.current.play();
+        audioRef.current.play().catch(() => {
+          setIsPlaying(false);
+          isPlayingRef.current = false;
+        });
       } else {
         audioRef.current.pause();
       }
     }
-  }, [isPlaying]);
+  }, [isPlaying, isInitialized]);
 
   const handleTimeUpdate = () => {
     if (audioRef.current) {
@@ -82,13 +103,16 @@ export function MediaPlayer() {
   const togglePlay = () => setIsPlaying(!isPlaying);
   const prevTrack = () => {
     setCurrentTrack((prev) => (prev > 0 ? prev - 1 : playlist.length - 1));
+    isPlayingRef.current = true;
     setIsPlaying(true);
   };
   const nextTrack = () => {
     setCurrentTrack((prev) => (prev < playlist.length - 1 ? prev + 1 : 0));
+    isPlayingRef.current = true;
     setIsPlaying(true);
   };
   const stopTrack = () => {
+    isPlayingRef.current = false;
     setIsPlaying(false);
     setProgress(0);
     setCurrentTime(0);
