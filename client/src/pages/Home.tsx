@@ -5,19 +5,19 @@ import logoImage from "@assets/image_1767797842217.png";
 
 export default function Home() {
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-blue-600">
+    <div className="relative w-full h-screen overflow-hidden bg-black">
       {/* 
         =====================================================
-        BACKGROUND IMAGE LAYER
+        BACKGROUND LAYER
         =====================================================
-        Stretched and blurred for soft dreamy effect
+        Black background with subtle blur texture
         =====================================================
       */}
-      <img
-        src={bgImage}
-        alt=""
-        className="absolute inset-0 w-full h-full object-cover blur-xl scale-110"
-        draggable={false}
+      <div 
+        className="absolute inset-0 w-full h-full blur-xl scale-110 opacity-30"
+        style={{
+          background: 'radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a0a 70%, #000000 100%)'
+        }}
       />
 
       {/* 
