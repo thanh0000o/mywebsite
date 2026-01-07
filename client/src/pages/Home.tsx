@@ -213,7 +213,7 @@ export default function Home() {
           className="text-[10px] text-white/40 tracking-wider drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]"
           style={{ fontFamily: 'var(--font-pixel)' }}
         >
-          © 2000-2026 | designed on a 2560 x 1440 screen & to last
+          © 2000-2026 | designed on a 2560 x 1440 screen & <a href="https://jeffhuang.com/designed_to_last/" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: '#0000ff' }} data-testid="link-designed-to-last">to last</a>
         </p>
       </div>
 
