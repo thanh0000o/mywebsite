@@ -124,10 +124,10 @@ function ArtViewer({ art, onClose }: { art: Artwork; onClose: () => void }) {
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='1' height='1' fill='%23888' /%3E%3Crect x='3' y='1' width='1' height='1' fill='%23aaa' /%3E%3Crect x='1' y='3' width='1' height='1' fill='%23777' /%3E%3Crect x='4' y='4' width='1' height='1' fill='%239a9a9a' /%3E%3Crect x='2' y='5' width='1' height='1' fill='%23909090' /%3E%3Crect x='5' y='2' width='1' height='1' fill='%23858585' /%3E%3C/svg%3E")`,
-            backgroundSize: "3px 3px",
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='1' height='1' fill='%23999' /%3E%3Crect x='2' y='1' width='1' height='1' fill='%23bbb' /%3E%3Crect x='1' y='2' width='1' height='1' fill='%23888' /%3E%3Crect x='3' y='3' width='1' height='1' fill='%23aaa' /%3E%3C/svg%3E")`,
+            backgroundSize: "4px 4px",
             imageRendering: "pixelated" as const,
-            opacity: 0.4,
+            opacity: 0.6,
             zIndex: 0,
           }}
         />
@@ -360,14 +360,24 @@ export function ArtContent() {
   return (
     <>
       <div 
-        className="w-full h-full p-2"
+        className="w-full h-full p-2 relative"
         style={{
           backgroundColor: '#c0c0c0',
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E")`,
         }}
       >
+        {/* Pixelated noise texture overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='1' height='1' fill='%23999' /%3E%3Crect x='2' y='1' width='1' height='1' fill='%23bbb' /%3E%3Crect x='1' y='2' width='1' height='1' fill='%23888' /%3E%3Crect x='3' y='3' width='1' height='1' fill='%23aaa' /%3E%3C/svg%3E")`,
+            backgroundSize: "4px 4px",
+            imageRendering: "pixelated" as const,
+            opacity: 0.6,
+            zIndex: 0,
+          }}
+        />
         <div 
-          className="w-full h-full overflow-auto p-2"
+          className="w-full h-full overflow-auto p-2 relative z-10"
           style={{
             backgroundColor: '#1a1a1a',
             borderTop: '2px solid #808080',
