@@ -102,10 +102,10 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
           {['File', 'Edit', 'View', 'Insert', 'Modify', 'Text', 'Window', 'Help'].map((item) => (
             <span 
               key={item} 
-              className="cursor-pointer hover:underline text-black"
+              className="cursor-pointer text-black"
               style={{ fontSize: '12px' }}
             >
-              {item}
+              <span className="underline">{item[0]}</span>{item.slice(1)}
             </span>
           ))}
         </div>
