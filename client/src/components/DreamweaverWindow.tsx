@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import logoImage from "@assets/ChatGPT_Image_Jan_7,_2026,_12_04_31_PM_1767811147577.png";
 
 interface DreamweaverWindowProps {
   onClose: () => void;
@@ -202,6 +203,15 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
                 borderRight: '2px solid #fff',
               }}
             >
+              {/* Logo Image */}
+              <img 
+                src={logoImage}
+                alt="Thành Lambeets"
+                className="max-w-full max-h-[60%] object-contain"
+                style={{ imageRendering: 'pixelated' }}
+                draggable={false}
+              />
+              
               {/* Scroll Here text */}
               <p 
                 className="text-xs text-black mt-4"
