@@ -50,7 +50,7 @@ export function ValuesContent() {
             {values.map((value, index) => (
               <div 
                 key={index} 
-                className="flex items-center justify-between px-2 py-1"
+                className="flex items-center justify-between gap-1 px-1 py-0.5 overflow-hidden"
                 style={{
                   backgroundColor: "#c0c0c0",
                   borderTop: "1px solid #fff",
@@ -60,16 +60,16 @@ export function ValuesContent() {
                 }}
               >
                 <span 
-                  className="text-[8px] font-bold"
+                  className="text-[7px] font-bold truncate"
                   style={{ fontFamily: "var(--font-pixel)", color: "#000" }}
                 >
                   {value.label}
                 </span>
-                <div className="flex gap-0.5">
+                <div className="flex gap-0 flex-shrink-0">
                   {Array.from({ length: value.stars }).map((_, i) => (
                     <Star 
                       key={i} 
-                      className="w-3 h-3" 
+                      className="w-2.5 h-2.5" 
                       fill={starColors[i % starColors.length]}
                       color={starColors[i % starColors.length]}
                     />

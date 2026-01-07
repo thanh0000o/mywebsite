@@ -49,7 +49,7 @@ export function SkillsContent() {
             return (
               <div 
                 key={index} 
-                className="flex items-center gap-1 px-2 py-1"
+                className="flex items-center gap-1 px-1.5 py-0.5"
                 style={{
                   backgroundColor: skill.color,
                   borderTop: "1px solid rgba(255,255,255,0.5)",
@@ -58,9 +58,9 @@ export function SkillsContent() {
                   borderRight: "1px solid rgba(0,0,0,0.3)",
                 }}
               >
-                <IconComponent className="w-3 h-3 text-white" />
+                <IconComponent className="w-2.5 h-2.5 text-white flex-shrink-0" />
                 <span 
-                  className="text-[8px] text-white font-bold"
+                  className="text-[7px] text-white font-bold whitespace-nowrap"
                   style={{ fontFamily: "var(--font-pixel)" }}
                 >
                   {skill.label}
