@@ -1,9 +1,44 @@
 export function SoftwareContent() {
+  const AdobeIcon = () => (
+    <svg width="16" height="16" viewBox="0 0 16 16" style={{ imageRendering: 'pixelated' }}>
+      <rect x="0" y="0" width="16" height="16" fill="#330000"/>
+      <polygon points="8,2 14,14 10,14 8.5,10 5.5,10 8,2" fill="#ff0000"/>
+      <polygon points="2,14 6,14 8,8 5,8" fill="#ff0000"/>
+    </svg>
+  );
+
+  const BlenderIcon = () => (
+    <svg width="16" height="16" viewBox="0 0 16 16" style={{ imageRendering: 'pixelated' }}>
+      <rect x="0" y="0" width="16" height="16" fill="#1a1a1a"/>
+      <ellipse cx="8" cy="9" rx="6" ry="4" fill="#ea7600"/>
+      <ellipse cx="8" cy="8" rx="2" ry="1.5" fill="#265787"/>
+      <circle cx="8" cy="8" r="0.8" fill="#fff"/>
+    </svg>
+  );
+
+  const OfficeIcon = () => (
+    <svg width="16" height="16" viewBox="0 0 16 16" style={{ imageRendering: 'pixelated' }}>
+      <rect x="0" y="0" width="16" height="16" fill="#d24726"/>
+      <rect x="3" y="3" width="10" height="10" fill="#fff"/>
+      <rect x="5" y="5" width="6" height="6" fill="#d24726"/>
+    </svg>
+  );
+
+  const AIIcon = () => (
+    <svg width="16" height="16" viewBox="0 0 16 16" style={{ imageRendering: 'pixelated' }}>
+      <rect x="0" y="0" width="16" height="16" fill="#1a1a2e"/>
+      <rect x="4" y="4" width="8" height="8" fill="#00ff00" opacity="0.8"/>
+      <rect x="5" y="6" width="2" height="2" fill="#000"/>
+      <rect x="9" y="6" width="2" height="2" fill="#000"/>
+      <rect x="6" y="9" width="4" height="1" fill="#000"/>
+    </svg>
+  );
+
   const software = [
-    { name: "Adobe Creative Suite", items: ["Illustrator", "InDesign", "Photoshop"] },
-    { name: "Blender", items: [] },
-    { name: "Microsoft Office", items: [] },
-    { name: "AI Tools", items: ["up-to-date user", "eager to learn & integrate", "Replit, Lovable, AI agents"] },
+    { name: "Adobe Creative Suite", items: ["Illustrator", "InDesign", "Photoshop"], icon: AdobeIcon },
+    { name: "Blender", items: [], icon: BlenderIcon },
+    { name: "Microsoft Office", items: [], icon: OfficeIcon },
+    { name: "AI Tools", items: ["up-to-date user", "eager to learn & integrate", "Replit, Lovable, AI agents"], icon: AIIcon },
   ];
 
   return (
@@ -47,7 +82,8 @@ export function SoftwareContent() {
           >
             {software.map((item, index) => (
               <div key={index} className="mb-3">
-                <div className="flex items-center gap-1 mb-1">
+                <div className="flex items-center gap-2 mb-1">
+                  <item.icon />
                   <span 
                     className="px-2 py-0.5"
                     style={{ 
