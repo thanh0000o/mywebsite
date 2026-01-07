@@ -192,52 +192,35 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
               </div>
             </div>
 
-            {/* Canvas Container */}
+            {/* Center Canvas */}
             <div 
-              className="flex-1 m-0.5"
-              style={{ backgroundColor: '#C0C0C0', padding: '2px' }}
+              className="flex-1 m-1 flex flex-col items-center overflow-hidden"
+              style={{
+                backgroundColor: '#fff',
+                borderTop: '2px solid #808080',
+                borderLeft: '2px solid #808080',
+                borderBottom: '2px solid #fff',
+                borderRight: '2px solid #fff',
+              }}
             >
-              {/* Canvas Viewport */}
-              <div 
-                className="w-full h-full relative"
-                style={{
-                  backgroundColor: '#fff',
-                  overflow: 'hidden',
-                  borderTop: '2px solid #808080',
-                  borderLeft: '2px solid #808080',
-                  borderBottom: '2px solid #fff',
-                  borderRight: '2px solid #fff',
-                  boxShadow: 'inset 1px 1px 3px rgba(0,0,0,0.1)',
-                }}
-              >
-                {/* Canvas Content */}
-                <div 
-                  className="w-full h-full overflow-y-auto relative flex flex-col items-center"
-                  style={{
-                    minHeight: '2000px',
-                    backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 19px, #E0E0E0 19px, #E0E0E0 20px)',
-                  }}
-                >
-                  {/* Logo Image */}
-                  <div className="pt-12 flex items-center justify-center">
-                    <img 
-                      src={logoImage}
-                      alt="Thành Lambeets"
-                      className="w-80 h-auto object-contain"
-                      style={{ imageRendering: 'pixelated' }}
-                      draggable={false}
-                    />
-                  </div>
-                  
-                  {/* Scroll Here text */}
-                  <p 
-                    className="text-sm text-black mt-8 font-bold"
-                    style={{ fontFamily: 'var(--font-pixel)' }}
-                  >
-                    [SCROLL HERE]
-                  </p>
-                </div>
+              {/* Logo Image */}
+              <div className="flex-1 flex items-center justify-center">
+                <img 
+                  src={logoImage}
+                  alt="Thành Lambeets"
+                  className="w-64 h-auto object-contain"
+                  style={{ imageRendering: 'pixelated' }}
+                  draggable={false}
+                />
               </div>
+              
+              {/* Scroll Here text */}
+              <p 
+                className="text-sm text-black pb-8 font-bold"
+                style={{ fontFamily: 'var(--font-pixel)' }}
+              >
+                [SCROLL HERE]
+              </p>
             </div>
 
             {/* Bottom Toolbar */}
