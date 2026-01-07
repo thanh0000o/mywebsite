@@ -148,7 +148,7 @@ export function MediaPlayer() {
       <motion.div
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
-        className="fixed top-4 right-4 z-40 cursor-pointer"
+        className="fixed top-4 right-4 z-[100] cursor-pointer"
         onClick={() => setIsMinimized(false)}
         data-testid="button-media-player-restore"
       >
@@ -191,7 +191,7 @@ export function MediaPlayer() {
     <motion.div
       initial={{ opacity: 0, x: 50 }}
       animate={{ opacity: 1, x: 0 }}
-      className="fixed top-4 right-4 z-40"
+      className="fixed top-4 right-4 z-[100]"
     >
       <div
         className="flex flex-col relative"
