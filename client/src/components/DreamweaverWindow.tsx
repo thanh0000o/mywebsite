@@ -372,12 +372,13 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
               </div>
             </div>
 
-            {/* Center Canvas - Scrollable with clip */}
+            {/* Center Canvas - Scrollable with clip and noise texture */}
             <div 
               ref={canvasRef}
               className="flex-1 m-1 relative overflow-hidden"
               style={{
-                backgroundColor: '#fff',
+                backgroundColor: '#ffffff',
+                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E")`,
                 borderTop: '2px solid #808080',
                 borderLeft: '2px solid #808080',
                 borderBottom: '2px solid #fff',
@@ -420,72 +421,96 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
                     [SCROLL HERE]
                   </p>
 
-                  {/* Flower SVG - 12 stems matching reference style */}
-                  <svg 
-                    id="flower" 
-                    width="100%" 
-                    height="350"
-                    viewBox="0 0 400 350"
-                    preserveAspectRatio="xMidYMid meet"
-                    className="absolute"
-                    style={{
-                      left: '0',
-                      top: '280px',
-                      shapeRendering: 'crispEdges',
-                    }}
+                  {/* Flower SVG - centered with 20 curved branches */}
+                  <div 
+                    className="flex justify-center w-full"
+                    style={{ marginTop: '200px' }}
                   >
-                    {/* Center point at (200, 300) - bottom center */}
-                    {/* Stem 1: Far left */}
-                    <path ref={(el) => addStemRef(el, 0)} d="M 200,300 Q 120,250 60,120" 
-                          stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="square"/>
-                    {/* Stem 2: Left */}
-                    <path ref={(el) => addStemRef(el, 1)} d="M 200,300 Q 140,220 100,80" 
-                          stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="square"/>
-                    {/* Stem 3: Center-left up */}
-                    <path ref={(el) => addStemRef(el, 2)} d="M 200,300 Q 170,200 150,50" 
-                          stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="square"/>
-                    {/* Stem 4: Center-left */}
-                    <path ref={(el) => addStemRef(el, 3)} d="M 200,300 Q 190,180 180,30" 
-                          stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="square"/>
-                    {/* Stem 5: Center */}
-                    <path ref={(el) => addStemRef(el, 4)} d="M 200,300 Q 200,200 200,40" 
-                          stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="square"/>
-                    {/* Stem 6: Center-right */}
-                    <path ref={(el) => addStemRef(el, 5)} d="M 200,300 Q 210,180 220,30" 
-                          stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="square"/>
-                    {/* Stem 7: Center-right up */}
-                    <path ref={(el) => addStemRef(el, 6)} d="M 200,300 Q 230,200 250,50" 
-                          stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="square"/>
-                    {/* Stem 8: Right */}
-                    <path ref={(el) => addStemRef(el, 7)} d="M 200,300 Q 260,220 300,80" 
-                          stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="square"/>
-                    {/* Stem 9: Far right */}
-                    <path ref={(el) => addStemRef(el, 8)} d="M 200,300 Q 280,250 340,120" 
-                          stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="square"/>
-                    {/* Stem 10: Lower left curve */}
-                    <path ref={(el) => addStemRef(el, 9)} d="M 200,300 Q 100,320 40,260" 
-                          stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="square"/>
-                    {/* Stem 11: Lower right curve */}
-                    <path ref={(el) => addStemRef(el, 10)} d="M 200,300 Q 300,320 360,260" 
-                          stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="square"/>
-                    {/* Stem 12: Straight down */}
-                    <path ref={(el) => addStemRef(el, 11)} d="M 200,300 L 200,340" 
-                          stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="square"/>
-                    
-                    {/* Portfolio squares at stem endpoints */}
-                    <rect ref={(el) => addSquareRef(el, 0)} data-project="1" x="53" y="113" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                    <rect ref={(el) => addSquareRef(el, 1)} data-project="2" x="93" y="73" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                    <rect ref={(el) => addSquareRef(el, 2)} data-project="3" x="143" y="43" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                    <rect ref={(el) => addSquareRef(el, 3)} data-project="4" x="173" y="23" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                    <rect ref={(el) => addSquareRef(el, 4)} data-project="5" x="193" y="33" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                    <rect ref={(el) => addSquareRef(el, 5)} data-project="6" x="213" y="23" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                    <rect ref={(el) => addSquareRef(el, 6)} data-project="7" x="243" y="43" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                    <rect ref={(el) => addSquareRef(el, 7)} data-project="8" x="293" y="73" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                    <rect ref={(el) => addSquareRef(el, 8)} data-project="9" x="333" y="113" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                    <rect ref={(el) => addSquareRef(el, 9)} data-project="10" x="33" y="253" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                    <rect ref={(el) => addSquareRef(el, 10)} data-project="11" x="353" y="253" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                    <rect ref={(el) => addSquareRef(el, 11)} data-project="12" x="193" y="333" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  </svg>
+                    <svg 
+                      id="flower" 
+                      width="600"
+                      height="550"
+                      viewBox="0 0 600 550"
+                      preserveAspectRatio="xMidYMid meet"
+                      style={{ shapeRendering: 'crispEdges' }}
+                    >
+                      {/* Trunk - vertical line from bottom center */}
+                      <path ref={(el) => addStemRef(el, 0)} d="M 300,450 L 300,520" 
+                            stroke="#333" strokeWidth="2" fill="none"/>
+                      
+                      {/* Left side branches (1-10) - curving left */}
+                      <path ref={(el) => addStemRef(el, 1)} d="M 300,450 Q 100,480 30,350" 
+                            stroke="#666" strokeWidth="1.5" fill="none"/>
+                      <path ref={(el) => addStemRef(el, 2)} d="M 300,450 Q 80,400 20,100" 
+                            stroke="#666" strokeWidth="1.5" fill="none"/>
+                      <path ref={(el) => addStemRef(el, 3)} d="M 300,450 Q 120,350 80,200" 
+                            stroke="#666" strokeWidth="1.5" fill="none"/>
+                      <path ref={(el) => addStemRef(el, 4)} d="M 300,450 Q 150,320 100,120" 
+                            stroke="#666" strokeWidth="1.5" fill="none"/>
+                      <path ref={(el) => addStemRef(el, 5)} d="M 300,450 Q 180,300 130,80" 
+                            stroke="#666" strokeWidth="1.5" fill="none"/>
+                      <path ref={(el) => addStemRef(el, 6)} d="M 300,450 Q 200,350 160,250" 
+                            stroke="#666" strokeWidth="1.5" fill="none"/>
+                      <path ref={(el) => addStemRef(el, 7)} d="M 300,450 Q 230,320 200,180" 
+                            stroke="#666" strokeWidth="1.5" fill="none"/>
+                      <path ref={(el) => addStemRef(el, 8)} d="M 300,450 Q 250,300 220,100" 
+                            stroke="#666" strokeWidth="1.5" fill="none"/>
+                      <path ref={(el) => addStemRef(el, 9)} d="M 300,450 Q 270,280 250,60" 
+                            stroke="#666" strokeWidth="1.5" fill="none"/>
+                      <path ref={(el) => addStemRef(el, 10)} d="M 300,450 Q 290,250 280,40" 
+                            stroke="#666" strokeWidth="1.5" fill="none"/>
+                      
+                      {/* Right side branches (11-20) - curving right */}
+                      <path ref={(el) => addStemRef(el, 11)} d="M 300,450 Q 310,250 320,40" 
+                            stroke="#666" strokeWidth="1.5" fill="none"/>
+                      <path ref={(el) => addStemRef(el, 12)} d="M 300,450 Q 330,280 350,60" 
+                            stroke="#666" strokeWidth="1.5" fill="none"/>
+                      <path ref={(el) => addStemRef(el, 13)} d="M 300,450 Q 350,300 380,100" 
+                            stroke="#666" strokeWidth="1.5" fill="none"/>
+                      <path ref={(el) => addStemRef(el, 14)} d="M 300,450 Q 370,320 400,180" 
+                            stroke="#666" strokeWidth="1.5" fill="none"/>
+                      <path ref={(el) => addStemRef(el, 15)} d="M 300,450 Q 400,350 440,250" 
+                            stroke="#666" strokeWidth="1.5" fill="none"/>
+                      <path ref={(el) => addStemRef(el, 16)} d="M 300,450 Q 420,300 470,80" 
+                            stroke="#666" strokeWidth="1.5" fill="none"/>
+                      <path ref={(el) => addStemRef(el, 17)} d="M 300,450 Q 450,320 500,120" 
+                            stroke="#666" strokeWidth="1.5" fill="none"/>
+                      <path ref={(el) => addStemRef(el, 18)} d="M 300,450 Q 480,350 520,200" 
+                            stroke="#666" strokeWidth="1.5" fill="none"/>
+                      <path ref={(el) => addStemRef(el, 19)} d="M 300,450 Q 520,400 580,100" 
+                            stroke="#666" strokeWidth="1.5" fill="none"/>
+                      <path ref={(el) => addStemRef(el, 20)} d="M 300,450 Q 500,480 570,350" 
+                            stroke="#666" strokeWidth="1.5" fill="none"/>
+                      
+                      {/* Square nodes at endpoints */}
+                      <rect ref={(el) => addSquareRef(el, 0)} x="293" y="513" width="14" height="14" fill="#6B2C3D" style={{ opacity: 0, cursor: 'pointer' }}/>
+                      <rect ref={(el) => addSquareRef(el, 1)} x="23" y="343" width="14" height="14" fill="#6B2C3D" style={{ opacity: 0, cursor: 'pointer' }}/>
+                      <rect ref={(el) => addSquareRef(el, 2)} x="13" y="93" width="14" height="14" fill="#6B2C3D" style={{ opacity: 0, cursor: 'pointer' }}/>
+                      <rect ref={(el) => addSquareRef(el, 3)} x="73" y="193" width="14" height="14" fill="#6B2C3D" style={{ opacity: 0, cursor: 'pointer' }}/>
+                      <rect ref={(el) => addSquareRef(el, 4)} x="93" y="113" width="14" height="14" fill="#6B2C3D" style={{ opacity: 0, cursor: 'pointer' }}/>
+                      <rect ref={(el) => addSquareRef(el, 5)} x="123" y="73" width="14" height="14" fill="#6B2C3D" style={{ opacity: 0, cursor: 'pointer' }}/>
+                      <rect ref={(el) => addSquareRef(el, 6)} x="153" y="243" width="14" height="14" fill="#6B2C3D" style={{ opacity: 0, cursor: 'pointer' }}/>
+                      <rect ref={(el) => addSquareRef(el, 7)} x="193" y="173" width="14" height="14" fill="#6B2C3D" style={{ opacity: 0, cursor: 'pointer' }}/>
+                      <rect ref={(el) => addSquareRef(el, 8)} x="213" y="93" width="14" height="14" fill="#6B2C3D" style={{ opacity: 0, cursor: 'pointer' }}/>
+                      <rect ref={(el) => addSquareRef(el, 9)} x="243" y="53" width="14" height="14" fill="#6B2C3D" style={{ opacity: 0, cursor: 'pointer' }}/>
+                      <rect ref={(el) => addSquareRef(el, 10)} x="273" y="33" width="14" height="14" fill="#6B2C3D" style={{ opacity: 0, cursor: 'pointer' }}/>
+                      <rect ref={(el) => addSquareRef(el, 11)} x="313" y="33" width="14" height="14" fill="#6B2C3D" style={{ opacity: 0, cursor: 'pointer' }}/>
+                      <rect ref={(el) => addSquareRef(el, 12)} x="343" y="53" width="14" height="14" fill="#6B2C3D" style={{ opacity: 0, cursor: 'pointer' }}/>
+                      <rect ref={(el) => addSquareRef(el, 13)} x="373" y="93" width="14" height="14" fill="#6B2C3D" style={{ opacity: 0, cursor: 'pointer' }}/>
+                      <rect ref={(el) => addSquareRef(el, 14)} x="393" y="173" width="14" height="14" fill="#6B2C3D" style={{ opacity: 0, cursor: 'pointer' }}/>
+                      <rect ref={(el) => addSquareRef(el, 15)} x="433" y="243" width="14" height="14" fill="#6B2C3D" style={{ opacity: 0, cursor: 'pointer' }}/>
+                      <rect ref={(el) => addSquareRef(el, 16)} x="463" y="73" width="14" height="14" fill="#6B2C3D" style={{ opacity: 0, cursor: 'pointer' }}/>
+                      <rect ref={(el) => addSquareRef(el, 17)} x="493" y="113" width="14" height="14" fill="#6B2C3D" style={{ opacity: 0, cursor: 'pointer' }}/>
+                      <rect ref={(el) => addSquareRef(el, 18)} x="513" y="193" width="14" height="14" fill="#6B2C3D" style={{ opacity: 0, cursor: 'pointer' }}/>
+                      <rect ref={(el) => addSquareRef(el, 19)} x="573" y="93" width="14" height="14" fill="#6B2C3D" style={{ opacity: 0, cursor: 'pointer' }}/>
+                      <rect ref={(el) => addSquareRef(el, 20)} x="563" y="343" width="14" height="14" fill="#6B2C3D" style={{ opacity: 0, cursor: 'pointer' }}/>
+                      
+                      {/* Select text */}
+                      <text x="300" y="490" textAnchor="middle" fill="#999" fontSize="10" fontFamily="var(--font-pixel)">
+                        SELECT A NODE TO VIEW DETAILS
+                      </text>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
