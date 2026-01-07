@@ -34,13 +34,25 @@ export default function Home() {
     }
 
     const offset = windows.length * 30;
+    
+    // Set size based on content type
+    let width = "400px";
+    let height = "300px";
+    if (type === "aboutme") {
+      width = "580px";
+      height = "420px";
+    } else if (type === "education") {
+      width = "340px";
+      height = "200px";
+    }
+    
     const newWindow: WindowState = {
       id: `window-${windowIdCounter++}`,
       type,
       title,
       position: { x: 150 + offset, y: 50 + offset },
-      width: "520px",
-      height: "480px",
+      width,
+      height,
       zIndex: topZIndex + 1,
     };
     setTopZIndex(topZIndex + 1);

@@ -11,36 +11,49 @@ In all his work, Gerrit wants to create chances for people to pause, reflect, an
 export function AboutMeContent() {
   return (
     <div
-      className="h-full p-3 overflow-y-auto"
+      className="h-full p-3 overflow-y-auto relative"
       style={{
-        backgroundColor: "#fff",
+        backgroundColor: "#a0a0a0",
       }}
     >
-      {/* Title */}
-      <h1
-        className="text-xl font-bold mb-2 pb-1"
-        style={{
-          fontFamily: "var(--font-pixel)",
-          color: "#000",
-          borderBottom: "1px solid #000",
-        }}
-      >
-        About Me
-      </h1>
-
-      {/* Text Content */}
+      {/* Pixelated noise texture overlay */}
       <div
-        className="text-[9px] leading-tight"
+        className="absolute inset-0 pointer-events-none opacity-40"
         style={{
-          fontFamily: "var(--font-pixel)",
-          color: "#000",
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='1' height='1' fill='%23888' /%3E%3Crect x='2' y='1' width='1' height='1' fill='%23999' /%3E%3Crect x='1' y='2' width='1' height='1' fill='%23777' /%3E%3Crect x='3' y='3' width='1' height='1' fill='%238a8a8a' /%3E%3Crect x='0' y='3' width='1' height='1' fill='%23909090' /%3E%3Crect x='2' y='0' width='1' height='1' fill='%23858585' /%3E%3C/svg%3E")`,
+          backgroundSize: "4px 4px",
+          imageRendering: "pixelated",
         }}
-      >
-        {aboutMeText.split("\n\n").map((paragraph, index) => (
-          <p key={index} className="mb-2">
-            {paragraph}
-          </p>
-        ))}
+      />
+      
+      {/* Content */}
+      <div className="relative z-10">
+        {/* Title */}
+        <h1
+          className="text-base font-bold mb-2 pb-1"
+          style={{
+            fontFamily: "var(--font-pixel)",
+            color: "#000",
+            borderBottom: "1px solid #666",
+          }}
+        >
+          About Me
+        </h1>
+
+        {/* Text Content */}
+        <div
+          className="text-[9px] leading-tight"
+          style={{
+            fontFamily: "var(--font-pixel)",
+            color: "#000",
+          }}
+        >
+          {aboutMeText.split("\n\n").map((paragraph, index) => (
+            <p key={index} className="mb-2">
+              {paragraph}
+            </p>
+          ))}
+        </div>
       </div>
     </div>
   );
