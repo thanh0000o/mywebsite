@@ -68,13 +68,13 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
         const canvasWidth = scrollContainer.offsetWidth - 20; // Account for padding
         const logoWidth = logo.offsetWidth;
         
-        // Start position (centered - accounting for logo width)
+        // Start position (centered)
         const startX = (canvasWidth - logoWidth) / 2;
         const startY = 80;
         
-        // End position (top-left with padding)
-        const endX = 20;
-        const endY = 20;
+        // End position (top-left corner)
+        const endX = 10;
+        const endY = 10;
         
         const logoProgress = Math.min(scrollY / logoAnimationEnd, 1);
         
@@ -82,17 +82,20 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
         let newX = startX + (endX - startX) * logoProgress;
         let newY = startY + (endY - startY) * logoProgress;
         
-        // Pixelate for stepped movement
+        // Pixelate for stepped movement (4px increments)
         newX = pixelate(newX);
         newY = pixelate(newY);
         
-        // Clamp to keep within canvas bounds
-        newX = Math.max(endX, Math.min(newX, canvasWidth - logoWidth - 20));
-        newY = Math.max(endY, newY);
-        
-        logo.style.left = `${newX}px`;
-        logo.style.top = `${newY}px`;
-        logo.style.transform = 'none';
+        // After animation completes, make logo sticky at top-left
+        if (logoProgress >= 1) {
+          logo.style.position = 'sticky';
+          logo.style.top = `${endY}px`;
+          logo.style.left = `${endX}px`;
+        } else {
+          logo.style.position = 'absolute';
+          logo.style.left = `${newX}px`;
+          logo.style.top = `${newY}px`;
+        }
       }
 
       // SCROLL INDICATOR FADE (0-50px scroll)
