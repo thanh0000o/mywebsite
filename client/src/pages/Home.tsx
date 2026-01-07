@@ -39,11 +39,11 @@ export default function Home() {
     let width = "400px";
     let height = "300px";
     if (type === "aboutme") {
-      width = "580px";
-      height = "420px";
+      width = "650px";
+      height = "520px";
     } else if (type === "education") {
-      width = "340px";
-      height = "200px";
+      width = "380px";
+      height = "240px";
     }
     
     const newWindow: WindowState = {
