@@ -11,16 +11,16 @@ export function LanguagesContent() {
     const filledBlocks = Math.round((level / 100) * totalBlocks);
     
     return (
-      <div className="flex gap-px">
+      <div className="flex gap-0.5">
         {Array.from({ length: totalBlocks }).map((_, i) => (
           <div
             key={i}
-            className="w-3 h-3"
+            className="w-4 h-3"
             style={{
               backgroundColor: i < filledBlocks ? "#fff" : "transparent",
               backgroundImage: i < filledBlocks 
-                ? `url("data:image/svg+xml,%3Csvg viewBox='0 0 2 2' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='1' height='1' fill='%23ddd' /%3E%3Crect x='1' y='1' width='1' height='1' fill='%23ddd' /%3E%3C/svg%3E")`
-                : `url("data:image/svg+xml,%3Csvg viewBox='0 0 2 2' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='1' height='1' fill='%23444' /%3E%3Crect x='1' y='1' width='1' height='1' fill='%23444' /%3E%3C/svg%3E")`,
+                ? `url("data:image/svg+xml,%3Csvg viewBox='0 0 2 2' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='1' height='1' fill='%23ccc' /%3E%3Crect x='1' y='1' width='1' height='1' fill='%23ccc' /%3E%3C/svg%3E")`
+                : `url("data:image/svg+xml,%3Csvg viewBox='0 0 2 2' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='1' height='1' fill='%23333' /%3E%3Crect x='1' y='1' width='1' height='1' fill='%23333' /%3E%3C/svg%3E")`,
               backgroundSize: "2px 2px",
               imageRendering: "pixelated",
             }}
@@ -50,7 +50,7 @@ export function LanguagesContent() {
       {/* Content area */}
       <div className="p-3 relative z-10 h-full">
         <div
-          className="h-full p-3"
+          className="h-full p-4"
           style={{
             backgroundColor: "#1a1a1a",
             borderTop: "2px solid #808080",
@@ -60,7 +60,7 @@ export function LanguagesContent() {
           }}
         >
           <div
-            className="text-[10px] mb-3"
+            className="text-[9px] mb-3"
             style={{
               fontFamily: "var(--font-pixel)",
               color: "#888",
@@ -71,9 +71,9 @@ export function LanguagesContent() {
           
           <div className="space-y-3">
             {languages.map((lang, index) => (
-              <div key={index} className="flex items-center gap-3">
+              <div key={index} className="flex items-center gap-4">
                 <span
-                  className="w-20 text-[10px]"
+                  className="w-24 text-[10px]"
                   style={{
                     fontFamily: "var(--font-pixel)",
                     color: "#00ff00",

@@ -58,7 +58,7 @@ export function ExperienceContent() {
       {/* Content area */}
       <div className="p-3 overflow-y-auto relative z-10 h-full">
         <div
-          className="h-full p-3 overflow-y-auto"
+          className="h-full p-4 overflow-y-auto"
           style={{
             backgroundColor: "#d4d4d4",
             borderTop: "2px solid #808080",
@@ -75,15 +75,21 @@ export function ExperienceContent() {
             }}
           >
             {experiences.map((exp, index) => (
-              <div key={index} className="mb-3 pb-2" style={{ borderBottom: index < experiences.length - 1 ? "1px dotted #999" : "none" }}>
+              <div 
+                key={index} 
+                className="mb-3 pb-2" 
+                style={{ 
+                  borderBottom: index < experiences.length - 1 ? "1px dotted #999" : "none" 
+                }}
+              >
                 <div className="flex items-start gap-1">
                   <span style={{ color: "#000080" }}>[*]</span>
                   <span className="font-bold">{exp.role}</span>
+                  <span style={{ color: "#666" }}>| {exp.period}</span>
                 </div>
                 <div className="ml-4" style={{ color: "#333" }}>{exp.description}</div>
-                <div className="ml-4 flex justify-between">
+                <div className="ml-4">
                   <span style={{ color: "#000080" }}>{exp.company}</span>
-                  <span style={{ color: "#666" }}>{exp.period}</span>
                 </div>
               </div>
             ))}

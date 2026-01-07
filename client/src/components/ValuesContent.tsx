@@ -31,7 +31,7 @@ export function ValuesContent() {
       {/* Content area */}
       <div className="p-3 relative z-10 h-full">
         <div
-          className="h-full p-3"
+          className="h-full p-4"
           style={{
             backgroundColor: "#d4d4d4",
             borderTop: "2px solid #808080",
@@ -41,7 +41,7 @@ export function ValuesContent() {
           }}
         >
           <div
-            className="text-[9px]"
+            className="text-[10px]"
             style={{
               fontFamily: "var(--font-pixel)",
               color: "#000",
@@ -51,7 +51,7 @@ export function ValuesContent() {
               {values.map((value, index) => (
                 <div 
                   key={index} 
-                  className="flex items-center gap-1 p-1"
+                  className="flex items-center gap-1 px-2 py-1.5"
                   style={{
                     backgroundColor: "#c0c0c0",
                     borderTop: "1px solid #fff",

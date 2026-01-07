@@ -56,11 +56,11 @@ export default function Home() {
       width = "380px";
       height = "220px";
     } else if (type === "skills") {
-      width = "340px";
-      height = "260px";
+      width = "380px";
+      height = "300px";
     } else if (type === "languages") {
-      width = "320px";
-      height = "240px";
+      width = "360px";
+      height = "260px";
     } else if (type === "software") {
       width = "420px";
       height = "320px";

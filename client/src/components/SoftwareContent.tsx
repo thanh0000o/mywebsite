@@ -3,7 +3,7 @@ export function SoftwareContent() {
     { name: "Adobe Creative Suite", items: ["Illustrator", "InDesign", "Photoshop"] },
     { name: "Blender", items: [] },
     { name: "Microsoft Office", items: [] },
-    { name: "AI Tools", items: ["up-to-date user", "eager to learn & integrate new tools", "Replit, Lovable, AI agents for automatization"] },
+    { name: "AI Tools", items: ["up-to-date user", "eager to learn & integrate", "Replit, Lovable, AI agents"] },
   ];
 
   return (
@@ -26,7 +26,7 @@ export function SoftwareContent() {
       {/* Content area */}
       <div className="p-3 overflow-y-auto relative z-10 h-full">
         <div
-          className="h-full p-3 overflow-y-auto"
+          className="h-full p-4 overflow-y-auto"
           style={{
             backgroundColor: "#d4d4d4",
             borderTop: "2px solid #808080",
@@ -36,7 +36,7 @@ export function SoftwareContent() {
           }}
         >
           <div
-            className="text-[9px]"
+            className="text-[10px]"
             style={{
               fontFamily: "var(--font-pixel)",
               color: "#000",
@@ -46,7 +46,7 @@ export function SoftwareContent() {
               <div key={index} className="mb-3">
                 <div className="flex items-center gap-1 mb-1">
                   <span 
-                    className="px-1"
+                    className="px-2 py-0.5"
                     style={{ 
                       backgroundColor: "#000080", 
                       color: "#fff",
@@ -58,7 +58,7 @@ export function SoftwareContent() {
                 {item.items.length > 0 && (
                   <div className="ml-3">
                     {item.items.map((subItem, subIndex) => (
-                      <div key={subIndex} className="flex items-center gap-1">
+                      <div key={subIndex} className="flex items-center gap-1 mb-0.5">
                         <span style={{ color: "#666" }}>|--</span>
                         <span style={{ color: "#333" }}>{subItem}</span>
                       </div>

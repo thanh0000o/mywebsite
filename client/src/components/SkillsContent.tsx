@@ -30,7 +30,7 @@ export function SkillsContent() {
       {/* Content area */}
       <div className="p-3 relative z-10 h-full">
         <div
-          className="h-full p-3"
+          className="h-full p-4"
           style={{
             backgroundColor: "#d4d4d4",
             borderTop: "2px solid #808080",
@@ -40,14 +40,14 @@ export function SkillsContent() {
           }}
         >
           <div
-            className="text-[9px]"
+            className="text-[10px]"
             style={{
               fontFamily: "var(--font-pixel)",
               color: "#000",
             }}
           >
             {skills.map((skill, index) => (
-              <div key={index} className="flex items-center gap-2 mb-1.5">
+              <div key={index} className="flex items-center gap-2 mb-2">
                 <span style={{ color: "#000080" }}>&gt;</span>
                 <span>{skill}</span>
               </div>
