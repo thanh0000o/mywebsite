@@ -40,7 +40,7 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
               className="text-sm font-bold"
               style={{ fontFamily: 'var(--font-pixel)', textShadow: '1px 1px 0 #000' }}
             >
-              Untitled-1 - gportfolio_gerritthànhlambeets
+              Untitled-1 - portfolio_gerritthànhlambeets
             </span>
           </div>
           <div className="flex gap-0.5">
