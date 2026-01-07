@@ -1,21 +1,35 @@
+import { GraduationCap, Pause, Award } from "lucide-react";
+
 export function EducationContent() {
   const educationItems = [
     {
-      degree: "Bachelor — Idea & Innovation Management",
-      school: "Erasmus Hogeschool Brussel",
-      period: "2021–2024  (with praise)",
+      icon: GraduationCap,
+      degree: "Bachelor",
+      field: "Idea & Innovation",
+      school: "Erasmus Hogeschool",
+      period: "2021-2024",
+      badge: "cum laude",
+      color: "#2e7d32",
       status: "completed",
     },
     {
-      degree: "Master — Business Administration",
-      school: "VUB | 2024",
-      period: "status: paused",
+      icon: Pause,
+      degree: "Master",
+      field: "Business Admin",
+      school: "VUB",
+      period: "2024",
+      badge: "paused",
+      color: "#f57c00",
       status: "paused",
     },
     {
-      degree: "Secondary — Accounting & CS",
-      school: "KA Tervuren | 2012–2018",
-      period: "",
+      icon: Award,
+      degree: "Secondary",
+      field: "Accounting & CS",
+      school: "KA Tervuren",
+      period: "2012-2018",
+      badge: null,
+      color: "#1565c0",
       status: "completed",
     },
   ];
@@ -40,11 +54,10 @@ export function EducationContent() {
       {/* Moving scanlines overlay */}
       <div className="window-scanlines" aria-hidden="true" />
       
-      {/* Content area */}
-      <div className="p-3 overflow-y-auto relative z-10 h-full">
-        {/* Inner content panel with inset border */}
+      {/* Content area - horizontal cards */}
+      <div className="p-2 relative z-10 h-full flex flex-col">
         <div
-          className="h-full p-3"
+          className="flex-1 p-2 flex flex-col gap-1"
           style={{
             backgroundColor: "#d4d4d4",
             borderTop: "2px solid #808080",
@@ -53,36 +66,78 @@ export function EducationContent() {
             borderRight: "2px solid #fff",
           }}
         >
-          <div
-            className="text-[9px] leading-relaxed"
-            style={{
-              fontFamily: "var(--font-pixel)",
-              color: "#000",
-            }}
-          >
-            {educationItems.map((item, index) => (
-              <div key={index} className="mb-2">
-                <div className="flex items-start gap-1">
-                  <span style={{ color: item.status === "paused" ? "#b8860b" : "#008000" }}>
-                    {item.status === "paused" ? "[○]" : "[■]"}
-                  </span>
-                  <span className="font-bold">{item.degree}</span>
+          {educationItems.map((item, index) => {
+            const IconComponent = item.icon;
+            return (
+              <div 
+                key={index} 
+                className="flex items-center gap-2 p-1.5 flex-1"
+                style={{
+                  backgroundColor: "#c0c0c0",
+                  borderTop: "1px solid #fff",
+                  borderLeft: "1px solid #fff",
+                  borderBottom: "1px solid #808080",
+                  borderRight: "1px solid #808080",
+                }}
+              >
+                {/* Icon */}
+                <div 
+                  className="w-7 h-7 flex items-center justify-center flex-shrink-0"
+                  style={{
+                    backgroundColor: item.color,
+                    borderTop: "1px solid rgba(255,255,255,0.5)",
+                    borderLeft: "1px solid rgba(255,255,255,0.5)",
+                    borderBottom: "1px solid rgba(0,0,0,0.3)",
+                    borderRight: "1px solid rgba(0,0,0,0.3)",
+                  }}
+                >
+                  <IconComponent className="w-4 h-4 text-white" />
                 </div>
-                <div className="ml-4" style={{ color: "#333" }}>{item.school}</div>
-                {item.period && (
-                  <div 
-                    className="ml-4" 
-                    style={{ 
-                      color: item.status === "paused" ? "#b8860b" : "#666",
-                      fontStyle: item.status === "paused" ? "italic" : "normal"
-                    }}
-                  >
-                    {item.period}
+                
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-1">
+                    <span 
+                      className="text-[8px] font-bold"
+                      style={{ fontFamily: "var(--font-pixel)", color: "#000" }}
+                    >
+                      {item.degree}
+                    </span>
+                    <span 
+                      className="text-[7px]"
+                      style={{ fontFamily: "var(--font-pixel)", color: "#666" }}
+                    >
+                      {item.period}
+                    </span>
+                    {item.badge && (
+                      <span 
+                        className="text-[6px] px-1"
+                        style={{ 
+                          fontFamily: "var(--font-pixel)", 
+                          color: "#fff",
+                          backgroundColor: item.status === "paused" ? "#f57c00" : "#2e7d32",
+                        }}
+                      >
+                        {item.badge}
+                      </span>
+                    )}
                   </div>
-                )}
+                  <div 
+                    className="text-[7px] truncate"
+                    style={{ fontFamily: "var(--font-pixel)", color: "#000080" }}
+                  >
+                    {item.field}
+                  </div>
+                  <div 
+                    className="text-[6px]"
+                    style={{ fontFamily: "var(--font-pixel)", color: "#666" }}
+                  >
+                    {item.school}
+                  </div>
+                </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </div>
     </div>
