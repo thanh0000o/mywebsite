@@ -1,5 +1,6 @@
 import { CrtOverlay } from "@/components/CrtOverlay";
 import bgImage from "@assets/image_1767797601762.png";
+import logoImage from "@assets/image_1767797842217.png";
 
 export default function Home() {
   return (
@@ -8,14 +9,7 @@ export default function Home() {
         =====================================================
         BACKGROUND IMAGE LAYER
         =====================================================
-        To swap the background image:
-        1. Add your image to attached_assets/ folder
-        2. Update the import above to point to your new image
-        
-        Current settings:
-        - Stretched to fill entire viewport
-        - Heavy blur filter for soft dreamy effect
-        - Adjust blur-xl to blur-md, blur-lg, blur-2xl, blur-3xl as needed
+        Stretched and blurred for soft dreamy effect
         =====================================================
       */}
       <img
@@ -27,9 +21,38 @@ export default function Home() {
 
       {/* 
         =====================================================
-        CRT / SCANLINE OVERLAY (optional - can be removed)
+        CENTERED LOGO
+        =====================================================
+        Pixelated rendering, clickable with no action
+        To swap: update the logoImage import above
         =====================================================
       */}
+      <div className="absolute inset-0 flex items-center justify-center z-10">
+        <div className="flex flex-col items-center">
+          <a
+            href="#"
+            onClick={(e) => e.preventDefault()}
+            className="block cursor-pointer"
+            data-testid="link-logo"
+          >
+            <img
+              src={logoImage}
+              alt="HTML Logo"
+              className="w-24 h-24 drop-shadow-lg"
+              style={{
+                imageRendering: 'pixelated',
+              }}
+              draggable={false}
+            />
+          </a>
+          <div className="mt-2 text-center">
+            <p className="text-xs font-mono text-white/80 drop-shadow-md">[particle]</p>
+            <p className="text-xs font-mono text-white/80 drop-shadow-md">0001</p>
+          </div>
+        </div>
+      </div>
+
+      {/* CRT / SCANLINE OVERLAY */}
       <CrtOverlay />
     </div>
   );
