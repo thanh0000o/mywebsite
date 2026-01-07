@@ -20,7 +20,7 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
   
   const [stemLengths, setStemLengths] = useState<number[]>([]);
 
-  // Initialize stem lengths on mount
+  // Initialize stem lengths and center logo on mount
   useEffect(() => {
     const lengths: number[] = [];
     stemsRef.current.forEach((stem) => {
@@ -32,6 +32,16 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
       }
     });
     setStemLengths(lengths);
+    
+    // Center logo initially
+    const canvas = canvasRef.current;
+    const logo = logoRef.current;
+    if (canvas && logo) {
+      const canvasWidth = canvas.offsetWidth;
+      const logoWidth = logo.offsetWidth;
+      const startX = (canvasWidth - logoWidth) / 2;
+      logo.style.left = `${startX}px`;
+    }
   }, []);
 
   // Scroll animation handler
@@ -52,14 +62,14 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
       // LOGO ANIMATION (0-300px scroll)
       if (logo) {
         const canvasWidth = canvas.offsetWidth;
-        const canvasHeight = canvas.offsetHeight;
+        const logoWidth = logo.offsetWidth;
         
-        // Start position (centered)
-        const startX = canvasWidth / 2;
+        // Start position (centered - accounting for logo width)
+        const startX = (canvasWidth - logoWidth) / 2;
         const startY = 150;
         
-        // End position (top-left)
-        const endX = 40;
+        // End position (top-left with padding)
+        const endX = 20;
         const endY = 20;
         
         const logoProgress = Math.min(scrollY / logoAnimationEnd, 1);
@@ -72,15 +82,13 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
         newX = pixelate(newX);
         newY = pixelate(newY);
         
-        if (logoProgress < 1) {
-          logo.style.left = `${newX}px`;
-          logo.style.top = `${newY}px`;
-          logo.style.transform = 'translateX(-50%)';
-        } else {
-          logo.style.left = `${endX}px`;
-          logo.style.top = `${endY}px`;
-          logo.style.transform = 'none';
-        }
+        // Clamp to keep within canvas bounds
+        newX = Math.max(endX, Math.min(newX, canvasWidth - logoWidth - 20));
+        newY = Math.max(endY, newY);
+        
+        logo.style.left = `${newX}px`;
+        logo.style.top = `${newY}px`;
+        logo.style.transform = 'none';
       }
 
       // SCROLL INDICATOR FADE (0-50px scroll)
@@ -103,14 +111,21 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
         // Pixelate progress for stepped effect
         const pixelatedProgress = Math.floor(flowerProgress * 50) / 50;
 
-        // Animate each stem
+        // Animate each stem with proper staggered timing
         stemsRef.current.forEach((stem, index) => {
           if (stem && stemLengths[index]) {
             const length = stemLengths[index];
             
-            // Stagger each stem slightly
-            const delay = index * 0.05;
-            const stemProgress = Math.max(0, Math.min(1, (pixelatedProgress - delay) / 0.8));
+            // Stagger each stem - earlier stems start sooner
+            const stemCount = stemsRef.current.length;
+            const delayFraction = index / stemCount * 0.3; // Max 30% delay for last stem
+            const stemDuration = 1 - delayFraction; // Remaining duration for stem to grow
+            
+            // Calculate stem progress: starts at delayFraction, ends at 1
+            let stemProgress = 0;
+            if (pixelatedProgress > delayFraction) {
+              stemProgress = Math.min(1, (pixelatedProgress - delayFraction) / stemDuration);
+            }
             
             // Animate stem growth
             const offset = length * (1 - stemProgress);
@@ -118,11 +133,20 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
           }
         });
 
-        // Show squares when stems are mostly grown
+        // Show squares when their corresponding stem is 70% grown
         squaresRef.current.forEach((square, index) => {
-          if (square) {
-            const showThreshold = 0.7 + (index * 0.02);
-            if (pixelatedProgress > showThreshold) {
+          if (square && stemsRef.current[index]) {
+            const stemCount = stemsRef.current.length;
+            const delayFraction = index / stemCount * 0.3;
+            const stemDuration = 1 - delayFraction;
+            
+            let stemProgress = 0;
+            if (pixelatedProgress > delayFraction) {
+              stemProgress = Math.min(1, (pixelatedProgress - delayFraction) / stemDuration);
+            }
+            
+            // Show square when stem is 70% grown
+            if (stemProgress >= 0.7) {
               square.style.opacity = '1';
             } else {
               square.style.opacity = '0';
@@ -363,9 +387,7 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
                   className="absolute w-48 h-auto object-contain"
                   style={{ 
                     imageRendering: 'pixelated',
-                    left: '50%',
                     top: '150px',
-                    transform: 'translateX(-50%)',
                   }}
                   draggable={false}
                 />
