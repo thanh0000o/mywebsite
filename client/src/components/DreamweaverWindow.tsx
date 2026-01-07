@@ -14,6 +14,16 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
       onOpenWindow('aboutme', 'About Me - gerrit thành lambeets');
     } else if (tab === 'EDUCATION') {
       onOpenWindow('education', 'EDUCATION.log');
+    } else if (tab === 'EXPERIENCE') {
+      onOpenWindow('experience', 'EXPERIENCE.exe');
+    } else if (tab === 'VALUES') {
+      onOpenWindow('values', 'VALUES.ini');
+    } else if (tab === 'SOFTSKILLS') {
+      onOpenWindow('skills', 'SKILLS.dat');
+    } else if (tab === 'LANGUAGES') {
+      onOpenWindow('languages', 'LANGUAGES.cfg');
+    } else if (tab === 'SOFTWARE') {
+      onOpenWindow('software', 'SOFTWARE.sys');
     }
   };
 

@@ -6,6 +6,11 @@ import { DreamweaverWindow } from "@/components/DreamweaverWindow";
 import { DesktopWindow } from "@/components/DesktopWindow";
 import { AboutMeContent } from "@/components/AboutMeContent";
 import { EducationContent } from "@/components/EducationContent";
+import { ExperienceContent } from "@/components/ExperienceContent";
+import { ValuesContent } from "@/components/ValuesContent";
+import { SkillsContent } from "@/components/SkillsContent";
+import { LanguagesContent } from "@/components/LanguagesContent";
+import { SoftwareContent } from "@/components/SoftwareContent";
 import { MediaPlayer } from "@/components/MediaPlayer";
 import logoImage from "@assets/image_1767797842217.png";
 
@@ -44,6 +49,21 @@ export default function Home() {
     } else if (type === "education") {
       width = "420px";
       height = "280px";
+    } else if (type === "experience") {
+      width = "480px";
+      height = "420px";
+    } else if (type === "values") {
+      width = "380px";
+      height = "220px";
+    } else if (type === "skills") {
+      width = "340px";
+      height = "260px";
+    } else if (type === "languages") {
+      width = "320px";
+      height = "240px";
+    } else if (type === "software") {
+      width = "420px";
+      height = "320px";
     }
     
     const newWindow: WindowState = {
@@ -78,6 +98,16 @@ export default function Home() {
         return <AboutMeContent />;
       case "education":
         return <EducationContent />;
+      case "experience":
+        return <ExperienceContent />;
+      case "values":
+        return <ValuesContent />;
+      case "skills":
+        return <SkillsContent />;
+      case "languages":
+        return <LanguagesContent />;
+      case "software":
+        return <SoftwareContent />;
       default:
         return <div className="p-4">Content coming soon...</div>;
     }
