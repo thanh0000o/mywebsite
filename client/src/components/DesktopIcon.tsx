@@ -15,17 +15,12 @@ export function DesktopIcon({ imageSrc, label, href, onClick }: DesktopIconProps
       className="cursor-pointer group flex flex-col items-center gap-2"
       onClick={onClick}
     >
-      <div className="
-        relative
-        shadow-[0_0_15px_rgba(255,255,255,0.5)]
-        group-hover:shadow-[0_0_25px_rgba(255,255,255,0.8)]
-        transition-all duration-300
-      ">
-        <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none" />
+      <div className="relative">
+        <div className="absolute -inset-4 bg-black/40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
         <img 
           src={imageSrc} 
           alt={label}
-          className="w-24 h-24 drop-shadow-lg"
+          className="relative w-24 h-24 drop-shadow-[0_0_20px_rgba(255,255,255,0.6)] group-hover:drop-shadow-[0_0_35px_rgba(255,255,255,0.9)] transition-all duration-300"
           style={{ imageRendering: 'pixelated' }}
           draggable={false}
         />
