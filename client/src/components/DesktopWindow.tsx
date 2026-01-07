@@ -78,7 +78,7 @@ export function DesktopWindow({
       data-testid={`window-${id}`}
     >
       <div
-        className="flex flex-col h-full"
+        className="flex flex-col h-full relative"
         style={{
           backgroundColor: "#C0C0C0",
           boxShadow: "5px 5px 20px rgba(0,0,0,0.5)",
@@ -88,9 +88,20 @@ export function DesktopWindow({
           borderRight: "2px solid #808080",
         }}
       >
+        {/* Pixelated noise texture overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='1' height='1' fill='%23888' /%3E%3Crect x='3' y='1' width='1' height='1' fill='%23aaa' /%3E%3Crect x='1' y='3' width='1' height='1' fill='%23777' /%3E%3Crect x='4' y='4' width='1' height='1' fill='%239a9a9a' /%3E%3Crect x='2' y='5' width='1' height='1' fill='%23909090' /%3E%3Crect x='5' y='2' width='1' height='1' fill='%23858585' /%3E%3C/svg%3E")`,
+            backgroundSize: "3px 3px",
+            imageRendering: "pixelated" as const,
+            opacity: 0.4,
+            zIndex: 0,
+          }}
+        />
         {/* Title Bar - Draggable */}
         <div
-          className="flex items-center justify-between px-1 py-0.5 cursor-move select-none"
+          className="flex items-center justify-between px-1 py-0.5 cursor-move select-none relative z-10"
           style={{
             background: "linear-gradient(90deg, #000080, #1084d0)",
             color: "white",
@@ -176,11 +187,11 @@ export function DesktopWindow({
         </div>
 
         {/* Window Content */}
-        <div className="flex-1 overflow-hidden">{children}</div>
+        <div className="flex-1 overflow-hidden relative z-10">{children}</div>
 
         {/* Status Bar */}
         <div
-          className="flex items-center justify-between px-2 py-0.5 text-[10px]"
+          className="flex items-center justify-between px-2 py-0.5 text-[10px] relative z-10"
           style={{
             backgroundColor: "#C0C0C0",
             borderTop: "1px solid #808080",

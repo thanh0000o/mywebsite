@@ -109,7 +109,7 @@ function ArtViewer({ art, onClose }: { art: Artwork; onClose: () => void }) {
       onClick={onClose}
     >
       <div 
-        className="max-w-3xl max-h-[80vh] flex flex-col"
+        className="max-w-3xl max-h-[80vh] flex flex-col relative"
         style={{
           backgroundColor: '#C0C0C0',
           boxShadow: '4px 4px 15px rgba(0,0,0,0.5)',
@@ -120,9 +120,20 @@ function ArtViewer({ art, onClose }: { art: Artwork; onClose: () => void }) {
         }}
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Pixelated noise texture overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='1' height='1' fill='%23888' /%3E%3Crect x='3' y='1' width='1' height='1' fill='%23aaa' /%3E%3Crect x='1' y='3' width='1' height='1' fill='%23777' /%3E%3Crect x='4' y='4' width='1' height='1' fill='%239a9a9a' /%3E%3Crect x='2' y='5' width='1' height='1' fill='%23909090' /%3E%3Crect x='5' y='2' width='1' height='1' fill='%23858585' /%3E%3C/svg%3E")`,
+            backgroundSize: "3px 3px",
+            imageRendering: "pixelated" as const,
+            opacity: 0.4,
+            zIndex: 0,
+          }}
+        />
         {/* Title Bar */}
         <div 
-          className="flex items-center justify-between px-1 py-0.5"
+          className="flex items-center justify-between px-1 py-0.5 relative z-10"
           style={{
             background: 'linear-gradient(90deg, #000080, #1084d0)',
             color: 'white',
@@ -171,7 +182,7 @@ function ArtViewer({ art, onClose }: { art: Artwork; onClose: () => void }) {
 
         {/* Menu Bar */}
         <div 
-          className="flex items-center gap-4 px-2 py-0.5 text-[10px]"
+          className="flex items-center gap-4 px-2 py-0.5 text-[10px] relative z-10"
           style={{
             backgroundColor: '#C0C0C0',
             borderBottom: '1px solid #808080',
@@ -188,10 +199,9 @@ function ArtViewer({ art, onClose }: { art: Artwork; onClose: () => void }) {
 
         {/* Content Area */}
         <div 
-          className="p-2 flex-1"
+          className="p-2 flex-1 relative z-10"
           style={{
             backgroundColor: '#c0c0c0',
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E")`,
           }}
         >
           <div 
@@ -328,7 +338,7 @@ function ArtViewer({ art, onClose }: { art: Artwork; onClose: () => void }) {
 
         {/* Status Bar */}
         <div 
-          className="flex items-center justify-between px-2 py-0.5 text-[9px]"
+          className="flex items-center justify-between px-2 py-0.5 text-[9px] relative z-10"
           style={{
             backgroundColor: '#C0C0C0',
             borderTop: '1px solid #808080',

@@ -102,7 +102,7 @@ export function MediaPlayer() {
       className="fixed top-4 right-4 z-40"
     >
       <div
-        className="flex flex-col"
+        className="flex flex-col relative"
         style={{
           backgroundColor: '#C0C0C0',
           boxShadow: '3px 3px 10px rgba(0,0,0,0.5)',
@@ -112,9 +112,20 @@ export function MediaPlayer() {
           borderRight: '2px solid #808080',
         }}
       >
+        {/* Pixelated noise texture overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='1' height='1' fill='%23888' /%3E%3Crect x='3' y='1' width='1' height='1' fill='%23aaa' /%3E%3Crect x='1' y='3' width='1' height='1' fill='%23777' /%3E%3Crect x='4' y='4' width='1' height='1' fill='%239a9a9a' /%3E%3Crect x='2' y='5' width='1' height='1' fill='%23909090' /%3E%3Crect x='5' y='2' width='1' height='1' fill='%23858585' /%3E%3C/svg%3E")`,
+            backgroundSize: "3px 3px",
+            imageRendering: "pixelated" as const,
+            opacity: 0.4,
+            zIndex: 0,
+          }}
+        />
         {/* Title Bar */}
         <div
-          className="flex items-center justify-between px-1 py-0.5"
+          className="flex items-center justify-between px-1 py-0.5 relative z-10"
           style={{
             background: 'linear-gradient(90deg, #000080, #1084d0)',
             color: 'white',
@@ -169,7 +180,7 @@ export function MediaPlayer() {
         </div>
 
         {/* Main Content - Horizontal Layout */}
-        <div className="flex items-stretch gap-1 p-1">
+        <div className="flex items-stretch gap-1 p-1 relative z-10">
           {/* Left: Track Info & Visualizer */}
           <div
             className="flex flex-col p-1"
