@@ -98,20 +98,20 @@ export function EducationContent() {
                 <div className="flex-1 min-w-0 leading-tight">
                   <div className="flex items-center gap-1 flex-wrap">
                     <span 
-                      className="text-[7px] font-bold"
+                      className="text-[9px] font-bold"
                       style={{ fontFamily: "var(--font-pixel)", color: "#000" }}
                     >
                       {item.degree}
                     </span>
                     <span 
-                      className="text-[6px]"
+                      className="text-[8px]"
                       style={{ fontFamily: "var(--font-pixel)", color: "#666" }}
                     >
                       {item.period}
                     </span>
                     {item.badge && (
                       <span 
-                        className="text-[5px] px-0.5"
+                        className="text-[7px] px-1"
                         style={{ 
                           fontFamily: "var(--font-pixel)", 
                           color: "#fff",
@@ -123,7 +123,7 @@ export function EducationContent() {
                     )}
                   </div>
                   <div 
-                    className="text-[6px]"
+                    className="text-[8px]"
                     style={{ fontFamily: "var(--font-pixel)", color: "#000080" }}
                   >
                     {item.field} - {item.school}
