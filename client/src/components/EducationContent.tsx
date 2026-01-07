@@ -71,7 +71,7 @@ export function EducationContent() {
             return (
               <div 
                 key={index} 
-                className="flex items-center gap-2 p-1.5 flex-1"
+                className="flex items-center gap-1.5 px-1 py-0.5 flex-1"
                 style={{
                   backgroundColor: "#c0c0c0",
                   borderTop: "1px solid #fff",
@@ -82,7 +82,7 @@ export function EducationContent() {
               >
                 {/* Icon */}
                 <div 
-                  className="w-7 h-7 flex items-center justify-center flex-shrink-0"
+                  className="w-5 h-5 flex items-center justify-center flex-shrink-0"
                   style={{
                     backgroundColor: item.color,
                     borderTop: "1px solid rgba(255,255,255,0.5)",
@@ -91,27 +91,27 @@ export function EducationContent() {
                     borderRight: "1px solid rgba(0,0,0,0.3)",
                   }}
                 >
-                  <IconComponent className="w-4 h-4 text-white" />
+                  <IconComponent className="w-3 h-3 text-white" />
                 </div>
                 
                 {/* Content */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-1">
+                <div className="flex-1 min-w-0 leading-tight">
+                  <div className="flex items-center gap-1 flex-wrap">
                     <span 
-                      className="text-[8px] font-bold"
+                      className="text-[7px] font-bold"
                       style={{ fontFamily: "var(--font-pixel)", color: "#000" }}
                     >
                       {item.degree}
                     </span>
                     <span 
-                      className="text-[7px]"
+                      className="text-[6px]"
                       style={{ fontFamily: "var(--font-pixel)", color: "#666" }}
                     >
                       {item.period}
                     </span>
                     {item.badge && (
                       <span 
-                        className="text-[6px] px-1"
+                        className="text-[5px] px-0.5"
                         style={{ 
                           fontFamily: "var(--font-pixel)", 
                           color: "#fff",
@@ -123,16 +123,10 @@ export function EducationContent() {
                     )}
                   </div>
                   <div 
-                    className="text-[7px] truncate"
+                    className="text-[6px]"
                     style={{ fontFamily: "var(--font-pixel)", color: "#000080" }}
                   >
-                    {item.field}
-                  </div>
-                  <div 
-                    className="text-[6px]"
-                    style={{ fontFamily: "var(--font-pixel)", color: "#666" }}
-                  >
-                    {item.school}
+                    {item.field} - {item.school}
                   </div>
                 </div>
               </div>
