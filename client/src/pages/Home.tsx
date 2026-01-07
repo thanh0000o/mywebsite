@@ -156,7 +156,7 @@ export default function Home() {
             <div className="flex flex-col items-center">
               <DesktopIcon
                 imageSrc={logoImage}
-                label="portfolio_gerritthànhlambeets"
+                label="portfolio_thànhlambeets"
                 onClick={() => setShowDreamweaver(true)}
               />
             </div>

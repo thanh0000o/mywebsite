@@ -11,7 +11,7 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
 
   const handleTabClick = (tab: string) => {
     if (tab === 'ABOUT ME') {
-      onOpenWindow('aboutme', 'About Me - gerrit thành lambeets');
+      onOpenWindow('aboutme', 'About Me - thành lambeets');
     } else if (tab === 'EDUCATION') {
       onOpenWindow('education', 'EDUCATION.log');
     } else if (tab === 'EXPERIENCE') {
@@ -86,7 +86,7 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
               className="text-sm font-bold"
               style={{ fontFamily: 'var(--font-pixel)', textShadow: '1px 1px 0 #000' }}
             >
-              Untitled-1 - gerrit thành lambeets
+              Untitled-1 - thành lambeets
             </span>
           </div>
           <div className="flex gap-0.5">
