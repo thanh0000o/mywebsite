@@ -1,194 +1,11 @@
 import { motion } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
 import logoImage from "@assets/ChatGPT_Image_Jan_7,_2026,_12_04_31_PM_1767811147577.png";
 
 interface DreamweaverWindowProps {
   onClose: () => void;
 }
 
-// Helper to quantize values in 4px steps for pixelated movement
-function pixelate(value: number, step: number = 4): number {
-  return Math.round(value / step) * step;
-}
-
 export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
-  const canvasRef = useRef<HTMLDivElement>(null);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const logoRef = useRef<HTMLImageElement>(null);
-  const scrollIndicatorRef = useRef<HTMLParagraphElement>(null);
-  const stemsRef = useRef<SVGPathElement[]>([]);
-  const squaresRef = useRef<SVGRectElement[]>([]);
-  
-  const [stemLengths, setStemLengths] = useState<number[]>([]);
-
-  // Initialize stem lengths and center logo on mount
-  useEffect(() => {
-    const lengths: number[] = [];
-    stemsRef.current.forEach((stem) => {
-      if (stem) {
-        const length = stem.getTotalLength();
-        lengths.push(length);
-        stem.style.strokeDasharray = `${length}`;
-        stem.style.strokeDashoffset = `${length}`;
-      }
-    });
-    setStemLengths(lengths);
-    
-    // Center logo initially (with a small delay to ensure dimensions are computed)
-    setTimeout(() => {
-      const scrollContainer = scrollContainerRef.current;
-      const logo = logoRef.current;
-      if (scrollContainer && logo) {
-        const canvasWidth = scrollContainer.offsetWidth - 20;
-        const logoWidth = logo.offsetWidth;
-        const startX = (canvasWidth - logoWidth) / 2;
-        logo.style.left = `${startX}px`;
-      }
-    }, 50);
-  }, []);
-
-  // Scroll animation handler
-  useEffect(() => {
-    const scrollContainer = scrollContainerRef.current;
-    const canvas = canvasRef.current;
-    if (!scrollContainer || !canvas) return;
-
-    const handleScroll = () => {
-      const scrollY = scrollContainer.scrollTop;
-      const logo = logoRef.current;
-      const scrollIndicator = scrollIndicatorRef.current;
-
-      // Animation constants
-      const logoAnimationEnd = 300;
-      const flowerStart = 300;
-      const flowerEnd = 1200;
-
-      // LOGO ANIMATION (0-300px scroll)
-      if (logo) {
-        const canvasWidth = scrollContainer.offsetWidth - 20; // Account for padding
-        const logoWidth = logo.offsetWidth;
-        
-        // Start position (centered)
-        const startX = (canvasWidth - logoWidth) / 2;
-        const startY = 80;
-        
-        // End position (top-left corner)
-        const endX = 10;
-        const endY = 10;
-        
-        const logoProgress = Math.min(scrollY / logoAnimationEnd, 1);
-        
-        // Calculate new position with pixelation
-        let newX = startX + (endX - startX) * logoProgress;
-        let newY = startY + (endY - startY) * logoProgress;
-        
-        // Pixelate for stepped movement (4px increments)
-        newX = pixelate(newX);
-        newY = pixelate(newY);
-        
-        // After animation completes, make logo sticky at top-left
-        if (logoProgress >= 1) {
-          logo.style.position = 'sticky';
-          logo.style.top = `${endY}px`;
-          logo.style.left = `${endX}px`;
-        } else {
-          logo.style.position = 'absolute';
-          logo.style.left = `${newX}px`;
-          logo.style.top = `${newY}px`;
-        }
-      }
-
-      // SCROLL INDICATOR FADE (0-50px scroll)
-      if (scrollIndicator) {
-        if (scrollY > 50) {
-          scrollIndicator.style.opacity = '0';
-          scrollIndicator.style.pointerEvents = 'none';
-        } else {
-          const opacity = Math.max(0, 1 - scrollY / 50);
-          scrollIndicator.style.opacity = `${Math.round(opacity * 10) / 10}`;
-          scrollIndicator.style.pointerEvents = 'auto';
-        }
-      }
-
-      // FLOWER ANIMATION (300-1200px scroll)
-      if (scrollY > flowerStart) {
-        const flowerScrollRange = flowerEnd - flowerStart;
-        const flowerProgress = Math.min((scrollY - flowerStart) / flowerScrollRange, 1);
-        
-        // Pixelate progress for stepped effect
-        const pixelatedProgress = Math.floor(flowerProgress * 50) / 50;
-
-        // Animate each stem with proper staggered timing
-        stemsRef.current.forEach((stem, index) => {
-          if (stem && stemLengths[index]) {
-            const length = stemLengths[index];
-            
-            // Stagger each stem - earlier stems start sooner
-            const stemCount = stemsRef.current.length;
-            const delayFraction = index / stemCount * 0.3; // Max 30% delay for last stem
-            const stemDuration = 1 - delayFraction; // Remaining duration for stem to grow
-            
-            // Calculate stem progress: starts at delayFraction, ends at 1
-            let stemProgress = 0;
-            if (pixelatedProgress > delayFraction) {
-              stemProgress = Math.min(1, (pixelatedProgress - delayFraction) / stemDuration);
-            }
-            
-            // Animate stem growth
-            const offset = length * (1 - stemProgress);
-            stem.style.strokeDashoffset = `${offset}`;
-          }
-        });
-
-        // Show squares when their corresponding stem is 70% grown
-        squaresRef.current.forEach((square, index) => {
-          if (square && stemsRef.current[index]) {
-            const stemCount = stemsRef.current.length;
-            const delayFraction = index / stemCount * 0.3;
-            const stemDuration = 1 - delayFraction;
-            
-            let stemProgress = 0;
-            if (pixelatedProgress > delayFraction) {
-              stemProgress = Math.min(1, (pixelatedProgress - delayFraction) / stemDuration);
-            }
-            
-            // Show square when stem is 70% grown
-            if (stemProgress >= 0.7) {
-              square.style.opacity = '1';
-            } else {
-              square.style.opacity = '0';
-            }
-          }
-        });
-      } else {
-        // Reset flower if scrolled back up
-        stemsRef.current.forEach((stem, index) => {
-          if (stem && stemLengths[index]) {
-            stem.style.strokeDashoffset = `${stemLengths[index]}`;
-          }
-        });
-        squaresRef.current.forEach((square) => {
-          if (square) {
-            square.style.opacity = '0';
-          }
-        });
-      }
-    };
-
-    scrollContainer.addEventListener('scroll', handleScroll);
-    return () => scrollContainer.removeEventListener('scroll', handleScroll);
-  }, [stemLengths]);
-
-  // Store ref for stems
-  const addStemRef = (el: SVGPathElement | null, index: number) => {
-    if (el) stemsRef.current[index] = el;
-  };
-
-  // Store ref for squares
-  const addSquareRef = (el: SVGRectElement | null, index: number) => {
-    if (el) squaresRef.current[index] = el;
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
@@ -372,9 +189,8 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
               </div>
             </div>
 
-            {/* Center Canvas - Scrollable with clip and noise texture */}
+            {/* Center Canvas with noise texture */}
             <div 
-              ref={canvasRef}
               className="flex-1 m-1 relative overflow-hidden"
               style={{
                 backgroundColor: '#ffffff',
@@ -385,127 +201,15 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
                 borderRight: '2px solid #fff',
               }}
             >
-              {/* FIXED CENTERED FLOWER OVERLAY - doesn't scroll */}
-              <div 
-                className="absolute inset-0 flex items-center justify-center pointer-events-none"
-                style={{ zIndex: 1 }}
-              >
-                <svg 
-                  id="flower" 
-                  width="450"
-                  height="380"
-                  viewBox="0 0 450 380"
-                  preserveAspectRatio="xMidYMid meet"
-                >
-                  {/* Organic curved branches matching reference - cubic bezier for smooth loops */}
-                  {/* Center point at (225, 300) */}
-                  
-                  {/* Branch 1: Far left, curves down then up-left */}
-                  <path ref={(el) => addStemRef(el, 0)} 
-                        d="M 225,300 C 180,320 100,340 50,280 C 20,240 30,200 45,160" 
-                        stroke="#00AA00" strokeWidth="1.5" fill="none"/>
-                  {/* Branch 2: Left low, loops down and curves to left */}
-                  <path ref={(el) => addStemRef(el, 1)} 
-                        d="M 225,300 C 190,330 120,340 70,290 C 40,255 55,210 75,175" 
-                        stroke="#00AA00" strokeWidth="1.5" fill="none"/>
-                  {/* Branch 3: Left mid, S-curve going up-left */}
-                  <path ref={(el) => addStemRef(el, 2)} 
-                        d="M 225,300 C 200,280 140,280 100,220 C 70,170 80,120 100,80" 
-                        stroke="#00AA00" strokeWidth="1.5" fill="none"/>
-                  {/* Branch 4: Left upper, graceful arc */}
-                  <path ref={(el) => addStemRef(el, 3)} 
-                        d="M 225,300 C 210,260 170,200 145,140 C 125,90 130,50 145,25" 
-                        stroke="#00AA00" strokeWidth="1.5" fill="none"/>
-                  {/* Branch 5: Center-left top */}
-                  <path ref={(el) => addStemRef(el, 4)} 
-                        d="M 225,300 C 220,250 200,160 185,100 C 175,55 180,25 190,10" 
-                        stroke="#00AA00" strokeWidth="1.5" fill="none"/>
-                  {/* Branch 6: Center top left */}
-                  <path ref={(el) => addStemRef(el, 5)} 
-                        d="M 225,300 C 225,240 215,140 210,80 C 208,40 215,15 225,5" 
-                        stroke="#00AA00" strokeWidth="1.5" fill="none"/>
-                  {/* Branch 7: Center top right */}
-                  <path ref={(el) => addStemRef(el, 6)} 
-                        d="M 225,300 C 225,240 235,140 240,80 C 242,40 235,15 225,5" 
-                        stroke="#00AA00" strokeWidth="1.5" fill="none"/>
-                  {/* Branch 8: Center-right top */}
-                  <path ref={(el) => addStemRef(el, 7)} 
-                        d="M 225,300 C 230,250 250,160 265,100 C 275,55 270,25 260,10" 
-                        stroke="#00AA00" strokeWidth="1.5" fill="none"/>
-                  {/* Branch 9: Right upper, graceful arc */}
-                  <path ref={(el) => addStemRef(el, 8)} 
-                        d="M 225,300 C 240,260 280,200 305,140 C 325,90 320,50 305,25" 
-                        stroke="#00AA00" strokeWidth="1.5" fill="none"/>
-                  {/* Branch 10: Right mid, S-curve going up-right */}
-                  <path ref={(el) => addStemRef(el, 9)} 
-                        d="M 225,300 C 250,280 310,280 350,220 C 380,170 370,120 350,80" 
-                        stroke="#00AA00" strokeWidth="1.5" fill="none"/>
-                  {/* Branch 11: Right low, loops down and curves to right */}
-                  <path ref={(el) => addStemRef(el, 10)} 
-                        d="M 225,300 C 260,330 330,340 380,290 C 410,255 395,210 375,175" 
-                        stroke="#00AA00" strokeWidth="1.5" fill="none"/>
-                  {/* Branch 12: Far right, curves down then up-right */}
-                  <path ref={(el) => addStemRef(el, 11)} 
-                        d="M 225,300 C 270,320 350,340 400,280 C 430,240 420,200 405,160" 
-                        stroke="#00AA00" strokeWidth="1.5" fill="none"/>
-                  
-                  {/* Square nodes at exact branch endpoints */}
-                  <rect ref={(el) => addSquareRef(el, 0)} x="39" y="154" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 1)} x="69" y="169" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 2)} x="94" y="74" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 3)} x="139" y="19" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 4)} x="184" y="4" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 5)} x="219" y="-1" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 6)} x="219" y="-1" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 7)} x="254" y="4" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 8)} x="299" y="19" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 9)} x="344" y="74" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 10)} x="369" y="169" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 11)} x="399" y="154" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  
-                  {/* Select text */}
-                  <text x="225" y="340" textAnchor="middle" fill="#999" fontSize="10" fontFamily="var(--font-pixel)">
-                    SELECT A NODE TO VIEW DETAILS
-                  </text>
-                </svg>
-              </div>
-              
-              {/* Scrollable content layer - for scroll interaction and logo */}
-              <div 
-                ref={scrollContainerRef}
-                className="absolute inset-0 overflow-y-auto overflow-x-hidden"
-                style={{ padding: '10px', zIndex: 2 }}
-              >
-                {/* Scrollable content - creates scroll height */}
-                <div className="relative" style={{ minHeight: '1500px' }}>
-                  {/* Logo Image - Positioned absolutely for animation */}
-                  <img 
-                    ref={logoRef}
-                    src={logoImage}
-                    alt="Thành Lambeets"
-                    className="absolute w-40 h-auto object-contain"
-                    style={{ 
-                      imageRendering: 'pixelated',
-                      top: '80px',
-                    }}
-                    draggable={false}
-                  />
-                  
-                  {/* Scroll Here text */}
-                  <p 
-                    ref={scrollIndicatorRef}
-                    className="absolute text-sm text-black font-bold"
-                    style={{ 
-                      fontFamily: 'var(--font-pixel)',
-                      left: '50%',
-                      top: '200px',
-                      transform: 'translateX(-50%)',
-                      transition: 'opacity 0.1s steps(5)',
-                    }}
-                  >
-                    [SCROLL HERE]
-                  </p>
-                </div>
+              {/* Centered logo */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <img 
+                  src={logoImage}
+                  alt="Thành Lambeets"
+                  className="w-48 h-auto object-contain"
+                  style={{ imageRendering: 'pixelated' }}
+                  draggable={false}
+                />
               </div>
             </div>
 
