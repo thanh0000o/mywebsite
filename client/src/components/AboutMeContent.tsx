@@ -26,28 +26,8 @@ export function AboutMeContent() {
         }}
       />
       
-      {/* Header bar */}
-      <div
-        className="px-3 py-2 relative z-10"
-        style={{
-          background: "linear-gradient(90deg, #000080, #1084d0)",
-          borderBottom: "2px solid #808080",
-        }}
-      >
-        <h1
-          className="text-sm font-bold tracking-wide"
-          style={{
-            fontFamily: "var(--font-pixel)",
-            color: "#fff",
-            textShadow: "1px 1px 0 #000",
-          }}
-        >
-          // ABOUT_ME.txt
-        </h1>
-      </div>
-      
       {/* Content area */}
-      <div className="p-4 overflow-y-auto relative z-10" style={{ height: "calc(100% - 40px)" }}>
+      <div className="p-3 overflow-y-auto relative z-10 h-full">
         {/* Inner content panel with inset border */}
         <div
           className="h-full p-3 overflow-y-auto"

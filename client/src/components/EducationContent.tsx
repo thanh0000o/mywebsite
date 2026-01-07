@@ -37,31 +37,11 @@ export function EducationContent() {
         }}
       />
       
-      {/* Header bar */}
-      <div
-        className="px-3 py-1.5 relative z-10"
-        style={{
-          background: "linear-gradient(90deg, #000080, #1084d0)",
-          borderBottom: "2px solid #808080",
-        }}
-      >
-        <h1
-          className="text-xs font-bold tracking-wide"
-          style={{
-            fontFamily: "var(--font-pixel)",
-            color: "#fff",
-            textShadow: "1px 1px 0 #000",
-          }}
-        >
-          // EDUCATION.log
-        </h1>
-      </div>
-      
       {/* Content area */}
-      <div className="p-3 overflow-y-auto relative z-10" style={{ height: "calc(100% - 32px)" }}>
+      <div className="p-3 overflow-y-auto relative z-10 h-full">
         {/* Inner content panel with inset border */}
         <div
-          className="h-full p-2"
+          className="h-full p-3"
           style={{
             backgroundColor: "#d4d4d4",
             borderTop: "2px solid #808080",
