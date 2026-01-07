@@ -1,11 +1,163 @@
 import { motion } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
 import logoImage from "@assets/ChatGPT_Image_Jan_7,_2026,_12_04_31_PM_1767811147577.png";
 
 interface DreamweaverWindowProps {
   onClose: () => void;
 }
 
+// Helper to quantize values in 4px steps for pixelated movement
+function pixelate(value: number, step: number = 4): number {
+  return Math.round(value / step) * step;
+}
+
 export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
+  const canvasRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLImageElement>(null);
+  const scrollIndicatorRef = useRef<HTMLParagraphElement>(null);
+  const stemsRef = useRef<SVGPathElement[]>([]);
+  const squaresRef = useRef<SVGRectElement[]>([]);
+  
+  const [stemLengths, setStemLengths] = useState<number[]>([]);
+
+  // Initialize stem lengths on mount
+  useEffect(() => {
+    const lengths: number[] = [];
+    stemsRef.current.forEach((stem) => {
+      if (stem) {
+        const length = stem.getTotalLength();
+        lengths.push(length);
+        stem.style.strokeDasharray = `${length}`;
+        stem.style.strokeDashoffset = `${length}`;
+      }
+    });
+    setStemLengths(lengths);
+  }, []);
+
+  // Scroll animation handler
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const handleScroll = () => {
+      const scrollY = canvas.scrollTop;
+      const logo = logoRef.current;
+      const scrollIndicator = scrollIndicatorRef.current;
+
+      // Animation constants
+      const logoAnimationEnd = 300;
+      const flowerStart = 300;
+      const flowerEnd = 1200;
+
+      // LOGO ANIMATION (0-300px scroll)
+      if (logo) {
+        const canvasWidth = canvas.offsetWidth;
+        const canvasHeight = canvas.offsetHeight;
+        
+        // Start position (centered)
+        const startX = canvasWidth / 2;
+        const startY = 150;
+        
+        // End position (top-left)
+        const endX = 40;
+        const endY = 20;
+        
+        const logoProgress = Math.min(scrollY / logoAnimationEnd, 1);
+        
+        // Calculate new position with pixelation
+        let newX = startX + (endX - startX) * logoProgress;
+        let newY = startY + (endY - startY) * logoProgress;
+        
+        // Pixelate for stepped movement
+        newX = pixelate(newX);
+        newY = pixelate(newY);
+        
+        if (logoProgress < 1) {
+          logo.style.left = `${newX}px`;
+          logo.style.top = `${newY}px`;
+          logo.style.transform = 'translateX(-50%)';
+        } else {
+          logo.style.left = `${endX}px`;
+          logo.style.top = `${endY}px`;
+          logo.style.transform = 'none';
+        }
+      }
+
+      // SCROLL INDICATOR FADE (0-50px scroll)
+      if (scrollIndicator) {
+        if (scrollY > 50) {
+          scrollIndicator.style.opacity = '0';
+          scrollIndicator.style.pointerEvents = 'none';
+        } else {
+          const opacity = Math.max(0, 1 - scrollY / 50);
+          scrollIndicator.style.opacity = `${Math.round(opacity * 10) / 10}`;
+          scrollIndicator.style.pointerEvents = 'auto';
+        }
+      }
+
+      // FLOWER ANIMATION (300-1200px scroll)
+      if (scrollY > flowerStart) {
+        const flowerScrollRange = flowerEnd - flowerStart;
+        const flowerProgress = Math.min((scrollY - flowerStart) / flowerScrollRange, 1);
+        
+        // Pixelate progress for stepped effect
+        const pixelatedProgress = Math.floor(flowerProgress * 50) / 50;
+
+        // Animate each stem
+        stemsRef.current.forEach((stem, index) => {
+          if (stem && stemLengths[index]) {
+            const length = stemLengths[index];
+            
+            // Stagger each stem slightly
+            const delay = index * 0.05;
+            const stemProgress = Math.max(0, Math.min(1, (pixelatedProgress - delay) / 0.8));
+            
+            // Animate stem growth
+            const offset = length * (1 - stemProgress);
+            stem.style.strokeDashoffset = `${offset}`;
+          }
+        });
+
+        // Show squares when stems are mostly grown
+        squaresRef.current.forEach((square, index) => {
+          if (square) {
+            const showThreshold = 0.7 + (index * 0.02);
+            if (pixelatedProgress > showThreshold) {
+              square.style.opacity = '1';
+            } else {
+              square.style.opacity = '0';
+            }
+          }
+        });
+      } else {
+        // Reset flower if scrolled back up
+        stemsRef.current.forEach((stem, index) => {
+          if (stem && stemLengths[index]) {
+            stem.style.strokeDashoffset = `${stemLengths[index]}`;
+          }
+        });
+        squaresRef.current.forEach((square) => {
+          if (square) {
+            square.style.opacity = '0';
+          }
+        });
+      }
+    };
+
+    canvas.addEventListener('scroll', handleScroll);
+    return () => canvas.removeEventListener('scroll', handleScroll);
+  }, [stemLengths]);
+
+  // Store ref for stems
+  const addStemRef = (el: SVGPathElement | null, index: number) => {
+    if (el) stemsRef.current[index] = el;
+  };
+
+  // Store ref for squares
+  const addSquareRef = (el: SVGRectElement | null, index: number) => {
+    if (el) squaresRef.current[index] = el;
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
@@ -131,7 +283,6 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
               borderRight: '1px solid #808080',
             }}
           >
-            {/* Sidebar Tool Icons - using simple symbols instead of emojis */}
             {['▼', '□', '⊞', '⊟', '▤', '●', '⟁', '⚡', '✦'].map((icon, i) => (
               <div
                 key={i}
@@ -160,7 +311,6 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
                 borderBottom: '1px solid #808080',
               }}
             >
-              {/* Left blue square */}
               <div 
                 className="w-6 h-6"
                 style={{
@@ -171,7 +321,6 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
                   borderRight: '1px solid #808080',
                 }}
               />
-              {/* Toolbar Tabs */}
               <div className="flex items-center gap-1">
                 {['SITE', 'LIBRARY', 'STYLES', 'BEHAVIOR', 'TIMELINE', 'HTML'].map((tab) => (
                   <div
@@ -192,9 +341,10 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
               </div>
             </div>
 
-            {/* Center Canvas */}
+            {/* Center Canvas - Scrollable */}
             <div 
-              className="flex-1 m-1 flex flex-col items-center overflow-hidden"
+              ref={canvasRef}
+              className="flex-1 m-1 relative overflow-y-auto overflow-x-hidden"
               style={{
                 backgroundColor: '#fff',
                 borderTop: '2px solid #808080',
@@ -203,24 +353,115 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
                 borderRight: '2px solid #fff',
               }}
             >
-              {/* Logo Image */}
-              <div className="flex-1 flex items-center justify-center">
+              {/* Scrollable content container */}
+              <div className="relative" style={{ minHeight: '1500px' }}>
+                {/* Logo Image - Positioned absolutely for animation */}
                 <img 
+                  ref={logoRef}
                   src={logoImage}
                   alt="Thành Lambeets"
-                  className="w-64 h-auto object-contain"
-                  style={{ imageRendering: 'pixelated' }}
+                  className="absolute w-48 h-auto object-contain"
+                  style={{ 
+                    imageRendering: 'pixelated',
+                    left: '50%',
+                    top: '150px',
+                    transform: 'translateX(-50%)',
+                  }}
                   draggable={false}
                 />
+                
+                {/* Scroll Here text */}
+                <p 
+                  ref={scrollIndicatorRef}
+                  className="absolute text-sm text-black font-bold"
+                  style={{ 
+                    fontFamily: 'var(--font-pixel)',
+                    left: '50%',
+                    top: '280px',
+                    transform: 'translateX(-50%)',
+                    transition: 'opacity 0.1s steps(5)',
+                  }}
+                >
+                  [SCROLL HERE]
+                </p>
+
+                {/* Flower SVG */}
+                <svg 
+                  id="flower" 
+                  width="400" 
+                  height="400" 
+                  viewBox="0 0 600 600"
+                  className="absolute"
+                  style={{
+                    left: '50%',
+                    top: '350px',
+                    transform: 'translateX(-50%)',
+                    overflow: 'visible',
+                  }}
+                >
+                  {/* Stem 1: Upper left */}
+                  <path ref={(el) => addStemRef(el, 0)} className="stem" d="M 300,300 Q 250,200 200,150" 
+                        stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="round"/>
+                  
+                  {/* Stem 2: Upper center-left */}
+                  <path ref={(el) => addStemRef(el, 1)} className="stem" d="M 300,300 Q 280,220 270,140" 
+                        stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="round"/>
+                  
+                  {/* Stem 3: Upper right */}
+                  <path ref={(el) => addStemRef(el, 2)} className="stem" d="M 300,300 Q 360,240 420,200" 
+                        stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="round"/>
+                  
+                  {/* Stem 4: Right */}
+                  <path ref={(el) => addStemRef(el, 3)} className="stem" d="M 300,300 Q 380,310 460,320" 
+                        stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="round"/>
+                  
+                  {/* Stem 5: Lower right */}
+                  <path ref={(el) => addStemRef(el, 4)} className="stem" d="M 300,300 Q 360,370 410,440" 
+                        stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="round"/>
+                  
+                  {/* Stem 6: Lower center */}
+                  <path ref={(el) => addStemRef(el, 5)} className="stem" d="M 300,300 Q 310,380 315,460" 
+                        stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="round"/>
+                  
+                  {/* Stem 7: Lower left */}
+                  <path ref={(el) => addStemRef(el, 6)} className="stem" d="M 300,300 Q 240,380 190,450" 
+                        stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="round"/>
+                  
+                  {/* Stem 8: Left */}
+                  <path ref={(el) => addStemRef(el, 7)} className="stem" d="M 300,300 Q 220,310 140,320" 
+                        stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="round"/>
+                  
+                  {/* Stem 9 */}
+                  <path ref={(el) => addStemRef(el, 8)} className="stem" d="M 300,300 Q 260,180 230,100" 
+                        stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="round"/>
+                  
+                  {/* Stem 10 */}
+                  <path ref={(el) => addStemRef(el, 9)} className="stem" d="M 300,300 Q 340,200 380,140" 
+                        stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="round"/>
+                  
+                  {/* Stem 11 */}
+                  <path ref={(el) => addStemRef(el, 10)} className="stem" d="M 300,300 Q 420,330 500,360" 
+                        stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="round"/>
+                  
+                  {/* Stem 12 */}
+                  <path ref={(el) => addStemRef(el, 11)} className="stem" d="M 300,300 Q 180,330 100,360" 
+                        stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="round"/>
+                  
+                  {/* Portfolio squares at stem endpoints */}
+                  <rect ref={(el) => addSquareRef(el, 0)} className="portfolio-square" data-project="1" x="193" y="143" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                  <rect ref={(el) => addSquareRef(el, 1)} className="portfolio-square" data-project="2" x="263" y="133" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                  <rect ref={(el) => addSquareRef(el, 2)} className="portfolio-square" data-project="3" x="413" y="193" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                  <rect ref={(el) => addSquareRef(el, 3)} className="portfolio-square" data-project="4" x="453" y="313" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                  <rect ref={(el) => addSquareRef(el, 4)} className="portfolio-square" data-project="5" x="403" y="433" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                  <rect ref={(el) => addSquareRef(el, 5)} className="portfolio-square" data-project="6" x="308" y="453" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                  <rect ref={(el) => addSquareRef(el, 6)} className="portfolio-square" data-project="7" x="183" y="443" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                  <rect ref={(el) => addSquareRef(el, 7)} className="portfolio-square" data-project="8" x="133" y="313" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                  <rect ref={(el) => addSquareRef(el, 8)} className="portfolio-square" data-project="9" x="223" y="93" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                  <rect ref={(el) => addSquareRef(el, 9)} className="portfolio-square" data-project="10" x="373" y="133" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                  <rect ref={(el) => addSquareRef(el, 10)} className="portfolio-square" data-project="11" x="493" y="353" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                  <rect ref={(el) => addSquareRef(el, 11)} className="portfolio-square" data-project="12" x="93" y="353" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                </svg>
               </div>
-              
-              {/* Scroll Here text */}
-              <p 
-                className="text-sm text-black pb-8 font-bold"
-                style={{ fontFamily: 'var(--font-pixel)' }}
-              >
-                [SCROLL HERE]
-              </p>
             </div>
 
             {/* Bottom Toolbar */}
@@ -232,7 +473,6 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
                 borderTop: '1px solid #808080',
               }}
             >
-              {/* Format dropdown */}
               <div className="flex items-center gap-1">
                 <span className="text-[10px] text-black" style={{ fontFamily: 'var(--font-pixel)' }}>Format</span>
                 <select 
@@ -247,7 +487,6 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
                 </select>
               </div>
 
-              {/* Font dropdown */}
               <select 
                 className="text-[10px] px-1 text-black"
                 style={{
@@ -259,7 +498,6 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
                 <option>Default Font</option>
               </select>
 
-              {/* Size dropdown */}
               <select 
                 className="text-[10px] px-1 text-black"
                 style={{
@@ -271,7 +509,6 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
                 <option>Default Size</option>
               </select>
 
-              {/* Format buttons */}
               <div className="flex gap-0.5">
                 {['B', 'I', '≡', '≡', '≡'].map((btn, i) => (
                   <button

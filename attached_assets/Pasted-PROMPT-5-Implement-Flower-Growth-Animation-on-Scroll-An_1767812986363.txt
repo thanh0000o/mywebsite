@@ -1,0 +1,86 @@
+PROMPT 5: Implement Flower Growth Animation on Scroll
+Animate the flower to grow as user scrolls:
+Animation Behavior:
+
+Flower starts growing after logo reaches top-left (after 300px scroll)
+Stems grow from center outward (stroke animation)
+Growth is pixelated/stepped
+Each stem grows at slightly different speed
+Squares appear when stems are fully grown
+Full flower visible by 1200px of scrolling
+
+JavaScript Implementation:
+javascript// Get all stems and squares
+const stems = document.querySelectorAll('.stem');
+const squares = document.querySelectorAll('.portfolio-square');
+
+// Calculate each stem length
+stems.forEach(stem => {
+  const length = stem.getTotalLength();
+  stem.style.strokeDasharray = length;
+  stem.style.strokeDashoffset = length;
+  stem.dataset.length = length; // Store for animation
+});
+
+// Update scroll event listener
+canvasContent.addEventListener('scroll', function() {
+  const scrollY = canvasContent.scrollTop;
+  
+  // ... existing logo animation code ...
+  
+  // FLOWER ANIMATION (starts at 300px scroll)
+  if (scrollY > 300) {
+    const flowerScrollRange = 900; // 300px to 1200px = 900px range
+    const flowerProgress = Math.min((scrollY - 300) / flowerScrollRange, 1);
+    
+    // Pixelate progress (update every 2% for stepped effect)
+    const pixelatedProgress = Math.floor(flowerProgress * 50) / 50;
+    
+    // Animate each stem
+    stems.forEach((stem, index) => {
+      const length = parseFloat(stem.dataset.length);
+      
+      // Stagger each stem slightly
+      const delay = index * 0.05;
+      const stemProgress = Math.max(0, Math.min(1, (pixelatedProgress - delay) / 0.8));
+      
+      // Animate stem growth
+      const offset = length * (1 - stemProgress);
+      stem.style.strokeDashoffset = offset;
+    });
+    
+    // Show squares when stems are mostly grown
+    squares.forEach((square, index) => {
+      const showThreshold = 0.7 + (index * 0.02);
+      if (pixelatedProgress > showThreshold) {
+        square.style.opacity = '1';
+      } else {
+        square.style.opacity = '0';
+      }
+    });
+  } else {
+    // Reset flower if scrolled back up
+    stems.forEach(stem => {
+      stem.style.strokeDashoffset = stem.dataset.length;
+    });
+    squares.forEach(square => {
+      square.style.opacity = '0';
+    });
+  }
+});
+Testing:
+
+Scroll to 300px - flower should start growing
+Stems should grow in pixelated steps
+Each stem grows at slightly different speed (staggered)
+Squares appear when stems are ~70% grown
+Full flower visible at 1200px scroll
+Scrolling back up should reset flower
+
+🔹 REQUIREMENTS:
+
+Add to existing scroll event listener
+Pixelated/stepped animation
+Staggered stem growth for organic feel
+Smooth performance
+Well-commented

@@ -1,0 +1,85 @@
+ Implement Pixelated Logo Scroll Animation
+Add scroll animation that moves logo to top-left corner:
+Animation Behavior:
+
+Logo starts centered (already positioned from Prompt 2)
+When user scrolls in .canvas-content, logo moves to top-left
+Animation completes in first 300px of scrolling
+Movement is pixelated (4px steps) for retro feel
+Final position: 20px from top, 20px from left
+Logo stays fixed after reaching top-left
+
+JavaScript Implementation:
+javascript// Get elements
+const canvasContent = document.querySelector('.canvas-content');
+const logo = document.querySelector('.logo-container');
+
+// Get initial center position
+const canvasWidth = canvasContent.offsetWidth;
+const startX = canvasWidth / 2; // Center
+const startY = 300; // Initial top position
+
+// Target position (top-left)
+const endX = 20;
+const endY = 20;
+
+// Animation settings
+const maxScroll = 300; // Animation duration in pixels
+
+// Scroll event listener
+canvasContent.addEventListener('scroll', function() {
+  const scrollY = canvasContent.scrollTop;
+  
+  // Calculate progress (0 to 1)
+  const progress = Math.min(scrollY / maxScroll, 1);
+  
+  // Calculate new position
+  let newX = startX + (endX - startX) * progress;
+  let newY = startY + (endY - startY) * progress;
+  
+  // PIXELATE: Round to nearest 4px for stepped movement
+  newX = Math.round(newX / 4) * 4;
+  newY = Math.round(newY / 4) * 4;
+  
+  // Apply position
+  if (progress < 1) {
+    // During animation: use left positioning
+    logo.style.left = newX + 'px';
+    logo.style.top = newY + 'px';
+    logo.style.transform = 'none';
+  } else {
+    // After animation: fixed at top-left
+    logo.style.left = endX + 'px';
+    logo.style.top = endY + 'px';
+    logo.style.transform = 'none';
+  }
+});
+Testing:
+
+Scroll slowly - logo should move in visible 4px steps (pixelated)
+Logo should reach top-left at 300px scroll
+Logo should stay at top-left after 300px
+Logo should not go outside canvas boundaries
+
+Hide [SCROLL HERE] text after scrolling:
+javascriptconst scrollIndicator = document.querySelector('.scroll-indicator');
+
+canvasContent.addEventListener('scroll', function() {
+  const scrollY = canvasContent.scrollTop;
+  
+  // Hide scroll indicator after 50px
+  if (scrollY > 50) {
+    scrollIndicator.style.opacity = '0';
+  } else {
+    scrollIndicator.style.opacity = '1';
+  }
+  
+  // ... rest of scroll logic
+});
+🔹 REQUIREMENTS:
+
+Add to existing code
+Vanilla JS only
+Pixelated movement (4px steps)
+Logo stays within canvas bounds
+Well-commented
