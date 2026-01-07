@@ -38,7 +38,7 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
       className="fixed inset-0 flex items-center justify-center z-50 p-4"
     >
       <div 
-        className="w-[45vw] h-[50vh] min-w-[500px] min-h-[400px] flex flex-col"
+        className="w-[45vw] h-[50vh] min-w-[500px] min-h-[400px] flex flex-col relative"
         style={{
           backgroundColor: '#C0C0C0',
           boxShadow: '5px 5px 20px rgba(0,0,0,0.5)',
@@ -48,9 +48,20 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
           borderRight: '2px solid #808080',
         }}
       >
+        {/* Pixelated noise texture overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='1' height='1' fill='%23999' /%3E%3Crect x='2' y='1' width='1' height='1' fill='%23bbb' /%3E%3Crect x='1' y='2' width='1' height='1' fill='%23888' /%3E%3Crect x='3' y='3' width='1' height='1' fill='%23aaa' /%3E%3C/svg%3E")`,
+            backgroundSize: "4px 4px",
+            imageRendering: "pixelated" as const,
+            opacity: 0.6,
+            zIndex: 0,
+          }}
+        />
         {/* Title Bar */}
         <div 
-          className="flex items-center justify-between px-1 py-0.5"
+          className="flex items-center justify-between px-1 py-0.5 relative z-10"
           style={{
             background: 'linear-gradient(90deg, #000080, #1084d0)',
             color: 'white',
@@ -128,7 +139,7 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
 
         {/* Menu Bar */}
         <div 
-          className="flex items-center gap-4 px-2 py-1 text-sm"
+          className="flex items-center gap-4 px-2 py-1 text-sm relative z-10"
           style={{
             backgroundColor: '#C0C0C0',
             borderBottom: '1px solid #808080',
@@ -148,7 +159,7 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
         </div>
 
         {/* Main Content Area */}
-        <div className="flex flex-1 overflow-hidden">
+        <div className="flex flex-1 overflow-hidden relative z-10">
           {/* Left Sidebar */}
           <div 
             className="flex flex-col gap-1 p-1"
@@ -261,7 +272,7 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
 
             {/* Bottom Toolbar */}
             <div 
-              className="flex items-center px-2 gap-2"
+              className="flex items-center px-2 gap-2 relative z-10"
               style={{
                 height: '50px',
                 backgroundColor: '#C0C0C0',
@@ -331,7 +342,7 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
 
         {/* Status Bar */}
         <div 
-          className="flex items-center justify-between px-2 py-0.5 text-[10px]"
+          className="flex items-center justify-between px-2 py-0.5 text-[10px] relative z-10"
           style={{
             backgroundColor: '#C0C0C0',
             borderTop: '1px solid #808080',
