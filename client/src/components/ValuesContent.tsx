@@ -1,15 +1,18 @@
+import { Star } from "lucide-react";
+
 export function ValuesContent() {
   const values = [
-    "Curiosity",
-    "Empathy", 
-    "Reliability",
-    "Creativity",
-    "Discipline",
-    "Thoughtfulness",
-    "Growth",
-    "Authenticity",
-    "Dedication",
+    { label: "Curiosity", stars: 3 },
+    { label: "Empathy", stars: 3 },
+    { label: "Reliability", stars: 2 },
+    { label: "Creativity", stars: 3 },
+    { label: "Discipline", stars: 2 },
+    { label: "Growth", stars: 3 },
+    { label: "Authenticity", stars: 2 },
+    { label: "Dedication", stars: 3 },
   ];
+
+  const starColors = ["#ffd700", "#ffa500", "#ff69b4"];
 
   return (
     <div
@@ -31,10 +34,10 @@ export function ValuesContent() {
       {/* Moving scanlines overlay */}
       <div className="window-scanlines" aria-hidden="true" />
       
-      {/* Content area */}
-      <div className="p-3 relative z-10 h-full">
+      {/* Content area - star rating style */}
+      <div className="p-2 relative z-10 h-full flex flex-col">
         <div
-          className="h-full p-4"
+          className="flex-1 p-2"
           style={{
             backgroundColor: "#d4d4d4",
             borderTop: "2px solid #808080",
@@ -43,31 +46,37 @@ export function ValuesContent() {
             borderRight: "2px solid #fff",
           }}
         >
-          <div
-            className="text-[10px]"
-            style={{
-              fontFamily: "var(--font-pixel)",
-              color: "#000",
-            }}
-          >
-            <div className="grid grid-cols-3 gap-2">
-              {values.map((value, index) => (
-                <div 
-                  key={index} 
-                  className="flex items-center gap-1 px-2 py-1.5"
-                  style={{
-                    backgroundColor: "#c0c0c0",
-                    borderTop: "1px solid #fff",
-                    borderLeft: "1px solid #fff",
-                    borderBottom: "1px solid #808080",
-                    borderRight: "1px solid #808080",
-                  }}
+          <div className="grid grid-cols-2 gap-1 h-full">
+            {values.map((value, index) => (
+              <div 
+                key={index} 
+                className="flex items-center justify-between px-2 py-1"
+                style={{
+                  backgroundColor: "#c0c0c0",
+                  borderTop: "1px solid #fff",
+                  borderLeft: "1px solid #fff",
+                  borderBottom: "1px solid #808080",
+                  borderRight: "1px solid #808080",
+                }}
+              >
+                <span 
+                  className="text-[8px] font-bold"
+                  style={{ fontFamily: "var(--font-pixel)", color: "#000" }}
                 >
-                  <span style={{ color: "#008000" }}>+</span>
-                  <span>{value}</span>
+                  {value.label}
+                </span>
+                <div className="flex gap-0.5">
+                  {Array.from({ length: value.stars }).map((_, i) => (
+                    <Star 
+                      key={i} 
+                      className="w-3 h-3" 
+                      fill={starColors[i % starColors.length]}
+                      color={starColors[i % starColors.length]}
+                    />
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

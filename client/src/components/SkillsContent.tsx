@@ -1,13 +1,15 @@
+import { Brain, Lightbulb, Sparkles, Eye, Users, Target, Award, Clock } from "lucide-react";
+
 export function SkillsContent() {
   const skills = [
-    "Deep thinking",
-    "Curious builder mindset",
-    "AI-driven workflow exploration",
-    "Visual & conceptual creativity",
-    "Empathetic collaboration",
-    "Self-directed focus",
-    "High personal standards",
-    "Deadline discipline",
+    { icon: Brain, label: "Deep thinker", color: "#8e44ad" },
+    { icon: Lightbulb, label: "Builder", color: "#f39c12" },
+    { icon: Sparkles, label: "AI explorer", color: "#3498db" },
+    { icon: Eye, label: "Creative", color: "#e91e63" },
+    { icon: Users, label: "Empathetic", color: "#00bcd4" },
+    { icon: Target, label: "Focused", color: "#4caf50" },
+    { icon: Award, label: "High standards", color: "#ff5722" },
+    { icon: Clock, label: "Deadline pro", color: "#607d8b" },
   ];
 
   return (
@@ -30,10 +32,10 @@ export function SkillsContent() {
       {/* Moving scanlines overlay */}
       <div className="window-scanlines" aria-hidden="true" />
       
-      {/* Content area */}
-      <div className="p-3 relative z-10 h-full">
+      {/* Content area - horizontal pill layout */}
+      <div className="p-2 relative z-10 h-full flex flex-col">
         <div
-          className="h-full p-4"
+          className="flex-1 p-2 flex flex-wrap content-start gap-1"
           style={{
             backgroundColor: "#d4d4d4",
             borderTop: "2px solid #808080",
@@ -42,20 +44,30 @@ export function SkillsContent() {
             borderRight: "2px solid #fff",
           }}
         >
-          <div
-            className="text-[10px]"
-            style={{
-              fontFamily: "var(--font-pixel)",
-              color: "#000",
-            }}
-          >
-            {skills.map((skill, index) => (
-              <div key={index} className="flex items-center gap-2 mb-2">
-                <span style={{ color: "#000080" }}>&gt;</span>
-                <span>{skill}</span>
+          {skills.map((skill, index) => {
+            const IconComponent = skill.icon;
+            return (
+              <div 
+                key={index} 
+                className="flex items-center gap-1 px-2 py-1"
+                style={{
+                  backgroundColor: skill.color,
+                  borderTop: "1px solid rgba(255,255,255,0.5)",
+                  borderLeft: "1px solid rgba(255,255,255,0.5)",
+                  borderBottom: "1px solid rgba(0,0,0,0.3)",
+                  borderRight: "1px solid rgba(0,0,0,0.3)",
+                }}
+              >
+                <IconComponent className="w-3 h-3 text-white" />
+                <span 
+                  className="text-[8px] text-white font-bold"
+                  style={{ fontFamily: "var(--font-pixel)" }}
+                >
+                  {skill.label}
+                </span>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </div>
     </div>

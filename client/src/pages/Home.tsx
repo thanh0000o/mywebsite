@@ -62,11 +62,11 @@ export default function Home() {
       width = "min(320px, 90vw)";
       height = "min(220px, 60vh)";
     } else if (type === "values") {
-      width = "min(380px, 90vw)";
-      height = "min(220px, 60vh)";
+      width = "min(300px, 90vw)";
+      height = "min(200px, 55vh)";
     } else if (type === "skills") {
-      width = "min(380px, 90vw)";
-      height = "min(300px, 70vh)";
+      width = "min(320px, 90vw)";
+      height = "min(160px, 50vh)";
     } else if (type === "languages") {
       width = "min(360px, 90vw)";
       height = "min(260px, 65vh)";
