@@ -1,18 +1,21 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import winampLogo from "@assets/Screenshot_2026-01-07_144010_1767817428647.png";
+import track1 from "@assets/08-voyager-possessions_instrumental_mix-z0ne_1767827346337.mp3";
+import track2 from "@assets/02._source_direct_-_complexities_1767827373954.mp3";
+import track3 from "@assets/02_The_Rise_1767827380707.mp3";
 
 interface Track {
   id: number;
   title: string;
   artist: string;
-  src?: string;
+  src: string;
 }
 
-const mockPlaylist: Track[] = [
-  { id: 1, title: "TRACK_01", artist: "UNKNOWN" },
-  { id: 2, title: "TRACK_02", artist: "UNKNOWN" },
-  { id: 3, title: "TRACK_03", artist: "UNKNOWN" },
+const playlist: Track[] = [
+  { id: 1, title: "Possessions (Instrumental)", artist: "Voyager", src: track1 },
+  { id: 2, title: "Complexities", artist: "Source Direct", src: track2 },
+  { id: 3, title: "The Rise", artist: "Unknown", src: track3 },
 ];
 
 export function MediaPlayer() {
@@ -20,35 +23,78 @@ export function MediaPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTrack, setCurrentTrack] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
   const [volume, setVolume] = useState(75);
   const [showPlaylist, setShowPlaylist] = useState(false);
-  const [playlist] = useState<Track[]>(mockPlaylist);
   const audioRef = useRef<HTMLAudioElement>(null);
-  const progressInterval = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    if (isPlaying) {
-      progressInterval.current = setInterval(() => {
-        setProgress((prev) => (prev >= 100 ? 0 : prev + 1));
-      }, 300);
-    } else {
-      if (progressInterval.current) {
-        clearInterval(progressInterval.current);
+    if (audioRef.current) {
+      audioRef.current.volume = volume / 100;
+    }
+  }, [volume]);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.src = playlist[currentTrack].src;
+      if (isPlaying) {
+        audioRef.current.play();
       }
     }
-    return () => {
-      if (progressInterval.current) {
-        clearInterval(progressInterval.current);
+  }, [currentTrack]);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.play();
+      } else {
+        audioRef.current.pause();
       }
-    };
+    }
   }, [isPlaying]);
 
+  const handleTimeUpdate = () => {
+    if (audioRef.current) {
+      const current = audioRef.current.currentTime;
+      const dur = audioRef.current.duration || 1;
+      setCurrentTime(current);
+      setProgress((current / dur) * 100);
+    }
+  };
+
+  const handleLoadedMetadata = () => {
+    if (audioRef.current) {
+      setDuration(audioRef.current.duration);
+    }
+  };
+
+  const handleEnded = () => {
+    nextTrack();
+  };
+
+  const formatTime = (time: number) => {
+    const mins = Math.floor(time / 60);
+    const secs = Math.floor(time % 60);
+    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+  };
+
   const togglePlay = () => setIsPlaying(!isPlaying);
-  const prevTrack = () => setCurrentTrack((prev) => (prev > 0 ? prev - 1 : playlist.length - 1));
-  const nextTrack = () => setCurrentTrack((prev) => (prev < playlist.length - 1 ? prev + 1 : 0));
+  const prevTrack = () => {
+    setCurrentTrack((prev) => (prev > 0 ? prev - 1 : playlist.length - 1));
+    setIsPlaying(true);
+  };
+  const nextTrack = () => {
+    setCurrentTrack((prev) => (prev < playlist.length - 1 ? prev + 1 : 0));
+    setIsPlaying(true);
+  };
   const stopTrack = () => {
     setIsPlaying(false);
     setProgress(0);
+    setCurrentTime(0);
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+    }
   };
 
   if (isMinimized) {
@@ -259,13 +305,13 @@ export function MediaPlayer() {
                 className="text-[7px]"
                 style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
               >
-                {String(Math.floor(progress * 0.6 / 60)).padStart(2, '0')}:{String(Math.floor(progress * 0.6) % 60).padStart(2, '0')}
+                {formatTime(currentTime)}
               </span>
               <span
                 className="text-[7px]"
                 style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
               >
-                01:00
+                {formatTime(duration)}
               </span>
             </div>
           </div>
@@ -403,7 +449,12 @@ export function MediaPlayer() {
         </div>
       </div>
 
-      <audio ref={audioRef} />
+      <audio 
+        ref={audioRef}
+        onTimeUpdate={handleTimeUpdate}
+        onLoadedMetadata={handleLoadedMetadata}
+        onEnded={handleEnded}
+      />
     </motion.div>
   );
 }
