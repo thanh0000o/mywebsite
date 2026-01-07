@@ -39,16 +39,31 @@ export function MediaPlayer() {
 
   useEffect(() => {
     if (audioRef.current && !isInitialized) {
-      audioRef.current.src = playlist[0].src;
+      const randomTrackIndex = Math.floor(Math.random() * playlist.length);
+      setCurrentTrack(randomTrackIndex);
+      audioRef.current.src = playlist[randomTrackIndex].src;
       audioRef.current.volume = volume / 100;
+      
+      const handleCanPlay = () => {
+        if (audioRef.current) {
+          const duration = audioRef.current.duration;
+          if (duration && isFinite(duration)) {
+            const randomTime = Math.random() * duration;
+            audioRef.current.currentTime = randomTime;
+          }
+          audioRef.current.play().then(() => {
+            setIsPlaying(true);
+            isPlayingRef.current = true;
+          }).catch(() => {
+            setIsPlaying(false);
+            isPlayingRef.current = false;
+          });
+          audioRef.current.removeEventListener('canplay', handleCanPlay);
+        }
+      };
+      
+      audioRef.current.addEventListener('canplay', handleCanPlay);
       setIsInitialized(true);
-      audioRef.current.play().then(() => {
-        setIsPlaying(true);
-        isPlayingRef.current = true;
-      }).catch(() => {
-        setIsPlaying(false);
-        isPlayingRef.current = false;
-      });
     }
   }, []);
 
