@@ -92,7 +92,7 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
 
         {/* Menu Bar */}
         <div 
-          className="flex items-center gap-4 px-2 py-1 text-sm"
+          className="flex items-center gap-4 px-2 py-1 text-sm text-black"
           style={{
             backgroundColor: '#C0C0C0',
             borderBottom: '1px solid #808080',
@@ -102,7 +102,7 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
           {['File', 'Edit', 'View', 'Insert', 'Modify', 'Text', 'Window', 'Help'].map((item) => (
             <span 
               key={item} 
-              className="cursor-pointer hover:underline"
+              className="cursor-pointer hover:underline text-black"
               style={{ fontSize: '12px' }}
             >
               {item}
@@ -155,7 +155,7 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
                 {['SITE', 'LIBRARY', 'STYLES', 'BEHAVIOR', 'TIMELINE', 'HTML'].map((tab) => (
                   <div
                     key={tab}
-                    className="px-2 py-1 text-[10px] cursor-pointer"
+                    className="px-2 py-1 text-[10px] cursor-pointer text-black"
                     style={{
                       backgroundColor: '#C0C0C0',
                       borderTop: '2px solid #fff',
@@ -196,7 +196,7 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
             >
               {/* Format dropdown */}
               <div className="flex items-center gap-1">
-                <span className="text-[10px]" style={{ fontFamily: 'var(--font-pixel)' }}>Format</span>
+                <span className="text-[10px] text-black" style={{ fontFamily: 'var(--font-pixel)' }}>Format</span>
                 <select 
                   className="text-[10px] px-1"
                   style={{
@@ -257,7 +257,7 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
 
         {/* Status Bar */}
         <div 
-          className="flex items-center justify-between px-2 py-0.5 text-[10px]"
+          className="flex items-center justify-between px-2 py-0.5 text-[10px] text-black"
           style={{
             backgroundColor: '#C0C0C0',
             borderTop: '1px solid #808080',
