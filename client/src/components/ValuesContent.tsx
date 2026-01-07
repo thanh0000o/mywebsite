@@ -4,11 +4,11 @@ export function ValuesContent() {
   const values = [
     { label: "Curiosity", stars: 3 },
     { label: "Empathy", stars: 3 },
-    { label: "Reliability", stars: 2 },
+    { label: "Reliability", stars: 3 },
     { label: "Creativity", stars: 3 },
-    { label: "Discipline", stars: 2 },
+    { label: "Discipline", stars: 3 },
     { label: "Growth", stars: 3 },
-    { label: "Authenticity", stars: 2 },
+    { label: "Authenticity", stars: 3 },
     { label: "Dedication", stars: 3 },
   ];
 
