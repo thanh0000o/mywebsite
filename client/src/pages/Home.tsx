@@ -38,7 +38,9 @@ export default function Home() {
       return;
     }
 
-    const offset = windows.length * 30;
+    // Random position within visible area
+    const randomX = Math.floor(Math.random() * 300) + 100;
+    const randomY = Math.floor(Math.random() * 200) + 50;
     
     // Set size based on content type
     let width = "400px";
@@ -70,7 +72,7 @@ export default function Home() {
       id: `window-${windowIdCounter++}`,
       type,
       title,
-      position: { x: 150 + offset, y: 50 + offset },
+      position: { x: randomX, y: randomY },
       width,
       height,
       zIndex: topZIndex + 1,
