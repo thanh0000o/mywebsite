@@ -1,5 +1,5 @@
 import { CrtOverlay } from "@/components/CrtOverlay";
-import bgImage from "@assets/thanh1000_layer_data_and_nature_and_invert_it_and_use_vietname_1767797246973.png";
+import bgImage from "@assets/image_1767797601762.png";
 
 export default function Home() {
   return (
@@ -12,18 +12,15 @@ export default function Home() {
         1. Add your image to attached_assets/ folder
         2. Update the import above to point to your new image
         
-        Pixel sharpness is controlled by image-rendering below.
-        - 'pixelated' forces crisp pixel edges (no smoothing)
-        - 'crisp-edges' is the CSS standard fallback
+        Current settings:
+        - Stretched to fill entire viewport (object-cover)
+        - Blur filter applied for soft effect
         =====================================================
       */}
       <img
         src={bgImage}
         alt=""
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{
-          imageRendering: 'pixelated',
-        }}
+        className="absolute inset-0 w-full h-full object-cover blur-sm"
         draggable={false}
       />
 
