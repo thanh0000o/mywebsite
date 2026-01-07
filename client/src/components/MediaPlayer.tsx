@@ -170,7 +170,7 @@ export function MediaPlayer() {
         <div
           className="mx-1 mt-1 p-2"
           style={{
-            backgroundColor: '#000',
+            backgroundColor: '#fff',
             borderTop: '2px solid #808080',
             borderLeft: '2px solid #808080',
             borderBottom: '2px solid #fff',
@@ -181,20 +181,20 @@ export function MediaPlayer() {
           <div className="flex justify-between items-start mb-2">
             <div>
               <div
-                className="text-[10px] text-green-500 tracking-wider"
+                className="text-[10px] text-[#000080] tracking-wider font-bold"
                 style={{ fontFamily: 'var(--font-pixel)' }}
               >
                 {playlist[currentTrack]?.title || "NO TRACK"}
               </div>
               <div
-                className="text-[8px] text-green-600"
+                className="text-[8px] text-black"
                 style={{ fontFamily: 'var(--font-pixel)' }}
               >
                 {playlist[currentTrack]?.artist || ""}
               </div>
             </div>
             <div
-              className="text-[10px] text-green-500"
+              className="text-[10px] text-[#000080] font-bold"
               style={{ fontFamily: 'var(--font-pixel)' }}
             >
               {isPlaying ? "PLAYING" : "STOPPED"}
@@ -213,7 +213,7 @@ export function MediaPlayer() {
                   className="w-[10px] transition-all duration-75"
                   style={{
                     height: `${height}%`,
-                    backgroundColor: height > 70 ? '#ff0000' : height > 40 ? '#ffff00' : '#00ff00',
+                    backgroundColor: height > 70 ? '#1084d0' : '#000080',
                   }}
                 />
               );
@@ -224,12 +224,15 @@ export function MediaPlayer() {
           <div
             className="h-2 relative"
             style={{
-              backgroundColor: '#333',
-              border: '1px solid #000',
+              backgroundColor: '#C0C0C0',
+              borderTop: '1px solid #808080',
+              borderLeft: '1px solid #808080',
+              borderBottom: '1px solid #fff',
+              borderRight: '1px solid #fff',
             }}
           >
             <div
-              className="h-full bg-green-500"
+              className="h-full bg-[#000080]"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -237,13 +240,13 @@ export function MediaPlayer() {
           {/* Time Display */}
           <div className="flex justify-between mt-1">
             <span
-              className="text-[8px] text-green-500"
+              className="text-[8px] text-black"
               style={{ fontFamily: 'var(--font-pixel)' }}
             >
               00:{String(Math.floor(progress * 0.6)).padStart(2, '0')}
             </span>
             <span
-              className="text-[8px] text-green-500"
+              className="text-[8px] text-black"
               style={{ fontFamily: 'var(--font-pixel)' }}
             >
               01:00
