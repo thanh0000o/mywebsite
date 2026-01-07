@@ -187,8 +187,8 @@ export function MediaPlayer() {
                 {playlist[currentTrack]?.title || "NO TRACK"}
               </div>
               <div
-                className="text-[8px] text-black"
-                style={{ fontFamily: 'var(--font-pixel)' }}
+                className="text-[8px]"
+                style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
               >
                 {playlist[currentTrack]?.artist || ""}
               </div>
@@ -240,14 +240,14 @@ export function MediaPlayer() {
           {/* Time Display */}
           <div className="flex justify-between mt-1">
             <span
-              className="text-[8px] text-black"
-              style={{ fontFamily: 'var(--font-pixel)' }}
+              className="text-[8px]"
+              style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
             >
               00:{String(Math.floor(progress * 0.6)).padStart(2, '0')}
             </span>
             <span
-              className="text-[8px] text-black"
-              style={{ fontFamily: 'var(--font-pixel)' }}
+              className="text-[8px]"
+              style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
             >
               01:00
             </span>
@@ -284,8 +284,8 @@ export function MediaPlayer() {
         {/* Volume Slider */}
         <div className="flex items-center gap-2 px-2 pb-1">
           <span
-            className="text-[8px] text-black"
-            style={{ fontFamily: 'var(--font-pixel)' }}
+            className="text-[8px]"
+            style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
           >
             VOL
           </span>
@@ -321,8 +321,8 @@ export function MediaPlayer() {
             />
           </div>
           <span
-            className="text-[8px] text-black w-6 text-right"
-            style={{ fontFamily: 'var(--font-pixel)' }}
+            className="text-[8px] w-6 text-right"
+            style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
           >
             {volume}%
           </span>
@@ -342,8 +342,8 @@ export function MediaPlayer() {
           }}
         >
           <div
-            className="text-[8px] text-black px-1 py-0.5 border-b border-gray-300"
-            style={{ fontFamily: 'var(--font-pixel)' }}
+            className="text-[8px] px-1 py-0.5 border-b border-gray-300"
+            style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
           >
             PLAYLIST [{playlist.length} TRACKS]
           </div>
@@ -360,13 +360,13 @@ export function MediaPlayer() {
             >
               <span
                 className="text-[8px]"
-                style={{ fontFamily: 'var(--font-pixel)' }}
+                style={{ fontFamily: 'var(--font-pixel)', color: 'inherit' }}
               >
                 {String(index + 1).padStart(2, '0')}.
               </span>
               <span
                 className="text-[8px]"
-                style={{ fontFamily: 'var(--font-pixel)' }}
+                style={{ fontFamily: 'var(--font-pixel)', color: 'inherit' }}
               >
                 {track.artist} - {track.title}
               </span>
@@ -383,8 +383,8 @@ export function MediaPlayer() {
           }}
         >
           <span
-            className="text-[8px] text-black"
-            style={{ fontFamily: 'var(--font-pixel)' }}
+            className="text-[8px]"
+            style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
           >
             READY - {playlist.length} files in playlist
           </span>
