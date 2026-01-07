@@ -38,9 +38,9 @@ export default function Home() {
       return;
     }
 
-    // Random position within visible area
-    const randomX = Math.floor(Math.random() * 300) + 100;
-    const randomY = Math.floor(Math.random() * 200) + 50;
+    // Random position within visible area - wider range for more noticeable difference
+    const randomX = Math.floor(Math.random() * 400) + 50;
+    const randomY = Math.floor(Math.random() * 250) + 30;
     
     // Set size based on content type
     let width = "400px";
