@@ -36,7 +36,7 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
       className="fixed inset-0 flex items-center justify-center z-50 p-4"
     >
       <div 
-        className="w-[60vw] h-[60vh] flex flex-col"
+        className="w-[45vw] h-[50vh] min-w-[500px] min-h-[400px] flex flex-col"
         style={{
           backgroundColor: '#C0C0C0',
           boxShadow: '5px 5px 20px rgba(0,0,0,0.5)',
@@ -235,20 +235,20 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
                 <img 
                   src={logoImage}
                   alt="Thành Lambeets"
-                  className="w-72 h-auto object-contain"
+                  className="w-48 h-auto object-contain"
                   style={{ imageRendering: 'pixelated' }}
                   draggable={false}
                 />
                 <div 
-                  className="mt-6 text-center max-w-md"
+                  className="mt-4 text-center max-w-sm"
                   style={{ 
                     fontFamily: 'var(--font-pixel)', 
                     color: '#333',
-                    fontSize: '11px',
-                    lineHeight: '1.6',
+                    fontSize: '10px',
+                    lineHeight: '1.5',
                   }}
                 >
-                  <p className="mb-3" style={{ fontSize: '14px', fontWeight: 'bold' }}>Welcome.</p>
+                  <p className="mb-2" style={{ fontSize: '12px', fontWeight: 'bold' }}>Welcome.</p>
                   <p>
                     This is a place for ideas, tools, and quiet exploration. I'm Gerrit, and I like building things with ideas, pixels, and curiosity where art, technology, and thoughtful experimentation come together. Scroll gently.
                   </p>
