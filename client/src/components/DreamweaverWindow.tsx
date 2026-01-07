@@ -14,7 +14,7 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
       className="fixed inset-0 flex items-center justify-center z-50 p-4"
     >
       <div 
-        className="w-[90vw] h-[90vh] flex flex-col"
+        className="w-[75vw] h-[75vh] flex flex-col"
         style={{
           backgroundColor: '#C0C0C0',
           boxShadow: '5px 5px 20px rgba(0,0,0,0.5)',
