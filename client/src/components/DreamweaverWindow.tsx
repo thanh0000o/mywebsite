@@ -235,7 +235,7 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
                 <img 
                   src={logoImage}
                   alt="Thành Lambeets"
-                  className="w-48 h-auto object-contain"
+                  className="w-64 h-auto object-contain"
                   style={{ imageRendering: 'pixelated' }}
                   draggable={false}
                 />
