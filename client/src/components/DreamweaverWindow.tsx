@@ -204,17 +204,19 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
               }}
             >
               {/* Logo Image */}
-              <img 
-                src={logoImage}
-                alt="Thành Lambeets"
-                className="max-w-full max-h-[60%] object-contain"
-                style={{ imageRendering: 'pixelated' }}
-                draggable={false}
-              />
+              <div className="flex-1 flex items-center justify-center">
+                <img 
+                  src={logoImage}
+                  alt="Thành Lambeets"
+                  className="max-w-[80%] max-h-[70%] object-contain"
+                  style={{ imageRendering: 'pixelated' }}
+                  draggable={false}
+                />
+              </div>
               
               {/* Scroll Here text */}
               <p 
-                className="text-xs text-black mt-4"
+                className="text-sm text-black mb-8 font-bold"
                 style={{ fontFamily: 'var(--font-pixel)' }}
               >
                 [SCROLL HERE]
