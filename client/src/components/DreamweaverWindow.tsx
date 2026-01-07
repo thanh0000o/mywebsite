@@ -385,47 +385,11 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
                 borderRight: '2px solid #fff',
               }}
             >
-              {/* Inner scroll container */}
+              {/* FIXED CENTERED FLOWER OVERLAY - doesn't scroll */}
               <div 
-                ref={scrollContainerRef}
-                className="absolute inset-0 overflow-y-auto overflow-x-hidden"
-                style={{ padding: '10px' }}
+                className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                style={{ zIndex: 1 }}
               >
-                {/* Scrollable content container */}
-                <div className="relative" style={{ minHeight: '1500px' }}>
-                  {/* Logo Image - Positioned absolutely for animation */}
-                  <img 
-                    ref={logoRef}
-                    src={logoImage}
-                    alt="Thành Lambeets"
-                    className="absolute w-40 h-auto object-contain"
-                    style={{ 
-                      imageRendering: 'pixelated',
-                      top: '80px',
-                    }}
-                    draggable={false}
-                  />
-                  
-                  {/* Scroll Here text */}
-                  <p 
-                    ref={scrollIndicatorRef}
-                    className="absolute text-sm text-black font-bold"
-                    style={{ 
-                      fontFamily: 'var(--font-pixel)',
-                      left: '50%',
-                      top: '200px',
-                      transform: 'translateX(-50%)',
-                      transition: 'opacity 0.1s steps(5)',
-                    }}
-                  >
-                    [SCROLL HERE]
-                  </p>
-
-                  {/* Flower SVG - centered with 20 curved branches */}
-                  <div 
-                    className="flex justify-center w-full"
-                    style={{ marginTop: '200px' }}
-                  >
                     <svg 
                       id="flower" 
                       width="600"
@@ -510,7 +474,43 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
                         SELECT A NODE TO VIEW DETAILS
                       </text>
                     </svg>
-                  </div>
+              </div>
+              
+              {/* Scrollable content layer - for scroll interaction and logo */}
+              <div 
+                ref={scrollContainerRef}
+                className="absolute inset-0 overflow-y-auto overflow-x-hidden"
+                style={{ padding: '10px', zIndex: 2 }}
+              >
+                {/* Scrollable content - creates scroll height */}
+                <div className="relative" style={{ minHeight: '1500px' }}>
+                  {/* Logo Image - Positioned absolutely for animation */}
+                  <img 
+                    ref={logoRef}
+                    src={logoImage}
+                    alt="Thành Lambeets"
+                    className="absolute w-40 h-auto object-contain"
+                    style={{ 
+                      imageRendering: 'pixelated',
+                      top: '80px',
+                    }}
+                    draggable={false}
+                  />
+                  
+                  {/* Scroll Here text */}
+                  <p 
+                    ref={scrollIndicatorRef}
+                    className="absolute text-sm text-black font-bold"
+                    style={{ 
+                      fontFamily: 'var(--font-pixel)',
+                      left: '50%',
+                      top: '200px',
+                      transform: 'translateX(-50%)',
+                      transition: 'opacity 0.1s steps(5)',
+                    }}
+                  >
+                    [SCROLL HERE]
+                  </p>
                 </div>
               </div>
             </div>
