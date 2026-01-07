@@ -39,37 +39,43 @@ export default function Home() {
       return;
     }
 
-    // Random position within visible area - wider range for more noticeable difference
-    const randomX = Math.floor(Math.random() * 400) + 50;
-    const randomY = Math.floor(Math.random() * 250) + 30;
+    // Get viewport dimensions for responsive positioning
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
     
-    // Set size based on content type
-    let width = "400px";
-    let height = "300px";
+    // Random position within visible area - constrained to viewport
+    const maxX = Math.max(50, vw - 450);
+    const maxY = Math.max(30, vh - 400);
+    const randomX = Math.floor(Math.random() * Math.min(maxX, 400)) + 20;
+    const randomY = Math.floor(Math.random() * Math.min(maxY, 250)) + 20;
+    
+    // Set size based on content type - use responsive values
+    let width = "min(400px, 90vw)";
+    let height = "min(300px, 70vh)";
     if (type === "aboutme") {
-      width = "650px";
-      height = "520px";
+      width = "min(650px, 90vw)";
+      height = "min(520px, 80vh)";
     } else if (type === "education") {
-      width = "420px";
-      height = "280px";
+      width = "min(420px, 90vw)";
+      height = "min(280px, 70vh)";
     } else if (type === "experience") {
-      width = "480px";
-      height = "420px";
+      width = "min(480px, 90vw)";
+      height = "min(420px, 75vh)";
     } else if (type === "values") {
-      width = "380px";
-      height = "220px";
+      width = "min(380px, 90vw)";
+      height = "min(220px, 60vh)";
     } else if (type === "skills") {
-      width = "380px";
-      height = "300px";
+      width = "min(380px, 90vw)";
+      height = "min(300px, 70vh)";
     } else if (type === "languages") {
-      width = "360px";
-      height = "260px";
+      width = "min(360px, 90vw)";
+      height = "min(260px, 65vh)";
     } else if (type === "software") {
-      width = "420px";
-      height = "320px";
+      width = "min(420px, 90vw)";
+      height = "min(320px, 70vh)";
     } else if (type === "art") {
-      width = "620px";
-      height = "500px";
+      width = "min(620px, 90vw)";
+      height = "min(500px, 80vh)";
     }
     
     const newWindow: WindowState = {

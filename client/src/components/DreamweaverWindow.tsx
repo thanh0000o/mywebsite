@@ -38,7 +38,7 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
       className="fixed inset-0 flex items-center justify-center z-50 p-4"
     >
       <div 
-        className="w-[45vw] h-[50vh] min-w-[500px] min-h-[400px] flex flex-col relative"
+        className="w-[95vw] sm:w-[85vw] md:w-[75vw] lg:w-[60vw] xl:w-[45vw] h-[70vh] sm:h-[60vh] md:h-[50vh] max-w-[900px] flex flex-col relative"
         style={{
           backgroundColor: '#C0C0C0',
           boxShadow: '5px 5px 20px rgba(0,0,0,0.5)',
@@ -193,9 +193,9 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
           <div className="flex-1 flex flex-col">
             {/* Top Toolbar */}
             <div 
-              className="flex items-center justify-between px-2 gap-2"
+              className="flex items-center justify-between px-1 sm:px-2 gap-1 sm:gap-2 py-1"
               style={{
-                height: '40px',
+                minHeight: '40px',
                 backgroundColor: '#C0C0C0',
                 borderBottom: '1px solid #808080',
               }}
@@ -210,12 +210,12 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
                   borderRight: '1px solid #808080',
                 }}
               />
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1 flex-wrap overflow-x-auto">
                 {tabs.map((tab) => (
                   <div
                     key={tab}
                     onClick={() => handleTabClick(tab)}
-                    className="px-2 py-1 text-[10px] cursor-pointer font-bold"
+                    className="px-1 sm:px-2 py-1 text-[8px] sm:text-[10px] cursor-pointer font-bold whitespace-nowrap"
                     style={{
                       backgroundColor: '#C0C0C0',
                       borderTop: '2px solid #fff',
@@ -250,7 +250,7 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
                 <img 
                   src={logoImage}
                   alt="Thành Lambeets"
-                  className="w-64 h-auto object-contain"
+                  className="w-32 sm:w-48 md:w-64 h-auto object-contain"
                   style={{ imageRendering: 'pixelated' }}
                   draggable={false}
                 />

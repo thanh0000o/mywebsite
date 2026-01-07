@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 
 interface DesktopWindowProps {
@@ -24,7 +24,26 @@ export function DesktopWindow({
   onFocus,
   onClose,
 }: DesktopWindowProps) {
-  const [position, setPosition] = useState(initialPosition);
+  // Constrain initial position to viewport
+  const constrainToViewport = (pos: { x: number; y: number }) => {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    return {
+      x: Math.min(Math.max(10, pos.x), Math.max(10, vw - 100)),
+      y: Math.min(Math.max(10, pos.y), Math.max(10, vh - 100)),
+    };
+  };
+  
+  const [position, setPosition] = useState(() => constrainToViewport(initialPosition));
+  
+  // Constrain position on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setPosition(prev => constrainToViewport(prev));
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   const [isDragging, setIsDragging] = useState(false);
   const dragRef = useRef<{ startX: number; startY: number; startPosX: number; startPosY: number } | null>(null);
 
