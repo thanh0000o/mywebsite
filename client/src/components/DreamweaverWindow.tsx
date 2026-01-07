@@ -392,67 +392,79 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
               >
                 <svg 
                   id="flower" 
-                  width="500"
-                  height="400"
-                  viewBox="0 0 500 400"
+                  width="450"
+                  height="380"
+                  viewBox="0 0 450 380"
                   preserveAspectRatio="xMidYMid meet"
                 >
-                  {/* Organic curved branches - matching reference with loops and curves */}
-                  {/* All branches emanate from center point (250, 320) */}
+                  {/* Organic curved branches matching reference - cubic bezier for smooth loops */}
+                  {/* Center point at (225, 300) */}
                   
-                  {/* Far left drooping branch */}
-                  <path ref={(el) => addStemRef(el, 0)} d="M 250,320 Q 150,350 80,280 Q 30,220 50,180" 
+                  {/* Branch 1: Far left, curves down then up-left */}
+                  <path ref={(el) => addStemRef(el, 0)} 
+                        d="M 225,300 C 180,320 100,340 50,280 C 20,240 30,200 45,160" 
                         stroke="#00AA00" strokeWidth="1.5" fill="none"/>
-                  {/* Left low branch */}
-                  <path ref={(el) => addStemRef(el, 1)} d="M 250,320 Q 180,340 120,290 Q 70,240 90,190" 
+                  {/* Branch 2: Left low, loops down and curves to left */}
+                  <path ref={(el) => addStemRef(el, 1)} 
+                        d="M 225,300 C 190,330 120,340 70,290 C 40,255 55,210 75,175" 
                         stroke="#00AA00" strokeWidth="1.5" fill="none"/>
-                  {/* Left mid-low branch with loop */}
-                  <path ref={(el) => addStemRef(el, 2)} d="M 250,320 Q 200,300 150,240 Q 100,180 120,120" 
+                  {/* Branch 3: Left mid, S-curve going up-left */}
+                  <path ref={(el) => addStemRef(el, 2)} 
+                        d="M 225,300 C 200,280 140,280 100,220 C 70,170 80,120 100,80" 
                         stroke="#00AA00" strokeWidth="1.5" fill="none"/>
-                  {/* Left rising branch */}
-                  <path ref={(el) => addStemRef(el, 3)} d="M 250,320 Q 210,280 170,200 Q 130,120 160,60" 
+                  {/* Branch 4: Left upper, graceful arc */}
+                  <path ref={(el) => addStemRef(el, 3)} 
+                        d="M 225,300 C 210,260 170,200 145,140 C 125,90 130,50 145,25" 
                         stroke="#00AA00" strokeWidth="1.5" fill="none"/>
-                  {/* Left upper branch */}
-                  <path ref={(el) => addStemRef(el, 4)} d="M 250,320 Q 230,260 200,160 Q 180,80 200,30" 
+                  {/* Branch 5: Center-left top */}
+                  <path ref={(el) => addStemRef(el, 4)} 
+                        d="M 225,300 C 220,250 200,160 185,100 C 175,55 180,25 190,10" 
                         stroke="#00AA00" strokeWidth="1.5" fill="none"/>
-                  {/* Center-left branch */}
-                  <path ref={(el) => addStemRef(el, 5)} d="M 250,320 Q 245,240 230,140 Q 220,60 235,20" 
+                  {/* Branch 6: Center top left */}
+                  <path ref={(el) => addStemRef(el, 5)} 
+                        d="M 225,300 C 225,240 215,140 210,80 C 208,40 215,15 225,5" 
                         stroke="#00AA00" strokeWidth="1.5" fill="none"/>
-                  {/* Center-right branch */}
-                  <path ref={(el) => addStemRef(el, 6)} d="M 250,320 Q 255,240 270,140 Q 280,60 265,20" 
+                  {/* Branch 7: Center top right */}
+                  <path ref={(el) => addStemRef(el, 6)} 
+                        d="M 225,300 C 225,240 235,140 240,80 C 242,40 235,15 225,5" 
                         stroke="#00AA00" strokeWidth="1.5" fill="none"/>
-                  {/* Right upper branch */}
-                  <path ref={(el) => addStemRef(el, 7)} d="M 250,320 Q 270,260 300,160 Q 320,80 300,30" 
+                  {/* Branch 8: Center-right top */}
+                  <path ref={(el) => addStemRef(el, 7)} 
+                        d="M 225,300 C 230,250 250,160 265,100 C 275,55 270,25 260,10" 
                         stroke="#00AA00" strokeWidth="1.5" fill="none"/>
-                  {/* Right rising branch */}
-                  <path ref={(el) => addStemRef(el, 8)} d="M 250,320 Q 290,280 330,200 Q 370,120 340,60" 
+                  {/* Branch 9: Right upper, graceful arc */}
+                  <path ref={(el) => addStemRef(el, 8)} 
+                        d="M 225,300 C 240,260 280,200 305,140 C 325,90 320,50 305,25" 
                         stroke="#00AA00" strokeWidth="1.5" fill="none"/>
-                  {/* Right mid-low branch with loop */}
-                  <path ref={(el) => addStemRef(el, 9)} d="M 250,320 Q 300,300 350,240 Q 400,180 380,120" 
+                  {/* Branch 10: Right mid, S-curve going up-right */}
+                  <path ref={(el) => addStemRef(el, 9)} 
+                        d="M 225,300 C 250,280 310,280 350,220 C 380,170 370,120 350,80" 
                         stroke="#00AA00" strokeWidth="1.5" fill="none"/>
-                  {/* Right low branch */}
-                  <path ref={(el) => addStemRef(el, 10)} d="M 250,320 Q 320,340 380,290 Q 430,240 410,190" 
+                  {/* Branch 11: Right low, loops down and curves to right */}
+                  <path ref={(el) => addStemRef(el, 10)} 
+                        d="M 225,300 C 260,330 330,340 380,290 C 410,255 395,210 375,175" 
                         stroke="#00AA00" strokeWidth="1.5" fill="none"/>
-                  {/* Far right drooping branch */}
-                  <path ref={(el) => addStemRef(el, 11)} d="M 250,320 Q 350,350 420,280 Q 470,220 450,180" 
+                  {/* Branch 12: Far right, curves down then up-right */}
+                  <path ref={(el) => addStemRef(el, 11)} 
+                        d="M 225,300 C 270,320 350,340 400,280 C 430,240 420,200 405,160" 
                         stroke="#00AA00" strokeWidth="1.5" fill="none"/>
                   
-                  {/* Square nodes at branch endpoints - matching green color */}
-                  <rect ref={(el) => addSquareRef(el, 0)} x="43" y="173" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 1)} x="83" y="183" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 2)} x="113" y="113" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 3)} x="153" y="53" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 4)} x="193" y="23" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 5)} x="228" y="13" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 6)} x="258" y="13" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 7)} x="293" y="23" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 8)} x="333" y="53" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 9)} x="373" y="113" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 10)} x="403" y="183" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 11)} x="443" y="173" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                  {/* Square nodes at exact branch endpoints */}
+                  <rect ref={(el) => addSquareRef(el, 0)} x="39" y="154" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                  <rect ref={(el) => addSquareRef(el, 1)} x="69" y="169" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                  <rect ref={(el) => addSquareRef(el, 2)} x="94" y="74" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                  <rect ref={(el) => addSquareRef(el, 3)} x="139" y="19" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                  <rect ref={(el) => addSquareRef(el, 4)} x="184" y="4" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                  <rect ref={(el) => addSquareRef(el, 5)} x="219" y="-1" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                  <rect ref={(el) => addSquareRef(el, 6)} x="219" y="-1" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                  <rect ref={(el) => addSquareRef(el, 7)} x="254" y="4" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                  <rect ref={(el) => addSquareRef(el, 8)} x="299" y="19" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                  <rect ref={(el) => addSquareRef(el, 9)} x="344" y="74" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                  <rect ref={(el) => addSquareRef(el, 10)} x="369" y="169" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                  <rect ref={(el) => addSquareRef(el, 11)} x="399" y="154" width="12" height="12" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
                   
                   {/* Select text */}
-                  <text x="250" y="370" textAnchor="middle" fill="#999" fontSize="10" fontFamily="var(--font-pixel)">
+                  <text x="225" y="340" textAnchor="middle" fill="#999" fontSize="10" fontFamily="var(--font-pixel)">
                     SELECT A NODE TO VIEW DETAILS
                   </text>
                 </svg>
