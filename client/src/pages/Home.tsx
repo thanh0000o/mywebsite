@@ -46,7 +46,7 @@ export default function Home() {
             />
           </a>
           <div className="mt-3 text-center" style={{ fontFamily: 'var(--font-pixel)' }}>
-            <p className="text-sm text-white drop-shadow-md tracking-wide">portfolio_gen+tthanhlambeets</p>
+            <p className="text-sm text-white drop-shadow-md tracking-wide">portfolio_gerritthanhlàmbeets</p>
           </div>
         </div>
       </div>
