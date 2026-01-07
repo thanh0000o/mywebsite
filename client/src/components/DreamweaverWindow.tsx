@@ -24,6 +24,8 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
       onOpenWindow('languages', 'LANGUAGES.cfg');
     } else if (tab === 'SOFTWARE') {
       onOpenWindow('software', 'SOFTWARE.sys');
+    } else if (tab === 'ART') {
+      onOpenWindow('art', 'ART_GALLERY.exe');
     }
   };
 

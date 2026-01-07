@@ -11,6 +11,7 @@ import { ValuesContent } from "@/components/ValuesContent";
 import { SkillsContent } from "@/components/SkillsContent";
 import { LanguagesContent } from "@/components/LanguagesContent";
 import { SoftwareContent } from "@/components/SoftwareContent";
+import { ArtContent } from "@/components/ArtContent";
 import { MediaPlayer } from "@/components/MediaPlayer";
 import logoImage from "@assets/image_1767797842217.png";
 
@@ -66,6 +67,9 @@ export default function Home() {
     } else if (type === "software") {
       width = "420px";
       height = "320px";
+    } else if (type === "art") {
+      width = "620px";
+      height = "500px";
     }
     
     const newWindow: WindowState = {
@@ -110,6 +114,8 @@ export default function Home() {
         return <LanguagesContent />;
       case "software":
         return <SoftwareContent />;
+      case "art":
+        return <ArtContent />;
       default:
         return <div className="p-4">Content coming soon...</div>;
     }
