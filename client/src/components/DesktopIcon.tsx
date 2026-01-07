@@ -12,7 +12,7 @@ export function DesktopIcon({ imageSrc, label, href, onClick }: DesktopIconProps
     <motion.div
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      className="cursor-pointer group flex flex-col items-center gap-2"
+      className="cursor-pointer group flex flex-col items-center justify-center gap-1"
       onClick={onClick}
     >
       <div className="relative">
@@ -26,7 +26,7 @@ export function DesktopIcon({ imageSrc, label, href, onClick }: DesktopIconProps
         />
       </div>
       <p 
-        className="text-[10px] text-white drop-shadow-md tracking-wide text-center transition-transform duration-300 group-hover:scale-105 max-w-[80px]"
+        className="text-[10px] text-white drop-shadow-md tracking-wide text-center transition-transform duration-300 group-hover:scale-105"
         style={{ fontFamily: 'var(--font-pixel)' }}
       >
         {label}
