@@ -13,6 +13,7 @@ function pixelate(value: number, step: number = 4): number {
 
 export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
   const canvasRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLImageElement>(null);
   const scrollIndicatorRef = useRef<HTMLParagraphElement>(null);
   const stemsRef = useRef<SVGPathElement[]>([]);
@@ -33,24 +34,27 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
     });
     setStemLengths(lengths);
     
-    // Center logo initially
-    const canvas = canvasRef.current;
-    const logo = logoRef.current;
-    if (canvas && logo) {
-      const canvasWidth = canvas.offsetWidth;
-      const logoWidth = logo.offsetWidth;
-      const startX = (canvasWidth - logoWidth) / 2;
-      logo.style.left = `${startX}px`;
-    }
+    // Center logo initially (with a small delay to ensure dimensions are computed)
+    setTimeout(() => {
+      const scrollContainer = scrollContainerRef.current;
+      const logo = logoRef.current;
+      if (scrollContainer && logo) {
+        const canvasWidth = scrollContainer.offsetWidth - 20;
+        const logoWidth = logo.offsetWidth;
+        const startX = (canvasWidth - logoWidth) / 2;
+        logo.style.left = `${startX}px`;
+      }
+    }, 50);
   }, []);
 
   // Scroll animation handler
   useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!scrollContainer || !canvas) return;
 
     const handleScroll = () => {
-      const scrollY = canvas.scrollTop;
+      const scrollY = scrollContainer.scrollTop;
       const logo = logoRef.current;
       const scrollIndicator = scrollIndicatorRef.current;
 
@@ -61,12 +65,12 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
 
       // LOGO ANIMATION (0-300px scroll)
       if (logo) {
-        const canvasWidth = canvas.offsetWidth;
+        const canvasWidth = scrollContainer.offsetWidth - 20; // Account for padding
         const logoWidth = logo.offsetWidth;
         
         // Start position (centered - accounting for logo width)
         const startX = (canvasWidth - logoWidth) / 2;
-        const startY = 150;
+        const startY = 80;
         
         // End position (top-left with padding)
         const endX = 20;
@@ -168,8 +172,8 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
       }
     };
 
-    canvas.addEventListener('scroll', handleScroll);
-    return () => canvas.removeEventListener('scroll', handleScroll);
+    scrollContainer.addEventListener('scroll', handleScroll);
+    return () => scrollContainer.removeEventListener('scroll', handleScroll);
   }, [stemLengths]);
 
   // Store ref for stems
@@ -365,10 +369,10 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
               </div>
             </div>
 
-            {/* Center Canvas - Scrollable */}
+            {/* Center Canvas - Scrollable with clip */}
             <div 
               ref={canvasRef}
-              className="flex-1 m-1 relative overflow-y-auto overflow-x-hidden"
+              className="flex-1 m-1 relative overflow-hidden"
               style={{
                 backgroundColor: '#fff',
                 borderTop: '2px solid #808080',
@@ -377,112 +381,109 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
                 borderRight: '2px solid #fff',
               }}
             >
-              {/* Scrollable content container */}
-              <div className="relative" style={{ minHeight: '1500px' }}>
-                {/* Logo Image - Positioned absolutely for animation */}
-                <img 
-                  ref={logoRef}
-                  src={logoImage}
-                  alt="Thành Lambeets"
-                  className="absolute w-48 h-auto object-contain"
-                  style={{ 
-                    imageRendering: 'pixelated',
-                    top: '150px',
-                  }}
-                  draggable={false}
-                />
-                
-                {/* Scroll Here text */}
-                <p 
-                  ref={scrollIndicatorRef}
-                  className="absolute text-sm text-black font-bold"
-                  style={{ 
-                    fontFamily: 'var(--font-pixel)',
-                    left: '50%',
-                    top: '280px',
-                    transform: 'translateX(-50%)',
-                    transition: 'opacity 0.1s steps(5)',
-                  }}
-                >
-                  [SCROLL HERE]
-                </p>
+              {/* Inner scroll container */}
+              <div 
+                ref={scrollContainerRef}
+                className="absolute inset-0 overflow-y-auto overflow-x-hidden"
+                style={{ padding: '10px' }}
+              >
+                {/* Scrollable content container */}
+                <div className="relative" style={{ minHeight: '1500px' }}>
+                  {/* Logo Image - Positioned absolutely for animation */}
+                  <img 
+                    ref={logoRef}
+                    src={logoImage}
+                    alt="Thành Lambeets"
+                    className="absolute w-40 h-auto object-contain"
+                    style={{ 
+                      imageRendering: 'pixelated',
+                      top: '80px',
+                    }}
+                    draggable={false}
+                  />
+                  
+                  {/* Scroll Here text */}
+                  <p 
+                    ref={scrollIndicatorRef}
+                    className="absolute text-sm text-black font-bold"
+                    style={{ 
+                      fontFamily: 'var(--font-pixel)',
+                      left: '50%',
+                      top: '200px',
+                      transform: 'translateX(-50%)',
+                      transition: 'opacity 0.1s steps(5)',
+                    }}
+                  >
+                    [SCROLL HERE]
+                  </p>
 
-                {/* Flower SVG */}
-                <svg 
-                  id="flower" 
-                  width="400" 
-                  height="400" 
-                  viewBox="0 0 600 600"
-                  className="absolute"
-                  style={{
-                    left: '50%',
-                    top: '350px',
-                    transform: 'translateX(-50%)',
-                    overflow: 'visible',
-                  }}
-                >
-                  {/* Stem 1: Upper left */}
-                  <path ref={(el) => addStemRef(el, 0)} className="stem" d="M 300,300 Q 250,200 200,150" 
-                        stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="round"/>
-                  
-                  {/* Stem 2: Upper center-left */}
-                  <path ref={(el) => addStemRef(el, 1)} className="stem" d="M 300,300 Q 280,220 270,140" 
-                        stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="round"/>
-                  
-                  {/* Stem 3: Upper right */}
-                  <path ref={(el) => addStemRef(el, 2)} className="stem" d="M 300,300 Q 360,240 420,200" 
-                        stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="round"/>
-                  
-                  {/* Stem 4: Right */}
-                  <path ref={(el) => addStemRef(el, 3)} className="stem" d="M 300,300 Q 380,310 460,320" 
-                        stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="round"/>
-                  
-                  {/* Stem 5: Lower right */}
-                  <path ref={(el) => addStemRef(el, 4)} className="stem" d="M 300,300 Q 360,370 410,440" 
-                        stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="round"/>
-                  
-                  {/* Stem 6: Lower center */}
-                  <path ref={(el) => addStemRef(el, 5)} className="stem" d="M 300,300 Q 310,380 315,460" 
-                        stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="round"/>
-                  
-                  {/* Stem 7: Lower left */}
-                  <path ref={(el) => addStemRef(el, 6)} className="stem" d="M 300,300 Q 240,380 190,450" 
-                        stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="round"/>
-                  
-                  {/* Stem 8: Left */}
-                  <path ref={(el) => addStemRef(el, 7)} className="stem" d="M 300,300 Q 220,310 140,320" 
-                        stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="round"/>
-                  
-                  {/* Stem 9 */}
-                  <path ref={(el) => addStemRef(el, 8)} className="stem" d="M 300,300 Q 260,180 230,100" 
-                        stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="round"/>
-                  
-                  {/* Stem 10 */}
-                  <path ref={(el) => addStemRef(el, 9)} className="stem" d="M 300,300 Q 340,200 380,140" 
-                        stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="round"/>
-                  
-                  {/* Stem 11 */}
-                  <path ref={(el) => addStemRef(el, 10)} className="stem" d="M 300,300 Q 420,330 500,360" 
-                        stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="round"/>
-                  
-                  {/* Stem 12 */}
-                  <path ref={(el) => addStemRef(el, 11)} className="stem" d="M 300,300 Q 180,330 100,360" 
-                        stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="round"/>
-                  
-                  {/* Portfolio squares at stem endpoints */}
-                  <rect ref={(el) => addSquareRef(el, 0)} className="portfolio-square" data-project="1" x="193" y="143" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 1)} className="portfolio-square" data-project="2" x="263" y="133" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 2)} className="portfolio-square" data-project="3" x="413" y="193" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 3)} className="portfolio-square" data-project="4" x="453" y="313" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 4)} className="portfolio-square" data-project="5" x="403" y="433" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 5)} className="portfolio-square" data-project="6" x="308" y="453" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 6)} className="portfolio-square" data-project="7" x="183" y="443" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 7)} className="portfolio-square" data-project="8" x="133" y="313" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 8)} className="portfolio-square" data-project="9" x="223" y="93" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 9)} className="portfolio-square" data-project="10" x="373" y="133" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 10)} className="portfolio-square" data-project="11" x="493" y="353" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                  <rect ref={(el) => addSquareRef(el, 11)} className="portfolio-square" data-project="12" x="93" y="353" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
-                </svg>
+                  {/* Flower SVG - 12 stems matching reference style */}
+                  <svg 
+                    id="flower" 
+                    width="100%" 
+                    height="350"
+                    viewBox="0 0 400 350"
+                    preserveAspectRatio="xMidYMid meet"
+                    className="absolute"
+                    style={{
+                      left: '0',
+                      top: '280px',
+                      shapeRendering: 'crispEdges',
+                    }}
+                  >
+                    {/* Center point at (200, 300) - bottom center */}
+                    {/* Stem 1: Far left */}
+                    <path ref={(el) => addStemRef(el, 0)} d="M 200,300 Q 120,250 60,120" 
+                          stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="square"/>
+                    {/* Stem 2: Left */}
+                    <path ref={(el) => addStemRef(el, 1)} d="M 200,300 Q 140,220 100,80" 
+                          stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="square"/>
+                    {/* Stem 3: Center-left up */}
+                    <path ref={(el) => addStemRef(el, 2)} d="M 200,300 Q 170,200 150,50" 
+                          stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="square"/>
+                    {/* Stem 4: Center-left */}
+                    <path ref={(el) => addStemRef(el, 3)} d="M 200,300 Q 190,180 180,30" 
+                          stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="square"/>
+                    {/* Stem 5: Center */}
+                    <path ref={(el) => addStemRef(el, 4)} d="M 200,300 Q 200,200 200,40" 
+                          stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="square"/>
+                    {/* Stem 6: Center-right */}
+                    <path ref={(el) => addStemRef(el, 5)} d="M 200,300 Q 210,180 220,30" 
+                          stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="square"/>
+                    {/* Stem 7: Center-right up */}
+                    <path ref={(el) => addStemRef(el, 6)} d="M 200,300 Q 230,200 250,50" 
+                          stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="square"/>
+                    {/* Stem 8: Right */}
+                    <path ref={(el) => addStemRef(el, 7)} d="M 200,300 Q 260,220 300,80" 
+                          stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="square"/>
+                    {/* Stem 9: Far right */}
+                    <path ref={(el) => addStemRef(el, 8)} d="M 200,300 Q 280,250 340,120" 
+                          stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="square"/>
+                    {/* Stem 10: Lower left curve */}
+                    <path ref={(el) => addStemRef(el, 9)} d="M 200,300 Q 100,320 40,260" 
+                          stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="square"/>
+                    {/* Stem 11: Lower right curve */}
+                    <path ref={(el) => addStemRef(el, 10)} d="M 200,300 Q 300,320 360,260" 
+                          stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="square"/>
+                    {/* Stem 12: Straight down */}
+                    <path ref={(el) => addStemRef(el, 11)} d="M 200,300 L 200,340" 
+                          stroke="#00AA00" strokeWidth="2" fill="none" strokeLinecap="square"/>
+                    
+                    {/* Portfolio squares at stem endpoints */}
+                    <rect ref={(el) => addSquareRef(el, 0)} data-project="1" x="53" y="113" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                    <rect ref={(el) => addSquareRef(el, 1)} data-project="2" x="93" y="73" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                    <rect ref={(el) => addSquareRef(el, 2)} data-project="3" x="143" y="43" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                    <rect ref={(el) => addSquareRef(el, 3)} data-project="4" x="173" y="23" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                    <rect ref={(el) => addSquareRef(el, 4)} data-project="5" x="193" y="33" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                    <rect ref={(el) => addSquareRef(el, 5)} data-project="6" x="213" y="23" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                    <rect ref={(el) => addSquareRef(el, 6)} data-project="7" x="243" y="43" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                    <rect ref={(el) => addSquareRef(el, 7)} data-project="8" x="293" y="73" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                    <rect ref={(el) => addSquareRef(el, 8)} data-project="9" x="333" y="113" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                    <rect ref={(el) => addSquareRef(el, 9)} data-project="10" x="33" y="253" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                    <rect ref={(el) => addSquareRef(el, 10)} data-project="11" x="353" y="253" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                    <rect ref={(el) => addSquareRef(el, 11)} data-project="12" x="193" y="333" width="14" height="14" fill="#00AA00" style={{ opacity: 0, cursor: 'pointer' }}/>
+                  </svg>
+                </div>
               </div>
             </div>
 
