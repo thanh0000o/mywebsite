@@ -1,0 +1,91 @@
+Create an animated flower that grows as you scroll, with clickable portfolio pieces:
+Flower Design:
+
+Flower grows from center of canvas (where logo was initially)
+12-15 curved stems radiating outward organically
+Each stem has a small square (14x14px) at the endpoint
+Green color: #00AA00 or #00FF00
+Match the organic, flowing design from the reference image
+
+Growth Animation:
+
+Flower starts growing after logo reaches top-left (~300px scroll)
+Stems grow progressively from center outward
+Growth is pixelated/stepped (update every 4-8px)
+Each stem grows at slightly different speeds for organic feel
+Squares appear when stem is 100% grown
+Full flower visible by 1000-1200px of scrolling
+
+SVG Implementation Structure:
+html<svg id="flower" width="800" height="800" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+  <!-- Stems as paths -->
+  <path class="stem" d="M 0,0 Q 50,50 100,80" stroke="#00AA00" fill="none" stroke-width="2"/>
+  
+  <!-- Portfolio squares at endpoints -->
+  <rect class="portfolio-square" data-project="1" x="95" y="75" width="14" height="14" fill="#00AA00"/>
+</svg>
+Scroll-Based Growth:
+javascriptcanvas.addEventListener('scroll', function() {
+  const scrollY = canvas.scrollTop;
+  
+  // Start flower growth after logo animation (300px)
+  if (scrollY > 300) {
+    const flowerProgress = Math.min((scrollY - 300) / 900, 1); // 300-1200px range
+    
+    // Pixelate progress (update every 2% for stepped effect)
+    const pixelatedProgress = Math.floor(flowerProgress * 50) / 50;
+    
+    // Animate each stem using stroke-dasharray/stroke-dashoffset
+    stems.forEach((stem, index) => {
+      const length = stem.getTotalLength();
+      const delay = index * 0.05; // stagger each stem
+      const stemProgress = Math.max(0, Math.min(1, (pixelatedProgress - delay) / 0.8));
+      
+      stem.style.strokeDasharray = length;
+      stem.style.strokeDashoffset = length * (1 - stemProgress);
+    });
+    
+    // Show squares when stems are grown
+    squares.forEach((square, index) => {
+      if (pixelatedProgress > 0.7 + (index * 0.02)) {
+        square.style.opacity = 1;
+      }
+    });
+  }
+});
+Interactivity:
+
+Each square is clickable
+Hover effect: scale to 1.3x with transform: scale(1.3)
+Cursor changes to pointer
+On click: alert('Portfolio piece ' + projectNumber + ' clicked') (placeholder)
+Optional: Show tooltip on hover with project name
+
+Flower Path Coordinates (example for organic curves):
+javascript// Define 12 stems with bezier curves radiating from center (0,0)
+const stemPaths = [
+  "M 0,0 Q -30,-50 -50,-100",   // stem 1: upper left
+  "M 0,0 Q 20,-60 30,-120",      // stem 2: upper center-left
+  "M 0,0 Q 60,-40 100,-60",      // stem 3: upper right
+  "M 0,0 Q 80,10 140,15",        // stem 4: right
+  "M 0,0 Q 70,50 110,100",       // stem 5: lower right
+  "M 0,0 Q 20,70 25,130",        // stem 6: lower center
+  "M 0,0 Q -40,80 -60,140",      // stem 7: lower left
+  "M 0,0 Q -80,30 -130,40",      // stem 8: left
+  // Add 4-7 more stems for full flower
+];
+Styling:
+
+Stems: 2px stroke width, no fill
+Squares: 14x14px, filled, green
+Hover: cursor: pointer; transform: scale(1.3); transition: transform 0.1s steps(3);
+Use stroke-linecap: round for stem ends
+
+🔹 REQUIREMENTS:
+
+Add to existing HTML file
+Use SVG for stems and squares
+Vanilla JS only
+Pixelated/stepped animation
+All squares clickable with hover effects
+Well-commented code for easy customization

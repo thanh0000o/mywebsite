@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useRef, useState, useCallback } from "react";
 import logoImage from "@assets/ChatGPT_Image_Jan_7,_2026,_12_04_31_PM_1767811147577.png";
 
 interface DreamweaverWindowProps {
@@ -6,6 +7,44 @@ interface DreamweaverWindowProps {
 }
 
 export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
+  const canvasRef = useRef<HTMLDivElement>(null);
+  const [logoPosition, setLogoPosition] = useState({ x: 0, y: 0, progress: 0 });
+
+  // Handle scroll with pixelated movement
+  const handleScroll = useCallback(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const scrollY = canvas.scrollTop;
+    const maxScroll = 300; // Animation completes at 300px scroll
+    const progress = Math.min(scrollY / maxScroll, 1); // 0 to 1
+
+    // Pixelate: Round progress to steps for retro feel
+    const steppedProgress = Math.round(progress * 25) / 25; // 25 steps
+
+    // Calculate position offsets from center
+    // End position: 20px from edges
+    const canvasWidth = canvas.offsetWidth;
+    const canvasHeight = canvas.offsetHeight;
+    const logoWidth = 320; // w-80 = 320px
+    
+    // Start: centered, End: top-left (20px from edges)
+    const startX = (canvasWidth - logoWidth) / 2;
+    const startY = (canvasHeight - 200) / 2; // Approximate logo height area
+    const endX = 20;
+    const endY = 20;
+
+    // Calculate new position with pixelated steps (4px increments)
+    let newX = startX + (endX - startX) * steppedProgress;
+    let newY = startY + (endY - startY) * steppedProgress;
+
+    // Round to nearest 4px for stepped movement
+    newX = Math.round(newX / 4) * 4;
+    newY = Math.round(newY / 4) * 4;
+
+    setLogoPosition({ x: newX, y: newY, progress: steppedProgress });
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
@@ -192,9 +231,11 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
               </div>
             </div>
 
-            {/* Center Canvas */}
+            {/* Center Canvas - Scrollable */}
             <div 
-              className="flex-1 m-1 flex flex-col items-center overflow-hidden"
+              ref={canvasRef}
+              onScroll={handleScroll}
+              className="flex-1 m-1 relative overflow-y-auto overflow-x-hidden"
               style={{
                 backgroundColor: '#fff',
                 borderTop: '2px solid #808080',
@@ -203,24 +244,41 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
                 borderRight: '2px solid #fff',
               }}
             >
-              {/* Logo Image */}
-              <div className="flex-1 flex items-center justify-center">
+              {/* Scrollable content area - makes canvas scrollable */}
+              <div style={{ height: '800px', position: 'relative' }}>
+                {/* Logo Image - Positioned with scroll animation */}
                 <img 
                   src={logoImage}
                   alt="Thành Lambeets"
                   className="w-80 h-auto object-contain"
-                  style={{ imageRendering: 'pixelated' }}
+                  style={{ 
+                    imageRendering: 'pixelated',
+                    position: logoPosition.progress > 0 ? 'fixed' : 'absolute',
+                    left: logoPosition.progress > 0 
+                      ? `calc(50% - 40vw + ${logoPosition.x}px)` 
+                      : '50%',
+                    top: logoPosition.progress > 0 
+                      ? `calc(50% - 25vh + ${logoPosition.y}px)` 
+                      : '50%',
+                    transform: logoPosition.progress > 0 ? 'none' : 'translate(-50%, -50%)',
+                    zIndex: 10,
+                  }}
                   draggable={false}
                 />
+                
+                {/* Scroll Here text - visible at start */}
+                {logoPosition.progress < 0.3 && (
+                  <p 
+                    className="text-sm text-black font-bold absolute left-1/2 -translate-x-1/2"
+                    style={{ 
+                      fontFamily: 'var(--font-pixel)',
+                      top: 'calc(50% + 100px)',
+                    }}
+                  >
+                    [SCROLL HERE]
+                  </p>
+                )}
               </div>
-              
-              {/* Scroll Here text */}
-              <p 
-                className="text-sm text-black pb-8 font-bold"
-                style={{ fontFamily: 'var(--font-pixel)' }}
-              >
-                [SCROLL HERE]
-              </p>
             </div>
 
             {/* Bottom Toolbar */}
