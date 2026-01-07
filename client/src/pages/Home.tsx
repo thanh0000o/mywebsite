@@ -5,6 +5,7 @@ import { DesktopIcon } from "@/components/DesktopIcon";
 import { DreamweaverWindow } from "@/components/DreamweaverWindow";
 import { DesktopWindow } from "@/components/DesktopWindow";
 import { AboutMeContent } from "@/components/AboutMeContent";
+import { EducationContent } from "@/components/EducationContent";
 import { MediaPlayer } from "@/components/MediaPlayer";
 import logoImage from "@assets/image_1767797842217.png";
 
@@ -63,6 +64,8 @@ export default function Home() {
     switch (type) {
       case "aboutme":
         return <AboutMeContent />;
+      case "education":
+        return <EducationContent />;
       default:
         return <div className="p-4">Content coming soon...</div>;
     }

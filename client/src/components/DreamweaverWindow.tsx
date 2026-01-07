@@ -12,6 +12,8 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
   const handleTabClick = (tab: string) => {
     if (tab === 'ABOUT ME') {
       onOpenWindow('aboutme', 'About Me - gerrit thành lambeets');
+    } else if (tab === 'EDUCATION') {
+      onOpenWindow('education', 'EDUCATION.log');
     }
   };
 
