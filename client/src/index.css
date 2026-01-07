@@ -97,10 +97,10 @@
     to bottom,
     rgba(255,255,255,0),
     rgba(255,255,255,0) 50%,
-    rgba(0,0,0,0.15) 50%,
-    rgba(0,0,0,0.15)
+    rgba(0,0,0,0.06) 50%,
+    rgba(0,0,0,0.06)
   );
-  background-size: 100% 3px;
+  background-size: 100% 4px;
   position: absolute;
   top: 0;
   left: 0;
@@ -108,7 +108,7 @@
   bottom: 0;
   pointer-events: none;
   z-index: 20;
-  animation: window-scroll 8s linear infinite;
+  animation: window-scroll 12s linear infinite;
 }
 
 @keyframes window-scroll {
