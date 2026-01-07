@@ -20,13 +20,13 @@ export function DesktopIcon({ imageSrc, label, href, onClick }: DesktopIconProps
         <img 
           src={imageSrc} 
           alt={label}
-          className="relative w-24 h-24 drop-shadow-[0_0_20px_rgba(255,255,255,0.6)] group-hover:drop-shadow-[0_0_35px_rgba(255,255,255,0.9)] transition-all duration-300"
+          className="relative w-12 h-12 drop-shadow-[0_0_15px_rgba(255,255,255,0.6)] group-hover:drop-shadow-[0_0_25px_rgba(255,255,255,0.9)] transition-all duration-300"
           style={{ imageRendering: 'pixelated' }}
           draggable={false}
         />
       </div>
       <p 
-        className="text-sm text-white drop-shadow-md tracking-wide text-center transition-transform duration-300 group-hover:scale-105"
+        className="text-[10px] text-white drop-shadow-md tracking-wide text-center transition-transform duration-300 group-hover:scale-105 max-w-[80px]"
         style={{ fontFamily: 'var(--font-pixel)' }}
       >
         {label}
