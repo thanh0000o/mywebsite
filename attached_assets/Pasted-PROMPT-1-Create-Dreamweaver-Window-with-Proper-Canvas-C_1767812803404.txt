@@ -1,0 +1,86 @@
+PROMPT 1: Create Dreamweaver Window with Proper Canvas ContainmentCreate a Dreamweaver-style application window with properly contained canvas area:Window Structure:
+
+Title bar: "Untitled-1 - gerrit thanh lambeets" with blue background (#0000AA)
+
+Small icon in top-left of title bar
+Window controls (minimize, maximize, close X) in top-right
+
+
+Menu bar: File, Edit, View, Insert, Modify, Text, Window, Help
+Main layout with four sections:
+
+Left sidebar (50px wide, gray #C0C0C0)
+Top toolbar (60px height, gray #C0C0C0)
+Center canvas (white with horizontal lines)
+Bottom toolbar (40px height, gray #C0C0C0)
+
+
+Canvas Container Structure (IMPORTANT):
+html<div class="canvas-container">
+  <div class="canvas-viewport">
+    <div class="canvas-content">
+      <!-- Content goes here -->
+    </div>
+  </div>
+</div>Canvas Styling:
+css.canvas-container {
+  flex: 1; /* Takes remaining space */
+  background: #C0C0C0;
+  padding: 2px;
+}
+
+.canvas-viewport {
+  width: 100%;
+  height: 100%;
+  background: white;
+  position: relative;
+  overflow: hidden; /* CRITICAL: clips overflow */
+  
+  /* 3D inset border */
+  border-top: 2px solid #808080;
+  border-left: 2px solid #808080;
+  border-bottom: 2px solid #FFFFFF;
+  border-right: 2px solid #FFFFFF;
+  box-shadow: inset 1px 1px 3px rgba(0,0,0,0.1);
+}
+
+.canvas-content {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto; /* Scrollable */
+  position: relative;
+  min-height: 2000px; /* Tall enough to scroll */
+  
+  /* Horizontal lines every 20px */
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 19px,
+    #E0E0E0 19px,
+    #E0E0E0 20px
+  );
+}Left Sidebar Icons:
+
+10 tool buttons (45x45px): ▶, 🖼️, ⊞, A, 📄, ✋, 🔍, 🔗, ⚙️, 📐
+Vertical stack with 3D beveled borders
+Gray background, hover effect
+Top Toolbar:
+
+Left: Logo placeholder (40x40px, gray box)
+Right: SITE (blue #000080, active), LIBRARY, STYLES, BEHAVIOR, TIMELINE, HTML
+3D beveled buttons
+Bottom Toolbar:
+
+Top row: Format "None ▼" | "Default Font ▼" | "Default Size ▼" | [B] [I] [≡] [≡] [≡] | 🔗
+Bottom: "<body>" on left | "1K / 1 sec" and arrows on right
+Window Styling:
+
+3D beveled borders throughout
+Window centered, 90% viewport size
+Box shadow: 5px 5px 20px rgba(0,0,0,0.5)
+🔹 REQUIREMENTS:
+
+Single HTML file with <style> and <script> sections
+Vanilla JS, well-commented
+Fixed/centered layout
+Proper canvas containment (overflow: hidden)
