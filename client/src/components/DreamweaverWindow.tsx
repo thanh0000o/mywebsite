@@ -1,99 +1,11 @@
 import { motion } from "framer-motion";
-import { useRef, useState, useCallback, useEffect } from "react";
 import logoImage from "@assets/ChatGPT_Image_Jan_7,_2026,_12_04_31_PM_1767811147577.png";
 
 interface DreamweaverWindowProps {
   onClose: () => void;
 }
 
-// Define 15 organic curved stems radiating from center
-const stemPaths = [
-  "M 0,0 Q -20,-80 -40,-150",      // stem 1: upper left
-  "M 0,0 Q 30,-90 50,-160",         // stem 2: upper center-right
-  "M 0,0 Q -60,-60 -120,-90",       // stem 3: upper far left
-  "M 0,0 Q 70,-50 130,-70",         // stem 4: upper right
-  "M 0,0 Q 90,10 160,20",           // stem 5: right
-  "M 0,0 Q 80,60 140,110",          // stem 6: lower right
-  "M 0,0 Q 40,80 60,150",           // stem 7: lower center-right
-  "M 0,0 Q -10,90 -15,165",         // stem 8: lower center
-  "M 0,0 Q -50,75 -80,140",         // stem 9: lower left
-  "M 0,0 Q -90,40 -155,60",         // stem 10: left
-  "M 0,0 Q -100,-20 -170,-25",      // stem 11: far left
-  "M 0,0 Q 100,-30 175,-40",        // stem 12: far right
-  "M 0,0 Q 55,95 85,165",           // stem 13: lower far right
-  "M 0,0 Q -75,90 -120,155",        // stem 14: lower far left
-  "M 0,0 Q 5,-100 10,-175",         // stem 15: straight up
-];
-
-// Get endpoint of quadratic bezier path
-function getPathEndpoint(pathD: string): { x: number; y: number } {
-  const parts = pathD.split(' ');
-  const lastParts = parts[parts.length - 1].split(',');
-  return {
-    x: parseFloat(lastParts[0]),
-    y: parseFloat(lastParts[1]),
-  };
-}
-
 export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
-  const canvasRef = useRef<HTMLDivElement>(null);
-  const pathRefs = useRef<(SVGPathElement | null)[]>([]);
-  const [logoPosition, setLogoPosition] = useState({ x: 0, y: 0, progress: 0 });
-  const [flowerProgress, setFlowerProgress] = useState(0);
-  const [pathLengths, setPathLengths] = useState<number[]>([]);
-  const [hoveredSquare, setHoveredSquare] = useState<number | null>(null);
-
-  // Calculate path lengths on mount
-  useEffect(() => {
-    const lengths = pathRefs.current.map(path => path?.getTotalLength() || 0);
-    setPathLengths(lengths);
-  }, []);
-
-  // Handle scroll with pixelated movement
-  const handleScroll = useCallback(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const scrollY = canvas.scrollTop;
-    
-    // Phase 1: Logo animation (0-300px)
-    const logoMaxScroll = 300;
-    const logoProgress = Math.min(scrollY / logoMaxScroll, 1);
-    const steppedLogoProgress = Math.round(logoProgress * 25) / 25;
-
-    const canvasWidth = canvas.offsetWidth;
-    const canvasHeight = canvas.offsetHeight;
-    const logoWidth = 320;
-    
-    const startX = (canvasWidth - logoWidth) / 2;
-    const startY = (canvasHeight - 200) / 2;
-    const endX = 20;
-    const endY = 20;
-
-    let newX = startX + (endX - startX) * steppedLogoProgress;
-    let newY = startY + (endY - startY) * steppedLogoProgress;
-
-    newX = Math.round(newX / 4) * 4;
-    newY = Math.round(newY / 4) * 4;
-
-    setLogoPosition({ x: newX, y: newY, progress: steppedLogoProgress });
-
-    // Phase 2: Flower growth (300-1200px)
-    if (scrollY > 300) {
-      const flowerScrollProgress = Math.min((scrollY - 300) / 900, 1);
-      // Pixelate progress (stepped effect)
-      const steppedFlower = Math.floor(flowerScrollProgress * 50) / 50;
-      setFlowerProgress(steppedFlower);
-    } else {
-      setFlowerProgress(0);
-    }
-  }, []);
-
-  // Handle portfolio square click
-  const handleSquareClick = (index: number) => {
-    alert(`Portfolio piece ${index + 1} clicked`);
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
@@ -280,11 +192,9 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
               </div>
             </div>
 
-            {/* Center Canvas - Scrollable */}
+            {/* Center Canvas */}
             <div 
-              ref={canvasRef}
-              onScroll={handleScroll}
-              className="flex-1 m-1 relative overflow-y-auto overflow-x-hidden"
+              className="flex-1 m-1 flex flex-col items-center overflow-hidden"
               style={{
                 backgroundColor: '#fff',
                 borderTop: '2px solid #808080',
@@ -293,111 +203,24 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
                 borderRight: '2px solid #fff',
               }}
             >
-              {/* Scrollable content area - makes canvas scrollable */}
-              <div style={{ height: '1500px', position: 'relative' }}>
-                {/* Logo Image - Positioned with scroll animation */}
+              {/* Logo Image */}
+              <div className="flex-1 flex items-center justify-center">
                 <img 
                   src={logoImage}
                   alt="Thành Lambeets"
                   className="w-80 h-auto object-contain"
-                  style={{ 
-                    imageRendering: 'pixelated',
-                    position: logoPosition.progress > 0 ? 'fixed' : 'absolute',
-                    left: logoPosition.progress > 0 
-                      ? `calc(50% - 40vw + ${logoPosition.x}px)` 
-                      : '50%',
-                    top: logoPosition.progress > 0 
-                      ? `calc(50% - 25vh + ${logoPosition.y}px)` 
-                      : '50%',
-                    transform: logoPosition.progress > 0 ? 'none' : 'translate(-50%, -50%)',
-                    zIndex: 10,
-                  }}
+                  style={{ imageRendering: 'pixelated' }}
                   draggable={false}
                 />
-                
-                {/* Scroll Here text - visible at start */}
-                {logoPosition.progress < 0.3 && (
-                  <p 
-                    className="text-sm text-black font-bold absolute left-1/2 -translate-x-1/2"
-                    style={{ 
-                      fontFamily: 'var(--font-pixel)',
-                      top: 'calc(50% + 100px)',
-                    }}
-                  >
-                    [SCROLL HERE]
-                  </p>
-                )}
-
-                {/* SVG Flower - grows after logo animation */}
-                <svg 
-                  width="400" 
-                  height="400" 
-                  viewBox="-200 -200 400 400"
-                  style={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    marginTop: '100px',
-                    opacity: flowerProgress > 0 ? 1 : 0,
-                  }}
-                >
-                  {/* Stems */}
-                  {stemPaths.map((pathD, index) => {
-                    const length = pathLengths[index] || 200;
-                    const delay = index * 0.04;
-                    const stemProgress = Math.max(0, Math.min(1, (flowerProgress - delay) / 0.7));
-                    const offset = length * (1 - stemProgress);
-                    
-                    return (
-                      <path
-                        key={index}
-                        ref={(el) => { pathRefs.current[index] = el; }}
-                        d={pathD}
-                        stroke="#00AA00"
-                        fill="none"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        style={{
-                          strokeDasharray: length,
-                          strokeDashoffset: Math.round(offset / 4) * 4,
-                        }}
-                      />
-                    );
-                  })}
-                  
-                  {/* Portfolio squares at endpoints */}
-                  {stemPaths.map((pathD, index) => {
-                    const endpoint = getPathEndpoint(pathD);
-                    const delay = index * 0.04;
-                    const stemProgress = Math.max(0, Math.min(1, (flowerProgress - delay) / 0.7));
-                    const isVisible = stemProgress >= 0.95;
-                    const isHovered = hoveredSquare === index;
-                    
-                    return (
-                      <rect
-                        key={`square-${index}`}
-                        x={endpoint.x - 7}
-                        y={endpoint.y - 7}
-                        width="14"
-                        height="14"
-                        fill="#00AA00"
-                        style={{
-                          opacity: isVisible ? 1 : 0,
-                          cursor: isVisible ? 'pointer' : 'default',
-                          transform: isHovered ? 'scale(1.3)' : 'scale(1)',
-                          transformOrigin: `${endpoint.x}px ${endpoint.y}px`,
-                          transition: 'transform 0.1s steps(3)',
-                        }}
-                        onMouseEnter={() => setHoveredSquare(index)}
-                        onMouseLeave={() => setHoveredSquare(null)}
-                        onClick={() => isVisible && handleSquareClick(index)}
-                        data-testid={`portfolio-square-${index}`}
-                      />
-                    );
-                  })}
-                </svg>
               </div>
+              
+              {/* Scroll Here text */}
+              <p 
+                className="text-sm text-black pb-8 font-bold"
+                style={{ fontFamily: 'var(--font-pixel)' }}
+              >
+                [SCROLL HERE]
+              </p>
             </div>
 
             {/* Bottom Toolbar */}
