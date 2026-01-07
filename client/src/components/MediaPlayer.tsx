@@ -60,21 +60,35 @@ export function MediaPlayer() {
         data-testid="button-media-player-restore"
       >
         <div
-          className="w-10 h-10 flex items-center justify-center"
+          className="flex flex-col"
           style={{
             backgroundColor: '#C0C0C0',
+            boxShadow: '2px 2px 5px rgba(0,0,0,0.3)',
             borderTop: '2px solid #fff',
             borderLeft: '2px solid #fff',
             borderBottom: '2px solid #808080',
             borderRight: '2px solid #808080',
           }}
         >
-          <img 
-            src={winampLogo} 
-            alt="Media Player" 
-            className="w-6 h-6"
-            style={{ imageRendering: 'pixelated' }}
-          />
+          <div
+            className="flex items-center gap-1 px-1 py-0.5"
+            style={{
+              background: 'linear-gradient(90deg, #000080, #1084d0)',
+            }}
+          >
+            <img 
+              src={winampLogo} 
+              alt="Media Player" 
+              className="w-4 h-4"
+              style={{ imageRendering: 'pixelated' }}
+            />
+            <span
+              className="text-[8px] text-white font-bold"
+              style={{ fontFamily: 'var(--font-pixel)' }}
+            >
+              MEDIA
+            </span>
+          </div>
         </div>
       </motion.div>
     );
@@ -90,20 +104,20 @@ export function MediaPlayer() {
       <div
         className="flex flex-col"
         style={{
-          backgroundColor: '#2B2B2B',
+          backgroundColor: '#C0C0C0',
           boxShadow: '3px 3px 10px rgba(0,0,0,0.5)',
-          borderTop: '2px solid #404040',
-          borderLeft: '2px solid #404040',
-          borderBottom: '2px solid #1a1a1a',
-          borderRight: '2px solid #1a1a1a',
+          borderTop: '2px solid #fff',
+          borderLeft: '2px solid #fff',
+          borderBottom: '2px solid #808080',
+          borderRight: '2px solid #808080',
         }}
       >
         {/* Title Bar */}
         <div
           className="flex items-center justify-between px-1 py-0.5"
           style={{
-            background: 'linear-gradient(90deg, #3a3a3a, #5a5a5a)',
-            borderBottom: '1px solid #1a1a1a',
+            background: 'linear-gradient(90deg, #000080, #1084d0)',
+            color: 'white',
           }}
         >
           <div className="flex items-center gap-1">
@@ -114,7 +128,7 @@ export function MediaPlayer() {
               style={{ imageRendering: 'pixelated' }}
             />
             <span
-              className="text-[10px] text-green-400"
+              className="text-[10px] text-white font-bold"
               style={{ fontFamily: 'var(--font-pixel)' }}
             >
               MEDIA_PLAYER.EXE
@@ -123,13 +137,13 @@ export function MediaPlayer() {
           <div className="flex items-center gap-1">
             <button
               onClick={() => setIsMinimized(true)}
-              className="w-4 h-4 flex items-center justify-center text-[10px] text-white"
+              className="w-4 h-4 flex items-center justify-center text-[10px] text-black"
               style={{
-                backgroundColor: '#404040',
-                borderTop: '1px solid #606060',
-                borderLeft: '1px solid #606060',
-                borderBottom: '1px solid #202020',
-                borderRight: '1px solid #202020',
+                backgroundColor: '#C0C0C0',
+                borderTop: '1px solid #fff',
+                borderLeft: '1px solid #fff',
+                borderBottom: '1px solid #808080',
+                borderRight: '1px solid #808080',
               }}
               data-testid="button-media-player-minimize"
             >
@@ -137,13 +151,13 @@ export function MediaPlayer() {
             </button>
             <button
               onClick={() => setIsMinimized(true)}
-              className="w-4 h-4 flex items-center justify-center text-[10px] text-white"
+              className="w-4 h-4 flex items-center justify-center text-[10px] text-black"
               style={{
-                backgroundColor: '#404040',
-                borderTop: '1px solid #606060',
-                borderLeft: '1px solid #606060',
-                borderBottom: '1px solid #202020',
-                borderRight: '1px solid #202020',
+                backgroundColor: '#C0C0C0',
+                borderTop: '1px solid #fff',
+                borderLeft: '1px solid #fff',
+                borderBottom: '1px solid #808080',
+                borderRight: '1px solid #808080',
               }}
               data-testid="button-media-player-close"
             >
@@ -156,8 +170,11 @@ export function MediaPlayer() {
         <div
           className="mx-1 mt-1 p-2"
           style={{
-            backgroundColor: '#0a1a0a',
-            border: '2px inset #1a1a1a',
+            backgroundColor: '#000',
+            borderTop: '2px solid #808080',
+            borderLeft: '2px solid #808080',
+            borderBottom: '2px solid #fff',
+            borderRight: '2px solid #fff',
           }}
         >
           {/* Track Info */}
@@ -170,7 +187,7 @@ export function MediaPlayer() {
                 {playlist[currentTrack]?.title || "NO TRACK"}
               </div>
               <div
-                className="text-[8px] text-green-700"
+                className="text-[8px] text-green-600"
                 style={{ fontFamily: 'var(--font-pixel)' }}
               >
                 {playlist[currentTrack]?.artist || ""}
@@ -197,7 +214,6 @@ export function MediaPlayer() {
                   style={{
                     height: `${height}%`,
                     backgroundColor: height > 70 ? '#ff0000' : height > 40 ? '#ffff00' : '#00ff00',
-                    boxShadow: '0 0 2px currentColor',
                   }}
                 />
               );
@@ -208,29 +224,26 @@ export function MediaPlayer() {
           <div
             className="h-2 relative"
             style={{
-              backgroundColor: '#0f2f0f',
-              border: '1px solid #0a1a0a',
+              backgroundColor: '#333',
+              border: '1px solid #000',
             }}
           >
             <div
               className="h-full bg-green-500"
-              style={{
-                width: `${progress}%`,
-                boxShadow: '0 0 4px #00ff00',
-              }}
+              style={{ width: `${progress}%` }}
             />
           </div>
 
           {/* Time Display */}
           <div className="flex justify-between mt-1">
             <span
-              className="text-[8px] text-green-600"
+              className="text-[8px] text-green-500"
               style={{ fontFamily: 'var(--font-pixel)' }}
             >
               00:{String(Math.floor(progress * 0.6)).padStart(2, '0')}
             </span>
             <span
-              className="text-[8px] text-green-600"
+              className="text-[8px] text-green-500"
               style={{ fontFamily: 'var(--font-pixel)' }}
             >
               01:00
@@ -249,13 +262,13 @@ export function MediaPlayer() {
             <button
               key={i}
               onClick={btn.action}
-              className="w-8 h-6 flex items-center justify-center text-[10px] text-white"
+              className="w-8 h-6 flex items-center justify-center text-[10px] text-black"
               style={{
-                backgroundColor: '#3a3a3a',
-                borderTop: '2px solid #505050',
-                borderLeft: '2px solid #505050',
-                borderBottom: '2px solid #1a1a1a',
-                borderRight: '2px solid #1a1a1a',
+                backgroundColor: '#C0C0C0',
+                borderTop: '2px solid #fff',
+                borderLeft: '2px solid #fff',
+                borderBottom: '2px solid #808080',
+                borderRight: '2px solid #808080',
                 fontFamily: 'var(--font-pixel)',
               }}
               data-testid={btn.testId}
@@ -268,7 +281,7 @@ export function MediaPlayer() {
         {/* Volume Slider */}
         <div className="flex items-center gap-2 px-2 pb-1">
           <span
-            className="text-[8px] text-gray-400"
+            className="text-[8px] text-black"
             style={{ fontFamily: 'var(--font-pixel)' }}
           >
             VOL
@@ -276,8 +289,11 @@ export function MediaPlayer() {
           <div
             className="flex-1 h-3 relative cursor-pointer"
             style={{
-              backgroundColor: '#1a1a1a',
-              border: '1px inset #0a0a0a',
+              backgroundColor: '#fff',
+              borderTop: '2px solid #808080',
+              borderLeft: '2px solid #808080',
+              borderBottom: '2px solid #fff',
+              borderRight: '2px solid #fff',
             }}
             onClick={(e) => {
               const rect = e.currentTarget.getBoundingClientRect();
@@ -286,7 +302,7 @@ export function MediaPlayer() {
             }}
           >
             <div
-              className="h-full bg-green-600"
+              className="h-full bg-[#000080]"
               style={{ width: `${volume}%` }}
             />
             <div
@@ -296,13 +312,13 @@ export function MediaPlayer() {
                 backgroundColor: '#C0C0C0',
                 borderTop: '1px solid #fff',
                 borderLeft: '1px solid #fff',
-                borderBottom: '1px solid #404040',
-                borderRight: '1px solid #404040',
+                borderBottom: '1px solid #808080',
+                borderRight: '1px solid #808080',
               }}
             />
           </div>
           <span
-            className="text-[8px] text-gray-400 w-6 text-right"
+            className="text-[8px] text-black w-6 text-right"
             style={{ fontFamily: 'var(--font-pixel)' }}
           >
             {volume}%
@@ -313,14 +329,17 @@ export function MediaPlayer() {
         <div
           className="mx-1 mb-1"
           style={{
-            backgroundColor: '#0a1a0a',
-            border: '2px inset #1a1a1a',
+            backgroundColor: '#fff',
+            borderTop: '2px solid #808080',
+            borderLeft: '2px solid #808080',
+            borderBottom: '2px solid #fff',
+            borderRight: '2px solid #fff',
             maxHeight: '80px',
             overflowY: 'auto',
           }}
         >
           <div
-            className="text-[8px] text-green-700 px-1 py-0.5 border-b border-green-900"
+            className="text-[8px] text-black px-1 py-0.5 border-b border-gray-300"
             style={{ fontFamily: 'var(--font-pixel)' }}
           >
             PLAYLIST [{playlist.length} TRACKS]
@@ -331,18 +350,19 @@ export function MediaPlayer() {
               onClick={() => setCurrentTrack(index)}
               className="flex items-center gap-1 px-1 py-0.5 cursor-pointer"
               style={{
-                backgroundColor: currentTrack === index ? '#0f3f0f' : 'transparent',
+                backgroundColor: currentTrack === index ? '#000080' : 'transparent',
+                color: currentTrack === index ? '#fff' : '#000',
               }}
               data-testid={`playlist-item-${track.id}`}
             >
               <span
-                className="text-[8px] text-green-600"
+                className="text-[8px]"
                 style={{ fontFamily: 'var(--font-pixel)' }}
               >
                 {String(index + 1).padStart(2, '0')}.
               </span>
               <span
-                className={`text-[8px] ${currentTrack === index ? 'text-green-400' : 'text-green-600'}`}
+                className="text-[8px]"
                 style={{ fontFamily: 'var(--font-pixel)' }}
               >
                 {track.artist} - {track.title}
@@ -355,12 +375,12 @@ export function MediaPlayer() {
         <div
           className="px-1 py-0.5"
           style={{
-            backgroundColor: '#2a2a2a',
-            borderTop: '1px solid #1a1a1a',
+            backgroundColor: '#C0C0C0',
+            borderTop: '1px solid #808080',
           }}
         >
           <span
-            className="text-[8px] text-gray-500"
+            className="text-[8px] text-black"
             style={{ fontFamily: 'var(--font-pixel)' }}
           >
             READY - {playlist.length} files in playlist
