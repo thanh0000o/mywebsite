@@ -1,12 +1,41 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
 
+/* 
+  =====================================================
+  PIXEL OPERATOR FONTS
+  =====================================================
+  Custom pixel fonts - swap files in /public/fonts/
+  =====================================================
+*/
+@font-face {
+  font-family: 'PixelOperatorMono';
+  src: url('/fonts/PixelOperatorMono.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PixelOperatorMono8';
+  src: url('/fonts/PixelOperatorMono8.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PixelOperatorMono8';
+  src: url('/fonts/PixelOperatorMono8-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --font-display: 'VT323', monospace;
-  --font-mono: 'Space Mono', monospace;
+  --font-display: 'PixelOperatorMono8', 'VT323', monospace;
+  --font-mono: 'PixelOperatorMono', 'Space Mono', monospace;
+  --font-pixel: 'PixelOperatorMono8', monospace;
 
   /* Retro CRT Terminal Palette */
   --background: 0 0% 5%;
