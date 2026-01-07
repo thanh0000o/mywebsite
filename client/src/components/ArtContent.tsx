@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import artWeb from "@assets/WEB_1767822627014.png";
@@ -39,6 +39,65 @@ const artworks: Artwork[] = [
 ];
 
 function ArtViewer({ art, onClose }: { art: Artwork; onClose: () => void }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(80);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.volume = volume / 100;
+    }
+  }, [volume]);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const handleTimeUpdate = () => {
+    if (videoRef.current) {
+      setCurrentTime(videoRef.current.currentTime);
+    }
+  };
+
+  const handleLoadedMetadata = () => {
+    if (videoRef.current) {
+      setDuration(videoRef.current.duration);
+    }
+  };
+
+  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (videoRef.current && duration) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const seekTime = (x / rect.width) * duration;
+      videoRef.current.currentTime = seekTime;
+      setCurrentTime(seekTime);
+    }
+  };
+
+  const formatTime = (time: number) => {
+    const mins = Math.floor(time / 60);
+    const secs = Math.floor(time % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const restart = () => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0;
+      videoRef.current.play();
+      setIsPlaying(true);
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
@@ -154,16 +213,115 @@ function ArtViewer({ art, onClose }: { art: Artwork; onClose: () => void }) {
                 draggable={false}
               />
             ) : (
-              <video
-                src={art.src}
-                autoPlay
-                loop
-                muted
-                playsInline
-                controls
-                className="w-full h-full object-contain"
-                style={{ maxHeight: '60vh' }}
-              />
+              <div className="flex flex-col h-full">
+                <video
+                  ref={videoRef}
+                  src={art.src}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="flex-1 object-contain"
+                  style={{ maxHeight: '55vh' }}
+                  onTimeUpdate={handleTimeUpdate}
+                  onLoadedMetadata={handleLoadedMetadata}
+                />
+                {/* Custom Windows 95 Video Controls */}
+                <div 
+                  className="p-1 mt-1"
+                  style={{
+                    backgroundColor: '#C0C0C0',
+                    borderTop: '2px solid #fff',
+                    borderLeft: '2px solid #fff',
+                    borderBottom: '2px solid #808080',
+                    borderRight: '2px solid #808080',
+                  }}
+                >
+                  {/* Progress Bar */}
+                  <div 
+                    className="w-full h-3 mb-1 cursor-pointer"
+                    style={{
+                      backgroundColor: '#fff',
+                      borderTop: '1px solid #808080',
+                      borderLeft: '1px solid #808080',
+                      borderBottom: '1px solid #fff',
+                      borderRight: '1px solid #fff',
+                    }}
+                    onClick={handleSeek}
+                    data-testid="video-progress-bar"
+                  >
+                    <div 
+                      className="h-full"
+                      style={{ 
+                        width: duration ? `${(currentTime / duration) * 100}%` : '0%',
+                        backgroundColor: '#000080',
+                      }}
+                    />
+                  </div>
+                  {/* Controls Row */}
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-1">
+                      {[
+                        { icon: '|◄', action: restart, testId: 'btn-restart' },
+                        { icon: isPlaying ? '||' : '►', action: togglePlay, testId: 'btn-play-pause' },
+                      ].map((btn, i) => (
+                        <button
+                          key={i}
+                          onClick={btn.action}
+                          className="w-6 h-5 flex items-center justify-center text-[9px]"
+                          style={{
+                            backgroundColor: '#C0C0C0',
+                            borderTop: '2px solid #fff',
+                            borderLeft: '2px solid #fff',
+                            borderBottom: '2px solid #808080',
+                            borderRight: '2px solid #808080',
+                            fontFamily: 'var(--font-pixel)',
+                            color: '#000',
+                          }}
+                          data-testid={btn.testId}
+                        >
+                          {btn.icon}
+                        </button>
+                      ))}
+                      <span 
+                        className="text-[9px] ml-1"
+                        style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
+                      >
+                        {formatTime(currentTime)} / {formatTime(duration)}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <span
+                        className="text-[8px]"
+                        style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
+                      >
+                        VOL
+                      </span>
+                      <div
+                        className="w-12 h-2 cursor-pointer"
+                        style={{
+                          backgroundColor: '#fff',
+                          borderTop: '1px solid #808080',
+                          borderLeft: '1px solid #808080',
+                          borderBottom: '1px solid #fff',
+                          borderRight: '1px solid #fff',
+                        }}
+                        onClick={(e) => {
+                          const rect = e.currentTarget.getBoundingClientRect();
+                          const x = e.clientX - rect.left;
+                          setVolume(Math.round((x / rect.width) * 100));
+                        }}
+                        data-testid="video-volume-bar"
+                      >
+                        <div
+                          className="h-full"
+                          style={{ width: `${volume}%`, backgroundColor: '#000080' }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             )}
           </div>
         </div>
