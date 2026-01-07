@@ -194,7 +194,7 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
 
             {/* Center Canvas */}
             <div 
-              className="flex-1 m-1 flex flex-col items-center justify-center relative"
+              className="flex-1 m-1 flex flex-col items-center overflow-hidden"
               style={{
                 backgroundColor: '#fff',
                 borderTop: '2px solid #808080',
@@ -204,11 +204,11 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
               }}
             >
               {/* Logo Image */}
-              <div className="flex-1 flex items-center justify-center">
+              <div className="flex-1 flex items-center justify-center py-4">
                 <img 
                   src={logoImage}
                   alt="Thành Lambeets"
-                  className="max-w-[80%] max-h-[70%] object-contain"
+                  className="max-w-[70%] max-h-full object-contain"
                   style={{ imageRendering: 'pixelated' }}
                   draggable={false}
                 />
@@ -216,7 +216,7 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
               
               {/* Scroll Here text */}
               <p 
-                className="text-sm text-black mb-8 font-bold"
+                className="text-sm text-black py-4 font-bold"
                 style={{ fontFamily: 'var(--font-pixel)' }}
               >
                 [SCROLL HERE]
