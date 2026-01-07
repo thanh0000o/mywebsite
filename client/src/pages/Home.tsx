@@ -45,9 +45,8 @@ export default function Home() {
               draggable={false}
             />
           </a>
-          <div className="mt-2 text-center" style={{ fontFamily: 'var(--font-pixel)' }}>
-            <p className="text-xs text-white/80 drop-shadow-md">[particle]</p>
-            <p className="text-xs text-white/80 drop-shadow-md">0001</p>
+          <div className="mt-3 text-center" style={{ fontFamily: 'var(--font-pixel)' }}>
+            <p className="text-sm text-white drop-shadow-md tracking-wide">portfolio_gen+tthanhlambeets</p>
           </div>
         </div>
       </div>
