@@ -56,8 +56,8 @@ export default function Home() {
       width = "min(650px, 90vw)";
       height = "min(520px, 80vh)";
     } else if (type === "education") {
-      width = "min(320px, 90vw)";
-      height = "min(180px, 50vh)";
+      width = "min(380px, 90vw)";
+      height = "min(200px, 55vh)";
     } else if (type === "experience") {
       width = "min(320px, 90vw)";
       height = "min(220px, 60vh)";
