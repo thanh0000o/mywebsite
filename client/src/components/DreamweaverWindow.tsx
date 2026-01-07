@@ -265,7 +265,7 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
                 >
                   <p className="mb-2" style={{ fontSize: '12px', fontWeight: 'bold' }}>Welcome.</p>
                   <p>
-                    This is a place for ideas, tools, and quiet exploration. I'm Gerrit, and I like building things with ideas, pixels, and curiosity where art, technology, and thoughtful experimentation come together.
+                    This is a place for ideas, tools, and quiet exploration. I'm Thành, and I like building things with ideas, pixels, and curiosity where art, technology, and thoughtful experimentation come together.
                   </p>
                   <p className="mt-2" style={{ fontStyle: 'italic' }}>Scroll gently.</p>
                 </div>
