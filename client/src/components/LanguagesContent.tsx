@@ -34,28 +34,31 @@ export function LanguagesContent() {
     </svg>
   );
 
-  const StarRating = ({ filled, total }: { filled: number; total: number }) => (
-    <div className="flex gap-0.5">
-      {Array.from({ length: total }).map((_, i) => (
-        <span 
-          key={i} 
-          style={{ 
-            color: i < filled ? '#ffcc00' : '#444',
-            fontSize: '10px',
-            textShadow: i < filled ? '0 0 2px #ff9900' : 'none'
-          }}
-        >
-          *
-        </span>
-      ))}
-    </div>
-  );
+  const PixelBar = ({ level }: { level: number }) => {
+    const totalBlocks = 10;
+    const filledBlocks = Math.round((level / 100) * totalBlocks);
+    
+    return (
+      <div className="flex gap-0.5">
+        {Array.from({ length: totalBlocks }).map((_, i) => (
+          <div
+            key={i}
+            className="w-3 h-2"
+            style={{
+              backgroundColor: i < filledBlocks ? "#00ff00" : "#333",
+              boxShadow: i < filledBlocks ? "0 0 2px #00ff00" : "none",
+            }}
+          />
+        ))}
+      </div>
+    );
+  };
 
   const languages = [
-    { name: "Dutch", level: "Native", stars: 5, flag: DutchFlag },
-    { name: "English", level: "Fluent", stars: 5, flag: UKFlag },
-    { name: "French", level: "Conversational", stars: 3, flag: FrenchFlag },
-    { name: "Vietnamese", level: "Basic", stars: 2, flag: VietnamFlag },
+    { name: "Dutch", level: 100, flag: DutchFlag },
+    { name: "English", level: 90, flag: UKFlag },
+    { name: "French", level: 60, flag: FrenchFlag },
+    { name: "Vietnamese", level: 30, flag: VietnamFlag },
   ];
 
   return (
@@ -79,9 +82,9 @@ export function LanguagesContent() {
       <div className="window-scanlines" aria-hidden="true" />
       
       {/* Content area */}
-      <div className="p-3 relative z-10 h-full">
+      <div className="p-2 relative z-10 h-full overflow-y-auto">
         <div
-          className="h-full p-4"
+          className="h-full p-3 overflow-y-auto"
           style={{
             backgroundColor: "#1a1a1a",
             borderTop: "2px solid #808080",
@@ -90,7 +93,7 @@ export function LanguagesContent() {
             borderRight: "2px solid #fff",
           }}
         >
-          <div className="space-y-3">
+          <div className="space-y-2">
             {languages.map((lang, index) => (
               <div 
                 key={index} 
@@ -104,29 +107,16 @@ export function LanguagesContent() {
                 }}
               >
                 <lang.flag />
-                <div className="flex flex-col gap-0.5">
-                  <span
-                    className="text-[10px]"
-                    style={{
-                      fontFamily: "var(--font-pixel)",
-                      color: "#00ff00",
-                    }}
-                  >
-                    {lang.name}
-                  </span>
-                  <div className="flex items-center gap-2">
-                    <StarRating filled={lang.stars} total={5} />
-                    <span
-                      className="text-[8px]"
-                      style={{
-                        fontFamily: "var(--font-pixel)",
-                        color: "#888",
-                      }}
-                    >
-                      {lang.level}
-                    </span>
-                  </div>
-                </div>
+                <span
+                  className="w-20 text-[10px]"
+                  style={{
+                    fontFamily: "var(--font-pixel)",
+                    color: "#00ff00",
+                  }}
+                >
+                  {lang.name}
+                </span>
+                <PixelBar level={lang.level} />
               </div>
             ))}
           </div>
