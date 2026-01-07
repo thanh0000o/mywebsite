@@ -42,8 +42,8 @@ export default function Home() {
       width = "650px";
       height = "520px";
     } else if (type === "education") {
-      width = "380px";
-      height = "240px";
+      width = "420px";
+      height = "280px";
     }
     
     const newWindow: WindowState = {
