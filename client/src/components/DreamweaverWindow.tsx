@@ -175,7 +175,7 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
                 {['SITE', 'LIBRARY', 'STYLES', 'BEHAVIOR', 'TIMELINE', 'HTML'].map((tab) => (
                   <div
                     key={tab}
-                    className="px-2 py-1 text-[10px] cursor-pointer text-black"
+                    className="px-2 py-1 text-[10px] cursor-pointer text-black font-bold"
                     style={{
                       backgroundColor: '#C0C0C0',
                       borderTop: '2px solid #fff',
