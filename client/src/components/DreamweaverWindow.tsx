@@ -246,25 +246,6 @@ export function DreamweaverWindow({ onClose }: DreamweaverWindowProps) {
               >
                 [SCROLL HERE]
               </p>
-
-              {/* Footer copyright inside canvas */}
-              <div 
-                className="absolute bottom-2 left-0 right-0 flex justify-center"
-              >
-                <p 
-                  className="text-[10px] text-black px-2 py-1"
-                  style={{ 
-                    fontFamily: 'var(--font-pixel)',
-                    backgroundColor: '#C0C0C0',
-                    borderTop: '1px solid #fff',
-                    borderLeft: '1px solid #fff',
-                    borderBottom: '1px solid #808080',
-                    borderRight: '1px solid #808080',
-                  }}
-                >
-                  © 2000-2026 | designed on a 2560 x 1440 screen & to last
-                </p>
-              </div>
             </div>
 
             {/* Bottom Toolbar */}
