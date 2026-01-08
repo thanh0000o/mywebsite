@@ -134,6 +134,19 @@ export default function Home() {
     setWindows([...windows, newWindow]);
   };
 
+  const closeWindow = (id: string) => {
+    setWindows(windows.filter((w) => w.id !== id));
+  };
+
+  const focusWindow = (id: string) => {
+    setWindows(
+      windows.map((w) =>
+        w.id === id ? { ...w, zIndex: topZIndex + 1 } : w
+      )
+    );
+    setTopZIndex(topZIndex + 1);
+  };
+
   const openArtWindow = (art: Artwork) => {
     const vw = window.innerWidth;
     const vh = window.innerHeight;
@@ -169,20 +182,7 @@ export default function Home() {
       artData: art,
     };
     setTopZIndex(topZIndex + 1);
-    setWindows([...windows, newWindow]);
-  };
-
-  const closeWindow = (id: string) => {
-    setWindows(windows.filter((w) => w.id !== id));
-  };
-
-  const focusWindow = (id: string) => {
-    setWindows(
-      windows.map((w) =>
-        w.id === id ? { ...w, zIndex: topZIndex + 1 } : w
-      )
-    );
-    setTopZIndex(topZIndex + 1);
+    setWindows((prev) => [...prev, newWindow]);
   };
 
   const renderWindowContent = (windowState: WindowState) => {
