@@ -26,16 +26,28 @@ export function MediaPlayer() {
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-  const [volume, setVolume] = useState(10);
+  const [volume, setVolume] = useState(5);
+  const [isMuted, setIsMuted] = useState(false);
+  const [previousVolume, setPreviousVolume] = useState(5);
   const [showPlaylist, setShowPlaylist] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   const isPlayingRef = useRef(false);
 
   useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.volume = volume / 100;
+      audioRef.current.volume = isMuted ? 0 : volume / 100;
     }
-  }, [volume]);
+  }, [volume, isMuted]);
+
+  const toggleMute = () => {
+    if (isMuted) {
+      setIsMuted(false);
+      setVolume(previousVolume > 0 ? previousVolume : 5);
+    } else {
+      setPreviousVolume(volume);
+      setIsMuted(true);
+    }
+  };
 
   useEffect(() => {
     if (audioRef.current && !isInitialized) {
@@ -394,14 +406,24 @@ export function MediaPlayer() {
 
             {/* Volume */}
             <div className="flex items-center gap-1 mt-1">
-              <span
-                className="text-[7px]"
-                style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
+              <button
+                onClick={toggleMute}
+                className="text-[7px] px-1"
+                style={{
+                  backgroundColor: '#C0C0C0',
+                  borderTop: '1px solid #fff',
+                  borderLeft: '1px solid #fff',
+                  borderBottom: '1px solid #808080',
+                  borderRight: '1px solid #808080',
+                  fontFamily: 'var(--font-pixel)',
+                  color: isMuted ? '#ff0000' : '#000',
+                }}
+                data-testid="button-mute"
               >
-                VOL
-              </span>
+                {isMuted ? 'X' : 'VOL'}
+              </button>
               <div
-                className="w-16 h-2 relative cursor-pointer"
+                className="w-12 h-2 relative cursor-pointer"
                 style={{
                   backgroundColor: '#fff',
                   borderTop: '1px solid #808080',
@@ -412,12 +434,14 @@ export function MediaPlayer() {
                 onClick={(e) => {
                   const rect = e.currentTarget.getBoundingClientRect();
                   const x = e.clientX - rect.left;
-                  setVolume(Math.round((x / rect.width) * 100));
+                  const newVol = Math.round((x / rect.width) * 100);
+                  setVolume(newVol);
+                  if (newVol > 0) setIsMuted(false);
                 }}
               >
                 <div
                   className="h-full bg-[#000080]"
-                  style={{ width: `${volume}%` }}
+                  style={{ width: isMuted ? '0%' : `${volume}%` }}
                 />
               </div>
             </div>
