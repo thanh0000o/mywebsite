@@ -18,49 +18,21 @@ const photoAlbums: PhotoAlbum[] = [
   { id: 8, name: "Nisramont0002", year: "2021", url: "https://photos.app.goo.gl/XUndRER9crjrFP1v5" },
 ];
 
-const pastelColors = [
-  '#ffb3ba', '#ffdfba', '#ffffba', '#baffc9', 
-  '#bae1ff', '#e0bbff', '#ffc8dd', '#bde0fe'
-];
-
-function PolaroidIcon({ color }: { color: string }) {
+function FolderIcon() {
   return (
-    <svg width="44" height="52" viewBox="0 0 44 52" style={{ imageRendering: 'pixelated' }}>
-      {/* Polaroid frame */}
-      <rect x="2" y="2" width="40" height="48" fill="#fffef5" stroke="#ddd" strokeWidth="2" rx="1"/>
-      {/* Photo area */}
-      <rect x="6" y="6" width="32" height="28" fill={color} stroke="#ccc" strokeWidth="1"/>
-      {/* Cute camera icon in photo */}
-      <circle cx="22" cy="18" r="8" fill="rgba(255,255,255,0.5)"/>
-      <circle cx="22" cy="18" r="5" fill="#fff"/>
-      <circle cx="22" cy="18" r="3" fill={color}/>
-      <rect x="14" y="12" width="16" height="2" fill="rgba(255,255,255,0.4)"/>
-      {/* Decorative tape on corner */}
-      <rect x="30" y="0" width="10" height="6" fill="#ffd700" opacity="0.7" transform="rotate(15, 35, 3)"/>
+    <svg width="40" height="36" viewBox="0 0 40 36" style={{ imageRendering: 'pixelated' }}>
+      {/* Folder back */}
+      <path d="M2 8 L14 8 L16 4 L38 4 L38 32 L2 32 Z" fill="#ffd700" stroke="#cc9900" strokeWidth="1"/>
+      {/* Folder front */}
+      <rect x="2" y="10" width="36" height="22" fill="#ffcc00" stroke="#cc9900" strokeWidth="1"/>
+      {/* Folder tab */}
+      <rect x="4" y="4" width="10" height="6" fill="#ffd700" stroke="#cc9900" strokeWidth="1"/>
+      {/* Photo icon inside */}
+      <rect x="12" y="16" width="16" height="12" fill="#fff" stroke="#808080" strokeWidth="1"/>
+      <rect x="14" y="18" width="12" height="8" fill="#87ceeb"/>
+      <circle cx="17" cy="21" r="2" fill="#fff"/>
+      <path d="M14 26 L18 22 L22 24 L26 20 L26 26 Z" fill="#228b22"/>
     </svg>
-  );
-}
-
-function Sparkle({ delay }: { delay: number }) {
-  return (
-    <motion.svg
-      width="12"
-      height="12"
-      viewBox="0 0 12 12"
-      className="absolute"
-      style={{ top: '-4px', right: '-4px' }}
-      animate={{ 
-        scale: [1, 1.3, 1],
-        opacity: [0.7, 1, 0.7],
-      }}
-      transition={{
-        duration: 2,
-        repeat: Infinity,
-        delay,
-      }}
-    >
-      <path d="M6 0 L7 4 L6 3 L5 4 Z M6 12 L5 8 L6 9 L7 8 Z M0 6 L4 5 L3 6 L4 7 Z M12 6 L8 7 L9 6 L8 5 Z" fill="#ffd700"/>
-    </motion.svg>
   );
 }
 
@@ -71,119 +43,103 @@ export function PhotoAlbumsContent() {
 
   return (
     <div 
-      className="h-full p-3 flex flex-col"
+      className="h-full p-2 flex flex-col"
       style={{
-        background: "linear-gradient(135deg, #e8f4f8 0%, #f0e6f6 50%, #fce4ec 100%)",
+        backgroundColor: "#c0c0c0",
       }}
     >
-      {/* Cute header with decorative elements */}
+      {/* Windows 95 style address bar */}
       <div 
-        className="mb-3 p-2 flex items-center gap-2"
+        className="mb-2 p-1 flex items-center gap-2"
         style={{
-          backgroundColor: "#fffef5",
-          borderTop: "2px solid #fff",
-          borderLeft: "2px solid #fff",
-          borderBottom: "2px solid #ddd",
-          borderRight: "2px solid #ddd",
-          boxShadow: "2px 2px 0 rgba(0,0,0,0.1)",
+          backgroundColor: "#fff",
+          borderTop: "2px solid #808080",
+          borderLeft: "2px solid #808080",
+          borderBottom: "2px solid #fff",
+          borderRight: "2px solid #fff",
         }}
       >
-        <span style={{ fontSize: '14px' }}>
-          <svg width="16" height="16" viewBox="0 0 16 16">
-            <rect x="2" y="4" width="12" height="10" fill="#ffd700" stroke="#cc9900" strokeWidth="1" rx="1"/>
-            <circle cx="8" cy="9" r="3" fill="#333"/>
-            <circle cx="8" cy="9" r="1.5" fill="#666"/>
-            <rect x="5" y="2" width="6" height="3" fill="#888"/>
-          </svg>
-        </span>
-        <p 
+        <span 
           className="text-[9px]"
-          style={{ fontFamily: "var(--font-pixel)", color: "#666" }}
+          style={{ fontFamily: "var(--font-pixel)", color: "#000" }}
         >
-          Click to open album in new tab
-        </p>
+          Address:
+        </span>
+        <span 
+          className="text-[9px] flex-1"
+          style={{ fontFamily: "var(--font-pixel)", color: "#000080" }}
+        >
+          C:\Users\Thanh\Photos\
+        </span>
       </div>
 
-      {/* Album grid with polaroid-style cards */}
-      <div className="grid grid-cols-4 gap-4 flex-1 content-start">
-        {photoAlbums.map((album, index) => (
-          <motion.button
-            key={album.id}
-            onClick={() => handleAlbumClick(album.url)}
-            className="flex flex-col items-center group"
-            style={{ background: 'transparent' }}
-            whileHover={{ scale: 1.05, rotate: [-1, 1][index % 2] }}
-            whileTap={{ scale: 0.95 }}
-            initial={{ opacity: 0, y: 15, rotate: (index % 2 === 0 ? -2 : 2) }}
-            animate={{ opacity: 1, y: 0, rotate: (index % 2 === 0 ? -1 : 1) }}
-            transition={{ delay: index * 0.08, type: "spring", stiffness: 200 }}
-            data-testid={`button-album-${album.id}`}
-          >
-            <div className="relative">
-              <Sparkle delay={index * 0.3} />
-              <div 
-                className="transition-all duration-300 group-hover:drop-shadow-[0_4px_12px_rgba(0,0,0,0.25)]"
-                style={{ filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.15))' }}
-              >
-                <PolaroidIcon color={pastelColors[index % pastelColors.length]} />
-              </div>
-            </div>
-            <div 
-              className="mt-1 px-2 py-1 text-center rounded-sm"
-              style={{ 
-                backgroundColor: 'rgba(255,255,255,0.8)',
-                boxShadow: '1px 1px 2px rgba(0,0,0,0.1)',
-              }}
-            >
-              <span
-                className="block text-[7px] leading-tight font-bold"
-                style={{ fontFamily: 'var(--font-pixel)', color: '#444' }}
-              >
-                {album.name}
-              </span>
-              <span
-                className="block text-[6px] leading-tight"
-                style={{ 
-                  fontFamily: 'var(--font-pixel)', 
-                  color: pastelColors[index % pastelColors.length].replace('#ff', '#99').replace('#ba', '#77'),
-                }}
-              >
-                ~ {album.year}
-              </span>
-            </div>
-          </motion.button>
-        ))}
-      </div>
-
-      {/* Footer with cute styling */}
+      {/* Album grid - classic Windows Explorer style */}
       <div 
-        className="mt-auto p-2 flex items-center justify-between"
+        className="flex-1 p-2 overflow-auto"
         style={{
-          backgroundColor: "#fffef5",
-          borderTop: "2px solid #fff",
-          borderLeft: "2px solid #fff",
-          borderBottom: "2px solid #ddd",
-          borderRight: "2px solid #ddd",
-          boxShadow: "2px 2px 0 rgba(0,0,0,0.1)",
+          backgroundColor: "#fff",
+          borderTop: "2px solid #808080",
+          borderLeft: "2px solid #808080",
+          borderBottom: "2px solid #fff",
+          borderRight: "2px solid #fff",
         }}
       >
-        <div className="flex items-center gap-2">
-          <svg width="12" height="12" viewBox="0 0 12 12">
-            <path d="M6 1 L7 4 L10 4 L7.5 6 L8.5 9 L6 7 L3.5 9 L4.5 6 L2 4 L5 4 Z" fill="#ffd700"/>
-          </svg>
-          <p 
-            className="text-[8px]"
-            style={{ fontFamily: "var(--font-pixel)", color: "#888" }}
-          >
-            {photoAlbums.length} albums
-          </p>
+        <div className="grid grid-cols-4 gap-4">
+          {photoAlbums.map((album, index) => (
+            <motion.button
+              key={album.id}
+              onClick={() => handleAlbumClick(album.url)}
+              className="flex flex-col items-center p-2 group"
+              style={{ background: 'transparent' }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: index * 0.03 }}
+              data-testid={`button-album-${album.id}`}
+            >
+              <div className="relative group-hover:brightness-110 transition-all">
+                <FolderIcon />
+              </div>
+              <div className="mt-1 text-center">
+                <span
+                  className="block text-[8px] leading-tight"
+                  style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
+                >
+                  {album.name}
+                </span>
+                <span
+                  className="block text-[7px] leading-tight"
+                  style={{ fontFamily: 'var(--font-pixel)', color: '#666' }}
+                >
+                  ~ {album.year}
+                </span>
+              </div>
+            </motion.button>
+          ))}
         </div>
-        <p 
-          className="text-[7px]"
-          style={{ fontFamily: "var(--font-pixel)", color: "#aaa" }}
+      </div>
+
+      {/* Windows 95 style status bar */}
+      <div 
+        className="mt-1 p-1 flex items-center justify-between"
+        style={{
+          backgroundColor: "#c0c0c0",
+          borderTop: "1px solid #fff",
+        }}
+      >
+        <span 
+          className="text-[8px]"
+          style={{ fontFamily: "var(--font-pixel)", color: "#000" }}
+        >
+          {photoAlbums.length} object(s)
+        </span>
+        <span 
+          className="text-[8px]"
+          style={{ fontFamily: "var(--font-pixel)", color: "#000" }}
         >
           Google Photos
-        </p>
+        </span>
       </div>
     </div>
   );
