@@ -47,30 +47,33 @@ export default function Home() {
     const vw = window.innerWidth;
     const vh = window.innerHeight;
     
-    // Define zones around the screen edges to place windows randomly
-    // Avoid top-right corner (media player area: ~280px wide, ~150px tall)
-    const mediaPlayerWidth = 300;
-    const mediaPlayerHeight = 180;
+    // Calculate constrained random position - keep windows in central area
+    // Define a "safe zone" that's roughly 20-80% of the viewport
+    const marginX = Math.max(80, vw * 0.15); // 15% margin from edges, min 80px
+    const marginY = Math.max(60, vh * 0.12); // 12% margin from edges, min 60px
     
-    // Generate random position across the whole viewport
-    // But avoid the media player zone in top-right
-    let randomX: number = Math.floor(Math.random() * Math.max(100, vw - 500)) + 10;
-    let randomY: number = Math.floor(Math.random() * Math.max(100, vh - 400)) + 10;
+    // Calculate safe bounds (where windows can spawn)
+    const safeMinX = marginX;
+    const safeMaxX = Math.max(marginX + 100, vw - marginX - 450); // Account for window width
+    const safeMinY = marginY;
+    const safeMaxY = Math.max(marginY + 100, vh - marginY - 400); // Account for window height
     
-    // Try to find a position that doesn't overlap media player
-    const maxAttempts = 10;
-    for (let i = 0; i < maxAttempts; i++) {
-      // Random position across most of the screen
-      randomX = Math.floor(Math.random() * Math.max(100, vw - 500)) + 10;
-      randomY = Math.floor(Math.random() * Math.max(100, vh - 400)) + 10;
-      
-      // Check if we're in the media player zone (top-right)
-      const inMediaPlayerZone = randomX > (vw - mediaPlayerWidth - 50) && randomY < mediaPlayerHeight;
-      
-      if (!inMediaPlayerZone) {
-        break;
-      }
-    }
+    // Random position within the safe central zone
+    // Add small random offset from center for variety
+    const centerX = vw / 2 - 200;
+    const centerY = vh / 2 - 200;
+    const offsetRange = 150; // How far from center windows can spawn
+    
+    let randomX = centerX + (Math.random() * offsetRange * 2 - offsetRange);
+    let randomY = centerY + (Math.random() * offsetRange * 2 - offsetRange);
+    
+    // Clamp to safe bounds
+    randomX = Math.max(safeMinX, Math.min(safeMaxX, randomX));
+    randomY = Math.max(safeMinY, Math.min(safeMaxY, randomY));
+    
+    // Round to integers
+    randomX = Math.floor(randomX);
+    randomY = Math.floor(randomY);
     
     // Set size based on content type - use responsive values
     let width = "min(400px, 90vw)";
