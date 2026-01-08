@@ -71,16 +71,6 @@ export function UnderConstructionContent() {
 
     ----------------------------------------
 
-       STATUS: brewing something cool...
-
-       TODO:
-       [x] make website
-       [x] add cool effects
-       [ ] finish this page
-       [ ] world domination
-
-    ----------------------------------------
-
 
        last updated: soon(tm)
        progress: |||||||........ 42%
