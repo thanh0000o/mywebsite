@@ -91,33 +91,51 @@ export function DragonLogoContent() {
                 lineHeight: '1.4',
               }}
             >
-              <svg width="280" height="55" viewBox="0 0 280 55" style={{ display: 'block', margin: '0 auto' }}>
-                {/* Wobbly hand-drawn pencil text effect */}
-                <text x="8" y="14" fill="#222" style={{ fontFamily: 'var(--font-pixel)', fontSize: '9px' }}>
+              <svg width="240" height="45" viewBox="0 0 240 45" style={{ display: 'block', margin: '0 auto' }}>
+                <text x="4" y="12" fill="#222" style={{ fontFamily: 'var(--font-pixel)', fontSize: '9px' }}>
                   I'm Vietnamese &amp; born in the
                 </text>
-                <text x="8" y="28" fill="#222" style={{ fontFamily: 'var(--font-pixel)', fontSize: '9px' }}>
+                <text x="4" y="26" fill="#222" style={{ fontFamily: 'var(--font-pixel)', fontSize: '9px' }}>
                   Year of the Dragon! So I drew
                 </text>
-                <text x="8" y="42" fill="#222" style={{ fontFamily: 'var(--font-pixel)', fontSize: '9px' }}>
+                <text x="4" y="40" fill="#222" style={{ fontFamily: 'var(--font-pixel)', fontSize: '9px' }}>
                   this cute dragon as my logo~
                 </text>
-                {/* Little heart doodle */}
-                <path d="M265 38 Q268 35 271 38 Q274 35 277 38 Q277 42 271 48 Q265 42 265 38" fill="none" stroke="#ff6b6b" strokeWidth="1.5"/>
-                {/* Star doodle */}
-                <path d="M255 10 L257 16 L263 16 L258 20 L260 26 L255 22 L250 26 L252 20 L247 16 L253 16 Z" fill="none" stroke="#ffd93d" strokeWidth="1"/>
               </svg>
             </div>
-            <img 
-              src={dragonLogo} 
-              alt="Dragon Logo"
-              className="max-w-full"
-              style={{ 
-                imageRendering: 'pixelated',
-                maxHeight: '180px',
-              }}
-              draggable={false}
-            />
+            {/* Dragon with hearts and stars around it */}
+            <div className="relative" style={{ display: 'inline-block' }}>
+              <img 
+                src={dragonLogo} 
+                alt="Dragon Logo"
+                className="max-w-full"
+                style={{ 
+                  imageRendering: 'pixelated',
+                  maxHeight: '160px',
+                }}
+                draggable={false}
+              />
+              {/* Decorations around the dragon */}
+              <svg 
+                className="absolute inset-0 w-full h-full pointer-events-none" 
+                viewBox="0 0 200 200"
+                style={{ overflow: 'visible' }}
+              >
+                {/* Top left star */}
+                <path d="M15 20 L17 26 L23 26 L18 30 L20 36 L15 32 L10 36 L12 30 L7 26 L13 26 Z" fill="none" stroke="#ffd93d" strokeWidth="1.5"/>
+                {/* Top right heart */}
+                <path d="M180 15 Q184 10 188 15 Q192 10 196 15 Q196 22 188 30 Q180 22 180 15" fill="none" stroke="#ff6b6b" strokeWidth="1.5"/>
+                {/* Bottom left heart */}
+                <path d="M5 170 Q9 165 13 170 Q17 165 21 170 Q21 177 13 185 Q5 177 5 170" fill="none" stroke="#ff6b6b" strokeWidth="1.5"/>
+                {/* Bottom right star */}
+                <path d="M185 175 L187 181 L193 181 L188 185 L190 191 L185 187 L180 191 L182 185 L177 181 L183 181 Z" fill="none" stroke="#ffd93d" strokeWidth="1.5"/>
+                {/* Small sparkles */}
+                <circle cx="30" cy="90" r="2" fill="#ffd93d"/>
+                <circle cx="175" cy="100" r="2" fill="#ff6b6b"/>
+                <circle cx="170" cy="50" r="1.5" fill="#ffd93d"/>
+                <circle cx="25" cy="140" r="1.5" fill="#ff6b6b"/>
+              </svg>
+            </div>
           </div>
         </div>
 
