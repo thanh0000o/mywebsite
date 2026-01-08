@@ -44,11 +44,30 @@ export default function Home() {
     const vw = window.innerWidth;
     const vh = window.innerHeight;
     
-    // Random position within visible area - constrained to viewport
-    const maxX = Math.max(50, vw - 450);
-    const maxY = Math.max(30, vh - 400);
-    const randomX = Math.floor(Math.random() * Math.min(maxX, 400)) + 20;
-    const randomY = Math.floor(Math.random() * Math.min(maxY, 250)) + 20;
+    // Define zones around the screen edges to place windows randomly
+    // Avoid top-right corner (media player area: ~280px wide, ~150px tall)
+    const mediaPlayerWidth = 300;
+    const mediaPlayerHeight = 180;
+    
+    // Generate random position across the whole viewport
+    // But avoid the media player zone in top-right
+    let randomX: number = Math.floor(Math.random() * Math.max(100, vw - 500)) + 10;
+    let randomY: number = Math.floor(Math.random() * Math.max(100, vh - 400)) + 10;
+    
+    // Try to find a position that doesn't overlap media player
+    const maxAttempts = 10;
+    for (let i = 0; i < maxAttempts; i++) {
+      // Random position across most of the screen
+      randomX = Math.floor(Math.random() * Math.max(100, vw - 500)) + 10;
+      randomY = Math.floor(Math.random() * Math.max(100, vh - 400)) + 10;
+      
+      // Check if we're in the media player zone (top-right)
+      const inMediaPlayerZone = randomX > (vw - mediaPlayerWidth - 50) && randomY < mediaPlayerHeight;
+      
+      if (!inMediaPlayerZone) {
+        break;
+      }
+    }
     
     // Set size based on content type - use responsive values
     let width = "min(400px, 90vw)";
