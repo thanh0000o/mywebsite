@@ -70,7 +70,7 @@ export function MediaPlayer() {
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-  const [volume, setVolume] = useState(5);
+  const [volume, setVolume] = useState(3);
   const [isMuted, setIsMuted] = useState(false);
   const [previousVolume, setPreviousVolume] = useState(5);
   const [showPlaylist, setShowPlaylist] = useState(false);
@@ -133,6 +133,7 @@ export function MediaPlayer() {
   useEffect(() => {
     if (audioRef.current && isInitialized) {
       audioRef.current.src = playlist[currentTrack].src;
+      audioRef.current.currentTime = 0;
       if (isPlayingRef.current) {
         audioRef.current.play().catch(() => {});
       }
