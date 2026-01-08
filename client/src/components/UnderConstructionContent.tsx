@@ -56,7 +56,7 @@ file size: smol
 importance: maximum
 
         .  *  .   *   .  *  .
-     *   tanstraea studios   *
+     *   thanh's corner   *
         .  *  .   *   .  *  .
 
 [END OF FILE]`}
