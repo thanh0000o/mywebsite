@@ -176,30 +176,22 @@ export default function Home() {
 
       {/* 
         =====================================================
-        DESKTOP VIEW
+        DESKTOP VIEW - Portfolio Icon (always visible)
         =====================================================
         Retro styled icons with hover effects
         =====================================================
       */}
-      <AnimatePresence>
-        {!showDreamweaver && (
-          <motion.div 
-            className="absolute inset-0 flex items-center justify-center z-10"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="flex flex-col items-center">
-              <DesktopIcon
-                imageSrc={logoImage}
-                label="portfolio_thànhlambeets"
-                onClick={() => setShowDreamweaver(true)}
-              />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <div 
+        className="absolute inset-0 flex items-center justify-center z-10"
+      >
+        <div className="flex flex-col items-center">
+          <DesktopIcon
+            imageSrc={logoImage}
+            label="portfolio_thànhlambeets"
+            onClick={() => setShowDreamweaver(true)}
+          />
+        </div>
+      </div>
 
       {/* 
         =====================================================
