@@ -86,55 +86,43 @@ export function DragonLogoContent() {
               className="mb-2 text-center"
               style={{
                 fontFamily: 'var(--font-pixel)',
-                fontSize: '9px',
-                color: '#000',
+                fontSize: '8px',
+                color: '#222',
                 lineHeight: '1.4',
               }}
             >
-              <svg width="240" height="45" viewBox="0 0 240 45" style={{ display: 'block', margin: '0 auto' }}>
-                <text x="4" y="12" fill="#222" style={{ fontFamily: 'var(--font-pixel)', fontSize: '9px' }}>
-                  I'm Vietnamese &amp; born in the
-                </text>
-                <text x="4" y="26" fill="#222" style={{ fontFamily: 'var(--font-pixel)', fontSize: '9px' }}>
-                  Year of the Dragon! So I drew
-                </text>
-                <text x="4" y="40" fill="#222" style={{ fontFamily: 'var(--font-pixel)', fontSize: '9px' }}>
-                  this cute dragon as my logo~
-                </text>
-              </svg>
+              <div>I'm Vietnamese & born in the</div>
+              <div>Year of the Dragon! So I drew</div>
+              <div>this cute dragon as my logo~</div>
             </div>
             {/* Dragon with hearts and stars around it */}
-            <div className="relative" style={{ display: 'inline-block' }}>
+            <div className="relative flex justify-center" style={{ padding: '12px' }}>
+              {/* Top left star */}
+              <svg className="absolute" style={{ top: '2px', left: '2px', width: '16px', height: '16px' }} viewBox="0 0 20 20">
+                <path d="M10 2 L11 7 L16 7 L12 10 L14 15 L10 12 L6 15 L8 10 L4 7 L9 7 Z" fill="none" stroke="#ffd93d" strokeWidth="1.5"/>
+              </svg>
+              {/* Top right heart */}
+              <svg className="absolute" style={{ top: '2px', right: '2px', width: '16px', height: '16px' }} viewBox="0 0 20 20">
+                <path d="M10 5 Q12 2 14 5 Q16 2 18 5 Q18 10 14 14 Q10 10 10 5" fill="none" stroke="#ff6b6b" strokeWidth="1.5"/>
+              </svg>
+              {/* Bottom left heart */}
+              <svg className="absolute" style={{ bottom: '2px', left: '2px', width: '16px', height: '16px' }} viewBox="0 0 20 20">
+                <path d="M10 5 Q12 2 14 5 Q16 2 18 5 Q18 10 14 14 Q10 10 10 5" fill="none" stroke="#ff6b6b" strokeWidth="1.5"/>
+              </svg>
+              {/* Bottom right star */}
+              <svg className="absolute" style={{ bottom: '2px', right: '2px', width: '16px', height: '16px' }} viewBox="0 0 20 20">
+                <path d="M10 2 L11 7 L16 7 L12 10 L14 15 L10 12 L6 15 L8 10 L4 7 L9 7 Z" fill="none" stroke="#ffd93d" strokeWidth="1.5"/>
+              </svg>
               <img 
                 src={dragonLogo} 
                 alt="Dragon Logo"
-                className="max-w-full"
                 style={{ 
                   imageRendering: 'pixelated',
-                  maxHeight: '160px',
+                  maxHeight: '130px',
+                  display: 'block',
                 }}
                 draggable={false}
               />
-              {/* Decorations around the dragon */}
-              <svg 
-                className="absolute inset-0 w-full h-full pointer-events-none" 
-                viewBox="0 0 200 200"
-                style={{ overflow: 'visible' }}
-              >
-                {/* Top left star */}
-                <path d="M15 20 L17 26 L23 26 L18 30 L20 36 L15 32 L10 36 L12 30 L7 26 L13 26 Z" fill="none" stroke="#ffd93d" strokeWidth="1.5"/>
-                {/* Top right heart */}
-                <path d="M180 15 Q184 10 188 15 Q192 10 196 15 Q196 22 188 30 Q180 22 180 15" fill="none" stroke="#ff6b6b" strokeWidth="1.5"/>
-                {/* Bottom left heart */}
-                <path d="M5 170 Q9 165 13 170 Q17 165 21 170 Q21 177 13 185 Q5 177 5 170" fill="none" stroke="#ff6b6b" strokeWidth="1.5"/>
-                {/* Bottom right star */}
-                <path d="M185 175 L187 181 L193 181 L188 185 L190 191 L185 187 L180 191 L182 185 L177 181 L183 181 Z" fill="none" stroke="#ffd93d" strokeWidth="1.5"/>
-                {/* Small sparkles */}
-                <circle cx="30" cy="90" r="2" fill="#ffd93d"/>
-                <circle cx="175" cy="100" r="2" fill="#ff6b6b"/>
-                <circle cx="170" cy="50" r="1.5" fill="#ffd93d"/>
-                <circle cx="25" cy="140" r="1.5" fill="#ff6b6b"/>
-              </svg>
             </div>
           </div>
         </div>
