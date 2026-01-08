@@ -33,19 +33,20 @@ export function ResumeContent() {
         <motion.a
           href={resumePdf}
           download="Resume_ThanhLambeets.pdf"
-          className="flex items-center gap-1 px-2 py-0.5"
+          className="flex items-center gap-1.5 px-3 py-1"
           style={{
             backgroundColor: '#C0C0C0',
             border: '2px outset #fff',
-            fontSize: '9px',
+            fontSize: '11px',
             color: '#000',
             textDecoration: 'none',
+            fontFamily: 'var(--font-pixel)',
           }}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           data-testid="button-download-resume"
         >
-          <svg width="12" height="12" viewBox="0 0 12 12" style={{ imageRendering: 'pixelated' }}>
+          <svg width="16" height="16" viewBox="0 0 12 12" style={{ imageRendering: 'pixelated' }}>
             <rect x="2" y="1" width="8" height="10" fill="#fff" stroke="#000" strokeWidth="1"/>
             <line x1="4" y1="4" x2="8" y2="4" stroke="#000" strokeWidth="1"/>
             <line x1="4" y1="6" x2="8" y2="6" stroke="#000" strokeWidth="1"/>
@@ -58,19 +59,20 @@ export function ResumeContent() {
           href={resumePdf}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-1 px-2 py-0.5"
+          className="flex items-center gap-1.5 px-3 py-1"
           style={{
             backgroundColor: '#C0C0C0',
             border: '2px outset #fff',
-            fontSize: '9px',
+            fontSize: '11px',
             color: '#000',
             textDecoration: 'none',
+            fontFamily: 'var(--font-pixel)',
           }}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           data-testid="button-open-resume-new-tab"
         >
-          <svg width="12" height="12" viewBox="0 0 12 12" style={{ imageRendering: 'pixelated' }}>
+          <svg width="16" height="16" viewBox="0 0 12 12" style={{ imageRendering: 'pixelated' }}>
             <rect x="1" y="3" width="8" height="8" fill="none" stroke="#000" strokeWidth="1"/>
             <polyline points="5,1 11,1 11,7" fill="none" stroke="#000" strokeWidth="1"/>
             <line x1="11" y1="1" x2="5" y2="7" stroke="#000" strokeWidth="1"/>
