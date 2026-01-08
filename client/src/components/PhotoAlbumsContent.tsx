@@ -80,16 +80,16 @@ export function PhotoAlbumsContent() {
                 <InternetExplorerIcon />
               </div>
             </div>
-            <div className="mt-2 text-center transition-all duration-300 group-hover:text-[#0078d4]">
+            <div className="mt-2 text-center">
               <span
                 className="block text-[8px] leading-tight"
-                style={{ fontFamily: 'var(--font-pixel)', color: 'inherit' }}
+                style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
               >
                 {album.name}
               </span>
               <span
                 className="block text-[7px] leading-tight"
-                style={{ fontFamily: 'var(--font-pixel)', color: 'inherit' }}
+                style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
               >
                 ~ {album.year}
               </span>
