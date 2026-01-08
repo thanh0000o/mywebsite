@@ -18,20 +18,38 @@ const photoAlbums: PhotoAlbum[] = [
   { id: 8, name: "Nisramont0002", year: "2021", url: "https://photos.app.goo.gl/XUndRER9crjrFP1v5" },
 ];
 
-function FolderIcon() {
+function PhotoFolderIcon() {
   return (
-    <svg width="40" height="36" viewBox="0 0 40 36" style={{ imageRendering: 'pixelated' }}>
+    <svg width="48" height="44" viewBox="0 0 48 44" style={{ imageRendering: 'auto' }}>
+      <defs>
+        <linearGradient id="folderGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#7eb8da"/>
+          <stop offset="50%" stopColor="#4a90b8"/>
+          <stop offset="100%" stopColor="#2d6a8a"/>
+        </linearGradient>
+        <linearGradient id="photoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#fff"/>
+          <stop offset="100%" stopColor="#e0e0e0"/>
+        </linearGradient>
+      </defs>
+      {/* Folder shadow */}
+      <ellipse cx="24" cy="42" rx="18" ry="2" fill="rgba(0,0,0,0.15)"/>
       {/* Folder back */}
-      <path d="M2 8 L14 8 L16 4 L38 4 L38 32 L2 32 Z" fill="#ffd700" stroke="#cc9900" strokeWidth="1"/>
-      {/* Folder front */}
-      <rect x="2" y="10" width="36" height="22" fill="#ffcc00" stroke="#cc9900" strokeWidth="1"/>
-      {/* Folder tab */}
-      <rect x="4" y="4" width="10" height="6" fill="#ffd700" stroke="#cc9900" strokeWidth="1"/>
-      {/* Photo icon inside */}
-      <rect x="12" y="16" width="16" height="12" fill="#fff" stroke="#808080" strokeWidth="1"/>
-      <rect x="14" y="18" width="12" height="8" fill="#87ceeb"/>
-      <circle cx="17" cy="21" r="2" fill="#fff"/>
-      <path d="M14 26 L18 22 L22 24 L26 20 L26 26 Z" fill="#228b22"/>
+      <path d="M4 12 L16 12 L18 8 L44 8 L44 38 L4 38 Z" fill="url(#folderGrad)" stroke="#1e4d6b" strokeWidth="1"/>
+      {/* Folder front face */}
+      <rect x="4" y="14" width="40" height="24" rx="1" fill="url(#folderGrad)" stroke="#1e4d6b" strokeWidth="1"/>
+      {/* Folder highlight */}
+      <rect x="6" y="15" width="36" height="3" fill="rgba(255,255,255,0.3)" rx="1"/>
+      {/* Photo stack effect */}
+      <rect x="14" y="19" width="20" height="14" fill="#f5f5f5" stroke="#999" strokeWidth="0.5" transform="rotate(-3, 24, 26)"/>
+      <rect x="14" y="19" width="20" height="14" fill="url(#photoGrad)" stroke="#888" strokeWidth="0.5"/>
+      {/* Photo image preview */}
+      <rect x="16" y="21" width="16" height="10" fill="#3a7ca5"/>
+      {/* Sun */}
+      <circle cx="27" cy="24" r="2" fill="#ffd54f"/>
+      {/* Mountains */}
+      <path d="M16 31 L22 25 L26 28 L32 23 L32 31 Z" fill="#2e7d32" opacity="0.9"/>
+      <path d="M16 31 L20 27 L24 31 Z" fill="#388e3c"/>
     </svg>
   );
 }
@@ -99,7 +117,7 @@ export function PhotoAlbumsContent() {
               data-testid={`button-album-${album.id}`}
             >
               <div className="relative group-hover:brightness-110 transition-all">
-                <FolderIcon />
+                <PhotoFolderIcon />
               </div>
               <div className="mt-1 text-center">
                 <span
