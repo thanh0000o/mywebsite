@@ -14,6 +14,7 @@ import { SoftwareContent } from "@/components/SoftwareContent";
 import { ArtContent } from "@/components/ArtContent";
 import { WebsiteArchiveContent } from "@/components/WebsiteArchiveContent";
 import { ResumeContent } from "@/components/ResumeContent";
+import { PhotoAlbumsContent } from "@/components/PhotoAlbumsContent";
 import { MediaPlayer } from "@/components/MediaPlayer";
 import logoImage from "@assets/image_1767797842217.png";
 
@@ -100,6 +101,9 @@ export default function Home() {
     } else if (type === "archive") {
       width = "min(900px, 95vw)";
       height = "min(700px, 90vh)";
+    } else if (type === "photoalbums") {
+      width = "min(400px, 90vw)";
+      height = "min(320px, 70vh)";
     } else if (type === "resume") {
       width = "min(900px, 95vw)";
       height = "min(750px, 90vh)";
@@ -151,6 +155,8 @@ export default function Home() {
         return <ArtContent />;
       case "archive":
         return <WebsiteArchiveContent />;
+      case "photoalbums":
+        return <PhotoAlbumsContent />;
       case "resume":
         return <ResumeContent />;
       default:
@@ -201,6 +207,41 @@ export default function Home() {
         =====================================================
       */}
       <div className="absolute top-4 left-4 flex flex-col gap-2" style={{ zIndex: 50 }}>
+        {/* Photo Albums Folder */}
+        <motion.button
+          onClick={() => openWindow("photoalbums", "PhotoAlbums")}
+          className="flex flex-col items-center p-2 group"
+          style={{ background: 'transparent' }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          data-testid="button-photoalbums-folder"
+        >
+          <div className="relative">
+            <div className="absolute -inset-4 bg-[#0078d4]/30 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
+            <svg 
+              width="40" 
+              height="36" 
+              viewBox="0 0 40 36" 
+              className="relative drop-shadow-[0_0_15px_rgba(0,120,212,0.6)] group-hover:drop-shadow-[0_0_25px_rgba(0,120,212,0.9)] transition-all duration-300"
+              style={{ imageRendering: 'pixelated' }}
+            >
+              <rect x="0" y="6" width="40" height="30" fill="#0078d4"/>
+              <rect x="0" y="0" width="16" height="10" fill="#0078d4"/>
+              <rect x="2" y="8" width="36" height="26" fill="#005a9e"/>
+              <rect x="4" y="10" width="32" height="2" fill="#fff" opacity="0.3"/>
+              <circle cx="20" cy="22" r="8" fill="none" stroke="#fff" strokeWidth="2"/>
+              <ellipse cx="20" cy="22" rx="6" ry="3" fill="none" stroke="#fff" strokeWidth="1.5" opacity="0.8"/>
+              <circle cx="20" cy="22" r="2" fill="#fff"/>
+            </svg>
+          </div>
+          <span
+            className="mt-1 text-[9px] text-white text-center drop-shadow-md tracking-wide transition-transform duration-300 group-hover:scale-105"
+            style={{ fontFamily: 'var(--font-pixel)' }}
+          >
+            PhotoAlbums
+          </span>
+        </motion.button>
+
         {/* Website Archive Folder */}
         <motion.button
           onClick={() => openWindow("archive", "WebsiteArchive")}
