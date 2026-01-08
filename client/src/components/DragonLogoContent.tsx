@@ -93,7 +93,7 @@ export function DragonLogoContent() {
             >
               <div>I'm Vietnamese & born in the</div>
               <div>Year of the Dragon! So I drew</div>
-              <div>this cute dragon as my logo~</div>
+              <div>this dragon as my logo~</div>
             </div>
             {/* Dragon with hearts and stars around it */}
             <div className="relative flex justify-center" style={{ padding: '12px' }}>
