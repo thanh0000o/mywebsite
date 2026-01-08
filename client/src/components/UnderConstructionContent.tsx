@@ -46,7 +46,7 @@ export function UnderConstructionContent() {
         }}
       >
         <div 
-          className="w-full h-full overflow-auto"
+          className="w-full h-full overflow-auto flex justify-center"
           style={{
             background: '#ffffff',
             borderTop: '1px solid #404040',
@@ -56,11 +56,11 @@ export function UnderConstructionContent() {
           }}
         >
           <pre 
-            className="p-4 whitespace-pre text-[12px] leading-[1.6] text-center"
+            className="p-4 whitespace-pre text-[12px] leading-[1.6]"
             style={{ 
               color: '#000',
               fontFamily: 'var(--font-pixel)',
-              minHeight: '100%',
+              display: 'inline-block',
             }}
           >
 {`
