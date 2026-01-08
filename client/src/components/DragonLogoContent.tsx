@@ -86,7 +86,7 @@ export function DragonLogoContent() {
               className="max-w-full"
               style={{ 
                 imageRendering: 'pixelated',
-                maxHeight: '280px',
+                maxHeight: '220px',
               }}
               draggable={false}
             />

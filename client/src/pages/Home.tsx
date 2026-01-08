@@ -106,8 +106,8 @@ export default function Home() {
       width = "min(400px, 90vw)";
       height = "min(320px, 70vh)";
     } else if (type === "dragonlogo") {
-      width = "min(500px, 90vw)";
-      height = "min(450px, 80vh)";
+      width = "min(420px, 90vw)";
+      height = "min(380px, 75vh)";
     } else if (type === "resume") {
       width = "min(900px, 95vw)";
       height = "min(750px, 90vh)";
