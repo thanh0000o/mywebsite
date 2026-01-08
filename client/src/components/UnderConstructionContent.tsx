@@ -82,6 +82,32 @@ export function UnderConstructionContent() {
 
 `}
           </pre>
+          <div className="flex justify-center gap-4 pb-6 pt-2">
+            <img 
+              src="https://web.archive.org/web/20091027065803im_/http://geocities.com/SiliconValley/Park/5344/dancingbaby.gif" 
+              alt="dancing baby"
+              className="h-12"
+              style={{ imageRendering: 'pixelated' }}
+            />
+            <img 
+              src="https://web.archive.org/web/20091027022038im_/http://www.geocities.com/Hollywood/Lot/4680/flmskuld.gif" 
+              alt="flame skull"
+              className="h-12"
+              style={{ imageRendering: 'pixelated' }}
+            />
+            <img 
+              src="https://web.archive.org/web/20091026234846im_/http://geocities.com/Heartland/Plains/8498/anim-hamster.gif" 
+              alt="hamster"
+              className="h-12"
+              style={{ imageRendering: 'pixelated' }}
+            />
+            <img 
+              src="https://web.archive.org/web/20091027065803im_/http://geocities.com/SiliconValley/Park/5344/dancingbaby.gif" 
+              alt="dancing baby 2"
+              className="h-12"
+              style={{ imageRendering: 'pixelated', transform: 'scaleX(-1)' }}
+            />
+          </div>
         </div>
       </div>
       
