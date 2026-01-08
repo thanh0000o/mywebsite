@@ -13,7 +13,7 @@ interface Track {
   src: string;
 }
 
-const playlistName = "Intelligent DnB";
+const playlistName = "Drums for the soul";
 
 const playlist: Track[] = [
   { id: 1, title: "Possessions (Instrumental)", artist: "Voyager", src: track1 },
