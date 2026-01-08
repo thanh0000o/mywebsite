@@ -56,7 +56,7 @@ export function UnderConstructionContent() {
           }}
         >
           <pre 
-            className="p-4 whitespace-pre text-[12px] leading-[1.6]"
+            className="p-4 whitespace-pre text-[12px] leading-[1.6] text-center"
             style={{ 
               color: '#000',
               fontFamily: 'var(--font-pixel)',
