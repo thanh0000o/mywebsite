@@ -15,6 +15,7 @@ import { ArtContent } from "@/components/ArtContent";
 import { WebsiteArchiveContent } from "@/components/WebsiteArchiveContent";
 import { ResumeContent } from "@/components/ResumeContent";
 import { PhotoAlbumsContent } from "@/components/PhotoAlbumsContent";
+import { DragonLogoContent } from "@/components/DragonLogoContent";
 import { MediaPlayer } from "@/components/MediaPlayer";
 import logoImage from "@assets/image_1767797842217.png";
 
@@ -104,6 +105,9 @@ export default function Home() {
     } else if (type === "photoalbums") {
       width = "min(400px, 90vw)";
       height = "min(320px, 70vh)";
+    } else if (type === "dragonlogo") {
+      width = "min(500px, 90vw)";
+      height = "min(450px, 80vh)";
     } else if (type === "resume") {
       width = "min(900px, 95vw)";
       height = "min(750px, 90vh)";
@@ -157,6 +161,8 @@ export default function Home() {
         return <WebsiteArchiveContent />;
       case "photoalbums":
         return <PhotoAlbumsContent />;
+      case "dragonlogo":
+        return <DragonLogoContent />;
       case "resume":
         return <ResumeContent />;
       default:
@@ -312,6 +318,55 @@ export default function Home() {
             style={{ fontFamily: 'var(--font-pixel)' }}
           >
             Resume.pdf
+          </span>
+        </motion.button>
+
+        {/* Dragon Logo PNG File */}
+        <motion.button
+          onClick={() => openWindow("dragonlogo", "dragon_logo.png - MS Paint")}
+          className="flex flex-col items-center p-2 group"
+          style={{ background: 'transparent' }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          data-testid="button-dragon-png"
+        >
+          <div className="relative">
+            <div className="absolute -inset-4 bg-purple-500/30 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
+            <svg 
+              width="36" 
+              height="42" 
+              viewBox="0 0 36 42" 
+              className="relative drop-shadow-[0_0_15px_rgba(180,100,255,0.6)] group-hover:drop-shadow-[0_0_25px_rgba(180,100,255,0.9)] transition-all duration-300"
+              style={{ imageRendering: 'pixelated' }}
+            >
+              {/* PNG document shape */}
+              <rect x="2" y="2" width="28" height="38" fill="#fff" stroke="#808080" strokeWidth="2"/>
+              {/* Folded corner */}
+              <polygon points="22,2 30,10 22,10" fill="#C0C0C0" stroke="#808080" strokeWidth="1"/>
+              {/* Image preview area - checkered pattern for transparency */}
+              <rect x="6" y="12" width="20" height="16" fill="#c0c0c0"/>
+              <rect x="6" y="12" width="5" height="4" fill="#fff"/>
+              <rect x="16" y="12" width="5" height="4" fill="#fff"/>
+              <rect x="11" y="16" width="5" height="4" fill="#fff"/>
+              <rect x="21" y="16" width="5" height="4" fill="#fff"/>
+              <rect x="6" y="20" width="5" height="4" fill="#fff"/>
+              <rect x="16" y="20" width="5" height="4" fill="#fff"/>
+              <rect x="11" y="24" width="5" height="4" fill="#fff"/>
+              <rect x="21" y="24" width="5" height="4" fill="#fff"/>
+              {/* Simple dragon silhouette */}
+              <path d="M12 14 Q16 12 18 16 Q20 14 22 16 L20 20 Q18 24 16 22 L14 26 L12 22 Q10 20 12 14" fill="#000"/>
+              {/* PNG text */}
+              <rect x="6" y="30" width="20" height="4" fill="#8b5cf6"/>
+              <text x="8" y="33" fill="#fff" style={{ fontSize: '4px', fontFamily: 'var(--font-pixel)' }}>PNG</text>
+              {/* Purple accent */}
+              <rect x="2" y="2" width="4" height="38" fill="#8b5cf6"/>
+            </svg>
+          </div>
+          <span
+            className="mt-1 text-[9px] text-white text-center drop-shadow-md tracking-wide transition-transform duration-300 group-hover:scale-105"
+            style={{ fontFamily: 'var(--font-pixel)' }}
+          >
+            dragon_logo.png
           </span>
         </motion.button>
       </div>
