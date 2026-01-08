@@ -4,6 +4,7 @@ import winampLogo from "@assets/Screenshot_2026-01-07_144010_1767817428647.png";
 import track1 from "@assets/08-voyager-possessions_instrumental_mix-z0ne_1767827346337.mp3";
 import track2 from "@assets/02._source_direct_-_complexities_1767827373954.mp3";
 import track3 from "@assets/02_The_Rise_1767827380707.mp3";
+import track4 from "@assets/Science_Fiction_Jazz_Vol_3_-_04_-_Aquasky_-_Opaque_1767878405812.mp3";
 
 interface Track {
   id: number;
@@ -12,10 +13,13 @@ interface Track {
   src: string;
 }
 
+const playlistName = "Intelligent DnB";
+
 const playlist: Track[] = [
   { id: 1, title: "Possessions (Instrumental)", artist: "Voyager", src: track1 },
   { id: 2, title: "Complexities", artist: "Source Direct", src: track2 },
   { id: 3, title: "The Rise", artist: "Unknown", src: track3 },
+  { id: 4, title: "Opaque", artist: "Aquasky", src: track4 },
 ];
 
 export function MediaPlayer() {
@@ -511,18 +515,28 @@ export function MediaPlayer() {
 
         {/* Playlist (collapsible) */}
         {showPlaylist && (
-          <div
-            className="mx-1 mb-1"
-            style={{
-              backgroundColor: '#fff',
-              borderTop: '2px solid #808080',
-              borderLeft: '2px solid #808080',
-              borderBottom: '2px solid #fff',
-              borderRight: '2px solid #fff',
-              maxHeight: '60px',
-              overflowY: 'auto',
-            }}
-          >
+          <div className="mx-1 mb-1">
+            <div
+              className="px-1 py-0.5 text-[7px] font-bold"
+              style={{
+                backgroundColor: '#000080',
+                color: '#fff',
+                fontFamily: 'var(--font-pixel)',
+              }}
+            >
+              {playlistName}
+            </div>
+            <div
+              style={{
+                backgroundColor: '#fff',
+                borderTop: '2px solid #808080',
+                borderLeft: '2px solid #808080',
+                borderBottom: '2px solid #fff',
+                borderRight: '2px solid #fff',
+                maxHeight: '60px',
+                overflowY: 'auto',
+              }}
+            >
             {playlist.map((track, index) => (
               <div
                 key={track.id}
@@ -542,6 +556,7 @@ export function MediaPlayer() {
                 </span>
               </div>
             ))}
+            </div>
           </div>
         )}
 
