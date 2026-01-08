@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useState, useRef } from "react";
 import logoImage from "@assets/ChatGPT_Image_Jan_7,_2026,_12_04_31_PM_1767811147577.png";
 
 interface DreamweaverWindowProps {
@@ -8,6 +9,7 @@ interface DreamweaverWindowProps {
 
 export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowProps) {
   const tabs = ['ART', 'ABOUT ME', 'EDUCATION', 'LANGUAGES', 'EXPERIENCE', 'SOFTWARE', 'SOFTSKILLS', 'VALUES'];
+  const constraintsRef = useRef(null);
 
   const handleTabClick = (tab: string) => {
     if (tab === 'ABOUT ME') {
@@ -31,14 +33,22 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
+      ref={constraintsRef}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
-      className="fixed inset-0 flex items-center justify-center z-50 p-4"
+      className="fixed inset-0 z-50 pointer-events-none"
     >
-      <div 
-        className="w-[95vw] sm:w-[85vw] md:w-[75vw] lg:w-[60vw] xl:w-[45vw] h-[70vh] sm:h-[60vh] md:h-[50vh] max-w-[900px] flex flex-col relative"
+      <motion.div 
+        drag
+        dragMomentum={false}
+        dragConstraints={constraintsRef}
+        initial={{ scale: 0.95, x: "-50%", y: "-50%" }}
+        animate={{ scale: 1, x: "-50%", y: "-50%" }}
+        exit={{ scale: 0.95, x: "-50%", y: "-50%" }}
+        transition={{ duration: 0.2 }}
+        className="absolute top-1/2 left-1/2 w-[95vw] sm:w-[85vw] md:w-[75vw] lg:w-[60vw] xl:w-[45vw] h-[70vh] sm:h-[60vh] md:h-[50vh] max-w-[900px] flex flex-col pointer-events-auto"
         style={{
           backgroundColor: '#C0C0C0',
           boxShadow: '5px 5px 20px rgba(0,0,0,0.5)',
@@ -355,7 +365,7 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
           <span>&lt;body&gt;</span>
           <span>1K / 1 sec</span>
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 }
