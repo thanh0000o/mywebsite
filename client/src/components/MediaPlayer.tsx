@@ -362,9 +362,9 @@ export function MediaPlayer() {
                 }
               }}
               onMouseDown={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
                 const handleMouseMove = (moveEvent: MouseEvent) => {
                   if (audioRef.current && duration > 0) {
-                    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
                     const x = Math.max(0, Math.min(moveEvent.clientX - rect.left, rect.width));
                     const percentage = x / rect.width;
                     const newTime = percentage * duration;
