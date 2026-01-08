@@ -10,20 +10,17 @@ export function DragonLogoContent() {
     >
       {/* Toolbar */}
       <div 
-        className="flex items-center gap-1 px-1 py-1"
+        className="flex items-center px-1 py-1"
         style={{
           borderBottom: "1px solid #808080",
         }}
       >
-        {["File", "Edit", "View", "Image", "Colors", "Help"].map((menu) => (
-          <span
-            key={menu}
-            className="px-2 py-0.5 text-[9px]"
-            style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
-          >
-            {menu}
-          </span>
-        ))}
+        <span className="px-2 py-0.5 text-[9px] hover:bg-[#000080] hover:text-white cursor-default" style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}><u>F</u>ile</span>
+        <span className="px-2 py-0.5 text-[9px] hover:bg-[#000080] hover:text-white cursor-default" style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}><u>E</u>dit</span>
+        <span className="px-2 py-0.5 text-[9px] hover:bg-[#000080] hover:text-white cursor-default" style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}><u>V</u>iew</span>
+        <span className="px-2 py-0.5 text-[9px] hover:bg-[#000080] hover:text-white cursor-default" style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}><u>I</u>mage</span>
+        <span className="px-2 py-0.5 text-[9px] hover:bg-[#000080] hover:text-white cursor-default" style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}><u>C</u>olors</span>
+        <span className="px-2 py-0.5 text-[9px] hover:bg-[#000080] hover:text-white cursor-default" style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}><u>H</u>elp</span>
       </div>
 
       {/* Tool palette */}
