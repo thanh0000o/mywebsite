@@ -101,8 +101,8 @@ export default function Home() {
       width = "min(400px, 90vw)";
       height = "min(350px, 70vh)";
     } else if (type === "resume") {
-      width = "min(700px, 95vw)";
-      height = "min(550px, 85vh)";
+      width = "min(900px, 95vw)";
+      height = "min(750px, 90vh)";
     }
     
     const newWindow: WindowState = {

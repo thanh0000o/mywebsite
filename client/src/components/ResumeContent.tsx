@@ -94,21 +94,25 @@ export function ResumeContent() {
         }}
       >
         {/* Inner document frame */}
-        <div className="p-2 h-full">
+        <div className="p-3 min-h-full flex items-start justify-center">
           <div 
-            className="w-full h-full bg-white relative overflow-hidden"
+            className="bg-white relative"
             style={{
               boxShadow: '2px 2px 8px rgba(0,0,0,0.4)',
+              maxWidth: '100%',
             }}
           >
             {/* Resume Image */}
             <img
               src={resumeImage}
               alt="Resume - Thành Lambeets"
-              className="w-full h-auto"
+              className="block"
               style={{
                 backgroundColor: '#fff',
                 imageRendering: 'auto',
+                width: '100%',
+                height: 'auto',
+                maxWidth: '850px',
               }}
             />
             
