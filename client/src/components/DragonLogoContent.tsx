@@ -64,7 +64,7 @@ export function DragonLogoContent() {
 
         {/* Canvas area */}
         <div 
-          className="flex-1 p-2 overflow-auto"
+          className="p-1 overflow-auto"
           style={{
             backgroundColor: "#808080",
           }}
@@ -83,10 +83,10 @@ export function DragonLogoContent() {
             <img 
               src={dragonLogo} 
               alt="Dragon Logo"
-              className="max-w-full"
               style={{ 
                 imageRendering: 'pixelated',
-                maxHeight: '260px',
+                height: '240px',
+                width: 'auto',
               }}
               draggable={false}
             />
