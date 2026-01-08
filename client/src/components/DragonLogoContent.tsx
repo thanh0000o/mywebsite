@@ -61,21 +61,20 @@ export function DragonLogoContent() {
 
         {/* Canvas area */}
         <div 
-          className="flex-1 p-2 overflow-auto"
+          className="flex-1 p-1 overflow-auto flex items-center justify-center"
           style={{
             backgroundColor: "#808080",
           }}
         >
           <div
-            className="relative"
+            className="w-full h-full flex flex-col items-center justify-center"
             style={{
               backgroundColor: "#fff",
               borderTop: "2px solid #808080",
               borderLeft: "2px solid #808080",
               borderBottom: "2px solid #fff",
               borderRight: "2px solid #fff",
-              display: "inline-block",
-              padding: "8px",
+              padding: "12px",
             }}
           >
             {/* Hand-drawn style text at top */}
@@ -93,21 +92,21 @@ export function DragonLogoContent() {
               <div>this dragon as my logo~</div>
             </div>
             {/* Dragon with hearts and stars around it */}
-            <div className="relative flex justify-center" style={{ padding: '12px' }}>
+            <div className="relative flex justify-center items-center" style={{ padding: '16px' }}>
               {/* Top left star */}
-              <svg className="absolute" style={{ top: '2px', left: '2px', width: '16px', height: '16px' }} viewBox="0 0 20 20">
+              <svg className="absolute" style={{ top: '0px', left: '0px', width: '16px', height: '16px' }} viewBox="0 0 20 20">
                 <path d="M10 2 L11 7 L16 7 L12 10 L14 15 L10 12 L6 15 L8 10 L4 7 L9 7 Z" fill="none" stroke="#ffd93d" strokeWidth="1.5"/>
               </svg>
               {/* Top right heart */}
-              <svg className="absolute" style={{ top: '2px', right: '2px', width: '16px', height: '16px' }} viewBox="0 0 20 20">
+              <svg className="absolute" style={{ top: '0px', right: '0px', width: '16px', height: '16px' }} viewBox="0 0 20 20">
                 <path d="M10 5 Q12 2 14 5 Q16 2 18 5 Q18 10 14 14 Q10 10 10 5" fill="none" stroke="#ff6b6b" strokeWidth="1.5"/>
               </svg>
               {/* Bottom left heart */}
-              <svg className="absolute" style={{ bottom: '2px', left: '2px', width: '16px', height: '16px' }} viewBox="0 0 20 20">
+              <svg className="absolute" style={{ bottom: '0px', left: '0px', width: '16px', height: '16px' }} viewBox="0 0 20 20">
                 <path d="M10 5 Q12 2 14 5 Q16 2 18 5 Q18 10 14 14 Q10 10 10 5" fill="none" stroke="#ff6b6b" strokeWidth="1.5"/>
               </svg>
               {/* Bottom right star */}
-              <svg className="absolute" style={{ bottom: '2px', right: '2px', width: '16px', height: '16px' }} viewBox="0 0 20 20">
+              <svg className="absolute" style={{ bottom: '0px', right: '0px', width: '16px', height: '16px' }} viewBox="0 0 20 20">
                 <path d="M10 2 L11 7 L16 7 L12 10 L14 15 L10 12 L6 15 L8 10 L4 7 L9 7 Z" fill="none" stroke="#ffd93d" strokeWidth="1.5"/>
               </svg>
               <img 
