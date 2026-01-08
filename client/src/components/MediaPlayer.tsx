@@ -575,7 +575,7 @@ export function MediaPlayer() {
                 borderLeft: '2px solid #808080',
                 borderBottom: '2px solid #fff',
                 borderRight: '2px solid #fff',
-                maxHeight: '60px',
+                maxHeight: '120px',
                 overflowY: 'auto',
               }}
             >
@@ -591,7 +591,7 @@ export function MediaPlayer() {
                 data-testid={`playlist-item-${track.id}`}
               >
                 <span
-                  className="text-[7px]"
+                  className="text-[8px]"
                   style={{ fontFamily: 'var(--font-pixel)', color: 'inherit' }}
                 >
                   {String(index + 1).padStart(2, '0')}. {track.artist} - {track.title}
