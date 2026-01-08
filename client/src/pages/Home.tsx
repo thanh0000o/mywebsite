@@ -288,7 +288,7 @@ export default function Home() {
 
         {/* Under Construction Notepad File */}
         <motion.button
-          onClick={() => openWindow("underconstruction", "underconstruction.txt - Notepad")}
+          onClick={() => openWindow("underconstruction", "notepad.txt")}
           className="flex flex-col items-center p-2 group"
           style={{ background: 'transparent' }}
           whileHover={{ scale: 1.05 }}
