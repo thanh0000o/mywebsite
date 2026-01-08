@@ -340,9 +340,9 @@ export function MediaPlayer() {
               })}
             </div>
 
-            {/* Progress Bar */}
+            {/* Progress Bar - Clickable/Draggable */}
             <div
-              className="h-1.5 relative"
+              className="h-2.5 relative cursor-pointer group"
               style={{
                 backgroundColor: '#C0C0C0',
                 borderTop: '1px solid #808080',
@@ -350,10 +350,53 @@ export function MediaPlayer() {
                 borderBottom: '1px solid #fff',
                 borderRight: '1px solid #fff',
               }}
+              onClick={(e) => {
+                if (audioRef.current && duration > 0) {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  const percentage = x / rect.width;
+                  const newTime = percentage * duration;
+                  audioRef.current.currentTime = newTime;
+                  setCurrentTime(newTime);
+                  setProgress(percentage * 100);
+                }
+              }}
+              onMouseDown={(e) => {
+                const handleMouseMove = (moveEvent: MouseEvent) => {
+                  if (audioRef.current && duration > 0) {
+                    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+                    const x = Math.max(0, Math.min(moveEvent.clientX - rect.left, rect.width));
+                    const percentage = x / rect.width;
+                    const newTime = percentage * duration;
+                    audioRef.current.currentTime = newTime;
+                    setCurrentTime(newTime);
+                    setProgress(percentage * 100);
+                  }
+                };
+                const handleMouseUp = () => {
+                  document.removeEventListener('mousemove', handleMouseMove);
+                  document.removeEventListener('mouseup', handleMouseUp);
+                };
+                document.addEventListener('mousemove', handleMouseMove);
+                document.addEventListener('mouseup', handleMouseUp);
+              }}
+              data-testid="progress-bar"
             >
               <div
                 className="h-full bg-[#000080]"
                 style={{ width: `${progress}%` }}
+              />
+              {/* Draggable handle */}
+              <div
+                className="absolute top-1/2 -translate-y-1/2 w-2 h-3"
+                style={{
+                  left: `calc(${progress}% - 4px)`,
+                  backgroundColor: '#C0C0C0',
+                  borderTop: '1px solid #fff',
+                  borderLeft: '1px solid #fff',
+                  borderBottom: '1px solid #808080',
+                  borderRight: '1px solid #808080',
+                }}
               />
             </div>
 
