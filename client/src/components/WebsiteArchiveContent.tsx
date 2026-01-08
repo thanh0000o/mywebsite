@@ -191,8 +191,8 @@ export function WebsiteArchiveContent() {
                   color: "#000",
                 }}
               >
-                <p className="text-[10px]"><strong>{selectedSite.name}</strong> ({selectedSite.year})</p>
-                <p className="mt-1 text-[9px]" style={{ color: "#333" }}>{selectedSite.description}</p>
+                <p className="text-[10px]"><strong>&gt; {selectedSite.name}</strong> ({selectedSite.year})</p>
+                <p className="mt-1 text-[9px]" style={{ color: "#333" }}>&gt;&gt; {selectedSite.description}</p>
               </div>
             </div>
           ) : (
