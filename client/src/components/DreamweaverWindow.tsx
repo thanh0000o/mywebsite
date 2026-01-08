@@ -71,9 +71,9 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
         />
         {/* Moving scanlines overlay */}
         <div className="window-scanlines" aria-hidden="true" />
-        {/* Title Bar */}
+        {/* Title Bar - Draggable */}
         <div 
-          className="flex items-center justify-between px-1 py-0.5 relative z-10"
+          className="flex items-center justify-between px-1 py-0.5 relative z-10 cursor-move select-none"
           style={{
             background: 'linear-gradient(90deg, #000080, #1084d0)',
             color: 'white',
