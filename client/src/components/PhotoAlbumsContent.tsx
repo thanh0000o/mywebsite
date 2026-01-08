@@ -7,14 +7,14 @@ interface PhotoAlbum {
 }
 
 const photoAlbums: PhotoAlbum[] = [
-  { id: 1, name: "Vietnam ~ 2025", url: "https://photos.app.goo.gl/kGwj2teWLqTnMvRj9" },
-  { id: 2, name: "Adventures ~ 2024", url: "https://photos.app.goo.gl/7sMG6CvVPRtHAzV77" },
-  { id: 3, name: "Memories ~ 2024", url: "https://photos.app.goo.gl/BXVSEyk1eL9gaqbZ7" },
-  { id: 4, name: "Wanderlust ~ 2023", url: "https://photos.app.goo.gl/QywY3S1kiwUhMkmNA" },
-  { id: 5, name: "Sunsets ~ 2023", url: "https://photos.app.goo.gl/tVwSuGMDT4FWxp4E8" },
-  { id: 6, name: "Friends ~ 2022", url: "https://photos.app.goo.gl/th9VsrySG5VXqspr5" },
-  { id: 7, name: "Travels ~ 2022", url: "https://photos.app.goo.gl/QFzcRiTBRgviKVCi9" },
-  { id: 8, name: "Moments ~ 2021", url: "https://photos.app.goo.gl/XUndRER9crjrFP1v5" },
+  { id: 1, name: "Nisramont0001 ~ 2025", url: "https://photos.app.goo.gl/kGwj2teWLqTnMvRj9" },
+  { id: 2, name: "Adventures0001 ~ 2025", url: "https://photos.app.goo.gl/7sMG6CvVPRtHAzV77" },
+  { id: 3, name: "Adventures0002 ~ 2024", url: "https://photos.app.goo.gl/BXVSEyk1eL9gaqbZ7" },
+  { id: 4, name: "Vietnam ~ 2025", url: "https://photos.app.goo.gl/QywY3S1kiwUhMkmNA" },
+  { id: 5, name: "Schwarzwald ~ 2025", url: "https://photos.app.goo.gl/tVwSuGMDT4FWxp4E8" },
+  { id: 6, name: "Swiss ~ 2025", url: "https://photos.app.goo.gl/th9VsrySG5VXqspr5" },
+  { id: 7, name: "France0001 ~ 2025", url: "https://photos.app.goo.gl/QFzcRiTBRgviKVCi9" },
+  { id: 8, name: "Nisramont0002 ~ 2021", url: "https://photos.app.goo.gl/XUndRER9crjrFP1v5" },
 ];
 
 function InternetExplorerIcon() {
