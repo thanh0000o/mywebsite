@@ -1,9 +1,9 @@
 export function LanguagesContent() {
-  const DutchFlag = () => (
+  const BelgianFlag = () => (
     <svg width="20" height="14" viewBox="0 0 20 14" style={{ imageRendering: 'pixelated' }}>
-      <rect x="0" y="0" width="20" height="5" fill="#ae1c28"/>
-      <rect x="0" y="5" width="20" height="4" fill="#fff"/>
-      <rect x="0" y="9" width="20" height="5" fill="#21468b"/>
+      <rect x="0" y="0" width="7" height="14" fill="#000"/>
+      <rect x="7" y="0" width="6" height="14" fill="#ffd90c"/>
+      <rect x="13" y="0" width="7" height="14" fill="#f31830"/>
     </svg>
   );
 
@@ -55,9 +55,9 @@ export function LanguagesContent() {
   };
 
   const languages = [
-    { name: "Dutch", level: 100, flag: DutchFlag },
+    { name: "Dutch", level: 100, flag: BelgianFlag },
     { name: "English", level: 90, flag: UKFlag },
-    { name: "French", level: 60, flag: FrenchFlag },
+    { name: "French", level: 30, flag: FrenchFlag },
     { name: "Vietnamese", level: 30, flag: VietnamFlag },
   ];
 
