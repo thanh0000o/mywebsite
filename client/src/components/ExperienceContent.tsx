@@ -84,7 +84,7 @@ export function ExperienceContent() {
               return (
                 <div 
                   key={index} 
-                  className="flex flex-col items-center justify-center p-2 text-center"
+                  className="flex flex-col items-center p-2 text-center"
                   style={{
                     backgroundColor: "#c0c0c0",
                     borderTop: "1px solid #fff",
@@ -94,7 +94,7 @@ export function ExperienceContent() {
                   }}
                 >
                   <div 
-                    className="w-8 h-8 flex items-center justify-center mb-1.5"
+                    className="w-8 h-8 flex items-center justify-center mb-1.5 flex-shrink-0"
                     style={{
                       backgroundColor: exp.color,
                       borderTop: "1px solid #fff",
@@ -106,19 +106,19 @@ export function ExperienceContent() {
                     <IconComponent className="w-5 h-5 text-white" />
                   </div>
                   <span 
-                    className="text-[11px] font-bold"
+                    className="text-[11px] font-bold flex-shrink-0"
                     style={{ fontFamily: "var(--font-pixel)", color: "#000" }}
                   >
                     {exp.role}
                   </span>
                   <span 
-                    className="text-[10px]"
+                    className="text-[10px] flex-1 flex items-center"
                     style={{ fontFamily: "var(--font-pixel)", color: "#000080" }}
                   >
                     {exp.company}
                   </span>
                   <span 
-                    className="text-[9px]"
+                    className="text-[9px] flex-shrink-0"
                     style={{ fontFamily: "var(--font-pixel)", color: "#666" }}
                   >
                     {exp.period}
