@@ -183,28 +183,37 @@ export default function Home() {
         Website Archive folder - always visible
         =====================================================
       */}
-      <div 
-        className="absolute top-4 left-4 z-20"
-      >
-        <button
+      <div className="absolute top-4 left-4 z-20">
+        <motion.button
           onClick={() => openWindow("archive", "WebsiteArchive")}
-          className="flex flex-col items-center p-2 hover-elevate rounded"
+          className="flex flex-col items-center p-2 group"
           style={{ background: 'transparent' }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           data-testid="button-archive-folder"
         >
-          <svg width="40" height="36" viewBox="0 0 40 36" style={{ imageRendering: 'pixelated' }}>
-            <rect x="0" y="6" width="40" height="30" fill="#ffd700"/>
-            <rect x="0" y="0" width="16" height="10" fill="#ffd700"/>
-            <rect x="2" y="8" width="36" height="26" fill="#e6c200"/>
-            <rect x="4" y="10" width="32" height="2" fill="#fff" opacity="0.3"/>
-          </svg>
+          <div className="relative">
+            <div className="absolute -inset-4 bg-black/40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
+            <svg 
+              width="40" 
+              height="36" 
+              viewBox="0 0 40 36" 
+              className="relative drop-shadow-[0_0_15px_rgba(255,255,255,0.6)] group-hover:drop-shadow-[0_0_25px_rgba(255,255,255,0.9)] transition-all duration-300"
+              style={{ imageRendering: 'pixelated' }}
+            >
+              <rect x="0" y="6" width="40" height="30" fill="#ffd700"/>
+              <rect x="0" y="0" width="16" height="10" fill="#ffd700"/>
+              <rect x="2" y="8" width="36" height="26" fill="#e6c200"/>
+              <rect x="4" y="10" width="32" height="2" fill="#fff" opacity="0.3"/>
+            </svg>
+          </div>
           <span
-            className="mt-1 text-[9px] text-white text-center drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
+            className="mt-1 text-[9px] text-white text-center drop-shadow-md tracking-wide transition-transform duration-300 group-hover:scale-105"
             style={{ fontFamily: 'var(--font-pixel)' }}
           >
             WebsiteArchive
           </span>
-        </button>
+        </motion.button>
       </div>
 
       {/* 
