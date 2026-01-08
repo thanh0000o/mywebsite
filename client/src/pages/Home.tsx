@@ -208,7 +208,7 @@ export default function Home() {
         Website Archive folder & Resume PDF - always visible
         =====================================================
       */}
-      <div className="absolute top-4 left-4 z-20 flex flex-col gap-2">
+      <div className="absolute top-4 left-4 flex flex-col gap-2" style={{ zIndex: 9999 }}>
         {/* Website Archive Folder */}
         <motion.button
           onClick={() => openWindow("archive", "WebsiteArchive")}
