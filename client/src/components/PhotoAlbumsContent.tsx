@@ -3,18 +3,19 @@ import { motion } from "framer-motion";
 interface PhotoAlbum {
   id: number;
   name: string;
+  year: string;
   url: string;
 }
 
 const photoAlbums: PhotoAlbum[] = [
-  { id: 1, name: "Nisramont0001 ~ 2025", url: "https://photos.app.goo.gl/kGwj2teWLqTnMvRj9" },
-  { id: 2, name: "Adventures0001 ~ 2025", url: "https://photos.app.goo.gl/7sMG6CvVPRtHAzV77" },
-  { id: 3, name: "Adventures0002 ~ 2024", url: "https://photos.app.goo.gl/BXVSEyk1eL9gaqbZ7" },
-  { id: 4, name: "Vietnam ~ 2025", url: "https://photos.app.goo.gl/QywY3S1kiwUhMkmNA" },
-  { id: 5, name: "Schwarzwald ~ 2025", url: "https://photos.app.goo.gl/tVwSuGMDT4FWxp4E8" },
-  { id: 6, name: "Swiss ~ 2025", url: "https://photos.app.goo.gl/th9VsrySG5VXqspr5" },
-  { id: 7, name: "France0001 ~ 2025", url: "https://photos.app.goo.gl/QFzcRiTBRgviKVCi9" },
-  { id: 8, name: "Nisramont0002 ~ 2021", url: "https://photos.app.goo.gl/XUndRER9crjrFP1v5" },
+  { id: 1, name: "Nisramont0001", year: "2025", url: "https://photos.app.goo.gl/kGwj2teWLqTnMvRj9" },
+  { id: 2, name: "Adventures0001", year: "2025", url: "https://photos.app.goo.gl/7sMG6CvVPRtHAzV77" },
+  { id: 3, name: "Adventures0002", year: "2024", url: "https://photos.app.goo.gl/BXVSEyk1eL9gaqbZ7" },
+  { id: 4, name: "Vietnam", year: "2025", url: "https://photos.app.goo.gl/QywY3S1kiwUhMkmNA" },
+  { id: 5, name: "Schwarzwald", year: "2025", url: "https://photos.app.goo.gl/tVwSuGMDT4FWxp4E8" },
+  { id: 6, name: "Swiss", year: "2025", url: "https://photos.app.goo.gl/th9VsrySG5VXqspr5" },
+  { id: 7, name: "France0001", year: "2025", url: "https://photos.app.goo.gl/QFzcRiTBRgviKVCi9" },
+  { id: 8, name: "Nisramont0002", year: "2021", url: "https://photos.app.goo.gl/XUndRER9crjrFP1v5" },
 ];
 
 function InternetExplorerIcon() {
@@ -36,13 +37,13 @@ export function PhotoAlbumsContent() {
 
   return (
     <div 
-      className="h-full p-3 overflow-auto"
+      className="h-full p-3 flex flex-col"
       style={{
         backgroundColor: "#c0c0c0",
       }}
     >
       <div 
-        className="mb-3 p-2"
+        className="mb-2 p-2"
         style={{
           backgroundColor: "#fff",
           borderTop: "2px solid #808080",
@@ -59,7 +60,7 @@ export function PhotoAlbumsContent() {
         </p>
       </div>
 
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-4 gap-3 flex-1 content-start">
         {photoAlbums.map((album, index) => (
           <motion.button
             key={album.id}
@@ -79,18 +80,26 @@ export function PhotoAlbumsContent() {
                 <InternetExplorerIcon />
               </div>
             </div>
-            <span
-              className="mt-2 text-[7px] text-center transition-all duration-300 group-hover:text-[#0078d4] leading-tight"
-              style={{ fontFamily: 'var(--font-pixel)', color: '#000', maxWidth: '90px', wordBreak: 'break-word' }}
-            >
-              {album.name}
-            </span>
+            <div className="mt-2 text-center transition-all duration-300 group-hover:text-[#0078d4]">
+              <span
+                className="block text-[8px] leading-tight"
+                style={{ fontFamily: 'var(--font-pixel)', color: 'inherit' }}
+              >
+                {album.name}
+              </span>
+              <span
+                className="block text-[7px] leading-tight"
+                style={{ fontFamily: 'var(--font-pixel)', color: 'inherit' }}
+              >
+                ~ {album.year}
+              </span>
+            </div>
           </motion.button>
         ))}
       </div>
 
       <div 
-        className="mt-4 p-2"
+        className="mt-auto pt-2 p-2"
         style={{
           backgroundColor: "#fff",
           borderTop: "2px solid #808080",
