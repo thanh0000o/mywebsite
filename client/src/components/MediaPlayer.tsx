@@ -100,13 +100,14 @@ export function MediaPlayer() {
       audioRef.current.src = playlist[randomTrackIndex].src;
       audioRef.current.volume = volume / 100;
       
-      const handleLoadedMetadata = () => {
+      const handleInitialLoadedMetadata = () => {
         if (audioRef.current) {
           const dur = audioRef.current.duration;
           if (dur && isFinite(dur) && dur > 0) {
             const randomTime = Math.random() * dur * 0.8;
             audioRef.current.currentTime = randomTime;
           }
+          audioRef.current.removeEventListener('loadedmetadata', handleInitialLoadedMetadata);
         }
       };
       
@@ -123,7 +124,7 @@ export function MediaPlayer() {
         }
       };
       
-      audioRef.current.addEventListener('loadedmetadata', handleLoadedMetadata);
+      audioRef.current.addEventListener('loadedmetadata', handleInitialLoadedMetadata);
       audioRef.current.addEventListener('canplaythrough', handleCanPlayThrough);
       audioRef.current.load();
       setIsInitialized(true);
