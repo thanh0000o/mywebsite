@@ -23,9 +23,9 @@ function PhotoFolderIcon() {
     <svg width="48" height="44" viewBox="0 0 48 44" style={{ imageRendering: 'auto' }}>
       <defs>
         <linearGradient id="folderGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#7eb8da"/>
-          <stop offset="50%" stopColor="#4a90b8"/>
-          <stop offset="100%" stopColor="#2d6a8a"/>
+          <stop offset="0%" stopColor="#ffe566"/>
+          <stop offset="50%" stopColor="#ffd700"/>
+          <stop offset="100%" stopColor="#e6c200"/>
         </linearGradient>
         <linearGradient id="photoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#fff"/>
@@ -35,11 +35,11 @@ function PhotoFolderIcon() {
       {/* Folder shadow */}
       <ellipse cx="24" cy="42" rx="18" ry="2" fill="rgba(0,0,0,0.15)"/>
       {/* Folder back */}
-      <path d="M4 12 L16 12 L18 8 L44 8 L44 38 L4 38 Z" fill="url(#folderGrad)" stroke="#1e4d6b" strokeWidth="1"/>
+      <path d="M4 12 L16 12 L18 8 L44 8 L44 38 L4 38 Z" fill="url(#folderGrad)" stroke="#b8960a" strokeWidth="1"/>
       {/* Folder front face */}
-      <rect x="4" y="14" width="40" height="24" rx="1" fill="url(#folderGrad)" stroke="#1e4d6b" strokeWidth="1"/>
+      <rect x="4" y="14" width="40" height="24" rx="1" fill="url(#folderGrad)" stroke="#b8960a" strokeWidth="1"/>
       {/* Folder highlight */}
-      <rect x="6" y="15" width="36" height="3" fill="rgba(255,255,255,0.3)" rx="1"/>
+      <rect x="6" y="15" width="36" height="3" fill="rgba(255,255,255,0.4)" rx="1"/>
       {/* Photo stack effect */}
       <rect x="14" y="19" width="20" height="14" fill="#f5f5f5" stroke="#999" strokeWidth="0.5" transform="rotate(-3, 24, 26)"/>
       <rect x="14" y="19" width="20" height="14" fill="url(#photoGrad)" stroke="#888" strokeWidth="0.5"/>
