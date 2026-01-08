@@ -267,7 +267,7 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
                   <p>
                     This is a place for ideas, tools, and quiet exploration. I'm Thành, and I like building things with ideas, pixels, and curiosity where art, technology, and thoughtful experimentation come together.
                   </p>
-                  <p className="mt-2" style={{ fontStyle: 'italic' }}>Scroll gently.</p>
+                  <p className="mt-2" style={{ fontStyle: 'italic' }}>Explore gently.</p>
                 </div>
               </div>
             </div>
