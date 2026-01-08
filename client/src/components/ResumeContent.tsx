@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import resumePdf from "@assets/resume_v2-landscape-V3-DEF_1767872450922.pdf";
+import resumeImage from "@assets/image_1767872658054.png";
 
 export function ResumeContent() {
   return (
@@ -100,13 +101,14 @@ export function ResumeContent() {
               boxShadow: '2px 2px 8px rgba(0,0,0,0.4)',
             }}
           >
-            {/* PDF Embed */}
-            <iframe
-              src={`${resumePdf}#toolbar=0&navpanes=0`}
-              className="w-full h-full border-0"
-              title="Resume - Thành Lambeets"
+            {/* Resume Image */}
+            <img
+              src={resumeImage}
+              alt="Resume - Thành Lambeets"
+              className="w-full h-auto"
               style={{
                 backgroundColor: '#fff',
+                imageRendering: 'auto',
               }}
             />
             
