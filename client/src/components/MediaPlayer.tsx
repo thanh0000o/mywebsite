@@ -5,6 +5,26 @@ import track1 from "@assets/08-voyager-possessions_instrumental_mix-z0ne_1767827
 import track2 from "@assets/02._source_direct_-_complexities_1767827373954.mp3";
 import track3 from "@assets/02_The_Rise_1767827380707.mp3";
 import track4 from "@assets/Science_Fiction_Jazz_Vol_3_-_04_-_Aquasky_-_Opaque_1767878405812.mp3";
+import track5 from "@assets/01_-_Desire_(Original_Mix)_1767898941118.mp3";
+import track6 from "@assets/01_-_Rantoul_-_System_Sylence_1767898949649.mp3";
+import track7 from "@assets/01_Temptation_1767898981813.mp3";
+import track8 from "@assets/01._source_direct_-_secret_liaisons_1767898984826.mp3";
+import track9 from "@assets/01._JMJ_&_Flytronic-In_Too_Deep_1767898988644.mp3";
+import track10 from "@assets/01._Blu_Mar_Ten_-_She_Moves_Through_1767899004603.mp3";
+import track11 from "@assets/01_Richie_Jmj_Montana_Original_Mix_1767899016828.mp3";
+import track12 from "@assets/02-alex_reece-feel_the_sunshine_(dj_pulse_remix)_1767899060349.mp3";
+import track13 from "@assets/02-dj_trace-after_hours_1767899067003.mp3";
+import track14 from "@assets/03_-_Hypersleep_(Voyager_Remix)_1767899069988.mp3";
+import track15 from "@assets/03_For_All_Of_Us_1767899078658.mp3";
+import track16 from "@assets/03_Language_1767899081781.mp3";
+import track17 from "@assets/05_-_On_And_On_(Blu_Mar_Ten_Remix)_1767899093228.mp3";
+import track18 from "@assets/05_Bringing_me_Down_1767899103543.mp3";
+import track19 from "@assets/5_-_Big_Bud_-_Emotionography_1767899107008.mp3";
+import track20 from "@assets/06_-_Alex_Reece_-_Candles_(Original_Mix)_1767899116454.mp3";
+import track21 from "@assets/06_-_High_Times_1767899124955.mp3";
+import track22 from "@assets/06_-_Jonny_L_-_Two_Of_Us_1767899127435.mp3";
+import track23 from "@assets/06_-_Omni_Trio_-_Who_Are_You_(Aquasky_Remix)_1767899145263.mp3";
+import track24 from "@assets/06_Seba_&_Lotek_-_So_Long_1767899152684.mp3";
 
 interface Track {
   id: number;
@@ -20,6 +40,26 @@ const playlist: Track[] = [
   { id: 2, title: "Complexities", artist: "Source Direct", src: track2 },
   { id: 3, title: "The Rise", artist: "Unknown", src: track3 },
   { id: 4, title: "Opaque", artist: "Aquasky", src: track4 },
+  { id: 5, title: "Desire (Original Mix)", artist: "Unknown", src: track5 },
+  { id: 6, title: "System Sylence", artist: "Rantoul", src: track6 },
+  { id: 7, title: "Temptation", artist: "Unknown", src: track7 },
+  { id: 8, title: "Secret Liaisons", artist: "Source Direct", src: track8 },
+  { id: 9, title: "In Too Deep", artist: "JMJ & Flytronic", src: track9 },
+  { id: 10, title: "She Moves Through", artist: "Blu Mar Ten", src: track10 },
+  { id: 11, title: "Montana (Original Mix)", artist: "Richie JMJ", src: track11 },
+  { id: 12, title: "Feel The Sunshine (DJ Pulse Remix)", artist: "Alex Reece", src: track12 },
+  { id: 13, title: "After Hours", artist: "DJ Trace", src: track13 },
+  { id: 14, title: "Hypersleep (Voyager Remix)", artist: "Unknown", src: track14 },
+  { id: 15, title: "For All Of Us", artist: "Unknown", src: track15 },
+  { id: 16, title: "Language", artist: "Unknown", src: track16 },
+  { id: 17, title: "On And On (Blu Mar Ten Remix)", artist: "Unknown", src: track17 },
+  { id: 18, title: "Bringing Me Down", artist: "Unknown", src: track18 },
+  { id: 19, title: "Emotionography", artist: "Big Bud", src: track19 },
+  { id: 20, title: "Candles (Original Mix)", artist: "Alex Reece", src: track20 },
+  { id: 21, title: "High Times", artist: "Unknown", src: track21 },
+  { id: 22, title: "Two Of Us", artist: "Jonny L", src: track22 },
+  { id: 23, title: "Who Are You (Aquasky Remix)", artist: "Omni Trio", src: track23 },
+  { id: 24, title: "So Long", artist: "Seba & Lotek", src: track24 },
 ];
 
 export function MediaPlayer() {
