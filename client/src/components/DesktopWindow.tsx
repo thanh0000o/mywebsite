@@ -209,20 +209,6 @@ export function DesktopWindow({
 
         {/* Window Content */}
         <div className="flex-1 overflow-hidden relative z-10">{children}</div>
-
-        {/* Status Bar */}
-        <div
-          className="flex items-center justify-between px-2 py-0.5 text-[10px] relative z-10"
-          style={{
-            backgroundColor: "#C0C0C0",
-            borderTop: "1px solid #808080",
-            fontFamily: "var(--font-pixel)",
-            color: "#000",
-          }}
-        >
-          <span>&lt;body&gt;</span>
-          <span>Ready</span>
-        </div>
       </div>
     </motion.div>
   );
