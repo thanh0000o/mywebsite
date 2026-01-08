@@ -226,21 +226,18 @@ export default function Home() {
           data-testid="button-photoalbums-folder"
         >
           <div className="relative">
-            <div className="absolute -inset-4 bg-[#0078d4]/30 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
+            <div className="absolute -inset-4 bg-black/40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
             <svg 
               width="40" 
               height="36" 
               viewBox="0 0 40 36" 
-              className="relative drop-shadow-[0_0_15px_rgba(0,120,212,0.6)] group-hover:drop-shadow-[0_0_25px_rgba(0,120,212,0.9)] transition-all duration-300"
+              className="relative drop-shadow-[0_0_15px_rgba(255,255,255,0.6)] group-hover:drop-shadow-[0_0_25px_rgba(255,255,255,0.9)] transition-all duration-300"
               style={{ imageRendering: 'pixelated' }}
             >
-              <rect x="0" y="6" width="40" height="30" fill="#0078d4"/>
-              <rect x="0" y="0" width="16" height="10" fill="#0078d4"/>
-              <rect x="2" y="8" width="36" height="26" fill="#005a9e"/>
+              <rect x="0" y="6" width="40" height="30" fill="#ffd700"/>
+              <rect x="0" y="0" width="16" height="10" fill="#ffd700"/>
+              <rect x="2" y="8" width="36" height="26" fill="#e6c200"/>
               <rect x="4" y="10" width="32" height="2" fill="#fff" opacity="0.3"/>
-              <circle cx="20" cy="22" r="8" fill="none" stroke="#fff" strokeWidth="2"/>
-              <ellipse cx="20" cy="22" rx="6" ry="3" fill="none" stroke="#fff" strokeWidth="1.5" opacity="0.8"/>
-              <circle cx="20" cy="22" r="2" fill="#fff"/>
             </svg>
           </div>
           <span
