@@ -108,7 +108,7 @@ export function LanguagesContent() {
               >
                 <lang.flag />
                 <span
-                  className="w-20 text-[10px]"
+                  className="w-24 text-[10px]"
                   style={{
                     fontFamily: "var(--font-pixel)",
                     color: "#00ff00",

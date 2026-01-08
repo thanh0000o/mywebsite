@@ -89,8 +89,8 @@ export default function Home() {
       width = "min(320px, 90vw)";
       height = "min(160px, 50vh)";
     } else if (type === "languages") {
-      width = "min(360px, 90vw)";
-      height = "min(260px, 65vh)";
+      width = "min(400px, 90vw)";
+      height = "min(280px, 65vh)";
     } else if (type === "software") {
       width = "min(420px, 90vw)";
       height = "min(320px, 70vh)";
