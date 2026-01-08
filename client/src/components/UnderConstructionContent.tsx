@@ -95,71 +95,59 @@ export function UnderConstructionContent() {
         </div>
       </div>
       
-      {/* Win95 Status Bar with proper 3D effect */}
+      {/* Win95 Status Bar */}
       <div 
-        className="flex items-center h-5 text-[10px]"
+        className="flex items-center px-1 py-1 gap-1 text-[9px] shrink-0"
         style={{
           background: '#c0c0c0',
           borderTop: '1px solid #ffffff',
+          color: '#000',
+          fontFamily: 'var(--font-pixel)',
         }}
       >
         <div 
-          className="flex-1 flex items-center justify-between px-1"
+          className="px-2 py-0.5 whitespace-nowrap"
+          style={{
+            borderTop: '1px solid #808080',
+            borderLeft: '1px solid #808080',
+            borderBottom: '1px solid #ffffff',
+            borderRight: '1px solid #ffffff',
+          }}
         >
-          <div 
-            className="px-2 py-0.5"
-            style={{
-              borderTop: '1px solid #808080',
-              borderLeft: '1px solid #808080',
-              borderBottom: '1px solid #ffffff',
-              borderRight: '1px solid #ffffff',
-              background: '#c0c0c0',
-              color: '#000',
-            }}
-          >
-            Ln 1, Col 1
-          </div>
-          <div className="flex gap-1">
-            <div 
-              className="px-2 py-0.5"
-              style={{
-                borderTop: '1px solid #808080',
-                borderLeft: '1px solid #808080',
-                borderBottom: '1px solid #ffffff',
-                borderRight: '1px solid #ffffff',
-                background: '#c0c0c0',
-                color: '#000',
-              }}
-            >
-              100%
-            </div>
-            <div 
-              className="px-2 py-0.5"
-              style={{
-                borderTop: '1px solid #808080',
-                borderLeft: '1px solid #808080',
-                borderBottom: '1px solid #ffffff',
-                borderRight: '1px solid #ffffff',
-                background: '#c0c0c0',
-                color: '#000',
-              }}
-            >
-              Windows (CRLF)
-            </div>
-            <div 
-              className="px-2 py-0.5"
-              style={{
-                borderTop: '1px solid #808080',
-                borderLeft: '1px solid #808080',
-                borderBottom: '1px solid #ffffff',
-                borderRight: '1px solid #ffffff',
-                background: '#c0c0c0',
-                color: '#000',
-              }}
-            >
-              UTF-8
-            </div>
-          </div>
+          Ln 1, Col 1
+        </div>
+        <div 
+          className="px-2 py-0.5 whitespace-nowrap"
+          style={{
+            borderTop: '1px solid #808080',
+            borderLeft: '1px solid #808080',
+            borderBottom: '1px solid #ffffff',
+            borderRight: '1px solid #ffffff',
+          }}
+        >
+          100%
+        </div>
+        <div 
+          className="px-2 py-0.5 whitespace-nowrap"
+          style={{
+            borderTop: '1px solid #808080',
+            borderLeft: '1px solid #808080',
+            borderBottom: '1px solid #ffffff',
+            borderRight: '1px solid #ffffff',
+          }}
+        >
+          CRLF
+        </div>
+        <div 
+          className="px-2 py-0.5 whitespace-nowrap"
+          style={{
+            borderTop: '1px solid #808080',
+            borderLeft: '1px solid #808080',
+            borderBottom: '1px solid #ffffff',
+            borderRight: '1px solid #ffffff',
+          }}
+        >
+          UTF-8
         </div>
       </div>
     </div>
