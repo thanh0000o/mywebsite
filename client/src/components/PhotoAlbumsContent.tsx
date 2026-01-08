@@ -59,13 +59,13 @@ export function PhotoAlbumsContent() {
         </p>
       </div>
 
-      <div className="grid grid-cols-4 gap-3">
+      <div className="grid grid-cols-4 gap-4">
         {photoAlbums.map((album, index) => (
           <motion.button
             key={album.id}
             onClick={() => handleAlbumClick(album.url)}
             className="flex flex-col items-center p-2 group"
-            style={{ background: 'transparent' }}
+            style={{ background: 'transparent', minWidth: '100px' }}
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
             initial={{ opacity: 0, y: 10 }}
@@ -80,8 +80,8 @@ export function PhotoAlbumsContent() {
               </div>
             </div>
             <span
-              className="mt-1 text-[8px] text-center transition-all duration-300 group-hover:text-[#0078d4]"
-              style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}
+              className="mt-2 text-[7px] text-center transition-all duration-300 group-hover:text-[#0078d4] leading-tight"
+              style={{ fontFamily: 'var(--font-pixel)', color: '#000', maxWidth: '90px', wordBreak: 'break-word' }}
             >
               {album.name}
             </span>

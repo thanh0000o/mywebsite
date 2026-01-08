@@ -106,8 +106,8 @@ export default function Home() {
       width = "min(900px, 95vw)";
       height = "min(700px, 90vh)";
     } else if (type === "photoalbums") {
-      width = "min(400px, 90vw)";
-      height = "min(320px, 70vh)";
+      width = "min(520px, 95vw)";
+      height = "min(400px, 80vh)";
     } else if (type === "dragonlogo") {
       width = "min(420px, 90vw)";
       height = "min(380px, 75vh)";
