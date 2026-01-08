@@ -78,15 +78,43 @@ export function DragonLogoContent() {
               borderBottom: "2px solid #fff",
               borderRight: "2px solid #fff",
               display: "inline-block",
+              padding: "8px",
             }}
           >
+            {/* Hand-drawn style text at top */}
+            <div 
+              className="mb-2 text-center"
+              style={{
+                fontFamily: 'var(--font-pixel)',
+                fontSize: '9px',
+                color: '#000',
+                lineHeight: '1.4',
+              }}
+            >
+              <svg width="280" height="55" viewBox="0 0 280 55" style={{ display: 'block', margin: '0 auto' }}>
+                {/* Wobbly hand-drawn pencil text effect */}
+                <text x="8" y="14" fill="#222" style={{ fontFamily: 'var(--font-pixel)', fontSize: '9px' }}>
+                  I'm Vietnamese &amp; born in the
+                </text>
+                <text x="8" y="28" fill="#222" style={{ fontFamily: 'var(--font-pixel)', fontSize: '9px' }}>
+                  Year of the Dragon! So I drew
+                </text>
+                <text x="8" y="42" fill="#222" style={{ fontFamily: 'var(--font-pixel)', fontSize: '9px' }}>
+                  this cute dragon as my logo~
+                </text>
+                {/* Little heart doodle */}
+                <path d="M265 38 Q268 35 271 38 Q274 35 277 38 Q277 42 271 48 Q265 42 265 38" fill="none" stroke="#ff6b6b" strokeWidth="1.5"/>
+                {/* Star doodle */}
+                <path d="M255 10 L257 16 L263 16 L258 20 L260 26 L255 22 L250 26 L252 20 L247 16 L253 16 Z" fill="none" stroke="#ffd93d" strokeWidth="1"/>
+              </svg>
+            </div>
             <img 
               src={dragonLogo} 
               alt="Dragon Logo"
               className="max-w-full"
               style={{ 
                 imageRendering: 'pixelated',
-                maxHeight: '220px',
+                maxHeight: '180px',
               }}
               draggable={false}
             />
