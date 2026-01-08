@@ -16,6 +16,7 @@ import { WebsiteArchiveContent } from "@/components/WebsiteArchiveContent";
 import { ResumeContent } from "@/components/ResumeContent";
 import { PhotoAlbumsContent } from "@/components/PhotoAlbumsContent";
 import { DragonLogoContent } from "@/components/DragonLogoContent";
+import { UnderConstructionContent } from "@/components/UnderConstructionContent";
 import { MediaPlayer } from "@/components/MediaPlayer";
 import logoImage from "@assets/image_1767797842217.png";
 
@@ -114,6 +115,9 @@ export default function Home() {
     } else if (type === "resume") {
       width = "min(900px, 95vw)";
       height = "min(750px, 90vh)";
+    } else if (type === "underconstruction") {
+      width = "min(420px, 90vw)";
+      height = "min(400px, 75vh)";
     }
     
     const newWindow: WindowState = {
@@ -168,6 +172,8 @@ export default function Home() {
         return <DragonLogoContent />;
       case "resume":
         return <ResumeContent />;
+      case "underconstruction":
+        return <UnderConstructionContent />;
       default:
         return <div className="p-4">Content coming soon...</div>;
     }
@@ -277,6 +283,52 @@ export default function Home() {
             style={{ fontFamily: 'var(--font-pixel)' }}
           >
             WebsiteArchive
+          </span>
+        </motion.button>
+
+        {/* Under Construction Notepad File */}
+        <motion.button
+          onClick={() => openWindow("underconstruction", "underconstruction.txt - Notepad")}
+          className="flex flex-col items-center p-2 group"
+          style={{ background: 'transparent' }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          data-testid="button-underconstruction"
+        >
+          <div className="relative">
+            <div className="absolute -inset-4 bg-yellow-300/30 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
+            <svg 
+              width="36" 
+              height="42" 
+              viewBox="0 0 36 42" 
+              className="relative drop-shadow-[0_0_15px_rgba(255,255,255,0.6)] group-hover:drop-shadow-[0_0_25px_rgba(255,255,255,0.9)] transition-all duration-300"
+              style={{ imageRendering: 'pixelated' }}
+            >
+              {/* Notepad document shape */}
+              <rect x="2" y="2" width="28" height="38" fill="#fffef5" stroke="#808080" strokeWidth="2"/>
+              {/* Folded corner */}
+              <polygon points="22,2 30,10 22,10" fill="#e8e8d0" stroke="#808080" strokeWidth="1"/>
+              {/* Notepad spiral binding */}
+              <circle cx="6" cy="8" r="2" fill="#808080"/>
+              <circle cx="6" cy="14" r="2" fill="#808080"/>
+              <circle cx="6" cy="20" r="2" fill="#808080"/>
+              <circle cx="6" cy="26" r="2" fill="#808080"/>
+              <circle cx="6" cy="32" r="2" fill="#808080"/>
+              {/* Text lines */}
+              <rect x="10" y="10" width="14" height="2" fill="#c0c0c0"/>
+              <rect x="10" y="15" width="12" height="2" fill="#c0c0c0"/>
+              <rect x="10" y="20" width="15" height="2" fill="#c0c0c0"/>
+              <rect x="10" y="25" width="10" height="2" fill="#c0c0c0"/>
+              <rect x="10" y="30" width="13" height="2" fill="#c0c0c0"/>
+              {/* Blue header line */}
+              <rect x="2" y="2" width="28" height="4" fill="#000080"/>
+            </svg>
+          </div>
+          <span
+            className="mt-1 text-[9px] text-white text-center drop-shadow-md tracking-wide transition-transform duration-300 group-hover:scale-105"
+            style={{ fontFamily: 'var(--font-pixel)' }}
+          >
+            underconstruction.txt
           </span>
         </motion.button>
 
