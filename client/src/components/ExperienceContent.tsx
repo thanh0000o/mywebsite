@@ -67,9 +67,9 @@ export function ExperienceContent() {
       <div className="window-scanlines" aria-hidden="true" />
       
       {/* Content area - grid layout, no scroll */}
-      <div className="p-2 relative z-10 h-full flex flex-col">
+      <div className="p-3 relative z-10 h-full flex flex-col">
         <div
-          className="flex-1 p-2"
+          className="flex-1 p-3"
           style={{
             backgroundColor: "#d4d4d4",
             borderTop: "2px solid #808080",
@@ -78,13 +78,13 @@ export function ExperienceContent() {
             borderRight: "2px solid #fff",
           }}
         >
-          <div className="grid grid-cols-3 gap-1 h-full">
+          <div className="grid grid-cols-3 gap-2 h-full">
             {experiences.map((exp, index) => {
               const IconComponent = exp.icon;
               return (
                 <div 
                   key={index} 
-                  className="flex flex-col items-center justify-center p-1 text-center"
+                  className="flex flex-col items-center justify-center p-2 text-center"
                   style={{
                     backgroundColor: "#c0c0c0",
                     borderTop: "1px solid #fff",
@@ -94,7 +94,7 @@ export function ExperienceContent() {
                   }}
                 >
                   <div 
-                    className="w-6 h-6 flex items-center justify-center mb-1"
+                    className="w-8 h-8 flex items-center justify-center mb-1.5"
                     style={{
                       backgroundColor: exp.color,
                       borderTop: "1px solid #fff",
@@ -103,22 +103,22 @@ export function ExperienceContent() {
                       borderRight: "1px solid #808080",
                     }}
                   >
-                    <IconComponent className="w-4 h-4 text-white" />
+                    <IconComponent className="w-5 h-5 text-white" />
                   </div>
                   <span 
-                    className="text-[8px] font-bold"
+                    className="text-[11px] font-bold"
                     style={{ fontFamily: "var(--font-pixel)", color: "#000" }}
                   >
                     {exp.role}
                   </span>
                   <span 
-                    className="text-[7px]"
+                    className="text-[10px]"
                     style={{ fontFamily: "var(--font-pixel)", color: "#000080" }}
                   >
                     {exp.company}
                   </span>
                   <span 
-                    className="text-[6px]"
+                    className="text-[9px]"
                     style={{ fontFamily: "var(--font-pixel)", color: "#666" }}
                   >
                     {exp.period}

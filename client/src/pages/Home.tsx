@@ -60,8 +60,8 @@ export default function Home() {
       width = "min(420px, 90vw)";
       height = "min(220px, 60vh)";
     } else if (type === "experience") {
-      width = "min(320px, 90vw)";
-      height = "min(220px, 60vh)";
+      width = "min(450px, 90vw)";
+      height = "min(300px, 70vh)";
     } else if (type === "values") {
       width = "min(300px, 90vw)";
       height = "min(200px, 55vh)";
