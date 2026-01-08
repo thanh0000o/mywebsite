@@ -151,23 +151,21 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
 
         {/* Menu Bar */}
         <div 
-          className="flex items-center gap-4 px-2 py-1 text-sm relative z-10"
+          className="flex items-center px-1 py-0.5 text-sm relative z-10"
           style={{
             backgroundColor: '#C0C0C0',
             borderBottom: '1px solid #808080',
             fontFamily: 'var(--font-pixel)',
-            color: '#000',
           }}
         >
-          {['File', 'Edit', 'View', 'Insert', 'Modify', 'Text', 'Window', 'Help'].map((item) => (
-            <span 
-              key={item} 
-              className="cursor-pointer"
-              style={{ fontSize: '12px', color: '#000' }}
-            >
-              <span style={{ textDecoration: 'underline', textDecorationThickness: '2px', textUnderlineOffset: '2px' }}>{item[0]}</span>{item.slice(1)}
-            </span>
-          ))}
+          <span className="px-2 py-0.5 text-[12px] text-black hover:bg-[#000080] hover:text-white cursor-default"><u>F</u>ile</span>
+          <span className="px-2 py-0.5 text-[12px] text-black hover:bg-[#000080] hover:text-white cursor-default"><u>E</u>dit</span>
+          <span className="px-2 py-0.5 text-[12px] text-black hover:bg-[#000080] hover:text-white cursor-default"><u>V</u>iew</span>
+          <span className="px-2 py-0.5 text-[12px] text-black hover:bg-[#000080] hover:text-white cursor-default"><u>I</u>nsert</span>
+          <span className="px-2 py-0.5 text-[12px] text-black hover:bg-[#000080] hover:text-white cursor-default"><u>M</u>odify</span>
+          <span className="px-2 py-0.5 text-[12px] text-black hover:bg-[#000080] hover:text-white cursor-default"><u>T</u>ext</span>
+          <span className="px-2 py-0.5 text-[12px] text-black hover:bg-[#000080] hover:text-white cursor-default"><u>W</u>indow</span>
+          <span className="px-2 py-0.5 text-[12px] text-black hover:bg-[#000080] hover:text-white cursor-default"><u>H</u>elp</span>
         </div>
 
         {/* Main Content Area */}
