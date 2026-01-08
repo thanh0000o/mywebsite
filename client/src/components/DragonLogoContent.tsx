@@ -15,12 +15,12 @@ export function DragonLogoContent() {
           borderBottom: "1px solid #808080",
         }}
       >
-        <span className="px-2 py-0.5 text-[9px] hover:bg-[#000080] hover:text-white cursor-default" style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}><u>F</u>ile</span>
-        <span className="px-2 py-0.5 text-[9px] hover:bg-[#000080] hover:text-white cursor-default" style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}><u>E</u>dit</span>
-        <span className="px-2 py-0.5 text-[9px] hover:bg-[#000080] hover:text-white cursor-default" style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}><u>V</u>iew</span>
-        <span className="px-2 py-0.5 text-[9px] hover:bg-[#000080] hover:text-white cursor-default" style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}><u>I</u>mage</span>
-        <span className="px-2 py-0.5 text-[9px] hover:bg-[#000080] hover:text-white cursor-default" style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}><u>C</u>olors</span>
-        <span className="px-2 py-0.5 text-[9px] hover:bg-[#000080] hover:text-white cursor-default" style={{ fontFamily: 'var(--font-pixel)', color: '#000' }}><u>H</u>elp</span>
+        <span className="px-2 py-0.5 text-[9px] text-black hover:bg-[#000080] hover:text-white cursor-default" style={{ fontFamily: 'var(--font-pixel)' }}><u>F</u>ile</span>
+        <span className="px-2 py-0.5 text-[9px] text-black hover:bg-[#000080] hover:text-white cursor-default" style={{ fontFamily: 'var(--font-pixel)' }}><u>E</u>dit</span>
+        <span className="px-2 py-0.5 text-[9px] text-black hover:bg-[#000080] hover:text-white cursor-default" style={{ fontFamily: 'var(--font-pixel)' }}><u>V</u>iew</span>
+        <span className="px-2 py-0.5 text-[9px] text-black hover:bg-[#000080] hover:text-white cursor-default" style={{ fontFamily: 'var(--font-pixel)' }}><u>I</u>mage</span>
+        <span className="px-2 py-0.5 text-[9px] text-black hover:bg-[#000080] hover:text-white cursor-default" style={{ fontFamily: 'var(--font-pixel)' }}><u>C</u>olors</span>
+        <span className="px-2 py-0.5 text-[9px] text-black hover:bg-[#000080] hover:text-white cursor-default" style={{ fontFamily: 'var(--font-pixel)' }}><u>H</u>elp</span>
       </div>
 
       {/* Tool palette */}
