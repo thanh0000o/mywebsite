@@ -12,6 +12,7 @@ import { SkillsContent } from "@/components/SkillsContent";
 import { LanguagesContent } from "@/components/LanguagesContent";
 import { SoftwareContent } from "@/components/SoftwareContent";
 import { ArtContent } from "@/components/ArtContent";
+import { WebsiteArchiveContent } from "@/components/WebsiteArchiveContent";
 import { MediaPlayer } from "@/components/MediaPlayer";
 import logoImage from "@assets/image_1767797842217.png";
 
@@ -76,6 +77,9 @@ export default function Home() {
     } else if (type === "art") {
       width = "min(620px, 90vw)";
       height = "min(500px, 80vh)";
+    } else if (type === "archive") {
+      width = "min(400px, 90vw)";
+      height = "min(350px, 70vh)";
     }
     
     const newWindow: WindowState = {
@@ -122,6 +126,8 @@ export default function Home() {
         return <SoftwareContent />;
       case "art":
         return <ArtContent />;
+      case "archive":
+        return <WebsiteArchiveContent />;
       default:
         return <div className="p-4">Content coming soon...</div>;
     }
@@ -169,6 +175,39 @@ export default function Home() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* 
+        =====================================================
+        DESKTOP FOLDER ICON - Top Left
+        =====================================================
+        Website Archive folder
+        =====================================================
+      */}
+      {showDreamweaver && (
+        <div 
+          className="absolute top-4 left-4 z-20"
+        >
+          <button
+            onClick={() => openWindow("archive", "WebsiteArchive")}
+            className="flex flex-col items-center p-2 hover-elevate rounded"
+            style={{ background: 'transparent' }}
+            data-testid="button-archive-folder"
+          >
+            <svg width="40" height="36" viewBox="0 0 40 36" style={{ imageRendering: 'pixelated' }}>
+              <rect x="0" y="6" width="40" height="30" fill="#ffd700"/>
+              <rect x="0" y="0" width="16" height="10" fill="#ffd700"/>
+              <rect x="2" y="8" width="36" height="26" fill="#e6c200"/>
+              <rect x="4" y="10" width="32" height="2" fill="#fff" opacity="0.3"/>
+            </svg>
+            <span
+              className="mt-1 text-[9px] text-white text-center drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
+              style={{ fontFamily: 'var(--font-pixel)' }}
+            >
+              WebsiteArchive
+            </span>
+          </button>
+        </div>
+      )}
 
       {/* 
         =====================================================
