@@ -53,8 +53,8 @@ export default function Home() {
     let width = "min(400px, 90vw)";
     let height = "min(300px, 70vh)";
     if (type === "aboutme") {
-      width = "min(650px, 90vw)";
-      height = "min(520px, 80vh)";
+      width = "min(480px, 90vw)";
+      height = "min(340px, 70vh)";
     } else if (type === "education") {
       width = "min(420px, 90vw)";
       height = "min(220px, 60vh)";
