@@ -11,8 +11,7 @@ import { ValuesContent } from "@/components/ValuesContent";
 import { SkillsContent } from "@/components/SkillsContent";
 import { LanguagesContent } from "@/components/LanguagesContent";
 import { SoftwareContent } from "@/components/SoftwareContent";
-import { ArtContent, Artwork } from "@/components/ArtContent";
-import { ArtViewerContent } from "@/components/ArtViewerContent";
+import { ArtContent } from "@/components/ArtContent";
 import { WebsiteArchiveContent } from "@/components/WebsiteArchiveContent";
 import { ResumeContent } from "@/components/ResumeContent";
 import { PhotoAlbumsContent } from "@/components/PhotoAlbumsContent";
@@ -28,7 +27,6 @@ interface WindowState {
   width: string;
   height: string;
   zIndex: number;
-  artData?: Artwork;
 }
 
 let windowIdCounter = 0;
@@ -116,9 +114,6 @@ export default function Home() {
     } else if (type === "resume") {
       width = "min(900px, 95vw)";
       height = "min(750px, 90vh)";
-    } else if (type.startsWith("artviewer-")) {
-      width = "min(550px, 90vw)";
-      height = "min(450px, 80vh)";
     }
     
     const newWindow: WindowState = {
@@ -147,51 +142,7 @@ export default function Home() {
     setTopZIndex(topZIndex + 1);
   };
 
-  const openArtWindow = (art: Artwork) => {
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-    
-    const marginX = Math.max(80, vw * 0.15);
-    const marginY = Math.max(60, vh * 0.12);
-    const safeMinX = marginX;
-    const safeMaxX = Math.max(marginX + 100, vw - marginX - 450);
-    const safeMinY = marginY;
-    const safeMaxY = Math.max(marginY + 100, vh - marginY - 400);
-    const centerX = vw / 2 - 200;
-    const centerY = vh / 2 - 200;
-    const offsetRange = 150;
-    
-    let randomX = centerX + (Math.random() * offsetRange * 2 - offsetRange);
-    let randomY = centerY + (Math.random() * offsetRange * 2 - offsetRange);
-    randomX = Math.max(safeMinX, Math.min(safeMaxX, randomX));
-    randomY = Math.max(safeMinY, Math.min(safeMaxY, randomY));
-    randomX = Math.floor(randomX);
-    randomY = Math.floor(randomY);
-
-    const windowType = `artviewer-${art.title.replace(/\s+/g, '-').toLowerCase()}`;
-    const windowTitle = `${art.title}.${art.type === "image" ? "bmp" : "avi"}`;
-    
-    const newWindow: WindowState = {
-      id: `window-${windowIdCounter++}`,
-      type: windowType,
-      title: windowTitle,
-      position: { x: randomX, y: randomY },
-      width: "min(550px, 90vw)",
-      height: "min(450px, 80vh)",
-      zIndex: topZIndex + 1,
-      artData: art,
-    };
-    setTopZIndex(topZIndex + 1);
-    setWindows((prev) => [...prev, newWindow]);
-  };
-
-  const renderWindowContent = (windowState: WindowState) => {
-    const { type, artData } = windowState;
-    
-    if (type.startsWith("artviewer-") && artData) {
-      return <ArtViewerContent type={artData.type} src={artData.src} title={artData.title} />;
-    }
-    
+  const renderWindowContent = (type: string) => {
     switch (type) {
       case "aboutme":
         return <AboutMeContent />;
@@ -208,7 +159,7 @@ export default function Home() {
       case "software":
         return <SoftwareContent />;
       case "art":
-        return <ArtContent onOpenArt={openArtWindow} />;
+        return <ArtContent />;
       case "archive":
         return <WebsiteArchiveContent />;
       case "photoalbums":
@@ -459,7 +410,7 @@ export default function Home() {
             onFocus={() => focusWindow(window.id)}
             onClose={() => closeWindow(window.id)}
           >
-            {renderWindowContent(window)}
+            {renderWindowContent(window.type)}
           </DesktopWindow>
         ))}
       </AnimatePresence>
