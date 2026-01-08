@@ -180,7 +180,7 @@ export function WebsiteArchiveContent() {
               
               {/* Info bar */}
               <div 
-                className="mt-2 p-3"
+                className="mt-3 p-4"
                 style={{
                   backgroundColor: "#c0c0c0",
                   borderTop: "2px solid #fff",
@@ -191,8 +191,8 @@ export function WebsiteArchiveContent() {
                   color: "#000",
                 }}
               >
-                <p className="text-[12px]"><strong>{selectedSite.name}</strong> ({selectedSite.year})</p>
-                <p className="mt-1 text-[11px]" style={{ color: "#333" }}>{selectedSite.description}</p>
+                <p className="text-sm"><strong>{selectedSite.name}</strong> ({selectedSite.year})</p>
+                <p className="mt-2 text-sm" style={{ color: "#333" }}>{selectedSite.description}</p>
               </div>
             </div>
           ) : (

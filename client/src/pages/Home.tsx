@@ -98,8 +98,8 @@ export default function Home() {
       width = "min(620px, 90vw)";
       height = "min(500px, 80vh)";
     } else if (type === "archive") {
-      width = "min(750px, 95vw)";
-      height = "min(550px, 85vh)";
+      width = "min(900px, 95vw)";
+      height = "min(700px, 90vh)";
     } else if (type === "resume") {
       width = "min(900px, 95vw)";
       height = "min(750px, 90vh)";
