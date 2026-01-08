@@ -13,6 +13,7 @@ import { LanguagesContent } from "@/components/LanguagesContent";
 import { SoftwareContent } from "@/components/SoftwareContent";
 import { ArtContent } from "@/components/ArtContent";
 import { WebsiteArchiveContent } from "@/components/WebsiteArchiveContent";
+import { ResumeContent } from "@/components/ResumeContent";
 import { MediaPlayer } from "@/components/MediaPlayer";
 import logoImage from "@assets/image_1767797842217.png";
 
@@ -99,6 +100,9 @@ export default function Home() {
     } else if (type === "archive") {
       width = "min(400px, 90vw)";
       height = "min(350px, 70vh)";
+    } else if (type === "resume") {
+      width = "min(700px, 95vw)";
+      height = "min(550px, 85vh)";
     }
     
     const newWindow: WindowState = {
@@ -147,6 +151,8 @@ export default function Home() {
         return <ArtContent />;
       case "archive":
         return <WebsiteArchiveContent />;
+      case "resume":
+        return <ResumeContent />;
       default:
         return <div className="p-4">Content coming soon...</div>;
     }
@@ -197,12 +203,13 @@ export default function Home() {
 
       {/* 
         =====================================================
-        DESKTOP FOLDER ICON - Top Left
+        DESKTOP ICONS - Top Left
         =====================================================
-        Website Archive folder - always visible
+        Website Archive folder & Resume PDF - always visible
         =====================================================
       */}
-      <div className="absolute top-4 left-4 z-20">
+      <div className="absolute top-4 left-4 z-20 flex flex-col gap-2">
+        {/* Website Archive Folder */}
         <motion.button
           onClick={() => openWindow("archive", "WebsiteArchive")}
           className="flex flex-col items-center p-2 group"
@@ -231,6 +238,47 @@ export default function Home() {
             style={{ fontFamily: 'var(--font-pixel)' }}
           >
             WebsiteArchive
+          </span>
+        </motion.button>
+
+        {/* Resume PDF File */}
+        <motion.button
+          onClick={() => openWindow("resume", "Resume.pdf - Acrobat Reader")}
+          className="flex flex-col items-center p-2 group"
+          style={{ background: 'transparent' }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          data-testid="button-resume-pdf"
+        >
+          <div className="relative">
+            <div className="absolute -inset-4 bg-black/40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
+            <svg 
+              width="36" 
+              height="42" 
+              viewBox="0 0 36 42" 
+              className="relative drop-shadow-[0_0_15px_rgba(255,255,255,0.6)] group-hover:drop-shadow-[0_0_25px_rgba(255,255,255,0.9)] transition-all duration-300"
+              style={{ imageRendering: 'pixelated' }}
+            >
+              {/* PDF document shape */}
+              <rect x="2" y="2" width="28" height="38" fill="#fff" stroke="#808080" strokeWidth="2"/>
+              {/* Folded corner */}
+              <polygon points="22,2 30,10 22,10" fill="#C0C0C0" stroke="#808080" strokeWidth="1"/>
+              {/* PDF text */}
+              <rect x="6" y="16" width="20" height="4" fill="#cc0000"/>
+              <text x="8" y="19" fill="#fff" style={{ fontSize: '4px', fontFamily: 'var(--font-pixel)' }}>PDF</text>
+              {/* Document lines */}
+              <rect x="6" y="24" width="18" height="2" fill="#808080"/>
+              <rect x="6" y="28" width="14" height="2" fill="#808080"/>
+              <rect x="6" y="32" width="16" height="2" fill="#808080"/>
+              {/* Adobe red accent */}
+              <rect x="2" y="2" width="4" height="38" fill="#cc0000"/>
+            </svg>
+          </div>
+          <span
+            className="mt-1 text-[9px] text-white text-center drop-shadow-md tracking-wide transition-transform duration-300 group-hover:scale-105"
+            style={{ fontFamily: 'var(--font-pixel)' }}
+          >
+            Resume.pdf
           </span>
         </motion.button>
       </div>
