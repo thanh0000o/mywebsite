@@ -4,27 +4,27 @@ const paragraphs = [
   {
     icon: Sparkles,
     color: "#9b59b6",
-    text: "Visual thinker and builder based in Brussels. Art, technology, and design as a chance to explore what makes us human.",
+    text: "Thành Lambeets is a visual thinker and builder based in Brussels. He sees art, technology, and design as a chance to constantly explore what makes us human, how we see the world, and what we can achieve.",
   },
   {
     icon: Eye,
     color: "#3498db",
-    text: "Process starts with observing carefully - a slow, thoughtful way of thinking. Interest in memory, desire, change, and the urge to be more.",
+    text: "His process always starts with observing things carefully a slow, thoughtful way of thinking that allows ideas to form naturally. This quiet focus leads to a strong interest in how we move between the real, physical world and the forces we can't see but feel every day: things like memory, desire, change, and the subtle urge to be more than ordinary.",
   },
   {
     icon: Cpu,
     color: "#27ae60",
-    text: "Background in Innovation Management, visual communication, and creative direction. Curious about AI tools and how they change our world.",
+    text: "With a background that includes Innovation Management, visual communication, and creative direction, Thành is comfortable moving between big concepts and the technical work needed to finish a project. He is always curious about new technologies like AI tools and digital ways of working, and how they change the environments we live in, both personally and together. For him, technology isn't a distraction; it's a tool to expand, challenge, or rethink human meaning.",
   },
   {
     icon: Heart,
     color: "#e74c3c",
-    text: "Multicultural upbringing with experience in youth leadership and creative work. Tackles every project with empathy and discipline.",
+    text: "Thanks to a multicultural upbringing and experience in youth leadership, research, and creative work, he tackles every project with empathy, clear thinking, and strong discipline. His approach is all about growth: constantly learning, improving his skills, and giving each idea the time it needs to become something solid. He believes creativity isn't a flash of genius, but a conversation between people, between tools, and between the world as it is and the world we imagine it could be.",
   },
   {
     icon: Lightbulb,
     color: "#f39c12",
-    text: "Goal: create chances for people to pause, reflect, and find beauty in complex things. Mixing imagination, technology, and human understanding.",
+    text: "In all his work, Thành wants to create chances for people to pause, reflect, and find the simple beauty hidden inside complex things. His goal is to build thoughtful, impactful experiences that successfully mix imagination, technology, and human understanding into work that truly connects with people.",
   },
 ];
 
