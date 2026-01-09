@@ -5,6 +5,20 @@ import { queryClient, apiRequest } from "@/lib/queryClient";
 import type { GuestbookMessage } from "@shared/schema";
 import { Win95Scrollbar } from "./Win95Scrollbar";
 
+const USERNAME_COLORS = [
+  "#FF0000", "#0000FF", "#008000", "#FF00FF", "#800080",
+  "#008080", "#FF6600", "#CC0066", "#006699", "#990000",
+  "#660099", "#009900", "#CC3300", "#0066CC", "#990066",
+];
+
+const getColorForUsername = (username: string): string => {
+  let hash = 0;
+  for (let i = 0; i < username.length; i++) {
+    hash = username.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return USERNAME_COLORS[Math.abs(hash) % USERNAME_COLORS.length];
+};
+
 const WIN95_EMOJIS = [
   { emoji: ":-)", label: "smile" },
   { emoji: ":-(", label: "sad" },
@@ -243,7 +257,7 @@ export function Guestbook() {
               style={{
                 margin: "6px",
                 marginBottom: "0",
-                backgroundColor: "#1a1a1a",
+                backgroundColor: "#FFFEF0",
                 borderTop: "2px solid #808080",
                 borderLeft: "2px solid #808080",
                 borderBottom: "2px solid #fff",
@@ -253,17 +267,17 @@ export function Guestbook() {
               }}
             >
               <Win95Scrollbar>
-                <div className="p-1">
+                <div className="p-2">
                   {isLoading ? (
                     <div
-                      className="text-center py-4 text-[10px]"
+                      className="text-center py-4 text-[11px]"
                       style={{ fontFamily: "var(--font-pixel)", color: "#808080" }}
                     >
                       Loading messages...
                     </div>
                   ) : messages.length === 0 ? (
                     <div
-                      className="text-center py-4 text-[10px]"
+                      className="text-center py-4 text-[11px]"
                       style={{ fontFamily: "var(--font-pixel)", color: "#808080" }}
                     >
                       No messages yet. Be the first!
@@ -272,35 +286,24 @@ export function Guestbook() {
                     messages.map((msg) => (
                       <div
                         key={msg.id}
-                        className="mb-2 p-1"
-                        style={{
-                          backgroundColor: "#008080",
-                          borderTop: "1px solid #00a0a0",
-                          borderLeft: "1px solid #00a0a0",
-                          borderBottom: "1px solid #006060",
-                          borderRight: "1px solid #006060",
-                        }}
+                        className="mb-1"
+                        style={{ lineHeight: "1.4" }}
                       >
-                        <div className="flex items-center justify-between mb-0.5">
-                          <span
-                            className="text-[9px] font-bold"
-                            style={{ fontFamily: "var(--font-pixel)", color: "#fff" }}
-                          >
-                            {msg.username}
-                          </span>
-                          <span
-                            className="text-[8px]"
-                            style={{ fontFamily: "var(--font-pixel)", color: "#c0c0c0" }}
-                          >
-                            {formatTime(msg.timestamp)}
-                          </span>
-                        </div>
-                        <div
-                          className="text-[10px]"
-                          style={{ fontFamily: "var(--font-pixel)", color: "#e0ffff" }}
+                        <span
+                          className="text-[11px] font-bold"
+                          style={{ 
+                            fontFamily: "var(--font-pixel)", 
+                            color: getColorForUsername(msg.username),
+                          }}
                         >
-                          {msg.message}
-                        </div>
+                          {msg.username}
+                        </span>
+                        <span
+                          className="text-[11px]"
+                          style={{ fontFamily: "var(--font-pixel)", color: "#000" }}
+                        >
+                          : {msg.message}
+                        </span>
                       </div>
                     ))
                   )}
@@ -308,14 +311,17 @@ export function Guestbook() {
               </Win95Scrollbar>
             </div>
 
-            <div className="px-2 py-1 relative z-10">
+            <div 
+              className="px-1.5 py-1.5 relative z-10"
+              style={{ backgroundColor: "#C0C0C0" }}
+            >
               {!hasSetUsername ? (
                 <div className="flex gap-1 items-center">
                   <span
-                    className="text-[9px]"
+                    className="text-[10px]"
                     style={{ fontFamily: "var(--font-pixel)", color: "#000" }}
                   >
-                    Name:
+                    Your name:
                   </span>
                   <input
                     type="text"
@@ -324,13 +330,13 @@ export function Guestbook() {
                     onKeyDown={handleKeyDown}
                     placeholder="Enter your name..."
                     maxLength={20}
-                    className="flex-1 px-1 py-0.5 text-[10px]"
+                    className="flex-1 px-2 py-1 text-[11px]"
                     style={{
-                      backgroundColor: "#fff",
-                      borderTop: "1px solid #808080",
-                      borderLeft: "1px solid #808080",
-                      borderBottom: "1px solid #fff",
-                      borderRight: "1px solid #fff",
+                      backgroundColor: "#FFFEF0",
+                      borderTop: "2px solid #808080",
+                      borderLeft: "2px solid #808080",
+                      borderBottom: "2px solid #fff",
+                      borderRight: "2px solid #fff",
                       fontFamily: "var(--font-pixel)",
                       color: "#000",
                       outline: "none",
@@ -341,13 +347,13 @@ export function Guestbook() {
                     onClick={() => {
                       if (username.trim()) setHasSetUsername(true);
                     }}
-                    className="px-2 py-0.5 text-[9px]"
+                    className="px-3 py-1 text-[10px]"
                     style={{
                       backgroundColor: "#C0C0C0",
-                      borderTop: "1px solid #fff",
-                      borderLeft: "1px solid #fff",
-                      borderBottom: "1px solid #808080",
-                      borderRight: "1px solid #808080",
+                      borderTop: "2px solid #fff",
+                      borderLeft: "2px solid #fff",
+                      borderBottom: "2px solid #808080",
+                      borderRight: "2px solid #808080",
                       fontFamily: "var(--font-pixel)",
                       color: "#000",
                     }}
@@ -358,12 +364,11 @@ export function Guestbook() {
                 </div>
               ) : (
                 <div className="flex flex-col gap-1">
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-2">
                     <span
-                      className="text-[8px] px-1"
+                      className="text-[10px] font-bold"
                       style={{
-                        backgroundColor: "#000080",
-                        color: "#fff",
+                        color: getColorForUsername(username),
                         fontFamily: "var(--font-pixel)",
                       }}
                     >
@@ -385,25 +390,24 @@ export function Guestbook() {
                     >
                       change
                     </button>
-                  </div>
-                  <div className="flex gap-1 items-center relative">
                     <button
                       onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-                      className="w-7 h-6 flex items-center justify-center text-[12px]"
+                      className="text-[9px] px-1"
                       style={{
                         backgroundColor: "#FFFF00",
-                        borderTop: "2px solid #fff",
-                        borderLeft: "2px solid #fff",
-                        borderBottom: "2px solid #808080",
-                        borderRight: "2px solid #808080",
+                        borderTop: "1px solid #fff",
+                        borderLeft: "1px solid #fff",
+                        borderBottom: "1px solid #808080",
+                        borderRight: "1px solid #808080",
                         fontFamily: "var(--font-pixel)",
                         color: "#000",
-                        fontWeight: "bold",
                       }}
                       data-testid="button-emoji-picker"
                     >
                       :-)
                     </button>
+                  </div>
+                  <div className="flex gap-1 items-end relative">
                     <input
                       ref={messageInputRef}
                       type="text"
@@ -412,13 +416,13 @@ export function Guestbook() {
                       onKeyDown={handleKeyDown}
                       placeholder="Type a message..."
                       maxLength={200}
-                      className="flex-1 px-1 py-0.5 text-[10px]"
+                      className="flex-1 px-2 py-1 text-[11px]"
                       style={{
-                        backgroundColor: "#fff",
-                        borderTop: "1px solid #808080",
-                        borderLeft: "1px solid #808080",
-                        borderBottom: "1px solid #fff",
-                        borderRight: "1px solid #fff",
+                        backgroundColor: "#FFFEF0",
+                        borderTop: "2px solid #808080",
+                        borderLeft: "2px solid #808080",
+                        borderBottom: "2px solid #fff",
+                        borderRight: "2px solid #fff",
                         fontFamily: "var(--font-pixel)",
                         color: "#000",
                         outline: "none",
@@ -428,13 +432,13 @@ export function Guestbook() {
                     <button
                       onClick={handleSend}
                       disabled={createMutation.isPending || !message.trim()}
-                      className="px-2 py-0.5 text-[9px]"
+                      className="px-3 py-1 text-[10px]"
                       style={{
                         backgroundColor: "#C0C0C0",
-                        borderTop: "1px solid #fff",
-                        borderLeft: "1px solid #fff",
-                        borderBottom: "1px solid #808080",
-                        borderRight: "1px solid #808080",
+                        borderTop: "2px solid #fff",
+                        borderLeft: "2px solid #fff",
+                        borderBottom: "2px solid #808080",
+                        borderRight: "2px solid #808080",
                         fontFamily: "var(--font-pixel)",
                         color: "#000",
                         opacity: createMutation.isPending || !message.trim() ? 0.5 : 1,
