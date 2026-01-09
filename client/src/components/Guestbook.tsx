@@ -454,7 +454,7 @@ export function Guestbook() {
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 10 }}
-                          className="absolute bottom-8 left-0 p-2 grid grid-cols-4 gap-1"
+                          className="absolute bottom-8 left-0"
                           style={{
                             backgroundColor: "#C0C0C0",
                             borderTop: "2px solid #fff",
@@ -464,6 +464,32 @@ export function Guestbook() {
                             zIndex: 100,
                           }}
                         >
+                          <div className="flex items-center justify-between px-1 py-0.5"
+                            style={{
+                              background: "linear-gradient(to right, #000080, #1084d0)",
+                            }}
+                          >
+                            <span className="text-[8px] text-white" style={{ fontFamily: "var(--font-pixel)" }}>
+                              Emojis
+                            </span>
+                            <button
+                              onClick={() => setShowEmojiPicker(false)}
+                              className="w-4 h-3 flex items-center justify-center text-[8px]"
+                              style={{
+                                backgroundColor: "#C0C0C0",
+                                borderTop: "1px solid #fff",
+                                borderLeft: "1px solid #fff",
+                                borderBottom: "1px solid #808080",
+                                borderRight: "1px solid #808080",
+                                fontFamily: "var(--font-pixel)",
+                                color: "#000",
+                              }}
+                              data-testid="button-close-emoji-picker"
+                            >
+                              X
+                            </button>
+                          </div>
+                          <div className="p-2 grid grid-cols-4 gap-1">
                           {WIN95_EMOJIS.map((item) => (
                             <button
                               key={item.label}
@@ -484,6 +510,7 @@ export function Guestbook() {
                               {item.emoji}
                             </button>
                           ))}
+                          </div>
                         </motion.div>
                       )}
                     </AnimatePresence>
