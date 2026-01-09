@@ -36,6 +36,16 @@ const WIN95_EMOJIS = [
   { emoji: "O:-)", label: "angel" },
   { emoji: ":-@", label: "angry" },
   { emoji: "8-)", label: "nerd" },
+  { emoji: "(^_^)", label: "happy" },
+  { emoji: "(T_T)", label: "crying" },
+  { emoji: "(o_o)", label: "shocked" },
+  { emoji: "(*_*)", label: "starstruck" },
+  { emoji: "(>_<)", label: "frustrated" },
+  { emoji: "(-_-)", label: "bored" },
+  { emoji: "(^o^)", label: "excited" },
+  { emoji: "\\(^-^)/", label: "celebrate" },
+  { emoji: "(._. )", label: "shy" },
+  { emoji: "~(^-^)~", label: "dance" },
 ];
 
 export function Guestbook() {
@@ -489,27 +499,41 @@ export function Guestbook() {
                               X
                             </button>
                           </div>
-                          <div className="p-2 grid grid-cols-4 gap-1">
-                          {WIN95_EMOJIS.map((item) => (
-                            <button
-                              key={item.label}
-                              onClick={() => insertEmoji(item.emoji)}
-                              className="w-12 h-7 flex items-center justify-center text-[11px] hover:bg-[#000080] hover:text-white"
-                              style={{
-                                backgroundColor: "#fff",
-                                borderTop: "1px solid #808080",
-                                borderLeft: "1px solid #808080",
-                                borderBottom: "1px solid #fff",
-                                borderRight: "1px solid #fff",
-                                fontFamily: "var(--font-pixel)",
-                                color: "#000",
-                              }}
-                              title={item.label}
-                              data-testid={`button-emoji-${item.label}`}
-                            >
-                              {item.emoji}
-                            </button>
-                          ))}
+                          <div 
+                            style={{ 
+                              height: "120px",
+                              borderTop: "2px solid #808080",
+                              borderLeft: "2px solid #808080",
+                              borderBottom: "2px solid #fff",
+                              borderRight: "2px solid #fff",
+                              backgroundColor: "#fff",
+                            }}
+                          >
+                            <Win95Scrollbar>
+                              <div className="p-1.5 grid grid-cols-4 gap-1">
+                                {WIN95_EMOJIS.map((item) => (
+                                  <button
+                                    key={item.label}
+                                    onClick={() => insertEmoji(item.emoji)}
+                                    className="px-1 h-7 flex items-center justify-center text-[9px] hover:bg-[#000080] hover:text-white whitespace-nowrap"
+                                    style={{
+                                      backgroundColor: "#fff",
+                                      borderTop: "1px solid #808080",
+                                      borderLeft: "1px solid #808080",
+                                      borderBottom: "1px solid #fff",
+                                      borderRight: "1px solid #fff",
+                                      fontFamily: "var(--font-pixel)",
+                                      color: "#000",
+                                      minWidth: "50px",
+                                    }}
+                                    title={item.label}
+                                    data-testid={`button-emoji-${item.label}`}
+                                  >
+                                    {item.emoji}
+                                  </button>
+                                ))}
+                              </div>
+                            </Win95Scrollbar>
                           </div>
                         </motion.div>
                       )}
