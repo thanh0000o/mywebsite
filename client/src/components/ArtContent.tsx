@@ -97,7 +97,10 @@ export function ArtContent({ onOpenArtViewer }: ArtContentProps) {
                     borderBottom: '2px solid #808080',
                     borderRight: '2px solid #808080',
                   }}
-                  onClick={() => onOpenArtViewer?.(art)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onOpenArtViewer?.(art);
+                  }}
                   data-testid={`art-item-${index}`}
                 >
                   <div 
