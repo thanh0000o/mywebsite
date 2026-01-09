@@ -140,8 +140,8 @@ export function Guestbook() {
       animate={{ opacity: 1, y: 0 }}
       className="fixed bottom-4 left-4 z-50"
       style={{
-        width: "320px",
-        height: isMinimized ? "auto" : "380px",
+        width: "380px",
+        height: isMinimized ? "auto" : "300px",
         backgroundColor: "#C0C0C0",
         borderTop: "2px solid #fff",
         borderLeft: "2px solid #fff",
@@ -247,7 +247,7 @@ export function Guestbook() {
                 borderLeft: "2px solid #808080",
                 borderBottom: "2px solid #fff",
                 borderRight: "2px solid #fff",
-                height: "220px",
+                height: "150px",
               }}
             >
               <Win95Scrollbar>
