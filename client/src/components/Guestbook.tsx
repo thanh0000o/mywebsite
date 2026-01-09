@@ -232,22 +232,24 @@ export function Guestbook() {
       <AnimatePresence>
         {!isMinimized && (
           <motion.div
-            initial={{ height: 0 }}
-            animate={{ height: "auto" }}
-            exit={{ height: 0 }}
-            className="flex flex-col relative z-10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="flex flex-col relative z-10 overflow-hidden"
             style={{ height: "calc(100% - 40px)" }}
           >
             <div
-              className="flex-1 overflow-hidden"
+              className="overflow-hidden"
               style={{
                 margin: "6px",
+                marginBottom: "0",
                 backgroundColor: "#1a1a1a",
                 borderTop: "2px solid #808080",
                 borderLeft: "2px solid #808080",
                 borderBottom: "2px solid #fff",
                 borderRight: "2px solid #fff",
-                height: "150px",
+                flex: "1 1 0",
+                minHeight: "0",
               }}
             >
               <Win95Scrollbar>
