@@ -160,8 +160,8 @@ export function Guestbook() {
       animate={{ opacity: 1, y: 0 }}
       className="fixed bottom-2 left-2 z-50 sm:bottom-4 sm:left-4"
       style={{
-        width: "min(380px, calc(100vw - 16px))",
-        height: isMinimized ? "auto" : "min(300px, calc(100vh - 100px))",
+        width: "var(--guestbook-width)",
+        height: isMinimized ? "auto" : "var(--guestbook-height)",
         backgroundColor: "#C0C0C0",
         borderTop: "2px solid #fff",
         borderLeft: "2px solid #fff",

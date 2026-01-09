@@ -280,6 +280,7 @@ export function MediaPlayer() {
       <div
         className="flex flex-col relative"
         style={{
+          width: 'var(--mediaplayer-width)',
           backgroundColor: '#C0C0C0',
           boxShadow: '3px 3px 10px rgba(0,0,0,0.5)',
           borderTop: '2px solid #fff',

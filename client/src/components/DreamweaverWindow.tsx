@@ -44,18 +44,21 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
         drag
         dragMomentum={false}
         dragConstraints={constraintsRef}
-        initial={{ scale: 0.95, x: "-50%", y: "-50%" }}
-        animate={{ scale: 1, x: "-50%", y: "-50%" }}
-        exit={{ scale: 0.95, x: "-50%", y: "-50%" }}
+        initial={{ opacity: 0.5 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0.5 }}
         transition={{ duration: 0.2 }}
-        className="absolute top-1/2 left-1/2 w-[95vw] sm:w-[85vw] md:w-[75vw] lg:w-[60vw] xl:w-[45vw] h-[70vh] sm:h-[60vh] md:h-[50vh] max-w-[900px] flex flex-col pointer-events-auto"
+        className="absolute top-1/2 left-1/2 flex flex-col pointer-events-auto"
         style={{
+          width: 'clamp(320px, 75vw, 900px)',
+          height: 'clamp(280px, 55vh, 600px)',
           backgroundColor: '#C0C0C0',
           boxShadow: '5px 5px 20px rgba(0,0,0,0.5)',
           borderTop: '2px solid #fff',
           borderLeft: '2px solid #fff',
           borderBottom: '2px solid #808080',
           borderRight: '2px solid #808080',
+          transform: 'translate(-50%, -50%)',
         }}
       >
         {/* Pixelated noise texture overlay */}
