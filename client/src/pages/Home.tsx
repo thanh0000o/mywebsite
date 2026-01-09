@@ -222,7 +222,7 @@ export default function Home() {
         =====================================================
       */}
       <div className="absolute top-4 left-4 flex flex-col gap-2" style={{ zIndex: 50 }}>
-        {/* Instagram Link - thanh0000 */}
+        {/* Instagram Link - thanh0000 - Frutiger Aero Style */}
         <motion.a
           href="https://www.instagram.com/thanh0000o/"
           target="_blank"
@@ -234,38 +234,86 @@ export default function Home() {
           data-testid="link-instagram"
         >
           <div className="relative">
-            <div className="absolute -inset-4 bg-purple-500/30 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
+            <div className="absolute -inset-4 bg-cyan-400/40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
             <svg 
-              width="40" 
-              height="40" 
-              viewBox="0 0 40 40" 
-              className="relative drop-shadow-[0_0_15px_rgba(255,255,255,0.6)] group-hover:drop-shadow-[0_0_25px_rgba(255,255,255,0.9)] transition-all duration-300"
-              style={{ imageRendering: 'pixelated' }}
+              width="44" 
+              height="44" 
+              viewBox="0 0 44 44" 
+              className="relative drop-shadow-[0_0_12px_rgba(77,217,255,0.5)] group-hover:drop-shadow-[0_0_20px_rgba(77,217,255,0.8)] transition-all duration-300"
             >
-              {/* Outer camera body - retro polaroid style */}
-              <rect x="2" y="2" width="36" height="36" fill="#c0c0c0" stroke="#808080" strokeWidth="2"/>
-              {/* Inner border - Win95 raised effect */}
-              <rect x="4" y="4" width="32" height="32" fill="#dfdfdf" stroke="#ffffff" strokeWidth="1"/>
-              {/* Camera lens area - dark background */}
-              <rect x="6" y="6" width="28" height="28" fill="#000080"/>
-              {/* Gradient overlay for retro feel */}
-              <rect x="6" y="6" width="28" height="14" fill="#400080" opacity="0.5"/>
-              {/* Camera lens outer ring */}
-              <circle cx="20" cy="20" r="10" fill="#404040" stroke="#808080" strokeWidth="2"/>
-              {/* Camera lens middle ring */}
-              <circle cx="20" cy="20" r="7" fill="#202020" stroke="#606060" strokeWidth="1"/>
-              {/* Camera lens inner - reflective */}
-              <circle cx="20" cy="20" r="4" fill="#000000"/>
-              {/* Lens reflection */}
-              <circle cx="18" cy="18" r="1.5" fill="#ffffff" opacity="0.6"/>
-              {/* Flash/viewfinder dot - top right */}
-              <rect x="28" y="8" width="4" height="4" fill="#ff6b6b"/>
-              <rect x="29" y="9" width="2" height="2" fill="#ffffff" opacity="0.5"/>
-              {/* Rainbow stripe at bottom - Instagram colors */}
-              <rect x="6" y="30" width="7" height="4" fill="#f9ce34"/>
-              <rect x="13" y="30" width="7" height="4" fill="#ee2a7b"/>
-              <rect x="20" y="30" width="7" height="4" fill="#6228d7"/>
-              <rect x="27" y="30" width="7" height="4" fill="#4c68d7"/>
+              <defs>
+                {/* Main body gradient - sky blue aero */}
+                <linearGradient id="aeroBodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#b8e4ff"/>
+                  <stop offset="25%" stopColor="#7dd3fc"/>
+                  <stop offset="50%" stopColor="#38bdf8"/>
+                  <stop offset="75%" stopColor="#0ea5e9"/>
+                  <stop offset="100%" stopColor="#0284c7"/>
+                </linearGradient>
+                {/* Glass highlight gradient */}
+                <linearGradient id="aeroGlassHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#ffffff" stopOpacity="0.9"/>
+                  <stop offset="50%" stopColor="#ffffff" stopOpacity="0.3"/>
+                  <stop offset="100%" stopColor="#ffffff" stopOpacity="0"/>
+                </linearGradient>
+                {/* Lens gradient - deep navy to cyan */}
+                <radialGradient id="aeroLensGrad" cx="40%" cy="35%" r="60%">
+                  <stop offset="0%" stopColor="#67e8f9"/>
+                  <stop offset="40%" stopColor="#22d3ee"/>
+                  <stop offset="70%" stopColor="#0891b2"/>
+                  <stop offset="100%" stopColor="#164e63"/>
+                </radialGradient>
+                {/* Inner lens - dark core */}
+                <radialGradient id="aeroLensCore" cx="35%" cy="35%" r="50%">
+                  <stop offset="0%" stopColor="#1e3a5f"/>
+                  <stop offset="60%" stopColor="#0c1929"/>
+                  <stop offset="100%" stopColor="#020617"/>
+                </radialGradient>
+                {/* Flash gradient - lime green aero */}
+                <linearGradient id="aeroFlashGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#d9f99d"/>
+                  <stop offset="50%" stopColor="#a3e635"/>
+                  <stop offset="100%" stopColor="#65a30d"/>
+                </linearGradient>
+              </defs>
+              
+              {/* Outer glow/shadow base */}
+              <rect x="4" y="4" width="36" height="36" rx="8" ry="8" fill="#0369a1" opacity="0.3"/>
+              
+              {/* Main camera body - rounded aero style */}
+              <rect x="3" y="3" width="38" height="38" rx="9" ry="9" fill="url(#aeroBodyGrad)" stroke="#0284c7" strokeWidth="1"/>
+              
+              {/* Glass highlight overlay - top half shine */}
+              <rect x="5" y="5" width="34" height="16" rx="7" ry="7" fill="url(#aeroGlassHighlight)"/>
+              
+              {/* Secondary subtle highlight */}
+              <ellipse cx="22" cy="12" rx="14" ry="6" fill="#ffffff" opacity="0.25"/>
+              
+              {/* Camera lens outer ring - glossy */}
+              <circle cx="22" cy="24" r="12" fill="url(#aeroLensGrad)" stroke="#0e7490" strokeWidth="1.5"/>
+              
+              {/* Lens inner ring */}
+              <circle cx="22" cy="24" r="9" fill="url(#aeroLensCore)" stroke="#155e75" strokeWidth="1"/>
+              
+              {/* Lens innermost - deep black */}
+              <circle cx="22" cy="24" r="5" fill="#020617"/>
+              
+              {/* Lens specular highlights */}
+              <ellipse cx="19" cy="21" rx="2.5" ry="1.8" fill="#ffffff" opacity="0.85"/>
+              <circle cx="25" cy="27" r="1" fill="#ffffff" opacity="0.4"/>
+              
+              {/* Flash/LED - top right with aero glow */}
+              <circle cx="33" cy="11" r="4" fill="url(#aeroFlashGrad)" stroke="#84cc16" strokeWidth="0.5"/>
+              <ellipse cx="32" cy="10" rx="1.5" ry="1" fill="#ffffff" opacity="0.8"/>
+              
+              {/* Instagram gradient accent stripe - bottom */}
+              <rect x="8" y="36" width="7" height="3" rx="1" fill="#fbbf24"/>
+              <rect x="15" y="36" width="7" height="3" rx="1" fill="#f472b6"/>
+              <rect x="22" y="36" width="7" height="3" rx="1" fill="#a855f7"/>
+              <rect x="29" y="36" width="7" height="3" rx="1" fill="#6366f1"/>
+              
+              {/* Bubble reflection - bottom right */}
+              <circle cx="35" cy="32" r="2" fill="#ffffff" opacity="0.15"/>
             </svg>
           </div>
           <span
