@@ -1,6 +1,6 @@
 
 import { z } from 'zod';
-import { insertVisitorSchema, visitors } from './schema';
+import { insertVisitorSchema, visitors, insertGuestbookMessageSchema, guestbookMessages } from './schema';
 
 export const errorSchemas = {
   internal: z.object({
@@ -16,6 +16,25 @@ export const api = {
       input: insertVisitorSchema,
       responses: {
         201: z.custom<typeof visitors.$inferSelect>(),
+        500: errorSchemas.internal,
+      },
+    },
+  },
+  guestbook: {
+    list: {
+      method: 'GET' as const,
+      path: '/api/guestbook',
+      responses: {
+        200: z.array(z.custom<typeof guestbookMessages.$inferSelect>()),
+        500: errorSchemas.internal,
+      },
+    },
+    create: {
+      method: 'POST' as const,
+      path: '/api/guestbook',
+      input: insertGuestbookMessageSchema,
+      responses: {
+        201: z.custom<typeof guestbookMessages.$inferSelect>(),
         500: errorSchemas.internal,
       },
     },
