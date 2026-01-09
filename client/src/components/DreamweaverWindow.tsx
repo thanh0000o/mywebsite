@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import logoImage from "@assets/ChatGPT_Image_Jan_7,_2026,_12_04_31_PM_1767811147577.png";
+import { Win95Scrollbar } from "@/components/Win95Scrollbar";
 
 interface DreamweaverWindowProps {
   onClose: () => void;
@@ -244,7 +245,7 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
               </div>
             </div>
 
-            {/* Center Canvas with noise texture */}
+            {/* Center Canvas with noise texture and Win95 scrollbar */}
             <div 
               className="flex-1 m-1 relative overflow-hidden"
               style={{
@@ -256,31 +257,33 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
                 borderRight: '2px solid #fff',
               }}
             >
-              {/* Centered logo and welcome text */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center px-8">
-                <img 
-                  src={logoImage}
-                  alt="Thành Lambeets"
-                  className="w-32 sm:w-48 md:w-64 h-auto object-contain"
-                  style={{ imageRendering: 'pixelated' }}
-                  draggable={false}
-                />
-                <div 
-                  className="mt-4 text-center max-w-sm"
-                  style={{ 
-                    fontFamily: 'var(--font-pixel)', 
-                    color: '#333',
-                    fontSize: '10px',
-                    lineHeight: '1.5',
-                  }}
-                >
-                  <p className="mb-2" style={{ fontSize: '12px', fontWeight: 'bold' }}>Welcome.</p>
-                  <p>
-                    This is a place for ideas, tools, and quiet exploration. I'm Thành, and I like building things with ideas, pixels, and curiosity where art, technology, and thoughtful experimentation come together.
-                  </p>
-                  <p className="mt-2" style={{ fontStyle: 'italic', color: '#0078d4' }}>[ Explore gently. ]</p>
+              <Win95Scrollbar>
+                {/* Centered logo and welcome text */}
+                <div className="flex flex-col items-center justify-center px-8 py-4 min-h-full">
+                  <img 
+                    src={logoImage}
+                    alt="Thành Lambeets"
+                    className="w-32 sm:w-48 md:w-64 h-auto object-contain"
+                    style={{ imageRendering: 'pixelated' }}
+                    draggable={false}
+                  />
+                  <div 
+                    className="mt-4 text-center max-w-sm"
+                    style={{ 
+                      fontFamily: 'var(--font-pixel)', 
+                      color: '#333',
+                      fontSize: '10px',
+                      lineHeight: '1.5',
+                    }}
+                  >
+                    <p className="mb-2" style={{ fontSize: '12px', fontWeight: 'bold' }}>Welcome.</p>
+                    <p>
+                      This is a place for ideas, tools, and quiet exploration. I'm Thành, and I like building things with ideas, pixels, and curiosity where art, technology, and thoughtful experimentation come together.
+                    </p>
+                    <p className="mt-2" style={{ fontStyle: 'italic', color: '#0078d4' }}>[ Explore gently. ]</p>
+                  </div>
                 </div>
-              </div>
+              </Win95Scrollbar>
             </div>
 
             {/* Bottom Toolbar */}
