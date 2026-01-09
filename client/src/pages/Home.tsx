@@ -11,7 +11,7 @@ import { ValuesContent } from "@/components/ValuesContent";
 import { SkillsContent } from "@/components/SkillsContent";
 import { LanguagesContent } from "@/components/LanguagesContent";
 import { SoftwareContent } from "@/components/SoftwareContent";
-import { ArtContent, ArtViewerContent, type Artwork } from "@/components/ArtContent";
+import { ArtContent } from "@/components/ArtContent";
 import { WebsiteArchiveContent } from "@/components/WebsiteArchiveContent";
 import { ResumeContent } from "@/components/ResumeContent";
 import { PhotoAlbumsContent } from "@/components/PhotoAlbumsContent";
@@ -29,7 +29,6 @@ interface WindowState {
   width: string;
   height: string;
   zIndex: number;
-  artData?: Artwork;
 }
 
 let windowIdCounter = 0;
@@ -139,31 +138,6 @@ export default function Home() {
     setWindows(windows.filter((w) => w.id !== id));
   };
 
-  const openArtViewer = (art: Artwork) => {
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-    const centerX = vw / 2 - 250;
-    const centerY = vh / 2 - 200;
-    const offsetRange = 100;
-    let randomX = centerX + (Math.random() * offsetRange * 2 - offsetRange);
-    let randomY = centerY + (Math.random() * offsetRange * 2 - offsetRange);
-    randomX = Math.max(50, Math.min(vw - 550, randomX));
-    randomY = Math.max(50, Math.min(vh - 450, randomY));
-
-    const newWindow: WindowState = {
-      id: `artviewer-${windowIdCounter++}`,
-      type: "artviewer",
-      title: `${art.title}.${art.type === "image" ? "bmp" : "avi"}`,
-      position: { x: Math.floor(randomX), y: Math.floor(randomY) },
-      width: "min(500px, 90vw)",
-      height: "min(400px, 80vh)",
-      zIndex: topZIndex + 1,
-      artData: art,
-    };
-    setTopZIndex(topZIndex + 1);
-    setWindows([...windows, newWindow]);
-  };
-
   const focusWindow = (id: string) => {
     setWindows(
       windows.map((w) =>
@@ -173,8 +147,8 @@ export default function Home() {
     setTopZIndex(topZIndex + 1);
   };
 
-  const renderWindowContent = (windowState: WindowState) => {
-    switch (windowState.type) {
+  const renderWindowContent = (type: string) => {
+    switch (type) {
       case "aboutme":
         return <AboutMeContent />;
       case "education":
@@ -190,7 +164,7 @@ export default function Home() {
       case "software":
         return <SoftwareContent />;
       case "art":
-        return <ArtContent onOpenArtViewer={openArtViewer} />;
+        return <ArtContent />;
       case "archive":
         return <WebsiteArchiveContent />;
       case "photoalbums":
@@ -201,8 +175,6 @@ export default function Home() {
         return <ResumeContent />;
       case "underconstruction":
         return <UnderConstructionContent />;
-      case "artviewer":
-        return windowState.artData ? <ArtViewerContent art={windowState.artData} /> : null;
       default:
         return <div className="p-4">Content coming soon...</div>;
     }
@@ -559,7 +531,7 @@ export default function Home() {
             onFocus={() => focusWindow(window.id)}
             onClose={() => closeWindow(window.id)}
           >
-            {renderWindowContent(window)}
+            {renderWindowContent(window.type)}
           </DesktopWindow>
         ))}
       </AnimatePresence>
