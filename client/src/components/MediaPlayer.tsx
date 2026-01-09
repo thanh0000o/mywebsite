@@ -93,6 +93,8 @@ export function MediaPlayer() {
     }
   };
 
+  const [pendingAutoplay, setPendingAutoplay] = useState(false);
+
   useEffect(() => {
     if (audioRef.current && !isInitialized) {
       const randomTrackIndex = Math.floor(Math.random() * playlist.length);
@@ -116,9 +118,9 @@ export function MediaPlayer() {
           audioRef.current.play().then(() => {
             setIsPlaying(true);
             isPlayingRef.current = true;
+            setPendingAutoplay(false);
           }).catch(() => {
-            setIsPlaying(false);
-            isPlayingRef.current = false;
+            setPendingAutoplay(true);
           });
           audioRef.current.removeEventListener('canplaythrough', handleCanPlayThrough);
         }
@@ -130,6 +132,30 @@ export function MediaPlayer() {
       setIsInitialized(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (!pendingAutoplay) return;
+
+    const tryPlayOnInteraction = () => {
+      if (audioRef.current && pendingAutoplay) {
+        audioRef.current.play().then(() => {
+          setIsPlaying(true);
+          isPlayingRef.current = true;
+          setPendingAutoplay(false);
+          document.removeEventListener('click', tryPlayOnInteraction);
+          document.removeEventListener('keydown', tryPlayOnInteraction);
+        }).catch(() => {});
+      }
+    };
+
+    document.addEventListener('click', tryPlayOnInteraction);
+    document.addEventListener('keydown', tryPlayOnInteraction);
+
+    return () => {
+      document.removeEventListener('click', tryPlayOnInteraction);
+      document.removeEventListener('keydown', tryPlayOnInteraction);
+    };
+  }, [pendingAutoplay]);
 
   useEffect(() => {
     if (audioRef.current && isInitialized) {
