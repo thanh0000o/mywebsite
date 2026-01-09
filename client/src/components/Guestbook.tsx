@@ -107,16 +107,12 @@ export function Guestbook() {
 
   const formatTime = (timestamp: string) => {
     const date = new Date(timestamp);
-    const now = new Date();
-    const diffMs = now.getTime() - date.getTime();
-    const diffMins = Math.floor(diffMs / 60000);
-    const diffHours = Math.floor(diffMs / 3600000);
-    const diffDays = Math.floor(diffMs / 86400000);
-
-    if (diffMins < 1) return "just now";
-    if (diffMins < 60) return `${diffMins}m ago`;
-    if (diffHours < 24) return `${diffHours}h ago`;
-    return `${diffDays}d ago`;
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear().toString().slice(-2);
+    const hours = date.getHours().toString().padStart(2, '0');
+    const mins = date.getMinutes().toString().padStart(2, '0');
+    return `${day}/${month}/${year} ${hours}:${mins}`;
   };
 
   if (!isOpen) {
@@ -296,24 +292,32 @@ export function Guestbook() {
                     messages.map((msg) => (
                       <div
                         key={msg.id}
-                        className="mb-1"
-                        style={{ lineHeight: "1.4" }}
+                        className="mb-2"
+                        style={{ lineHeight: "1.3" }}
                       >
-                        <span
-                          className="text-[11px] font-bold"
-                          style={{ 
-                            fontFamily: "var(--font-pixel)", 
-                            color: getColorForUsername(msg.username),
-                          }}
+                        <div className="flex items-center gap-1 flex-wrap">
+                          <span
+                            className="text-[10px] font-bold"
+                            style={{ 
+                              fontFamily: "var(--font-pixel)", 
+                              color: getColorForUsername(msg.username),
+                            }}
+                          >
+                            {msg.username}
+                          </span>
+                          <span
+                            className="text-[8px]"
+                            style={{ fontFamily: "var(--font-pixel)", color: "#808080" }}
+                          >
+                            [{formatTime(msg.timestamp)}]
+                          </span>
+                        </div>
+                        <div
+                          className="text-[10px] pl-1"
+                          style={{ fontFamily: "var(--font-pixel)", color: "#000", wordBreak: "break-word" }}
                         >
-                          {msg.username}
-                        </span>
-                        <span
-                          className="text-[11px]"
-                          style={{ fontFamily: "var(--font-pixel)", color: "#000" }}
-                        >
-                          : {msg.message}
-                        </span>
+                          {msg.message}
+                        </div>
                       </div>
                     ))
                   )}
