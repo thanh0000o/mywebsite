@@ -26,7 +26,7 @@ const WIN95_EMOJIS = [
 
 export function Guestbook() {
   const [isMinimized, setIsMinimized] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [username, setUsername] = useState("");
   const [message, setMessage] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
@@ -140,8 +140,8 @@ export function Guestbook() {
       animate={{ opacity: 1, y: 0 }}
       className="fixed bottom-4 left-4 z-50"
       style={{
-        width: "280px",
-        height: isMinimized ? "auto" : "320px",
+        width: "320px",
+        height: isMinimized ? "auto" : "380px",
         backgroundColor: "#C0C0C0",
         borderTop: "2px solid #fff",
         borderLeft: "2px solid #fff",
@@ -241,13 +241,13 @@ export function Guestbook() {
             <div
               className="flex-1 overflow-hidden"
               style={{
-                margin: "4px",
+                margin: "6px",
                 backgroundColor: "#1a1a1a",
                 borderTop: "2px solid #808080",
                 borderLeft: "2px solid #808080",
                 borderBottom: "2px solid #fff",
                 borderRight: "2px solid #fff",
-                height: "180px",
+                height: "220px",
               }}
             >
               <Win95Scrollbar>
@@ -306,7 +306,7 @@ export function Guestbook() {
               </Win95Scrollbar>
             </div>
 
-            <div className="p-1 relative z-10">
+            <div className="px-2 py-1 relative z-10">
               {!hasSetUsername ? (
                 <div className="flex gap-1 items-center">
                   <span
@@ -447,7 +447,7 @@ export function Guestbook() {
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 10 }}
-                          className="absolute bottom-7 left-0 p-1 grid grid-cols-4 gap-0.5"
+                          className="absolute bottom-7 left-0 p-2 grid grid-cols-8 gap-1"
                           style={{
                             backgroundColor: "#C0C0C0",
                             borderTop: "2px solid #fff",
@@ -461,7 +461,7 @@ export function Guestbook() {
                             <button
                               key={item.label}
                               onClick={() => insertEmoji(item.emoji)}
-                              className="w-7 h-6 flex items-center justify-center text-[9px] hover:bg-[#000080] hover:text-white"
+                              className="w-8 h-6 flex items-center justify-center text-[8px] hover:bg-[#000080] hover:text-white"
                               style={{
                                 backgroundColor: "#fff",
                                 borderTop: "1px solid #808080",
