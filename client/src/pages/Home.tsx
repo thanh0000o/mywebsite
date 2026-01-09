@@ -222,6 +222,60 @@ export default function Home() {
         =====================================================
       */}
       <div className="absolute top-4 left-4 flex flex-col gap-2" style={{ zIndex: 50 }}>
+        {/* Instagram Link - thanh0000 */}
+        <motion.a
+          href="https://www.instagram.com/thanh0000o/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex flex-col items-center p-2 group"
+          style={{ background: 'transparent', textDecoration: 'none' }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          data-testid="link-instagram"
+        >
+          <div className="relative">
+            <div className="absolute -inset-4 bg-purple-500/30 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
+            <svg 
+              width="40" 
+              height="40" 
+              viewBox="0 0 40 40" 
+              className="relative drop-shadow-[0_0_15px_rgba(255,255,255,0.6)] group-hover:drop-shadow-[0_0_25px_rgba(255,255,255,0.9)] transition-all duration-300"
+              style={{ imageRendering: 'pixelated' }}
+            >
+              {/* Outer camera body - retro polaroid style */}
+              <rect x="2" y="2" width="36" height="36" fill="#c0c0c0" stroke="#808080" strokeWidth="2"/>
+              {/* Inner border - Win95 raised effect */}
+              <rect x="4" y="4" width="32" height="32" fill="#dfdfdf" stroke="#ffffff" strokeWidth="1"/>
+              {/* Camera lens area - dark background */}
+              <rect x="6" y="6" width="28" height="28" fill="#000080"/>
+              {/* Gradient overlay for retro feel */}
+              <rect x="6" y="6" width="28" height="14" fill="#400080" opacity="0.5"/>
+              {/* Camera lens outer ring */}
+              <circle cx="20" cy="20" r="10" fill="#404040" stroke="#808080" strokeWidth="2"/>
+              {/* Camera lens middle ring */}
+              <circle cx="20" cy="20" r="7" fill="#202020" stroke="#606060" strokeWidth="1"/>
+              {/* Camera lens inner - reflective */}
+              <circle cx="20" cy="20" r="4" fill="#000000"/>
+              {/* Lens reflection */}
+              <circle cx="18" cy="18" r="1.5" fill="#ffffff" opacity="0.6"/>
+              {/* Flash/viewfinder dot - top right */}
+              <rect x="28" y="8" width="4" height="4" fill="#ff6b6b"/>
+              <rect x="29" y="9" width="2" height="2" fill="#ffffff" opacity="0.5"/>
+              {/* Rainbow stripe at bottom - Instagram colors */}
+              <rect x="6" y="30" width="7" height="4" fill="#f9ce34"/>
+              <rect x="13" y="30" width="7" height="4" fill="#ee2a7b"/>
+              <rect x="20" y="30" width="7" height="4" fill="#6228d7"/>
+              <rect x="27" y="30" width="7" height="4" fill="#4c68d7"/>
+            </svg>
+          </div>
+          <span
+            className="mt-1 text-[9px] text-white text-center drop-shadow-md tracking-wide transition-transform duration-300 group-hover:scale-105"
+            style={{ fontFamily: 'var(--font-pixel)' }}
+          >
+            thanh0000
+          </span>
+        </motion.a>
+
         {/* Photo Albums Folder */}
         <motion.button
           onClick={() => openWindow("photoalbums", "PhotoAlbums")}
