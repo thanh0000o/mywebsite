@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import resumePdf from "@assets/resume_v2-landscape-V3-DEF_1767872450922.pdf";
 import resumeImage from "@assets/image_1767872658054.png";
+import { Win95Scrollbar } from "./Win95Scrollbar";
 
 export function ResumeContent() {
   return (
@@ -89,44 +90,46 @@ export function ResumeContent() {
 
       {/* PDF Document Area */}
       <div 
-        className="flex-1 relative z-10 overflow-auto"
+        className="flex-1 relative z-10 overflow-hidden"
         style={{
           backgroundColor: '#808080',
           boxShadow: 'inset 2px 2px 4px rgba(0,0,0,0.3)',
         }}
       >
-        {/* Inner document frame */}
-        <div className="p-3 min-h-full flex items-start justify-center">
-          <div 
-            className="bg-white relative"
-            style={{
-              boxShadow: '2px 2px 8px rgba(0,0,0,0.4)',
-              maxWidth: '100%',
-            }}
-          >
-            {/* Resume Image */}
-            <img
-              src={resumeImage}
-              alt="Resume - Thành Lambeets"
-              className="block"
-              style={{
-                backgroundColor: '#fff',
-                imageRendering: 'auto',
-                width: '100%',
-                height: 'auto',
-                maxWidth: '850px',
-              }}
-            />
-            
-            {/* Scanline overlay on document */}
+        <Win95Scrollbar>
+          {/* Inner document frame */}
+          <div className="p-3 min-h-full flex items-start justify-center">
             <div 
-              className="absolute inset-0 pointer-events-none"
+              className="bg-white relative"
               style={{
-                background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px)',
+                boxShadow: '2px 2px 8px rgba(0,0,0,0.4)',
+                maxWidth: '100%',
               }}
-            />
+            >
+              {/* Resume Image */}
+              <img
+                src={resumeImage}
+                alt="Resume - Thành Lambeets"
+                className="block"
+                style={{
+                  backgroundColor: '#fff',
+                  imageRendering: 'auto',
+                  width: '100%',
+                  height: 'auto',
+                  maxWidth: '850px',
+                }}
+              />
+              
+              {/* Scanline overlay on document */}
+              <div 
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px)',
+                }}
+              />
+            </div>
           </div>
-        </div>
+        </Win95Scrollbar>
       </div>
 
       {/* Status Bar */}

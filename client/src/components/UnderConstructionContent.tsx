@@ -1,3 +1,5 @@
+import { Win95Scrollbar } from "./Win95Scrollbar";
+
 export function UnderConstructionContent() {
   return (
     <div 
@@ -46,7 +48,7 @@ export function UnderConstructionContent() {
         }}
       >
         <div 
-          className="w-full h-full overflow-auto flex justify-center"
+          className="w-full h-full"
           style={{
             background: '#ffffff',
             borderTop: '1px solid #404040',
@@ -55,14 +57,16 @@ export function UnderConstructionContent() {
             borderRight: '1px solid #dfdfdf',
           }}
         >
-          <pre 
-            className="p-4 whitespace-pre text-[12px] leading-[1.6]"
-            style={{ 
-              color: '#000',
-              fontFamily: 'var(--font-pixel)',
-              display: 'inline-block',
-            }}
-          >
+          <Win95Scrollbar>
+            <div className="flex justify-center">
+              <pre 
+                className="p-4 whitespace-pre text-[12px] leading-[1.6]"
+                style={{ 
+                  color: '#000',
+                  fontFamily: 'var(--font-pixel)',
+                  display: 'inline-block',
+                }}
+              >
 {`
      ==============================
      |   UNDER CONSTRUCTION   |
@@ -92,7 +96,9 @@ export function UnderConstructionContent() {
                *  *  *
 
 `}
-          </pre>
+              </pre>
+            </div>
+          </Win95Scrollbar>
         </div>
       </div>
       
