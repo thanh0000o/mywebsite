@@ -8,6 +8,11 @@ import artChrome1 from "@assets/1673002998232_1767822627015.jpg";
 import artChrome2 from "@assets/1673003000193_1767822627016.jpg";
 import artChrome3 from "@assets/1673003000368_1767822627016.jpg";
 import artParticle88 from "@assets/particle_88_1767822627018.png";
+import artMetalBlobs from "@assets/image_1767954772038.png";
+import artAngels from "@assets/image_1767954798547.png";
+import artThanh3D from "@assets/image_1767954820337.png";
+import artBabser from "@assets/image_1767954832999.png";
+import artLiLaLou from "@assets/image_1767954846854.png";
 
 import videoCanvas2 from "@assets/canvas-video_(2)_1767822669992.webm";
 import videoCanvas1 from "@assets/canvas-video_(1)_1767822684883.webm";
@@ -23,6 +28,11 @@ interface Artwork {
 }
 
 const artworks: Artwork[] = [
+  { type: "image", src: artMetalBlobs, title: "Metal Blobs" },
+  { type: "image", src: artAngels, title: "Angels" },
+  { type: "image", src: artThanh3D, title: "Thanh 3D" },
+  { type: "image", src: artBabser, title: "Babser" },
+  { type: "image", src: artLiLaLou, title: "Li La Lou" },
   { type: "image", src: artChrome1, title: "Chrome I" },
   { type: "video", src: videoCanvas, title: "Canvas" },
   { type: "image", src: artParticle15, title: "Particles" },
