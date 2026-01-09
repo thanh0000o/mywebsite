@@ -21,7 +21,10 @@ export const guestbookMessages = pgTable("guestbook_messages", {
   timestamp: text("timestamp").notNull(),
 });
 
-export const insertGuestbookMessageSchema = createInsertSchema(guestbookMessages).omit({ id: true });
+export const insertGuestbookMessageSchema = createInsertSchema(guestbookMessages).omit({ id: true, timestamp: true }).extend({
+  username: z.string().min(1).max(20).transform(s => s.trim()),
+  message: z.string().min(1).max(200).transform(s => s.trim()),
+});
 
 export type GuestbookMessage = typeof guestbookMessages.$inferSelect;
 export type InsertGuestbookMessage = z.infer<typeof insertGuestbookMessageSchema>;

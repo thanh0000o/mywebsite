@@ -18,6 +18,7 @@ import { PhotoAlbumsContent } from "@/components/PhotoAlbumsContent";
 import { DragonLogoContent } from "@/components/DragonLogoContent";
 import { UnderConstructionContent } from "@/components/UnderConstructionContent";
 import { MediaPlayer } from "@/components/MediaPlayer";
+import { Guestbook } from "@/components/Guestbook";
 import logoImage from "@assets/image_1767797842217.png";
 
 interface WindowState {
@@ -549,6 +550,9 @@ export default function Home() {
 
       {/* Media Player - Top Right */}
       <MediaPlayer />
+
+      {/* Guestbook - Bottom Left */}
+      <Guestbook />
 
       {/* CRT / SCANLINE OVERLAY */}
       <CrtOverlay />

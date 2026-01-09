@@ -27,7 +27,10 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createGuestbookMessage(message: InsertGuestbookMessage): Promise<GuestbookMessage> {
-    const [guestbookMessage] = await db.insert(guestbookMessages).values(message).returning();
+    const [guestbookMessage] = await db.insert(guestbookMessages).values({
+      ...message,
+      timestamp: new Date().toISOString(),
+    }).returning();
     return guestbookMessage;
   }
 }
