@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Win95Scrollbar } from "./Win95Scrollbar";
 
 import artWeb from "@assets/WEB_1767822627014.png";
 import artVietnam from "@assets/thanh1000_layer_data_and_nature_and_invert_it_and_use_vietname_1767822627015.png";
@@ -391,7 +392,7 @@ export function ArtContent() {
         {/* Moving scanlines overlay */}
         <div className="window-scanlines" aria-hidden="true" />
         <div 
-          className="w-full h-full overflow-auto p-2 relative z-10"
+          className="w-full h-full overflow-hidden relative z-10"
           style={{
             backgroundColor: '#1a1a1a',
             borderTop: '2px solid #808080',
@@ -400,61 +401,63 @@ export function ArtContent() {
             borderRight: '2px solid #fff',
           }}
         >
-          <div className="grid grid-cols-4 gap-2 p-1">
-            {artworks.map((art, index) => (
-              <div
-                key={index}
-                className="relative aspect-square overflow-hidden cursor-pointer transition-transform hover:scale-[1.02]"
-                style={{
-                  backgroundColor: '#c0c0c0',
-                  borderTop: '2px solid #fff',
-                  borderLeft: '2px solid #fff',
-                  borderBottom: '2px solid #808080',
-                  borderRight: '2px solid #808080',
-                }}
-                onClick={() => setSelectedArt(art)}
-                data-testid={`art-item-${index}`}
-              >
-                <div 
-                  className="w-full h-full p-1"
+          <Win95Scrollbar>
+            <div className="grid grid-cols-4 gap-2 p-2">
+              {artworks.map((art, index) => (
+                <div
+                  key={index}
+                  className="relative aspect-square overflow-hidden cursor-pointer transition-transform hover:scale-[1.02]"
                   style={{
-                    borderTop: '1px solid #808080',
-                    borderLeft: '1px solid #808080',
-                    borderBottom: '1px solid #fff',
-                    borderRight: '1px solid #fff',
+                    backgroundColor: '#c0c0c0',
+                    borderTop: '2px solid #fff',
+                    borderLeft: '2px solid #fff',
+                    borderBottom: '2px solid #808080',
+                    borderRight: '2px solid #808080',
                   }}
+                  onClick={() => setSelectedArt(art)}
+                  data-testid={`art-item-${index}`}
                 >
-                  {art.type === "image" ? (
-                    <img
-                      src={art.src}
-                      alt={art.title}
-                      className="w-full h-full object-cover"
-                      draggable={false}
-                    />
-                  ) : (
-                    <video
-                      src={art.src}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="w-full h-full object-cover"
-                    />
-                  )}
+                  <div 
+                    className="w-full h-full p-1"
+                    style={{
+                      borderTop: '1px solid #808080',
+                      borderLeft: '1px solid #808080',
+                      borderBottom: '1px solid #fff',
+                      borderRight: '1px solid #fff',
+                    }}
+                  >
+                    {art.type === "image" ? (
+                      <img
+                        src={art.src}
+                        alt={art.title}
+                        className="w-full h-full object-cover"
+                        draggable={false}
+                      />
+                    ) : (
+                      <video
+                        src={art.src}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="w-full h-full object-cover"
+                      />
+                    )}
+                  </div>
+                  <div 
+                    className="absolute bottom-0 left-0 right-0 text-center py-0.5 text-[8px]"
+                    style={{
+                      backgroundColor: 'rgba(0,0,128,0.9)',
+                      color: '#fff',
+                      fontFamily: 'var(--font-pixel)',
+                    }}
+                  >
+                    {art.title}
+                  </div>
                 </div>
-                <div 
-                  className="absolute bottom-0 left-0 right-0 text-center py-0.5 text-[8px]"
-                  style={{
-                    backgroundColor: 'rgba(0,0,128,0.9)',
-                    color: '#fff',
-                    fontFamily: 'var(--font-pixel)',
-                  }}
-                >
-                  {art.title}
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </Win95Scrollbar>
         </div>
       </div>
 
