@@ -122,7 +122,7 @@ export function Guestbook() {
         animate={{ opacity: 1, scale: 1 }}
         whileHover={{ scale: 1.05 }}
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-4 left-4 z-50 flex items-center gap-2 px-3 py-2"
+        className="fixed bottom-2 left-2 z-50 flex items-center gap-2 px-3 py-2 sm:bottom-4 sm:left-4"
         style={{
           backgroundColor: "#C0C0C0",
           borderTop: "2px solid #fff",
@@ -158,10 +158,10 @@ export function Guestbook() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="fixed bottom-4 left-4 z-50"
+      className="fixed bottom-2 left-2 z-50 sm:bottom-4 sm:left-4"
       style={{
-        width: "380px",
-        height: isMinimized ? "auto" : "300px",
+        width: "min(380px, calc(100vw - 16px))",
+        height: isMinimized ? "auto" : "min(300px, calc(100vh - 100px))",
         backgroundColor: "#C0C0C0",
         borderTop: "2px solid #fff",
         borderLeft: "2px solid #fff",
