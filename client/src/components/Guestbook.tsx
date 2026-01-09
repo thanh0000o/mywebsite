@@ -387,15 +387,16 @@ export function Guestbook() {
                   <div className="flex gap-1 items-center relative">
                     <button
                       onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-                      className="w-5 h-5 flex items-center justify-center text-[10px]"
+                      className="w-7 h-6 flex items-center justify-center text-[12px]"
                       style={{
-                        backgroundColor: "#C0C0C0",
-                        borderTop: "1px solid #fff",
-                        borderLeft: "1px solid #fff",
-                        borderBottom: "1px solid #808080",
-                        borderRight: "1px solid #808080",
+                        backgroundColor: "#FFFF00",
+                        borderTop: "2px solid #fff",
+                        borderLeft: "2px solid #fff",
+                        borderBottom: "2px solid #808080",
+                        borderRight: "2px solid #808080",
                         fontFamily: "var(--font-pixel)",
                         color: "#000",
+                        fontWeight: "bold",
                       }}
                       data-testid="button-emoji-picker"
                     >
@@ -447,7 +448,7 @@ export function Guestbook() {
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 10 }}
-                          className="absolute bottom-7 left-0 p-2 grid grid-cols-8 gap-1"
+                          className="absolute bottom-8 left-0 p-2 grid grid-cols-4 gap-1"
                           style={{
                             backgroundColor: "#C0C0C0",
                             borderTop: "2px solid #fff",
@@ -461,7 +462,7 @@ export function Guestbook() {
                             <button
                               key={item.label}
                               onClick={() => insertEmoji(item.emoji)}
-                              className="w-8 h-6 flex items-center justify-center text-[8px] hover:bg-[#000080] hover:text-white"
+                              className="w-12 h-7 flex items-center justify-center text-[11px] hover:bg-[#000080] hover:text-white"
                               style={{
                                 backgroundColor: "#fff",
                                 borderTop: "1px solid #808080",
