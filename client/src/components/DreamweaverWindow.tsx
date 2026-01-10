@@ -50,7 +50,7 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0.5, scale: 0.98 }}
         transition={{ duration: 0.2 }}
-        className="flex flex-col pointer-events-auto"
+        className="flex flex-col pointer-events-auto relative overflow-hidden"
         style={{
           width: 'clamp(320px, 75vw, 900px)',
           height: 'clamp(280px, 55vh, 600px)',
