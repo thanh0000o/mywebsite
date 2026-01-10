@@ -20,6 +20,7 @@ import { UnderConstructionContent } from "@/components/UnderConstructionContent"
 import { MediaPlayer } from "@/components/MediaPlayer";
 import { Guestbook } from "@/components/Guestbook";
 import logoImage from "@assets/image_1767797842217.png";
+import backgroundImage from "@assets/thanh1000_layer_data_and_nature_and_invert_it_and_use_japanes__1768055536677.png";
 
 interface WindowState {
   id: string;
@@ -186,13 +187,147 @@ export default function Home() {
         =====================================================
         BACKGROUND LAYER
         =====================================================
-        Black background with subtle blur texture
+        Datamoshing nature/data image with Win95 effects
         =====================================================
       */}
-      <div 
-        className="absolute inset-0 w-full h-full blur-xl scale-110 opacity-30"
+      
+      {/* Base background - darkened */}
+      <div className="absolute inset-0 bg-black" />
+      
+      {/* Main background image with slow drift animation */}
+      <motion.div
+        className="absolute inset-0"
+        animate={{
+          x: [0, -20, 0, 20, 0],
+          y: [0, 10, -10, 5, 0],
+        }}
+        transition={{
+          duration: 60,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
         style={{
-          background: 'radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a0a 70%, #000000 100%)'
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          opacity: 0.35,
+          filter: 'saturate(0.7) contrast(1.1)',
+        }}
+      />
+      
+      {/* Datamosh color channel shift - Red */}
+      <motion.div
+        className="absolute inset-0 mix-blend-screen pointer-events-none"
+        animate={{
+          x: [0, 3, -2, 4, 0],
+          opacity: [0.15, 0.25, 0.1, 0.2, 0.15],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        style={{
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          filter: 'saturate(2) hue-rotate(-30deg) brightness(0.8)',
+          opacity: 0.15,
+        }}
+      />
+      
+      {/* Datamosh color channel shift - Cyan */}
+      <motion.div
+        className="absolute inset-0 mix-blend-multiply pointer-events-none"
+        animate={{
+          x: [-2, 0, 3, -1, -2],
+          opacity: [0.2, 0.1, 0.25, 0.15, 0.2],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        style={{
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          filter: 'saturate(1.5) hue-rotate(180deg) brightness(0.6)',
+          opacity: 0.2,
+        }}
+      />
+      
+      {/* Glitch slice effect - horizontal bands */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none overflow-hidden"
+        animate={{
+          opacity: [0, 0, 0.8, 0, 0, 0.6, 0, 0],
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          times: [0, 0.4, 0.42, 0.44, 0.7, 0.72, 0.74, 1],
+        }}
+      >
+        <div
+          className="absolute w-full h-[3px]"
+          style={{
+            top: '23%',
+            backgroundImage: `url(${backgroundImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center 23%',
+            transform: 'translateX(15px)',
+            filter: 'brightness(1.5) saturate(2)',
+          }}
+        />
+        <div
+          className="absolute w-full h-[2px]"
+          style={{
+            top: '67%',
+            backgroundImage: `url(${backgroundImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center 67%',
+            transform: 'translateX(-20px)',
+            filter: 'brightness(1.3) hue-rotate(90deg)',
+          }}
+        />
+        <div
+          className="absolute w-full h-[4px]"
+          style={{
+            top: '45%',
+            backgroundImage: `url(${backgroundImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center 45%',
+            transform: 'translateX(8px)',
+            filter: 'invert(1) brightness(0.8)',
+          }}
+        />
+      </motion.div>
+      
+      {/* Win95 scanline overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px)',
+          opacity: 0.6,
+        }}
+      />
+      
+      {/* Pixelated noise texture */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 8 8' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='1' height='1' fill='%23fff' fill-opacity='0.03' /%3E%3Crect x='4' y='2' width='1' height='1' fill='%23fff' fill-opacity='0.05' /%3E%3Crect x='2' y='5' width='1' height='1' fill='%23fff' fill-opacity='0.02' /%3E%3Crect x='6' y='7' width='1' height='1' fill='%23fff' fill-opacity='0.04' /%3E%3Crect x='1' y='3' width='1' height='1' fill='%23000' fill-opacity='0.05' /%3E%3Crect x='5' y='1' width='1' height='1' fill='%23000' fill-opacity='0.03' /%3E%3Crect x='7' y='4' width='1' height='1' fill='%23000' fill-opacity='0.04' /%3E%3Crect x='3' y='6' width='1' height='1' fill='%23000' fill-opacity='0.02' /%3E%3C/svg%3E")`,
+          backgroundSize: '8px 8px',
+          imageRendering: 'pixelated',
+        }}
+      />
+      
+      {/* Vignette effect */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%)',
         }}
       />
 
