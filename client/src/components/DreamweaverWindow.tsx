@@ -39,17 +39,18 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
-      className="fixed inset-0 z-50 pointer-events-none"
+      className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none"
     >
       <motion.div 
         drag
         dragMomentum={false}
         dragConstraints={constraintsRef}
-        initial={{ opacity: 0.5 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0.5 }}
+        dragElastic={0}
+        initial={{ opacity: 0.5, scale: 0.98 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0.5, scale: 0.98 }}
         transition={{ duration: 0.2 }}
-        className="absolute top-1/2 left-1/2 flex flex-col pointer-events-auto"
+        className="flex flex-col pointer-events-auto"
         style={{
           width: 'clamp(320px, 75vw, 900px)',
           height: 'clamp(280px, 55vh, 600px)',
@@ -59,7 +60,6 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
           borderLeft: '2px solid #fff',
           borderBottom: '2px solid #808080',
           borderRight: '2px solid #808080',
-          transform: 'translate(-50%, -50%)',
         }}
       >
         {/* Pixelated noise texture overlay */}
