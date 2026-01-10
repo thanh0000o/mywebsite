@@ -76,6 +76,7 @@ export function MediaPlayer() {
   const [showPlaylist, setShowPlaylist] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   const isPlayingRef = useRef(false);
+  const constraintsRef = useRef(null);
 
   useEffect(() => {
     if (audioRef.current) {
@@ -272,22 +273,27 @@ export function MediaPlayer() {
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: 50 }}
-      animate={{ opacity: 1, x: 0 }}
-      className="fixed top-2 right-2 z-[100] sm:top-4 sm:right-4"
-    >
-      <div
-        className="flex flex-col relative"
-        style={{
-          backgroundColor: '#C0C0C0',
-          boxShadow: '3px 3px 10px rgba(0,0,0,0.5)',
-          borderTop: '2px solid #fff',
-          borderLeft: '2px solid #fff',
-          borderBottom: '2px solid #808080',
-          borderRight: '2px solid #808080',
-        }}
+    <div ref={constraintsRef} className="fixed inset-0 z-[100] pointer-events-none">
+      <motion.div
+        drag
+        dragMomentum={false}
+        dragConstraints={constraintsRef}
+        dragElastic={0}
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        className="absolute top-2 right-2 pointer-events-auto sm:top-4 sm:right-4"
       >
+        <div
+          className="flex flex-col relative overflow-hidden"
+          style={{
+            backgroundColor: '#C0C0C0',
+            boxShadow: '3px 3px 10px rgba(0,0,0,0.5)',
+            borderTop: '2px solid #fff',
+            borderLeft: '2px solid #fff',
+            borderBottom: '2px solid #808080',
+            borderRight: '2px solid #808080',
+          }}
+        >
         {/* Pixelated noise texture overlay */}
         <div
           className="absolute inset-0 pointer-events-none"
@@ -303,7 +309,7 @@ export function MediaPlayer() {
         <div className="window-scanlines" aria-hidden="true" />
         {/* Title Bar */}
         <div
-          className="flex items-center justify-between px-1 py-0.5 relative z-10"
+          className="flex items-center justify-between px-1 py-0.5 relative z-10 cursor-move select-none"
           style={{
             background: 'linear-gradient(90deg, #000080, #1084d0)',
             color: 'white',
@@ -652,5 +658,6 @@ export function MediaPlayer() {
         onEnded={handleEnded}
       />
     </motion.div>
+    </div>
   );
 }

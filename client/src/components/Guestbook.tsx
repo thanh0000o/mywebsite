@@ -56,6 +56,7 @@ export function Guestbook() {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [hasSetUsername, setHasSetUsername] = useState(false);
   const messageInputRef = useRef<HTMLInputElement>(null);
+  const constraintsRef = useRef(null);
 
   const { data: messages = [], isLoading } = useQuery<GuestbookMessage[]>({
     queryKey: ["/api/guestbook"],
@@ -155,21 +156,26 @@ export function Guestbook() {
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="fixed bottom-2 left-2 z-50 sm:bottom-4 sm:left-4"
-      style={{
-        width: "var(--guestbook-width)",
-        height: isMinimized ? "auto" : "var(--guestbook-height)",
-        backgroundColor: "#C0C0C0",
-        borderTop: "2px solid #fff",
-        borderLeft: "2px solid #fff",
-        borderBottom: "2px solid #808080",
-        borderRight: "2px solid #808080",
-        boxShadow: "4px 4px 8px rgba(0,0,0,0.5)",
-      }}
-    >
+    <div ref={constraintsRef} className="fixed inset-0 z-50 pointer-events-none">
+      <motion.div
+        drag
+        dragMomentum={false}
+        dragConstraints={constraintsRef}
+        dragElastic={0}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="absolute bottom-2 left-2 pointer-events-auto sm:bottom-4 sm:left-4"
+        style={{
+          width: "var(--guestbook-width)",
+          height: isMinimized ? "auto" : "var(--guestbook-height)",
+          backgroundColor: "#C0C0C0",
+          borderTop: "2px solid #fff",
+          borderLeft: "2px solid #fff",
+          borderBottom: "2px solid #808080",
+          borderRight: "2px solid #808080",
+          boxShadow: "4px 4px 8px rgba(0,0,0,0.5)",
+        }}
+      >
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -183,7 +189,7 @@ export function Guestbook() {
       <div className="window-scanlines" aria-hidden="true" />
 
       <div
-        className="flex items-center justify-between px-1 py-0.5 relative z-10"
+        className="flex items-center justify-between px-1 py-0.5 relative z-10 cursor-move select-none"
         style={{
           background: "linear-gradient(90deg, #000080, #1084d0)",
           color: "white",
@@ -565,5 +571,6 @@ export function Guestbook() {
         )}
       </AnimatePresence>
     </motion.div>
+    </div>
   );
 }
