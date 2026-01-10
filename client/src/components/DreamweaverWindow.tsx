@@ -226,7 +226,11 @@ export function DreamweaverWindow({ onClose, onOpenWindow }: DreamweaverWindowPr
                 {tabs.map((tab) => (
                   <div
                     key={tab}
-                    onClick={() => handleTabClick(tab)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleTabClick(tab);
+                    }}
+                    onPointerDown={(e) => e.stopPropagation()}
                     className="px-1 sm:px-2 py-1 text-[8px] sm:text-[10px] cursor-pointer font-bold whitespace-nowrap"
                     style={{
                       backgroundColor: '#C0C0C0',
