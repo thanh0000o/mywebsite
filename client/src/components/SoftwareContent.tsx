@@ -38,7 +38,7 @@ export function SoftwareContent() {
     { name: "Adobe Creative Suite", items: ["Illustrator", "InDesign", "Photoshop"], icon: AdobeIcon },
     { name: "Blender", items: [], icon: BlenderIcon },
     { name: "Microsoft Office", items: [], icon: OfficeIcon },
-    { name: "AI Tools", items: ["up-to-date user", "eager to learn & integrate", "Replit, Lovable, AI agents"], icon: AIIcon },
+    { name: "AI Tools", items: ["up-to-date user", "eager to learn & integrate"], icon: AIIcon },
   ];
 
   return (
