@@ -1,6 +1,6 @@
 This website — thanhlambeets.com — is my personal corner of the internet 🌐 and an experiment in learning by doing.
 
-I was inspired by Neocities-style websites and the charm of the early 2000s web 💾🖱️: messy, playful, and deeply personal. Instead of following a traditional coding path, I learned the basics of HTML and CSS through Codedex 📘 and by spending a lot of time inspecting existing Neocities websites 🔍. 
+I was inspired by Neocities-style websites and the charm of the early 2000s web 💾🖱️. Instead of following a traditional coding path, I spend a lot of time inspecting existing Neocities websites 🔍. 
 I dove into their source code, explored how things were built, and slowly pieced together how layouts, styles, and interactions worked 🧩.
 
 I also used AI tools like Claude 🤖 to help explain concepts and unblock me when I got stuck, but the learning itself was hands-on and experimental 🧪. 
